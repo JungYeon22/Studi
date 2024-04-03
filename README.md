@@ -1,4 +1,4 @@
-# ![studi.png](README_img/studi.png)
+# Studi
 
 ### 프로젝트 소개  
 > 스터디 인원 및 팀 프로젝트 팀원을 모집하는 플랫폼 서비스
