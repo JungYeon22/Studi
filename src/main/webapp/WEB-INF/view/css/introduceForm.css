@@ -1,0 +1,56 @@
+body {
+    min-height: 100vh;
+    background: rgb(255, 255, 255);
+}
+.input-form {
+    margin-top: 60px;
+    padding: 120px;
+    gap: 30px; /* 간격을 조절할 값 설정 */
+    width: 600px; /* 필요에 따라 폼의 최대 너비 설정 */
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/*.social-login-form  button{*/
+/*    height: 50px;*/
+/*}*/
+.form-control {
+    height: 53px;
+}
+p{
+    text-align: center;
+}
+a{
+    margin-right: 30px;
+}
+span {
+    color: black;
+    font-size: 1.5em;
+}
+
+
+#simpleIntroduce{
+    width: 500px;
+    height: 350px;
+}
+#introduceForm1{
+    height:230px;
+    margin: 0 auto;
+}
+#introduceForm2{
+    height:230px;
+    margin: 0 auto;
+}
+#introduceForm3{
+    height:250px;
+    margin: 0 auto;
+}
+#introduceForm4{
+
+    margin: 0 auto;
+}
+.form-control{
+    border-radius: 60px;
+    background-color: rgb(243, 241, 238);
+}

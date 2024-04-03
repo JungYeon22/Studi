@@ -1,0 +1,75 @@
+body {
+    min-height: 100vh;
+}
+#writeBoxTitle {
+    color:#000000;
+    font-weight: bold;
+    font-size: 32px;
+    text-transform: uppercase;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+#loginBoxTitle img {
+    display: block;
+    margin: 0 auto;
+}
+
+.input-form {
+    max-width: 680px;
+    margin-top: 80px;
+    padding: 32px;
+    background: #fff;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+}
+.write-login{
+    margin-top: 20px;
+    float: right;
+    font-size: 1.1em;
+}
+#relogin{
+    color:rgb(43, 43, 81);
+}
+#relogin:hover{
+    text-decoration: underline;
+}
+label {
+    font-size: 18px;
+    line-height: 2rem;
+    padding: 0.2em 0.4em;
+}
+
+[type="radio"]:hover {
+    cursor: pointer;
+}
+[type="checkbox"]:hover {
+    cursor: pointer;
+}
+
+.rank{
+    font-size: 0.8em;
+}
+.ridge{
+    border:5px ridge;
+}
+#zipcode {
+    width: 150px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#addr2{
+    margin-top: 10px;
+}
+.skill1{
+    margin-left: 30px;
+}
+.skill2{
+    margin-top: 10px;
+    margin-left: 30px;
+}
