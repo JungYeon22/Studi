@@ -40,10 +40,10 @@
                         </ul>
                     </li>
 
-                    <a type="button" class="uplogin">로그인</a>
+                    <a type="button" class="uplogin" href="/user/loginForm">로그인</a>
                     <img src="/image/line.png" class="line" width="20px" height="30px" style=" margin: 0;
               margin-top: 15px;">
-                    <a type="button" class="upwrite">회원가입</a>
+                    <a type="button" class="upwrite" href="/user/writeForm">회원가입</a>
                 </ul>
             </div>
         </div>
