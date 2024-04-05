@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 
@@ -38,7 +38,7 @@
         <div style="background-color: white;">
             <div class="row" style="width: 95%; margin-top: 3px;">
                 <div class="col-sm-1 dropdown">
-                    <img src="/image/icons8-동물-30.png" class="rounded  dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-left: 15px;" alt="profile"/>
+                    <img src="${pageContext.request.contextPath}/image/icons8-동물-30.png" class="rounded  dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-left: 15px;" alt="profile"/>
                     <div>
                         <small style="margin-left: 5px;">작성자</small>
                     </div>
@@ -52,14 +52,14 @@
                 <div class=" col card  rounded-3 bg-body-white " style="width: 90%;" > ㅋㅋㅋㅋㅋㅋ123412 45555ㅋㄷ미들급 신청합니다.</div>
                 <div class="col-sm-1" style="padding: 0px; margin:0 0 ;">
                     <div>
-                        <img src="/Studi-1.0-SNAPSHOT/image/icons8-바꾸다-24.png" class="rounded "  alt="edit"/>
+                        <img src="${pageContext.request.contextPath}/image/icons8-바꾸다-24.png" class="rounded "  alt="edit"/>
                     </div>
-                    <img src="/image/icons8-휴지통-비우기-24.png" class="rounded " alt="remove"/>
+                    <img src="${pageContext.request.contextPath}/image/icons8-휴지통-비우기-24.png" class="rounded " alt="remove"/>
                 </div>
             </div>
             <div class="row" style="width: 100%;">
                 &emsp;<div class="col-sm-1 dropdown">
-                <img src="/image/icons8-테디-베어-30.png" class="rounded dropdown-toggle"role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-left: 8px;" alt="profile"/>
+                <img src="${pageContext.request.contextPath}/image/icons8-테디-베어-30.png" class="rounded dropdown-toggle"role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-left: 8px;" alt="profile"/>
                 <div>
                     <small>작성자</small>
                 </div>
@@ -71,8 +71,8 @@
             </div>
                 <div class=" col card  rounded-3 bg-body-white " style="width: 100%;margin-top: 5px;" > ㅋㅋ ㅎㅇ</div>
                 <div class="col-sm-1" style="padding: 0px; margin:0 0 ;">
-                    <div><img src="/image/icons8-바꾸다-24.png" class="rounded "  alt="edit"/></div>
-                    <img src="/image/icons8-휴지통-비우기-24.png" class="rounded " alt="remove"/>
+                    <div><img src="${pageContext.request.contextPath}/image/icons8-바꾸다-24.png" class="rounded "  alt="edit"/></div>
+                    <img src="${pageContext.request.contextPath}/image/icons8-휴지통-비우기-24.png" class="rounded " alt="remove"/>
                 </div>
             </div>
         </div>
@@ -87,9 +87,9 @@
 
 </form>
 <div>
-    <img src="/image/icons8-바꾸다-24.png" style="height: 35px ; margin-left: 76%; margin-top: 80px;" >
-    <img src="/image/icons8-휴지통-비우기-24.png" style="height: 35px ; margin-left: 76%;" >
-    <img src="/image/icons8-북마크-리본-24 (1).png" style="height: 35px ; margin-left: 76%;" >
+    <img src="${pageContext.request.contextPath}/image/icons8-바꾸다-24.png" style="height: 35px ; margin-left: 76%; margin-top: 80px;" >
+    <img src="${pageContext.request.contextPath}/image/icons8-휴지통-비우기-24.png" style="height: 35px ; margin-left: 76%;" >
+    <img src="${pageContext.request.contextPath}/image/icons8-북마크-리본-24 (1).png" style="height: 35px ; margin-left: 76%;" >
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
