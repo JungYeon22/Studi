@@ -52,7 +52,7 @@
                 <div class=" gap-2 w-100 justify-content-between">
                     <div>
                         <small class="opacity-50 text-nowrap ms-3">작성자</small>&emsp;<small class="opacity-50 text-nowrap">now</small>&emsp;<small class="opacity-50 text-nowrap">조회</small><small class="opacity-50 text-nowrap">100</small><img src="/image/icons8-북마크-리본-24.png" class="rounded float-end"  alt="bookmark">
-                        <h6 class="mb-0 ms-3" >제목</h6><h6 class="mb-0 position-absolute top-50 end-0 translate-middle-y me-5">모집 마감(5/5)</h6>
+                        <h6 class="mb-0 ms-3" >제목</h6><h6 class="mb-0 position-absolute top-50 end-0 translate-middle-y me-5">모집 중(4/5)</h6>
                         <button type="button" class="btn btn-outline-danger rounded-pill btn-sm ms-3 mt-2" disabled>JAVA</button>
 
                     </div>
