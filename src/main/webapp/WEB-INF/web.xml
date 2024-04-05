@@ -31,11 +31,6 @@
         <url-pattern>*.ico</url-pattern>
         <url-pattern>*.swf</url-pattern>
     </servlet-mapping>
-    
-    <servlet-mapping>
-        <servlet-name>jsp</servlet-name>
-        <url-pattern>*.jsp</url-pattern>
-    </servlet-mapping>
 
     <!-- 인코딩 -->
     <filter>
