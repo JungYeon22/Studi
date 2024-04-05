@@ -24,7 +24,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle " id="navmenu" href="#" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
-                            more
+                            ${sessionScope.userDTO.name}님
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">회원정보수정</a></li>

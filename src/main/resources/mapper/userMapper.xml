@@ -2,7 +2,20 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="userSQL">
 
+<mapper namespace="USER">
+
+    <insert id="save" parameterType="user">
+        insert into USER(userId, pwd, name, skill, email, phone, hiredate)
+        values (#{userId}, #{pwd},#{name},#{skill},#{email},#{phone},#{hiredate})
+    </insert>
+
+    <select id="login" parameterType="user" resultType="user">
+        select * from USER where userId=#{userId} and pwd=#{pwd}
+    </select>
+
+    <select id="findByUserId" parameterType="string" resultType="user">
+        SELECT * FROM User WHERE userId = #{userId}
+    </select>
 
 </mapper>
