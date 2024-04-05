@@ -1,0 +1,9 @@
+CREATE TABLE USER (
+    UserId    VARCHAR(100)    ,
+    PWD    VARCHAR(100),
+    NAME    VARCHAR(100)    ,
+    SKILL    VARCHAR(100),
+    EMAIL    VARCHAR(100)    ,
+    PHONE    VARCHAR(100)    ,
+    HIREDATE    DATE
+);
