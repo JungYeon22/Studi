@@ -21,5 +21,10 @@ public class BoardController {
         return "board/boardList2";
     }
 
+    @GetMapping(value = "/boardInput")
+    public String boardInput(){
+        return "board/boardInput";
+    }
+
 
 }
