@@ -49,7 +49,7 @@
                     </ul>
                 </div>
 
-                <div class=" col card  rounded-3 bg-body-white " style="width: 90%;" > ㅋㅋㅋㅋㅋㅋ ㅋㄷ미들급 신청합니다.</div>
+                <div class=" col card  rounded-3 bg-body-white " style="width: 90%;" > ㅋㅋㅋㅋㅋㅋ1 ㅋㄷ미들급 신청합니다.</div>
                 <div class="col-sm-1" style="padding: 0px; margin:0 0 ;">
                     <div>
                         <img src="/Studi-1.0-SNAPSHOT/image/icons8-바꾸다-24.png" class="rounded "  alt="edit"/>
