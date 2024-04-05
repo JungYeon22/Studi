@@ -16,14 +16,15 @@
 
 </head>
 <body>
+<form id="boardInputForm">
 <div class="container">
     <div class="card">
         <div class="card-header bg-white">
             <div class="row">
                 <div class="col">
-                    <input type="text" class="form-control" id="title" placeholder="제목">
+                    <input type="text" class="form-control" id="subject" placeholder="제목">
                     <br>
-                    <input type="text" class="form-control" id="title1" value="작성자" readonly>
+                    <input type="text" class="form-control" id="name" value="작성자" readonly>
                     <br>
                     <input type="number" class="form-control" id="memberCount" placeholder="모집인원" min="2" max="5">
                 </div>
@@ -34,9 +35,9 @@
             </div>
         </div>
         <div class="card-body">
-            <div id="summernote"></div>
+            <div id="content"></div>
             <script>
-                $('#summernote').summernote({
+                $('#content').summernote({
                     placeholder: '글을 쓰세요.',
                     height: 500,
                 });
@@ -44,7 +45,7 @@
         </div>
     </div>
 </div>
-</div>
+</form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
