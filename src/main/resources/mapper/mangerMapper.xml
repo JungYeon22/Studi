@@ -7,21 +7,14 @@
     <select id="getToTalMember">
         select count(*) from user
     </select>
-    <!-- 이번주 가입 회원 수 -->
-    <select id="getWeekMember">
-        select
-        (select count(*)
-        from user
-        where regdate > to_char(trunc(sysdate,'iw'), 'yyyy/mm/dd'))
-        from user;
-    </select>
-    <!-- 오늘 가입 회원 수 -->
-    <select id="getTodayMember">
-        select
-        (select count(*)
-        from user
-        where regdate >= to_char(trunc(sysdate), 'yyyy/mm/dd'))
-        from ;
+
+    <!-- 가입 회원 수 -->
+    <select id="getTodayMember" resultType="java.util.Map">
+        SELECT DATE(hiredate) AS date, COUNT(*) AS signups
+        FROM user
+        WHERE hiredate >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+        GROUP BY DATE(hiredate)
+        ORDER BY DATE(hiredate) DESC;
     </select>
 
 </mapper>
