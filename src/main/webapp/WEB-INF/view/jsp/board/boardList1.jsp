@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 </head>
@@ -48,10 +48,10 @@
 
     <div class=" flex-column p-3 flex-md-row gap-4 py-md-0 ">
         <div class="list-group">
-            <a href="/board/boardList2" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true">
+            <a href="${pageContext.request.contextPath}/board/boardList2" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true">
                 <div class=" gap-2 w-100 justify-content-between">
                     <div>
-                        <small class="opacity-50 text-nowrap ms-3">작성자</small>&emsp;<small class="opacity-50 text-nowrap">now</small>&emsp;<small class="opacity-50 text-nowrap">조회</small><small class="opacity-50 text-nowrap">100</small><img src="/image/icons8-북마크-리본-24.png" class="rounded float-end"  alt="bookmark">
+                        <small class="opacity-50 text-nowrap ms-3">작성자</small>&emsp;<small class="opacity-50 text-nowrap">now</small>&emsp;<small class="opacity-50 text-nowrap">조회</small><small class="opacity-50 text-nowrap">100</small><img src="${pageContext.request.contextPath}/image/icons8-북마크-리본-24.png" class="rounded float-end"  alt="bookmark">
                         <h6 class="mb-0 ms-3" >제목</h6><h6 class="mb-0 position-absolute top-50 end-0 translate-middle-y me-5">모집 중(4/5)</h6>
                         <button type="button" class="btn btn-outline-danger rounded-pill btn-sm ms-3 mt-2" disabled>JAVA</button>
 
@@ -60,10 +60,10 @@
                 </div>
             </a>
             <br>
-            <a href="/board/boardList2" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true">
+            <a href="${pageContext.request.contextPath}/board/boardList2" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true">
                 <div class=" gap-2 w-100 justify-content-between">
                     <div>
-                        <small class="opacity-50 text-nowrap ms-3">작성자</small>&emsp;<small class="opacity-50 text-nowrap">now</small>&emsp;<small class="opacity-50 text-nowrap">조회</small><small class="opacity-50 text-nowrap">100</small><img src="/image/icons8-북마크-리본-24.png" class="rounded float-end"  alt="bookmark">
+                        <small class="opacity-50 text-nowrap ms-3">작성자</small>&emsp;<small class="opacity-50 text-nowrap">now</small>&emsp;<small class="opacity-50 text-nowrap">조회</small><small class="opacity-50 text-nowrap">100</small><img src="${pageContext.request.contextPath}/image/icons8-북마크-리본-24.png" class="rounded float-end"  alt="bookmark">
                         <h6 class="mb-0 ms-3" >제목</h6><h6 class="mb-0 position-absolute top-50 end-0 translate-middle-y me-5">모집 마감(5/5)</h6>
                         <button type="button" class="btn btn-outline-danger rounded-pill btn-sm ms-3 mt-2" disabled>JAVA</button>
 
@@ -72,10 +72,10 @@
                 </div>
             </a>
             <br>
-            <a href="/board/boardList2" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true">
+            <a href="${pageContext.request.contextPath}/board/boardList2" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true">
                 <div class=" gap-2 w-100 justify-content-between">
                     <div>
-                        <small class="opacity-50 text-nowrap ms-3">작성자</small>&emsp;<small class="opacity-50 text-nowrap">now</small>&emsp;<small class="opacity-50 text-nowrap">조회</small><small class="opacity-50 text-nowrap">100</small><img src="/image/icons8-북마크-리본-24.png" class="rounded float-end"  alt="bookmark">
+                        <small class="opacity-50 text-nowrap ms-3">작성자</small>&emsp;<small class="opacity-50 text-nowrap">now</small>&emsp;<small class="opacity-50 text-nowrap">조회</small><small class="opacity-50 text-nowrap">100</small><img src="${pageContext.request.contextPath}/image/icons8-북마크-리본-24.png" class="rounded float-end"  alt="bookmark">
                         <h6 class="mb-0 ms-3" >제목</h6><h6 class="mb-0 position-absolute top-50 end-0 translate-middle-y me-5">모집 마감(5/5)</h6>
                         <button type="button" class="btn btn-outline-danger rounded-pill btn-sm ms-3 mt-2" disabled>JAVA</button>
 
@@ -84,10 +84,10 @@
                 </div>
             </a>
             <br>
-            <a href="/board/boardList2" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true">
+            <a href="${pageContext.request.contextPath}/board/boardList2" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true">
                 <div class=" gap-2 w-100 justify-content-between">
                     <div>
-                        <small class="opacity-50 text-nowrap ms-3">작성자</small>&emsp;<small class="opacity-50 text-nowrap">now</small>&emsp;<small class="opacity-50 text-nowrap">조회</small><small class="opacity-50 text-nowrap">100</small><img src="/image/icons8-북마크-리본-24.png" class="rounded float-end"  alt="bookmark">
+                        <small class="opacity-50 text-nowrap ms-3">작성자</small>&emsp;<small class="opacity-50 text-nowrap">now</small>&emsp;<small class="opacity-50 text-nowrap">조회</small><small class="opacity-50 text-nowrap">100</small><img src="${pageContext.request.contextPath}/image/icons8-북마크-리본-24.png" class="rounded float-end"  alt="bookmark">
                         <h6 class="mb-0 ms-3" >제목</h6><h6 class="mb-0 position-absolute top-50 end-0 translate-middle-y me-5">모집 마감(5/5)</h6>
                         <button type="button" class="btn btn-outline-danger rounded-pill btn-sm ms-3 mt-2" disabled>JAVA</button>
 
@@ -96,10 +96,10 @@
                 </div>
             </a>
             <br>
-            <a href="/board/boardList2" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true">
+            <a href="${pageContext.request.contextPath}/board/boardList2" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true">
                 <div class=" gap-2 w-100 justify-content-between">
                     <div>
-                        <small class="opacity-50 text-nowrap ms-3">작성자</small>&emsp;<small class="opacity-50 text-nowrap">now</small>&emsp;<small class="opacity-50 text-nowrap">조회</small><small class="opacity-50 text-nowrap">100</small><img src="/image/icons8-북마크-리본-24.png" class="rounded float-end"  alt="bookmark">
+                        <small class="opacity-50 text-nowrap ms-3">작성자</small>&emsp;<small class="opacity-50 text-nowrap">now</small>&emsp;<small class="opacity-50 text-nowrap">조회</small><small class="opacity-50 text-nowrap">100</small><img src="${pageContext.request.contextPath}/image/icons8-북마크-리본-24.png" class="rounded float-end"  alt="bookmark">
                         <h6 class="mb-0 ms-3" >제목</h6><h6 class="mb-0 position-absolute top-50 end-0 translate-middle-y me-5">모집 마감(5/5)</h6>
                         <button type="button" class="btn btn-outline-danger rounded-pill btn-sm ms-3 mt-2" disabled>JAVA</button>
 
