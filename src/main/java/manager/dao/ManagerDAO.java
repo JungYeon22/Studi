@@ -2,9 +2,12 @@ package manager.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+import java.util.Map;
+
 @Mapper
 public interface ManagerDAO {
-    void getToTalMember(String hiredate);
-    void getWeekMember(String hiredate);
-    void getTodayMember(String hiredate);
+    public int getToTalMember(String hiredate);
+    public int getWeekMember(String hiredate);
+    public List<Map<String, Object>> getTodayMember(String hiredate);
 }

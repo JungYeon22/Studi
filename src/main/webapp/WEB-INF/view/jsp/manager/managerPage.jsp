@@ -314,7 +314,7 @@
         datasets: [
             {
                 label: '가입자',
-                data: [20, 35, 40, 30, 45, 50, 55], // 예시 데이터, 실제 데이터로 대체해야 함
+                data: [20, 35, 40, 30, 45, 50, 55], // <%-- ['${memMinus1}', '${memMinus2}', '${memMinus3}', '${memMinus4}', '${memMinus5}', '${memToday}']--%>
                 borderColor: 'rgba(255, 99, 132, 1)',
                 backgroundColor: 'rgba(255, 0, 0, 0.5)',
                 yAxisID: 'y',
