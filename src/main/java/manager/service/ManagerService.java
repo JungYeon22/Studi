@@ -1,8 +1,10 @@
 package manager.service;
 
+import java.util.List;
+import java.util.Map;
 public interface ManagerService {
 
-    public void getToTalMember(String hiredate);
-    public void getWeekMember(String hiredate);
-    public void getTodayMember(String hiredate);
+    public int getToTalMember(String hiredate);
+    public int getWeekMember(String hiredate);
+    public List<Map<String, Object>> getTodayMember(String hiredate);
 }
