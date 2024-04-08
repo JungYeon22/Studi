@@ -13,26 +13,58 @@
                         <div class="mb-3 row">
                             <label for="writer" class="col-sm-2 col-form-label">작성자</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="writer" value="박정연">
+                                <input type="text" readonly class="form-control-plaintext" id="writer" name="writer" value="박정연">
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="title" class="col-sm-2 col-form-label">제목</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="title" name="title">
+                                <div id="titleDiv"></div>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="content" class="form-label">내용</label>
-                            <textarea class="form-control" id="content" rows="5"></textarea>
+                            <textarea class="form-control" name="content" id="content" rows="5"></textarea>
+                            <div id="contentDiv"></div>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="fBoardWriteBtn">Save</button>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(function(){
+        $('#fBoardWriteBtn').click(function(){
+            var writer = $('#writer').val();
+            var title = $('#title').val();
+            var content = $('#content').val();
+            console.log(writer);
+
+            if(title == ""){
+                $('#titleDiv').html('제목을 입력해주세요.')
+            }
+            else if(content == ""){
+                $('#contentDiv').html('내용을 입력하세요.')
+            }
+            else {
+                $.post({
+                    url: '${pageContext.request.contextPath}/freeBoard/write'
+                    , data: $('#fBoardWriteForm').serialize() // 변수=값&변수=값..
+                    , success: function (){
+                        alert('게시글 등록')
+                        location.reload();
+                    }
+                    , error: function (e){
+                        console.log(e);
+                    }
+                })
+            }
+        })
+    });
+</script>

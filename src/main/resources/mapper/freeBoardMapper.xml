@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="freeBoard.dao.FBoardDAO">
+
+    <insert id="write" parameterType="FBoardDTO">
+        insert into free_board(writer, title, content) values(#{writer}, #{title}, #{content})
+    </insert>
+
+
+</mapper>

@@ -9,6 +9,11 @@
 <html>
 <head>
 <%@include file="../include/headFile.jsp"%>
+  <style>
+    #titleDiv, #contentDiv{
+      color: red;
+    }
+  </style>
 </head>
 <body>
 <%@include file="../include/header.jsp"%>
