@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -16,10 +17,12 @@ public class BoardImageController {
     private ObjectStorage objectStorage;
     private String bucketName="bitcamp-6th-bucket-102";
 
-    @PostMapping(value = "/boardImageUpload")
+    @PostMapping(value = "boardImageUpload")
+    @ResponseBody
     public String boardImageUpload(@RequestParam("file") MultipartFile file){
 
-        String fileName=objectStorage.uploadFile(bucketName,"storage/",file);
+        System.out.println("her");
+        String fileName=objectStorage.uploadFile(bucketName,"miniproject/",file);
         return fileName;
     }
 }
