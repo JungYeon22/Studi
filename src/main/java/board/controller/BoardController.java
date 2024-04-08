@@ -1,29 +1,40 @@
 package board.controller;
 
 
+import board.bean.BoardDTO;
+import board.service.BoardService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "board")
 public class BoardController {
 
-    @GetMapping(value = "/boardList1")
-    public String boardList1(){
+    @Autowired
+    private BoardService boardService;
+    @GetMapping(value = "/boardListMain")
+    public String boardListMain(){
 
-        return "board/boardList1";
+        return "board/boardListMain";
     }
 
-    @GetMapping(value = "/boardList2")
-    public String boardList2(){
+    @GetMapping(value = "/boardListDetail")
+    public String boardListDetail(){
 
-        return "board/boardList2";
+        return "board/boardListDetail";
     }
 
     @GetMapping(value = "/boardInput")
     public String boardInput(){
         return "board/boardInput";
+    }
+
+    @GetMapping(value = "/boardInputData")
+    @ResponseBody
+    public String boardInputData(@ModelAttribute BoardDTO boardDTO, @RequestParam() String[] lang){
+        return boardService.boardInputData(boardDTO,lang);
     }
 
 
