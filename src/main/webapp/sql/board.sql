@@ -1,10 +1,14 @@
 CREATE TABLE `BOARD` (
-`BOARDID`	VARCHAR(100),
-`CONTENT`	VARCHAR(100),
-`UserId`	VARCHAR(100),
-`DATE`	DATE,
-`FILE`	VARCHAR(100),
-`HIT`	VARCHAR(100)
+                         `BOARDID`	VARCHAR(100),
+                         `SUBJECT`	VARCHAR(100),
+                         `CONTENT`	VARCHAR(4000),
+                         `userCnt` INT,
+                         `projectType` VARCHAR(100),
+                         `projectField` VARCHAR(100),
+                         `UserId`	VARCHAR(100),
+                         `DATE`	DATE,
+                         `FILE`	VARCHAR(100),
+                         `HIT`	VARCHAR(100)
 );
 
 CREATE TABLE `COMMENT` (
@@ -20,7 +24,7 @@ CREATE TABLE `SCRAP` (
 `BOARDID`	VARCHAR(100)
 );
 
-CREATE TABLE `TAG` (
+CREATE TABLE `boardtag` (
 `CONTENT`	VARCHAR(100),
 `BOARDID`	VARCHAR(100)
 );

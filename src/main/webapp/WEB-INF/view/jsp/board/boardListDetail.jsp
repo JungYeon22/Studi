@@ -16,11 +16,14 @@
 
 
 </head>
+
 <body>
 
 <%@ include file="../include/header.jsp"%>
+
 <form class="position-absolute top-0 start-50 translate-middle-x mt-5" style="width: 50%">
     <br>
+
     <div class="card mb-4 rounded-3 shadow-sm " style="height: 100%; " >
         <div class="card-header py-3 " style="border-bottom: none; ">
             <h4 class="my-0 fw-normal " style="text-align: center;">스파링 급구</h4>
@@ -92,6 +95,9 @@
     <img src="${pageContext.request.contextPath}/image/icons8-북마크-리본-24 (1).png" style="height: 35px ; margin-left: 76%;" >
 </div>
 
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
+
 </html>
