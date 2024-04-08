@@ -31,10 +31,12 @@ public class BoardController {
         return "board/boardInput";
     }
 
-    @GetMapping(value = "/boardInputData")
+    @PostMapping(value = "/boardInputData")
     @ResponseBody
     public String boardInputData(@ModelAttribute BoardDTO boardDTO, @RequestParam() String[] lang){
-        return boardService.boardInputData(boardDTO,lang);
+        boardDTO.setBOARDID(boardDTO.getUserId()+boardDTO.getSUBJECT());
+        boardService.boardInputData(boardDTO,lang);
+        return "";
     }
 
 

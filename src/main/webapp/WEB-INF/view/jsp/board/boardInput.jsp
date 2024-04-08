@@ -17,15 +17,16 @@
 </head>
 <body>
 <%@ include file="../include/header.jsp"%>
-<form id="boardInputForm" style="margin-top: 70px" action="${pageContext.request.contextPath}/board/boardInputData">
+<form id="boardInputForm" style="margin-top: 70px" >
+
 <div class="container">
     <div class="card">
         <div class="card-header bg-white">
             <div class="row">
                 <div class="col">
-                    <input type="text" class="form-control" id="subject" name="subject" placeholder="제목">
+                    <input type="text" class="form-control" id="subject" name="SUBJECT" placeholder="제목">
                     <br>
-                    <input type="text" class="form-control" id="name" name="name" value="작성자" readonly>
+                    <input type="text" class="form-control" id="UserId" name="UserId" value="dongwoo" readonly>
                     <br>
 
 
@@ -59,16 +60,24 @@
                 </div>
 
                 <div id="button">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" id="boardInputFormBtn" class="btn btn-primary">글쓰기</button>
                 </div>
             </div>
         </div>
         <div class="card-body">
-            <div id="content" ></div>
+            <textarea id="content" name="CONTENT"></textarea>
             <script>
                 $('#content').summernote({
                     placeholder: '글을 쓰세요.',
                     height: 500,
+                    callbacks : {
+                        onImageUpload : function(files, editor, welEditable) {
+                            // 다중 이미지 처리
+                            for (var i = 0; i < files.length; i++) {
+                                imageUploader(files[i], this);
+                            }
+                        }
+                    }
                 });
             </script>
         </div>
@@ -77,5 +86,31 @@
 </form>
 <%@include file="../include/footer.jsp"%>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="http://code.jQuery.com/jquery-3.7.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/board/boardInput.js"></script>
+<script>
+    function imageUploader(file, el) {
+        var formData = new FormData();
+        formData.append('file', file);
+
+        $.ajax({
+            data : formData,
+            type : "POST",
+            url : '${pageContext.request.contextPath}/board/boardImageUpload',
+            contentType : false,
+            processData : false,
+            enctype : 'multipart/form-data',
+            success : function(data) {
+                $(el).summernote('insertImage', "https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/storage/"+data, function($image) {
+                    $image.css('width', "100%");
+                });
+                console.log(data);
+            },
+            error : function(e){
+                console.log(e);
+            }
+        });
+    }
+</script>
 </body>
 </html>
