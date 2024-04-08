@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Map;
+
 import manager.bean.ManagerDTO;
 
 @Repository
@@ -14,17 +17,20 @@ public class ManagerDAOMyBatis implements ManagerDAO{
     private SqlSession sqlSession;
 
     @Override
-    public void getToTalMember(String hiredate) {
-        sqlSession.insert("managerSQL.getToTalMember", hiredate);
+    public int getToTalMember(String hiredate) {
+
+        return sqlSession.selectOne("managerSQL.getToTalMember", hiredate);
     }
 
     @Override
-    public void getWeekMember(String hiredate) {
-        sqlSession.insert("managerSQL.getWeekMember", hiredate);
+    public int getWeekMember(String hiredate) {
+
+        return sqlSession.selectOne("managerSQL.getWeekMember", hiredate);
     }
 
     @Override
-    public void getTodayMember(String hiredate) {
-        sqlSession.insert("managerSQL.getTodayMember", hiredate);
+    public List<Map<String, Object>> getTodayMember(String hiredate) {
+        return sqlSession.selectList("managerSQL.getTodayMember", hiredate);
     }
+
 }

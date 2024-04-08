@@ -3,6 +3,9 @@ package manager.service;
 import manager.dao.ManagerDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Map;
+
 
 @Service
 public class ManagerServiceImpl implements ManagerService{
@@ -10,19 +13,17 @@ public class ManagerServiceImpl implements ManagerService{
     private ManagerDAO managerDAO;
 
     @Override
-    public void getToTalMember(String hiredate) {
-
-        managerDAO.getToTalMember(hiredate);
+    public int getToTalMember(String hiredate) {
+        return managerDAO.getToTalMember(hiredate);
     }
 
     @Override
-    public void getWeekMember(String hiredate) {
-        managerDAO.getWeekMember(hiredate);
+    public int getWeekMember(String hiredate) {
+        return managerDAO.getWeekMember(hiredate);
     }
 
     @Override
-    public void getTodayMember(String hiredate) {
-
-        managerDAO.getTodayMember(hiredate);
+    public List<Map<String, Object>> getTodayMember(String hiredate) {
+        return managerDAO.getTodayMember(hiredate);
     }
 }
