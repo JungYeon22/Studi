@@ -22,7 +22,7 @@ CREATE PROCEDURE LIKE_PROCEDURE (
 )
 BEGIN
     DECLARE existLike INT;
-        -- 해당 사용자가 이미 해당 게시글에 좋아요를 눌렀는지 확인
+    -- 해당 사용자가 이미 해당 게시글에 좋아요를 눌렀는지 확인
     SELECT COUNT(*) INTO existLike
     FROM fboard_like
     WHERE FBOARD = fboard_id AND userId = user_id;

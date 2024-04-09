@@ -10,6 +10,7 @@ import user.bean.UserDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,17 +21,22 @@ public class FreeBoardController {
     private FBoardService fBoardService;
 
     @GetMapping(value = "/freeBoardList")
-    public String freeBoardList(Model model){
-/*        HttpSession httpSession = request.getSession();
-        UserDTO userDTO = (UserDTO) httpSession.getAttribute("userDTO");*/
+    public String freeBoardList(HttpSession session, Model model){
+        UserDTO userDTO = (UserDTO)session.getAttribute("userDTO");
+        List<Integer> userLikeList = new ArrayList<>();
+        if(userDTO != null){
+            userLikeList = fBoardService.getUserLikeList(userDTO.getUserId());
+        }
         List<FBoardDTO> fBoardList = fBoardService.getFBoardList();
+
         model.addAttribute("fBoardList", fBoardList);
+        model.addAttribute("userLikeList", userLikeList);
         return "/freeBoard/freeBoardList";
     }
 
-    @PostMapping(value = "getUserListList")
+    @PostMapping(value = "getUserLikeList")
     @ResponseBody
-    public List<Integer> getUserListList(@RequestParam String userId, Model model){
+    public List<Integer> getUserLikeList(@RequestParam String userId, Model model){
         return fBoardService.getUserLikeList(userId);
     }
 
@@ -44,8 +50,6 @@ public class FreeBoardController {
     @ResponseBody
     public void updateLike(@RequestParam("num") String num,
                      @RequestParam("userId") String userId){
-        System.out.println("num : " + num);
-        System.out.println("userId : " + userId);
         fBoardService.updateLike(num, userId);
     }
 

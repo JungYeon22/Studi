@@ -40,8 +40,8 @@
         <div class="card-footer text-end">
           <i class="fa-regular fa-thumbs-up"> </i>
           <span class="likeValue">${fboardDTO.likes}</span>
-          <button type="button" class="btn btn-primary likeBtn" data-bs-toggle="button" aria-pressed="false">좋아요</button>
-          <input type="hidden" value="${fboardDTO.FBoard}">
+          <button type="button" class="btn btn-primary likeBtn" data-number="${fboardDTO.FBoard}" data-bs-toggle="button" aria-pressed="false">좋아요</button>
+          <input type="hidden"  value="${fboardDTO.FBoard}">
         </div>
       </div>
     </div>
@@ -51,28 +51,42 @@
 <script>
 $(function (){
 
+
   $.post({
-    url: '/freeBoard/getUserListList'
+    url: '/freeBoard/getUserLikeList'
     , data: 'userId='+$('#userId').val()
     , dataType: 'json'
     , success: function (data){
       console.log(JSON.stringify(data));  // 콘솔로 확인하려고
+      $.each(data, function(index, number){
+        console.log(number)
+        $('.likeBtn[data-number="'+ number+'"]').attr('aria-pressed', "true");
+      })
     }
   })
 
   $('.likeBtn').click(function (){
     var num = $(this).siblings('input[type="hidden"]'); // 해당 게시글 번호 가져오기
     alert(num.val());
+    var pressValue = $(this).attr('aria-pressed');
+    console.log(pressValue);
+    var like = num.siblings('.likeValue').text();
+    var likeCount
+    if(pressValue){
+      $(this).attr('aria-pressed', "false")
+      likeCount = parseInt(like) + 1;
+      num.siblings('.likeValue').text(likeCount);
+    }else{
+      $(this).attr('aria-pressed', "true")
+      likeCount = parseInt(like) - 1;
+      num.siblings('.likeValue').text(likeCount);
+    }
+
     $.post({
       url: '/freeBoard/updateLike',
       data: 'num='+num.val()+"&userId="+$('#userId').val(),
       success: function (){
         console.log("성공")
-        var like = num.siblings('.likeValue').text();
-        console.log("원래 좋아요 개수 : "+like)
-        var likeCount = parseInt(like) + 1;
-        console.log('좋아요 개수 : ' + likeCount)
-        num.siblings('.likeValue').text(likeCount);
       },
       error: function (e){
         console.log(e);
@@ -80,9 +94,6 @@ $(function (){
     })
   })
 })
-
-
-
 </script>
 </body>
 </html>
