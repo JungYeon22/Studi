@@ -128,22 +128,56 @@
                 <img src="../image/line.png" class="line" width="20px" height="30px" style=" margin: 0;
                   margin-top: 15px;">
                 <a type="button" class="upwrite">회원가입</a>
+            </ul>
         </div>
     </div>
-    </ul>
 </nav>
 <hr/>
 
 <!-- ########################################################################################################################### -->
 <div class="container">
+
     <main>
         <div class="py-5 text-center">
             <h2>관리자 페이지</h2>
+            <input type="text" name="pg" id="pg" value="1">
         </div>
+
+        <br>
+<%--        <table border="1" frame="hsides" role="rows" id="userListTable">
+            <tr>
+                <th>이름</th>
+                <th>아이디</th>
+                <th>비밀번호</th>
+            </tr>
+
+            <!-- 동적 처리 -->
+        </table>
+
+        <!-- 페이징 처리 -->
+        <div id="userPagingDiv" >~~~</div>--%>
+
+        <h4 class="mb-3 mt-3">
+            <span class="text-primary">유저 리스트</span>
+        </h4>
+        <div class="border border-primary-subtle rounded p-3">
+            <table border="1" frame="hsides" role="rows" id="userListTable">
+                <tr >
+                    <th>이름</th>
+                    <th>아이디</th>
+                    <th>비밀번호</th>
+                    <th>email</th>
+                    <th>휴대전화</th>
+                    <th>가입날짜</th>
+                </tr>
+            </table>
+            <div id="userPagingDiv" ></div>
+        </div>
+
 
         <div class="row">
             <div class="col-md-6"> <!-- 왼쪽 영역 -->
-                <h3 class="mb-3">통계 그래프
+                <h3 class="mb-3">대시 보드
                 </h3>
                 <div class="border border-primary-subtle rounded p-3">
                     <div class="mb-3">
@@ -166,18 +200,19 @@
             </div>
 
             <div class="col-md-6"> <!-- 오른쪽 영역 -->
+
                 <h4 class="mb-3">
                     <span class="text-primary">신고 리스트</span>
                 </h4>
                 <div class="border border-primary-subtle rounded p-3">
-                    <div class="accordion accordion-flush" id="accordion">
+                    <div class="accordion accordion-flush" id="accordion2">
                         <div class="accordion-item">
                             <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
                                     모두보기
                                 </button>
                             </h2>
-                            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordion">
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordion2">
                                 <div class="accordion-body">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div>
@@ -267,101 +302,178 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jQuery.com/jquery-3.7.1.min.js"></script>
 <script>
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['04-01', '04-02', '04-03', '04-04', '04-05', '04-06'],
-            datasets: [{
-                label: '게시물 생성',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+    $(document).ready(function() {
+        $(function(){
+            $.ajax({
+                type: 'POST',
+                url: '/admin/managerPage/getUserList',
+                data: { pg: $('#pg').val() },
+                dataType: 'json',
+                success: function(data){
+                    console.log(JSON.stringify(data));
+                    $.each(data.list, function(index, items){
+                        var result = `<tr>`
+                            + `<td align="center">` + items.name + `</td>`
+                            + `<td align="center"><a href="#" class="idA">` + items.userid + `</a></td>`
+                            + `<td align="center">` + items.pwd + `</td>` + `</a></td>`
+                            + `<td align="center">` + items.email + `</td>` + `</a></td>`
+                            + `<td align="center">` + items.phone + `</td>` + `</a></td>`
+                            + `<td align="center">` + items.hiredate + `</td>`
+                            + `</tr>`;
+
+                        $('#userListTable').append(result);
+                    }); //$.each
+
+                    //페이징 처리
+                    $('#userPagingDiv').html(data.managerPaging.pagingHTML);
+
+                },
+                error: function(e){
+                    console.log(e);
                 }
-            }
-        }
-    });
+            }); //$.ajax
+        });
+
+        $(function() {
+            $.ajax({
+                type: 'POST',
+                url: '/admin/managerPage/boardUpload',
+                dataType: 'json',
+                <%--data:${signupData},--%>
+                success: function(data) {
+                    console.log(JSON.stringify(data));
+
+                    var labelList = [];
+                    var valueList = [];
+
+                    for (var i = 0; i < data.length; i++) {
+                        var d = data[i];
+                        console.log(d.date);
+                        console.log(d.upload);
+                        labelList.push(d.date);
+                        valueList.push(d.upload);
+                    }
+
+                    const ctx = document.getElementById('myChart').getContext('2d');
+                    var data = {
+                        labels: labelList,
+                        datasets: [{
+                            label: '게시물 업로드 개수',
+                            data: valueList,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    };
+
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: data,
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                },
+                error: function(e) {
+                    console.log(e);
+                }
+            });
+        });
+
 
     // ************************************************************************************************
-    const ctx2 = document.getElementById('myChart2').getContext('2d');
-    const DATA_COUNT = 7;
-    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
-    const data = {
-        labels: labels,
-        datasets: [
-            {
-                label: '가입자',
-                data: [20, 35, 40, 30, 45, 50, 55], // <%-- ['${memMinus1}', '${memMinus2}', '${memMinus3}', '${memMinus4}', '${memMinus5}', '${memToday}']--%>
-                borderColor: 'rgba(255, 99, 132, 1)',
-                backgroundColor: 'rgba(255, 0, 0, 0.5)',
-                yAxisID: 'y',
-            },
-            {
-                label: '탈퇴자',
-                data: [-10, -20, -15, -25, -30, -35, -40], // 예시 데이터, 실제 데이터로 대체해야 함
-                borderColor: 'rgba(54, 162, 235, 1)',
-                backgroundColor: 'rgba(0, 0, 255, 0.5)',
-                yAxisID: 'y1',
-            }
-        ]
-    };
+        $(function() {
+            $.ajax({
+                type: 'POST',
+                url: '/admin/managerPage/signupCounts',
+                dataType: 'json',
+                <%--data:${signupData},--%>
+                success: function(data) {
+                    console.log(JSON.stringify(data));
 
-    const myChart2 = new Chart(ctx2, {
-        type: 'line',
-        data: data,
-        options: {
-            responsive: true,
-            interaction: {
-                mode: 'index',
-                intersect: false,
-            },
-            stacked: false,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Chart.js Line Chart - Multi Axis'
+                    var labelList = [];
+                    var valueList = [];
+
+                    for (var i = 0; i < data.length; i++) {
+                        var d = data[i];
+                        labelList.push(d.date);
+                        valueList.push(d.signups);
+                    }
+
+                    const ctx2 = document.getElementById('myChart2').getContext('2d');
+                    var data = {
+                        labels: labelList,
+                        datasets: [{
+                            label: '가입자',
+                            data: valueList,
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                            yAxisID: 'y',
+                        }]
+                    };
+
+                    const myChart2 = new Chart(ctx2, {
+                        type: 'line',
+                        data: data,
+                        options: {
+                            responsive: true,
+                            interaction: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            stacked: false,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    type: 'linear',
+                                    display: true,
+                                    position: 'left',
+                                },
+                                y1: {
+                                    type: 'linear',
+                                    display: true,
+                                    position: 'right',
+                                    grid: {
+                                        drawOnChartArea: false,
+                                    },
+                                },
+                            }
+                        },
+                    });
+                },
+                error: function(e) {
+                    console.log(e);
                 }
-            },
-            scales: {
-                y: {
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                },
-                y1: {
-                    type: 'linear',
-                    display: true,
-                    position: 'right',
-                    grid: {
-                        drawOnChartArea: false,
-                    },
-                },
-            }
-        },
+            });
+        });
     });
+
 </script>
 </body>
 </html>
