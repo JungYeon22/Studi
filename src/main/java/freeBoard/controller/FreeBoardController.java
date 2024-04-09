@@ -21,16 +21,9 @@ public class FreeBoardController {
     private FBoardService fBoardService;
 
     @GetMapping(value = "/freeBoardList")
-    public String freeBoardList(HttpSession session, Model model){
-        UserDTO userDTO = (UserDTO)session.getAttribute("userDTO");
-        List<Integer> userLikeList = new ArrayList<>();
-        if(userDTO != null){
-            userLikeList = fBoardService.getUserLikeList(userDTO.getUserId());
-        }
+    public String freeBoardList(Model model){
         List<FBoardDTO> fBoardList = fBoardService.getFBoardList();
-
         model.addAttribute("fBoardList", fBoardList);
-        model.addAttribute("userLikeList", userLikeList);
         return "/freeBoard/freeBoardList";
     }
 
