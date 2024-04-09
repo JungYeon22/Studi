@@ -117,19 +117,14 @@
                 </div>
 
 
-                <div class="col-md-6 mb-3">
+                <div class="col-md-8 mb-3">
                     <label>주소</label><br>
                     <div>
-                        <input type="text"   id="zipcode" placeholder="135-152" disabled/>
-                        <button type="button" class="btn btn-outline-secondary" id="addrbutton" onclick = "">우편번호검색</button>
+                        <input type="text" id="zonecode" placeholder="135-152" style="height: 35px" disabled/>
+                        <button type="button" class="btn btn-outline-secondary" id="addrbutton"  onclick = "">우편번호검색</button>
+                        <input type="text"  class="form-control" id="roadAddress"  placeholder="서울특별시 강남구" style="margin-top: 10px;"/>
+                        <input type="text" class="form-control" id="roadAddressDetail"  placeholder="상세주소" style="margin-top: 10px;"/>
                     </div>
-
-                    <input type="text"  class="form-control" id="addr1"  placeholder="서울특별시 강남구" style="margin-top: 10px;"/>
-                    <input type="text" class="form-control" id="addr2"  placeholder="상세주소"/>
-                    <div class="invalid-feedback">
-                        주소를 입력해주세요.
-                    </div>
-
                 </div>
 
                 <hr class="mb-4">
@@ -149,6 +144,7 @@
     </footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
 
@@ -269,6 +265,29 @@
             }
         });
 
+        // 우편번호 api
+        const elZonecode = document.querySelector("#zonecode");
+        const elRoadAddress = document.querySelector("#roadAddress");
+        const elRoadAddressDetail = document.querySelector("#roadAddressDetail");
+        const elResults = document.querySelectorAll(".el_result");
+        // 주소검색창 열기 함수
+        const onClickSearch = () => {
+            new daum.Postcode({
+                oncomplete: function (data) {
+                    elZonecode.value = data.zonecode;
+                    elRoadAddress.value = data.address;
+                },
+            }).open();
+        };
+        const register = () => {
+            console.log(`우편번호: ${elZonecode.value}`);
+            console.log(`주소: ${elRoadAddress.value}`);
+            console.log(`상세주소: ${elRoadAddressDetail.value}`);
+        };
+        elRoadAddressDetail.addEventListener("change", (e) => {
+            elRoadAddressDetail.value = e.target.value;
+        });
+        document.querySelector("#addrbutton").addEventListener("click", onClickSearch);
     });
 
 </script>
