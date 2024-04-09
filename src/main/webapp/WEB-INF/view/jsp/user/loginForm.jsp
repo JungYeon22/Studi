@@ -37,6 +37,7 @@
                 </div>
             </c:if>
 
+<%--            변경 해봄--%>
             <%--  로그인 성공시 해당 url로 이동 --%>
             <form class="login-form" action="${pageContext.request.contextPath}/user/loginForm" method="post" novalidate>
                 <div class="mb-3">
