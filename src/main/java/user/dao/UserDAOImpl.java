@@ -7,7 +7,7 @@ import user.bean.UserDTO;
 
 @Repository
 @RequiredArgsConstructor
-public class UserDAO {
+public class UserDAOImpl implements UserDao {
 
     private final SqlSessionTemplate sql;
 

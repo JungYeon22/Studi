@@ -11,7 +11,7 @@
 <body>
 <%@ include file="../include/header.jsp"%>
 
-<form class="position-absolute top-0 start-50 translate-middle-x mt-5" style="width: 50%">
+<form class="position-relative top-0 start-50 translate-middle-x mt-5" style="width: 50%">
     <br>
     <div class="grid d-flex p-4 gap-1 py-md-3 ms-2  " >
         <div class="p-2 g-col-6"   >
@@ -119,7 +119,7 @@
 
 </form>
 
-
+<%@include file="../include/footer.jsp"%>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
