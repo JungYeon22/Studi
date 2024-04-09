@@ -11,7 +11,8 @@ public class BoardDTO {
     private String BOARDID;
     private String SUBJECT;
     private String CONTENT;
-    private int userCnt;
+    private int userTotCnt;
+    private int userCurCnt;
     private String projectType;
     private String projectField;
     private String UserId;
