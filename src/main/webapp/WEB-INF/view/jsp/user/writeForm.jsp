@@ -41,6 +41,10 @@
                     <div class="col-md-6 mb-3">
                         <label for="id">아이디</label>
                         <input type="text" class="form-control" id="id" name="userId" placeholder="아이디입력" value="" required>
+
+                    </div>
+                    <div class="col-md-6 mb-3">
+
                         <button type="button" id="check-id" class="btn btn-outline-secondary" style="margin-top: 10px;">중복확인</button>
                         <div class="invalid-feedback">
                             아이디를 입력해주세요.
