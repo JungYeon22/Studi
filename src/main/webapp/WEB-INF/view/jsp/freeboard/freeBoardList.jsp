@@ -1,11 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: jungyeon
-  Date: 2024-04-05
-  Time: 오후 2:28
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <%@include file="../include/headFile.jsp"%>
@@ -26,131 +20,69 @@
       글쓰기
     </button>
   </div>
-
+  <input type="hidden" id="userId" name="userId" value="park"> <%--park 대신 ${sessionScope.userDTO.userId}--%>
+<c:forEach var="fboardDTO" items="${fBoardList}">
   <div class="row mt-4">
     <div class="col-md-8">
       <!-- 게시물 목록 -->
       <div class="card mb-3">
         <div class="card-header">
-          <strong>오늘의 공부 팁</strong>
-          <small class="text-muted">작성자: 박정연 | 작성시간: 2024-03-11</small>
+          <strong>${fboardDTO.title}</strong>
+          <small class="text-muted">작성자:${fboardDTO.writer} | 작성시간:${fboardDTO.date}</small>
+          <span>${fboardDTO.FBoard}</span>
         </div>
 
         <div class="card-body m-3">
-          <p class="card-text">오늘은 공부하는데 효율적인 방법에 대해 이야기해보려고 합니다.
-            요즘 공부 방법에 대한 다양한 이야기가 있지만, 가장 중요한 것은 계획입니다.
-            먼저 목표를 정하고, 그 목표를 달성하기 위한 계획을 세우는 것이 중요합니다.
-            또한 공부 시간을 일정하게 유지하고, 집중력을 유지할 수 있는 환경을 조성하는 것도 중요합니다.
-            그리고 공부한 내용을 정리하고 복습하는 것을 잊지 말아야 합니다.
-            이렇게 하면 효율적으로 공부할 수 있을 것입니다.</p>
+          <p class="card-text" id="contentValue">
+            ${fboardDTO.content}
+          </p>
         </div>
         <div class="card-footer text-end">
-          <i class="fa-regular fa-thumbs-up"></i>
-          <button type="button" class="btn btn-primary">좋아요</button>
+          <i class="fa-regular fa-thumbs-up"> </i>
+          <span class="likeValue">${fboardDTO.likes}</span>
+          <button type="button" class="btn btn-primary likeBtn" data-bs-toggle="button" aria-pressed="false">좋아요</button>
+          <input type="hidden" value="${fboardDTO.FBoard}">
         </div>
       </div>
     </div>
   </div>
-  <div class="row mt-4">
-    <div class="col-md-8">
-      <!-- 게시물 목록 -->
-      <div class="card mb-3">
-        <div class="card-header">
-          <strong>오늘의 공부 팁</strong>
-          <small class="text-muted">작성자: 박정연 | 작성시간: 2024-03-11</small>
-        </div>
-
-        <div class="card-body m-3">
-          <p class="card-text">오늘은 공부하는데 효율적인 방법에 대해 이야기해보려고 합니다.
-            요즘 공부 방법에 대한 다양한 이야기가 있지만, 가장 중요한 것은 계획입니다.
-            먼저 목표를 정하고, 그 목표를 달성하기 위한 계획을 세우는 것이 중요합니다.
-            또한 공부 시간을 일정하게 유지하고, 집중력을 유지할 수 있는 환경을 조성하는 것도 중요합니다.
-            그리고 공부한 내용을 정리하고 복습하는 것을 잊지 말아야 합니다.
-            이렇게 하면 효율적으로 공부할 수 있을 것입니다.</p>
-        </div>
-        <div class="card-footer text-end">
-          <i class="fa-regular fa-thumbs-up"></i>
-          <button type="button" class="btn btn-primary">좋아요</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row mt-4">
-    <div class="col-md-8">
-      <!-- 게시물 목록 -->
-      <div class="card mb-3">
-        <div class="card-header">
-          <strong>오늘의 공부 팁</strong>
-          <small class="text-muted">작성자: 박정연 | 작성시간: 2024-03-11</small>
-        </div>
-
-        <div class="card-body m-3">
-          <p class="card-text">오늘은 공부하는데 효율적인 방법에 대해 이야기해보려고 합니다.
-            요즘 공부 방법에 대한 다양한 이야기가 있지만, 가장 중요한 것은 계획입니다.
-            먼저 목표를 정하고, 그 목표를 달성하기 위한 계획을 세우는 것이 중요합니다.
-            또한 공부 시간을 일정하게 유지하고, 집중력을 유지할 수 있는 환경을 조성하는 것도 중요합니다.
-            그리고 공부한 내용을 정리하고 복습하는 것을 잊지 말아야 합니다.
-            이렇게 하면 효율적으로 공부할 수 있을 것입니다.</p>
-        </div>
-        <div class="card-footer text-end">
-          <i class="fa-regular fa-thumbs-up"></i>
-          <button type="button" class="btn btn-primary">좋아요</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row mt-4">
-    <div class="col-md-8">
-      <!-- 게시물 목록 -->
-      <div class="card mb-3">
-        <div class="card-header">
-          <strong>오늘의 공부 팁</strong>
-          <small class="text-muted">작성자: 박정연 | 작성시간: 2024-03-11</small>
-        </div>
-
-        <div class="card-body m-3">
-          <p class="card-text">오늘은 공부하는데 효율적인 방법에 대해 이야기해보려고 합니다.
-            요즘 공부 방법에 대한 다양한 이야기가 있지만, 가장 중요한 것은 계획입니다.
-            먼저 목표를 정하고, 그 목표를 달성하기 위한 계획을 세우는 것이 중요합니다.
-            또한 공부 시간을 일정하게 유지하고, 집중력을 유지할 수 있는 환경을 조성하는 것도 중요합니다.
-            그리고 공부한 내용을 정리하고 복습하는 것을 잊지 말아야 합니다.
-            이렇게 하면 효율적으로 공부할 수 있을 것입니다.</p>
-        </div>
-        <div class="card-footer text-end">
-          <i class="fa-regular fa-thumbs-up"></i>
-          <button type="button" class="btn btn-primary">좋아요</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row mt-4">
-    <div class="col-md-8">
-      <!-- 게시물 목록 -->
-      <div class="card mb-3">
-        <div class="card-header">
-          <strong>오늘의 공부 팁</strong>
-          <small class="text-muted">작성자: 박정연 | 작성시간: 2024-03-11</small>
-        </div>
-
-        <div class="card-body m-3">
-          <p class="card-text">오늘은 공부하는데 효율적인 방법에 대해 이야기해보려고 합니다.
-            요즘 공부 방법에 대한 다양한 이야기가 있지만, 가장 중요한 것은 계획입니다.
-            먼저 목표를 정하고, 그 목표를 달성하기 위한 계획을 세우는 것이 중요합니다.
-            또한 공부 시간을 일정하게 유지하고, 집중력을 유지할 수 있는 환경을 조성하는 것도 중요합니다.
-            그리고 공부한 내용을 정리하고 복습하는 것을 잊지 말아야 합니다.
-            이렇게 하면 효율적으로 공부할 수 있을 것입니다.</p>
-        </div>
-        <div class="card-footer text-end">
-          <i class="fa-regular fa-thumbs-up"></i>
-          <button type="button" class="btn btn-primary">좋아요</button>
-        </div>
-      </div>
-    </div>
-  </div>
+</c:forEach>
 </div>
 <script>
+$(function (){
+
+  $.post({
+    url: '/freeBoard/getUserListList'
+    , data: 'userId='+$('#userId').val()
+    , dataType: 'json'
+    , success: function (data){
+      console.log(JSON.stringify(data));  // 콘솔로 확인하려고
+    }
+  })
+
+  $('.likeBtn').click(function (){
+    var num = $(this).siblings('input[type="hidden"]'); // 해당 게시글 번호 가져오기
+    alert(num.val());
+    $.post({
+      url: '/freeBoard/updateLike',
+      data: 'num='+num.val()+"&userId="+$('#userId').val(),
+      success: function (){
+        console.log("성공")
+        var like = num.siblings('.likeValue').text();
+        console.log("원래 좋아요 개수 : "+like)
+        var likeCount = parseInt(like) + 1;
+        console.log('좋아요 개수 : ' + likeCount)
+        num.siblings('.likeValue').text(likeCount);
+      },
+      error: function (e){
+        console.log(e);
+      }
+    })
+  })
+})
+
+
 
 </script>
-
 </body>
 </html>

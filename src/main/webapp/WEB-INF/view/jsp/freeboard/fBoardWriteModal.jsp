@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Modal -->
-<div class="modal fade" id="fBoardWriteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
+<div class="modal fade" id="fBoardWriteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">글쓰기</h1>
@@ -13,7 +13,7 @@
                         <div class="mb-3 row">
                             <label for="writer" class="col-sm-2 col-form-label">작성자</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="writer" name="writer" value="박정연">
+                                <input type="text" readonly class="form-control-plaintext" id="writer" name="writer" value="박정연"><%--${sessionScope.userDTO.name}--%>
                             </div>
                         </div>
                         <div class="mb-3 row">
