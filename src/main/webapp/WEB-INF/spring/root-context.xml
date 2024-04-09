@@ -13,6 +13,7 @@
     <!-- DTO, Service, config, .. Web(url)과 관련없는 bean-->
     <context:component-scan base-package="spring.conf"/>
     <context:component-scan base-package="user.*"/>
+    <context:component-scan base-package="manager.*"/>
     <context:component-scan base-package="board.bean"/>
     <context:component-scan base-package="board.dao"/>
     <context:component-scan base-package="board.service"/>
@@ -20,6 +21,7 @@
     <!-- DAO와 Mapper.xml 연결-->
     <mybatis-spring:scan base-package="user.dao"/>
     <mybatis-spring:scan base-package="board.dao"/>
+    <mybatis-spring:scan base-package="manager.dao"/>
 
     <!-- 파일 모두 생성했는지 확인 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
