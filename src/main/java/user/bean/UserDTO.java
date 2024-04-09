@@ -11,12 +11,12 @@ import java.util.Date;
 public class UserDTO {
 
     private String name;
-    private String userId; //DTO , jsp의 name이랑 mapper의 명칭?
+    private String userId;
     private String pwd;
     private String skill;
     private String phone;
     private String email;
-    //    private String zipCode;
+//    private String zipCode;
 //    private String addr1;
 //    private String addr2;
     private Date hiredate;

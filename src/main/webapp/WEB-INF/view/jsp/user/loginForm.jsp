@@ -5,7 +5,9 @@
   Time: 오후 8:15
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html lang="ko">
 <head class="navbar navbar-expand-lg bd-navbar sticky-top">
     <meta charset="UTF-8">
@@ -27,31 +29,39 @@
         <div class="input-form col-md-12 mx-auto">
 
             <div id="loginBoxTitle"><img src="/image/sutdi.png" width="130" height="90"></div>
-            <form class="login-form" action="/user/loginForm" method="post" novalidate>
+
+            <%-- 로그인 아이디 비밀번호가 틀렸을시 --%>
+            <c:if test="${not empty loginError}">
+                <div class="alert alert-danger">
+                        ${loginError}
+                </div>
+            </c:if>
+
+<%--            변경 해봄--%>
+            <%--  로그인 성공시 해당 url로 이동 --%>
+            <form class="login-form" action="${pageContext.request.contextPath}/user/loginForm" method="post" novalidate>
                 <div class="mb-3">
                     <label for="id">아이디</label>
-                    <input type="text" class="form-control" id="id" name="userId" placeholder="아이디" required >
-                    <div class="invalid-feedback">
-                    </div>
+                    <input type="text" class="form-control" id="id" name="userId" placeholder="아이디" required>
+                    <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="mb-3">
                     <label for="password">비밀번호</label>
                     <input type="text" class="form-control" id="password" placeholder="비밀번호" name="pwd" required>
-                    <div class="invalid-feedback">
-                    </div>
-
+                    <div class="invalid-feedback"></div>
                     <a type="button" class="find"><span>아이디·비밀번호 찾기</span></a><br>
                 </div><br>
-                <form action="/" method="post">
-                    <div class="d-grid gap-2" >
-                        <button class="btn btn-outline-dark" type="submit" id="lobtn" >로그인</button>
-                    </div>
-                </form>
-                <div class="d-grid gap-2" style="margin-top: 10px;" onclick="location.href='writeForm'">
-                    <button class="btn btn-outline-dark" type="button" id="writebtn">회원가입</button>
+
+                <div class="d-grid gap-2">
+                    <button class="btn btn-outline-dark" type="submit" id="lobtn">로그인</button>
                 </div>
             </form>
+
+            <div class="d-grid gap-2" style="margin-top: 10px;">
+                <button class="btn btn-outline-dark" type="button" id="writebtn" onclick="location.href='writeForm'">회원가입</button>
+            </div>
+
             <hr>
 
             <form class="social-login-form" novalidate>

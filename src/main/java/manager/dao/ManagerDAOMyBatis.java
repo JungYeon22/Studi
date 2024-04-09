@@ -17,20 +17,24 @@ public class ManagerDAOMyBatis implements ManagerDAO{
     private SqlSession sqlSession;
 
     @Override
-    public int getToTalMember(String hiredate) {
-
-        return sqlSession.selectOne("managerSQL.getToTalMember", hiredate);
+    public List<Map<String, Object>> getTodayMember() {
+        return sqlSession.selectList("manager.getTodayMember");
     }
 
     @Override
-    public int getWeekMember(String hiredate) {
-
-        return sqlSession.selectOne("managerSQL.getWeekMember", hiredate);
+    public List<Map<String, Object>> boardUpload() {
+        return sqlSession.selectList("manager.boardUpload");
     }
 
     @Override
-    public List<Map<String, Object>> getTodayMember(String hiredate) {
-        return sqlSession.selectList("managerSQL.getTodayMember", hiredate);
+    public List<ManagerDTO> getUserList(int startNum) {
+        return sqlSession.selectList("manager.getUserList", startNum);
+    }
+
+    @Override
+    public int getTotalA() {
+        int totalA = sqlSession.selectOne("manager.getTotalA");
+        return totalA;
     }
 
 }
