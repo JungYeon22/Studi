@@ -5,9 +5,9 @@
         <div class="container-fluid">
             <a class="navbar-brand ms-5" href="http://localhost:8080/${pageContext.request.contextPath}"><img src="/image/sutdi.png" width="80" height="50"></a>
 
-
             <a class="navbar-brand ms-5" href="${pageContext.request.contextPath}/board/boardListMain"><strong>게시판</strong></a>
             <a class="navbar-brand ms-5" href="${pageContext.request.contextPath}/freeBoard/freeBoardList"><strong>라운지</strong></a>
+            <a class="navbar-brand ms-5" href="${pageContext.request.contextPath}/user/myPage"><strong>마이 페이지</strong></a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="position-absolute top-50 start-50 translate-middle">
