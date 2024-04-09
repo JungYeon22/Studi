@@ -13,6 +13,7 @@
 <%@include file="../include/header.jsp"%>
 <%@include file="fBoardWriteModal.jsp"%>
 <div><br><br><br></div>
+
 <div class="container mt-5">
   <div class="text-start mt-5">
     <!-- Button trigger modal -->
@@ -28,7 +29,7 @@
       <div class="card mb-3">
         <div class="card-header">
           <strong>${fboardDTO.title}</strong>
-          <small class="text-muted">작성자:${fboardDTO.writer} | 작성시간:${fboardDTO.date}</small>
+          <small class="text-muted">작성자: ${fboardDTO.writer} | 작성시간: ${fboardDTO.date}</small>
           <span>${fboardDTO.FBoard}</span>
         </div>
 
@@ -51,33 +52,35 @@
 <script>
 $(function (){
 
+        $.post({
+          url: '/freeBoard/getUserLikeList'
+          , data: 'userId='+$('#userId').val()
+          , dataType: 'json'
+          , success: function (data){
+            console.log(JSON.stringify(data));  // 콘솔로 확인하려고
+            $.each(data, function(index, number){
+              console.log(number)
+              $('.likeBtn[data-number="'+number+'"]').addClass('active');
+            })
+          }
+          , error: function(e){
+            console.log(e)
+          }
 
-  $.post({
-    url: '/freeBoard/getUserLikeList'
-    , data: 'userId='+$('#userId').val()
-    , dataType: 'json'
-    , success: function (data){
-      console.log(JSON.stringify(data));  // 콘솔로 확인하려고
-      $.each(data, function(index, number){
-        console.log(number)
-        $('.likeBtn[data-number="'+ number+'"]').attr('aria-pressed', "true");
-      })
-    }
-  })
+        })
+
 
   $('.likeBtn').click(function (){
     var num = $(this).siblings('input[type="hidden"]'); // 해당 게시글 번호 가져오기
     alert(num.val());
-    var pressValue = $(this).attr('aria-pressed');
+    var pressValue = $(this).hasClass('active');
     console.log(pressValue);
     var like = num.siblings('.likeValue').text();
     var likeCount
     if(pressValue){
-      $(this).attr('aria-pressed', "false")
       likeCount = parseInt(like) + 1;
       num.siblings('.likeValue').text(likeCount);
     }else{
-      $(this).attr('aria-pressed', "true")
       likeCount = parseInt(like) - 1;
       num.siblings('.likeValue').text(likeCount);
     }
