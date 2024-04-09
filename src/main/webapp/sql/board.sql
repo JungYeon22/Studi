@@ -3,6 +3,7 @@ CREATE TABLE `BOARD` (
                          `SUBJECT`	VARCHAR(100),
                          `CONTENT`	VARCHAR(4000),
                          `userCnt` INT,
+                         `userCurCnt` INT,
                          `projectType` VARCHAR(100),
                          `projectField` VARCHAR(100),
                          `UserId`	VARCHAR(100),

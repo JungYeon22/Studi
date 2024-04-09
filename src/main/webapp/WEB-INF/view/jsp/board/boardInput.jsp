@@ -31,18 +31,18 @@
 
 
                     <div class="hstack gap-3">
-                        <input type="number" class="form-control p-2" id="userCnt" name="userCnt" placeholder="모집인원" min="2" max="5">
-                        <select class="form-select d-inline p-2" aria-label="Default select example" id="projectType" name="projectType" style="height: 40px">
+                        <input type="number" class="form-control p-2" id="userTotCnt" name="userCnt" placeholder="모집인원" min="2" max="5">
+                        <select class="form-select d-inline p-2" aria-label="Default select example" id="projectType" name="projectType" style="height: 40px ; font-size: medium" >
                             <option selected>모집유형</option>
-                            <option value="1">프로젝트</option>
-                            <option value="2">대회</option>
-                            <option value="3">스킬업</option>
+                            <option value="project">프로젝트</option>
+                            <option value="comp">대회</option>
+                            <option value="skillup">스킬업</option>
                         </select>
-                        <select class="form-select d-inline p-2" aria-label="Default select example" id="projectField" name="projectField" style="height: 40px">
+                        <select class="form-select d-inline p-2" aria-label="Default select example" id="projectField" name="projectField" style="height: 40px; font-size: medium">
                             <option selected>모집분야</option>
-                            <option value="1">BackEnd</option>
-                            <option value="2">FrontEnd</option>
-                            <option value="3">Publisher</option>
+                            <option value="backend">BackEnd</option>
+                            <option value="frontend">FrontEnd</option>
+                            <option value="publisher">Publisher</option>
                         </select>
                         <hr/>
                     </div>
