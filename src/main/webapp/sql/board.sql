@@ -7,7 +7,7 @@ CREATE TABLE `BOARD` (
                          `projectType` VARCHAR(100),
                          `projectField` VARCHAR(100),
                          `UserId`	VARCHAR(100),
-                         `DATE`	DATE,
+                         `DATE`	DATETIME,
                          `FILE`	VARCHAR(100),
                          `HIT`	VARCHAR(100)
 );

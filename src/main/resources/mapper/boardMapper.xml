@@ -9,10 +9,13 @@
     </insert>
 
     <insert id="tagInput" parameterType="map">
-        insert into boardtag values(#{lang},#{boardId})
+        insert into boardtag values(#{lang},#{boardId},sysdate())
     </insert>
 
     <select id="boardListGet" resultType="board.bean.BoardDTO">
-        select * from board
+        select * from board order by DATE desc
+    </select>
+    <select id="boardTagGet" parameterType="String" resultType="String">
+        select CONTENT from boardtag where BOARDID=#{boardid}
     </select>
 </mapper>

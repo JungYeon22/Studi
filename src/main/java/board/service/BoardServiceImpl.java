@@ -39,4 +39,9 @@ public class BoardServiceImpl implements BoardService{
     public List<BoardDTO> boardListGet() {
         return boardDAO.boardListGet();
     }
+
+    @Override
+    public String boardTagGet(String boardid) {
+        return boardDAO.boardTagGet(boardid);
+    }
 }

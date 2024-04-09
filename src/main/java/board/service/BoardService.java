@@ -8,4 +8,6 @@ public interface BoardService {
     public String boardInputData(BoardDTO boardDTO, String[] lang);
 
     public List<BoardDTO> boardListGet();
+
+    public String boardTagGet(String boardid);
 }
