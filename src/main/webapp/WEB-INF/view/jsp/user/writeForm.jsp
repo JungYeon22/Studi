@@ -128,8 +128,6 @@
 
                 </div>
 
-
-
                 <hr class="mb-4">
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="agreement" required>
@@ -137,7 +135,7 @@
                 </div>
 
                 <div class="mb-4"></div>
-                <button type="submit" id="submit-button" class="btn btn-outline-dark btn-lg">가입 완료</button>
+                <button type="submit" id="submit-button" class="btn btn-outline-dark btn-lg" >가입 완료</button>
                 <p class="write-login"> 이미 studi 회원이신가요? <a type="button" id="relogin" onclick="location.href='loginForm' ">로그인</a></p>
             </form>
         </div>
@@ -149,16 +147,62 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
 
+
     window.addEventListener('load', () => {
 
+        // 비밀번호 유효성 검사
+        document.getElementById('password').addEventListener('input', function(event) {
+            const passwordRegex = /^[A-Za-z\d]{8,12}$/; // 8자리에서 12자리 사이의 영문자와 숫자만 허용
+            const feedback = document.getElementById('password').nextElementSibling;
+
+            if (!passwordRegex.test(event.target.value)) {
+                event.target.setCustomValidity("비밀번호는 8자리에서 12자리 사이여야 합니다");
+                feedback.textContent = "비밀번호는 8자리에서 12자리 사이여야 합니다";
+            } else {
+                event.target.setCustomValidity('');
+                feedback.textContent = "비밀번호를 입력해주세요";
+            }
+        });
+
+        // 핸드폰 번호 유효성 검사
+        document.getElementById('phone').addEventListener('input', function(event) {
+            const phoneRegex = /^\d{11}$/; // 정확히 11자리의 숫자만 허용
+            const feedback = document.getElementById('phone').nextElementSibling;
+
+            if (!phoneRegex.test(event.target.value)) {
+                event.target.setCustomValidity("잘못된 번호입니다");
+                feedback.textContent = "잘못된 번호입니다";
+            } else {
+                event.target.setCustomValidity('');
+                feedback.textContent = "핸드폰 번호를 입력해주세요";
+            }
+        });
+
+        // 이메일 유효성 검사
+        document.getElementById('email').addEventListener('input', function(event) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const feedback = document.getElementById('email').nextElementSibling;
+
+            if (!emailRegex.test(event.target.value)) {
+                event.target.setCustomValidity("잘못된 이메일 형식입니다");
+                feedback.textContent = "잘못된 이메일 형식입니다";
+            } else {
+                event.target.setCustomValidity('');
+                feedback.textContent = "이메일을 입력해주세요";
+            }
+        });
+    });
+
+    // 비밀번호와 비밀번호 재확인이 일치하는지 여부
+    window.addEventListener('load', () => {
         document.getElementById('repassword').addEventListener('input', function (event) {
             const password = document.getElementById('password').value;
             const confirmPassword = event.target.value;
             const feedback = event.target.nextElementSibling;
 
             if (password !== confirmPassword) {
-                event.target.setCustomValidity("비밀번호가 잘못되었습니다");
-                feedback.textContent = "비밀번호가 잘못되었습니다";
+                event.target.setCustomValidity("비밀번호가 서로 일치하지 않습니다.");
+                feedback.textContent = "비밀번호가 서로 일치하지 않습니다.";
             } else {
                 event.target.setCustomValidity('');
                 feedback.textContent = "비밀번호를 입력해주세요";
@@ -166,16 +210,16 @@
         });
     }, false);
 
+    // validation 검사
+    // 테스트할때 불편하니깐 이 영역만 주석처리하고 테스트
     window.addEventListener('load', () => {
         const forms = document.getElementsByClassName('validation-form');
-
         Array.prototype.filter.call(forms, (form) => {
             form.addEventListener('submit', function (event) {
                 if (form.checkValidity() === false) {
                     event.preventDefault();
                     event.stopPropagation();
                 }
-
                 form.classList.add('was-validated');
             }, false);
         });
@@ -222,6 +266,7 @@
         });
 
     });
+
 </script>
 </body>
 </html>

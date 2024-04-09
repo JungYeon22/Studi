@@ -1,28 +1,13 @@
 package user.service;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import user.bean.UserDTO;
-import user.dao.UserDAO;
 
-@Service
-@RequiredArgsConstructor
-public class UserService {
+import javax.servlet.http.HttpSession;
 
-    private final UserDAO userDAO;
+public interface UserService {
+    int save(UserDTO userDTO);
+    UserDTO login(UserDTO userDTO);
+    boolean checkUserId(String userId);
 
-    public int save(UserDTO userDTO) {
-        return userDAO.save(userDTO);
-    }
-
-    public UserDTO login(UserDTO userDTO) {
-            return userDAO.login(userDTO);
-    }
-
-    public boolean checkUserId(String userId) {
-        UserDTO user = userDAO.findByUserId(userId);
-        return user != null;
-    }
-
-
+    boolean loginAndSetSession(UserDTO userDTO, HttpSession session);
 }

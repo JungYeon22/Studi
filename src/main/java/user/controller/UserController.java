@@ -3,9 +3,10 @@ package user.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import user.bean.UserDTO;
-import user.service.UserService;
+import user.service.UserServiceImpl;
 
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
@@ -16,7 +17,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     @GetMapping("/writeForm")
     public String writeForm() {
@@ -38,14 +39,29 @@ public class UserController {
         return "user/loginForm";
     }
 
-    @PostMapping("/loginForm")
+    /*@PostMapping("/loginForm")
     public String login(@ModelAttribute UserDTO userDTO,
-                        HttpSession session) {
+                        HttpSession session,
+                        Model model) {
         UserDTO loginResult = userService.login(userDTO);
         if (loginResult != null) {
             session.setAttribute("userDTO", loginResult);
+            return "redirect:/"; // 메인 페이지로 리디렉션
+        } else {
+            model.addAttribute("loginError", "계정 이름 또는 암호가 잘못되었습니다.");
+            return "user/loginForm"; // 로그인 폼 페이지로 다시 리턴
+        }
+    }*/
+
+    @PostMapping("/loginForm")
+    public String login(@ModelAttribute UserDTO userDTO,
+                        HttpSession session,
+                        Model model) {
+        boolean loginResult = userService.loginAndSetSession(userDTO, session);
+        if (loginResult) {
             return "redirect:/";
         } else {
+            model.addAttribute("loginError", "계정 이름 또는 암호가 잘못되었습니다.");
             return "user/loginForm";
         }
     }
