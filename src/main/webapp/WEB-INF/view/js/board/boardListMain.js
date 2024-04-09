@@ -57,7 +57,6 @@ $(function (){
 
                 tagInsert(result,items);
 
-
             });
 
 
@@ -74,6 +73,7 @@ function tagInsert(result, items){
     $.ajax({
         type:'post',
         data:'boardid='+items.boardid,
+        async:false,
         url:'boardTagGet',
         dataType:'text',
         success:function(data){

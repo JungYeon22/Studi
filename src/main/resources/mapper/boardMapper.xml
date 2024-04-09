@@ -9,7 +9,7 @@
     </insert>
 
     <insert id="tagInput" parameterType="map">
-        insert into boardtag values(#{lang},#{boardId},sysdate())
+        insert into boardtag values(#{lang},#{boardId})
     </insert>
 
     <select id="boardListGet" resultType="board.bean.BoardDTO">
