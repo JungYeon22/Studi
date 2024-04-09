@@ -48,5 +48,10 @@ public class BoardController {
         return boardService.boardListGet();
     }
 
+    @PostMapping(value = "/boardTagGet")
+    @ResponseBody
+    public String boardTagGet(@RequestParam() String boardid){
 
+        return boardService.boardTagGet(boardid);
+    }
 }

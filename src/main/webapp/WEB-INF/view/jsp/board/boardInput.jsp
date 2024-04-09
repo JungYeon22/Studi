@@ -31,7 +31,7 @@
 
 
                     <div class="hstack gap-3">
-                        <input type="number" class="form-control p-2" id="userTotCnt" name="userCnt" placeholder="모집인원" min="2" max="5">
+                        <input type="number" class="form-control p-2" id="userTotCnt" name="userTotCnt" placeholder="모집인원" min="2" max="5">
                         <select class="form-select d-inline p-2" aria-label="Default select example" id="projectType" name="projectType" style="height: 40px ; font-size: medium" >
                             <option selected>모집유형</option>
                             <option value="project">프로젝트</option>
@@ -53,6 +53,9 @@
                         <input type="checkbox" name="lang" value="java" id="java"/> <label for="java">JAVA</label>
                         <input type="checkbox" name="lang" value="python" id="python"/> <label for="python">Python</label>
                         <input type="checkbox" name="lang" value="C" id="C"/> <label for="C">C</label>
+                        <input type="checkbox" name="lang" value="C++" id="C++"/> <label for="C++">C++</label>
+                        <input type="checkbox" name="lang" value="C#" id="C#"/> <label for="C#">C#</label>
+                        <input type="checkbox" name="lang" value="JavaScript" id="JavaScript"/> <label for="JavaScript">JavaScript</label>
 
                     </div>
 
