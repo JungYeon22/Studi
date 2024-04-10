@@ -8,15 +8,19 @@
 <%@include file="../include/header.jsp"%>
 <%@include file="fBoardWriteModal.jsp"%>
 <div><br><br><br></div>
-
+<input type="hidden" id="userId" name="userId" value="${sessionScope.userDTO.userId}"> <%--park 대신 ${sessionScope.userDTO.userId}--%>
 <div class="container mt-5">
   <div class="text-start mt-5">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fBoardWriteModal">
+    <button type="button" id="fBoardWriteModalBtn" class="btn btn-primary" >
       글쓰기
     </button>
   </div>
-  <input type="hidden" id="userId" name="userId" value="park"> <%--park 대신 ${sessionScope.userDTO.userId}--%>
+  <div class="collapse" id="BbsCollapse">
+    <div class="card card-body mt-2" style="width: 350px; color: #174cf6;">
+      로그인한 회원만 글쓰기가 가능합니다.
+    </div>
+  </div>
 <c:forEach var="fboardDTO" items="${fBoardList}">
   <div class="row mt-4">
     <div class="col-md-8">

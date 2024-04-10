@@ -1,49 +1,69 @@
 $(function (){
-    // 사용자의 좋아요를 누를 게시글 번호리스트를 가져온다.
-    $.post({
-        url: '/freeBoard/getUserLikeList'
-        , data: 'userId='+$('#userId').val()
-        , dataType: 'json'
-        , success: function (data){
-            console.log(JSON.stringify(data));  // 콘솔로 확인하려고
-            $.each(data, function(index, number){
-                console.log(number)
-                $('.likeBtn[data-number="'+number+'"]').addClass('active');
-            })
-        }
-        , error: function(e){
-            console.log(e)
-        }
+    if($('#userId').val()!=''){
+        // 글쓰기 기능
+        $('#fBoardWriteModalBtn').attr({
+            'data-bs-toggle': "modal",
+            'data-bs-target': "#fBoardWriteModal"
+        });
 
-    })
-
-    // 좋아요 버튼을 눌렀을 떄
-    $('.likeBtn').click(function (){
-        var num = $(this).siblings('input[type="hidden"]'); // 해당 게시글 번호 가져오기
-        alert(num.val());
-        var pressValue = $(this).hasClass('active');
-        console.log(pressValue);
-        var like = num.siblings('.likeValue').text();
-        var likeCount
-        if(pressValue){
-            likeCount = parseInt(like) + 1;
-            num.siblings('.likeValue').text(likeCount);
-        }else{
-            likeCount = parseInt(like) - 1;
-            num.siblings('.likeValue').text(likeCount);
-        }
-
+        // 사용자의 좋아요를 누를 게시글 번호리스트를 가져온다.
         $.post({
-            url: '/freeBoard/updateLike',
-            data: 'num='+num.val()+"&userId="+$('#userId').val(),
-            success: function (){
-                console.log("성공")
-            },
-            error: function (e){
-                console.log(e);
+            url: '/freeBoard/getUserLikeList'
+            , data: 'userId='+$('#userId').val()
+            , dataType: 'json'
+            , success: function (data){
+                console.log(JSON.stringify(data));  // 콘솔로 확인하려고
+                $.each(data, function(index, number){
+                    console.log(number)
+                    $('.likeBtn[data-number="'+number+'"]').addClass('active');
+                })
+            }
+            , error: function(e){
+                console.log(e)
             }
         })
-    })
+
+        // 로그인을 한 회원만 글쓰기 가능
+        $('')
+
+        // 좋아요 버튼을 눌렀을 떄
+        $('.likeBtn').click(function (){
+            var num = $(this).siblings('input[type="hidden"]'); // 해당 게시글 번호 가져오기
+            var pressValue = $(this).hasClass('active');
+            console.log(pressValue);
+            var like = num.siblings('.likeValue').text();
+            var likeCount
+            if(pressValue){
+                likeCount = parseInt(like) + 1;
+                num.siblings('.likeValue').text(likeCount);
+            }else{
+                likeCount = parseInt(like) - 1;
+                num.siblings('.likeValue').text(likeCount);
+            }
+
+            $.post({
+                url: '/freeBoard/updateLike',
+                data: 'num='+num.val()+"&userId="+$('#userId').val(),
+                success: function (){
+                    console.log("성공")
+                },
+                error: function (e){
+                    console.log(e);
+                }
+            })
+        })
+    }else {
+        $('#fBoardWriteModalBtn').attr({
+            'data-bs-toggle': "collapse",
+            'data-bs-target': "#BbsCollapse",
+            'aria-expanded': 'false',
+            'aria-controls': 'BbsCollapse'
+        });
+
+    }
+
+
+
     // 날짜 포멧 original : Tue Apr 09 16:49:50 KST 2024 -> 1분전..
     $('.card-header').each(function (){
         var dateElement = $(this).find('.text-muted');
