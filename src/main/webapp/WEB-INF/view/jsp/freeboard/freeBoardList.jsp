@@ -28,11 +28,11 @@
       <div class="card mb-3">
         <div class="card-header">
           <strong>${fboardDTO.title}</strong>
-          <small>작성자: ${fboardDTO.writer} | 작성시간:</small>
-          <small class="text-muted">${fboardDTO.date}</small>
-          <span>${fboardDTO.FBoard}</span>
+          <div class="text-end">
+            <small>작성자: ${fboardDTO.writer} | 작성시간:</small>
+            <small class="text-muted">${fboardDTO.date}</small>
+          </div>
         </div>
-
         <div class="card-body m-3">
           <p class="card-text" id="contentValue">
             ${fboardDTO.content}

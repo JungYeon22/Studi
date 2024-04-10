@@ -85,8 +85,7 @@ $(function (){
         var elapsedTime = getTimeAgo(mysqlFormatDateTime);
         console.log(elapsedTime);
 
-        dateElement.text("작성시간: " + elapsedTime);
-        dateElement.textContent = "작성시간: " + elapsedTime;
+        dateElement.text(elapsedTime);
     })
 })
 function getTimeAgo(mysqlDateTime){
