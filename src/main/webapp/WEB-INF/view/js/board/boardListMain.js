@@ -6,7 +6,7 @@ $(function (){
         url:'boardListGet',
         dataType:'json',
         success:function(data){
-            alert('글 불러오기 완료');
+            /*alert('글 불러오기 완료');*/
             console.log(JSON.stringify(data));
             $.each(data,function(index,items){
 
@@ -121,7 +121,7 @@ $('#selectLang').change(function(){
     cnt++;
     if(val!="default" && cnt<=3){
 
-        var result= `<button type="button" class="btn btn-outline-danger rounded-pill btn-sm ms-3 mt-2" disabled>`+val+`</button>`
+        var result= `<button type="button" class="btn btn-outline-danger rounded-pill btn-sm ms-3 mt-2" onclick="filterRemove(this)" value="`+val+`" >`+val+`</button>`
         if(cnt==3){
             lang=lang+","+val;
         }else{
@@ -130,6 +130,7 @@ $('#selectLang').change(function(){
 
         $('#selectDiv').append(result);
         filterSelect();
+        $(this).val('default').prop('selected',true);
     }else{
         alert("최대 2개까지만 선택 가능합니다.");
     }
@@ -142,10 +143,11 @@ $('#selectType').change(function(){
     cnt1++;
     if(val!="default" && cnt1==2){
 
-        var result= `<button type="button" class="btn btn-outline-info rounded-pill btn-sm ms-3 mt-2" disabled>`+val+`</button>`
+        var result= `<button type="button" class="btn btn-outline-info rounded-pill btn-sm ms-3 mt-2" onclick="filterRemove1(this)">`+val+`</button>`
         type=type+val;
         $('#selectDiv1').append(result);
         filterSelect();
+        $(this).val('default').prop('selected',true);
     }else{
         alert("최대 1개까지만 선택 가능합니다.");
     }
@@ -157,15 +159,45 @@ $('#selectField').change(function(){
     var val= $(this).val();
     cnt2++;
     if(val!="default" && cnt2==2){
-        var result= `<button type="button" class="btn btn-outline-success rounded-pill btn-sm ms-3 mt-2" disabled>`+val+`</button>`
+        var result= `<button type="button" class="btn btn-outline-success rounded-pill btn-sm ms-3 mt-2" onclick="filterRemove2(this)" >`+val+`</button>`
         field=field+val;
         $('#selectDiv2').append(result);
         filterSelect();
+        $(this).val('default').prop('selected',true);
     }else{
         alert("최대 1개까지만 선택 가능합니다.");
     }
 });
 
+function filterRemove(my){
+    var myvalue=$(my).val();
+    my.remove();
+
+    /*console.log("lang_before"+lang);*/
+    if(cnt==2){
+        lang="";
+        cnt=1;
+    }else{
+        lang=lang.replace(myvalue,"");
+        lang=lang.replace(",","");
+        cnt=2;
+    }
+    /*console.log("lang_after"+lang);*/
+
+    filterSelect();
+}
+function filterRemove1(my){
+    my.remove();
+    type="";
+    cnt1=1;
+    filterSelect();
+}
+function filterRemove2(my){
+    my.remove();
+    field="";
+    cnt2=1;
+    filterSelect();
+}
 
 
 function filterSelect(){
@@ -177,7 +209,7 @@ function filterSelect(){
         url:'boardListGet1',
         dataType:'json',
         success:function(data){
-            alert('글 불러오기 완료');
+            /*alert('글 불러오기 완료');*/
             console.log(JSON.stringify(data));
             $.each(data,function(index,items){
 
@@ -293,3 +325,5 @@ function tagInsert1(result, items){
         }
     });
 }
+
+
