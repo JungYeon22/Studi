@@ -3,13 +3,12 @@ package freeBoard.service;
 import freeBoard.bean.FBoardDTO;
 
 import java.util.List;
-import java.util.Map;
 
 public interface FBoardService {
 
     void write(FBoardDTO fBoardDTO);
 
-    List<FBoardDTO> getFBoardList();
+    List<FBoardDTO> getFBoardList(int page);
 
     void updateLike(String num, String userId);
 

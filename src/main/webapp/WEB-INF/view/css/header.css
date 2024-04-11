@@ -61,14 +61,14 @@ nav {
     margin: 0;
     margin-top: 15px;
 }
-.nav-link:hover {
+.menuItem:hover {
     color: #ff5733; /* 호버 시 텍스트 색상 변경 */
     transition: color 0.3s ease; /* 색상 변경 애니메이션 추가 */
 }
-.nav-link {
+.menuItem {
     text-decoration: none; /* 기본 링크 밑줄 제거 */
 }
 
-.nav-link:hover {
+.menuItem:hover {
     text-decoration: underline; /* 호버 시 밑줄 표시 */
 }

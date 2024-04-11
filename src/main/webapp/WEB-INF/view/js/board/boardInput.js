@@ -2,6 +2,7 @@ $(function(){
 
     $('#boardInputFormBtn').click(function(){
 
+
         $('#subjectDiv').empty();
         $('#userTotCntDiv').empty();
 
@@ -33,6 +34,7 @@ $(function(){
 
             });
         }
+
     });
 
 });
