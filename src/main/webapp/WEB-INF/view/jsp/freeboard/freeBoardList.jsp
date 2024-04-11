@@ -23,7 +23,7 @@
   </div>
   <div id="fBoardContainer">
     <c:forEach var="fboardDTO" items="${fBoardList}">
-      <div class="row mt-4">
+      <div class="content row mt-4">
         <div class="col-md-8">
           <!-- 게시물 목록 -->
           <div class="card mb-3">
