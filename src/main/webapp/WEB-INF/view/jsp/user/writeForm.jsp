@@ -25,7 +25,7 @@
 <div class="container">
     <div class="input-form-backgroud row">
         <div class="input-form col-md-12 mx-auto">
-            <div id="loginBoxTitle"><img src="/image/sutdi.png" width="130" height="90"></div>
+            <div id="loginBoxTitle"><img src="/image/sutdi.png" width="130" height="90" onclick="location.href='/'"></div>
             <br>
             <form class="validation-form" action="/user/writeForm" method="post" novalidate>
                 <div class="row">

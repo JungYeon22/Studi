@@ -26,9 +26,10 @@ public class UserController {
     }
 
     @PostMapping("/writeForm")
-    public String save(@ModelAttribute UserDTO userDTO) {
+    public String save(@ModelAttribute UserDTO userDTO, Model model) {
         int saveResult = userService.save(userDTO);
         if (saveResult > 0) {
+            model.addAttribute("writeOk", "가입에 성공하였습니다!");
             return "user/loginForm";
         } else {
             return "user/writeForm";
