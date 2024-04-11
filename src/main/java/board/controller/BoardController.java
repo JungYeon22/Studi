@@ -48,6 +48,14 @@ public class BoardController {
         return boardService.boardListGet();
     }
 
+    @PostMapping(value = "/boardListGet1")
+    @ResponseBody
+    public List<BoardDTO> boardListGet1(@RequestParam  String type, String field){
+
+
+        return boardService.boardListGet1(type,field);
+    }
+
     @PostMapping(value = "/boardTagGet")
     @ResponseBody
     public String boardTagGet(@RequestParam() String boardid){
