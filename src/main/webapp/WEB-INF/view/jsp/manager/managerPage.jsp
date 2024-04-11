@@ -92,55 +92,12 @@
     </style>
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar-example">
-<nav class="navbar navbar-expand-lg opacity-20" id="navbarall">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="../image/studi.png" width="80" height="50"></a>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="position-absolute top-50 start-50 translate-middle">
-                <input id="search" type="search" placeholder="search...">
-            </div>
-        </div>
-
-
-        <div class=" position-relative top-0 end-0" style="width: 300px; height: 60px;">
-            <ul class="navbar-nav me-auto mb-3 mb-lg-1">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle " id="navmenu" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        more
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">회원정보수정</a></li>
-                        <li><a class="dropdown-item" href="#">내 프로필</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">로그아웃&emsp;&emsp;
-                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <a type="button" class="uplogin">로그인</a>
-                <img src="../image/line.png" class="line" width="20px" height="30px" style=" margin: 0;
-                  margin-top: 15px;">
-                <a type="button" class="upwrite">회원가입</a>
-            </ul>
-        </div>
-    </div>
-</nav>
-<hr/>
-
+<%@ include file="../include/header.jsp"%>
 <!-- ########################################################################################################################### -->
-<div class="container">
-
+<div class="container mt-5">
     <main>
         <div class="py-5 text-center">
             <h2>관리자 페이지</h2>
-            <input type="text" name="pg" id="pg" value="1">
         </div>
 
         <br>
@@ -157,19 +114,25 @@
         <!-- 페이징 처리 -->
         <div id="userPagingDiv" >~~~</div>--%>
 
-        <h4 class="mb-3 mt-3">
+        <h4 class="mb-3">
             <span class="text-primary">유저 리스트</span>
         </h4>
-        <div class="border border-primary-subtle rounded p-3">
-            <table border="1" frame="hsides" role="rows" id="userListTable">
-                <tr >
-                    <th>이름</th>
-                    <th>아이디</th>
-                    <th>비밀번호</th>
-                    <th>email</th>
-                    <th>휴대전화</th>
-                    <th>가입날짜</th>
-                </tr>
+        <div class="border border-primary-subtle rounded p-3 table-responsive small">
+            <input type="hidden" name="userPagingPg" id="userPagingPg" value="1">
+            <table class="table table-striped table-sm" role="rows" id="userListTable">
+                <thead>
+                    <tr>
+                        <th scope="col">이름</th>
+                        <th scope="col">아이디</th>
+                        <th scope="col">비밀번호</th>
+                        <th scope="col">email</th>
+                        <th scope="col">휴대전화</th>
+                        <th scope="col">가입날짜</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
             </table>
             <div id="userPagingDiv" ></div>
         </div>
@@ -305,37 +268,46 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jQuery.com/jquery-3.7.1.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $(function(){
-            $.ajax({
-                type: 'POST',
-                url: '/admin/managerPage/getUserList',
-                data: { pg: $('#pg').val() },
-                dataType: 'json',
-                success: function(data){
-                    console.log(JSON.stringify(data));
-                    $.each(data.list, function(index, items){
-                        var result = `<tr>`
-                            + `<td align="center">` + items.name + `</td>`
-                            + `<td align="center"><a href="#" class="idA">` + items.userid + `</a></td>`
-                            + `<td align="center">` + items.pwd + `</td>` + `</a></td>`
-                            + `<td align="center">` + items.email + `</td>` + `</a></td>`
-                            + `<td align="center">` + items.phone + `</td>` + `</a></td>`
-                            + `<td align="center">` + items.hiredate + `</td>`
-                            + `</tr>`;
+    function loadUserList(pg) {
+        $.ajax({
+            type: 'POST',
+            url: '/admin/managerPage/getUserList',
+            data: {pg: pg}, // 클릭한 페이징 번호를 사용하여 데이터 요청
+            dataType: 'json',
+            success: function (data) {
+                console.log(JSON.stringify(data));
+                // 사용자 리스트 표시
+                var userListTable = $('#userListTable tbody');
+                userListTable.empty();
+                $.each(data.list, function (index, items) {
+                    var result = `<tr>`
+                        + `<td >` + items.name + `</td>`
+                        + `<td ><a href="#" class="idA">` + items.userid + `</a></td>`
+                        + `<td >` + items.pwd + `</td>` + `</a></td>`
+                        + `<td >` + items.email + `</td>` + `</a></td>`
+                        + `<td >` + items.phone + `</td>` + `</a></td>`
+                        + `<td >` + items.hiredate + `</td>`
+                        + `</tr>`;
+                    userListTable.append(result);
+                });
 
-                        $('#userListTable').append(result);
-                    }); //$.each
-
-                    //페이징 처리
-                    $('#userPagingDiv').html(data.managerPaging.pagingHTML);
-
-                },
-                error: function(e){
-                    console.log(e);
-                }
-            }); //$.ajax
+                // 페이징 처리
+                $('#userPagingDiv').html(data.managerPaging.pagingHTML);
+            },
+            error: function (e) {
+                console.log(e);
+            }
         });
+    }
+
+    $(document).ready(function() {
+        $('#userPagingDiv').on('click', '.paging', function() {
+            var pg = $(this).text();
+            loadUserList(pg);
+        });
+
+        // 페이지 로드 시 초기 데이터 로딩
+        loadUserList($('#userPagingPg').val());
 
         $(function() {
             $.ajax({
