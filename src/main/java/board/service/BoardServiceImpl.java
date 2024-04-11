@@ -44,4 +44,21 @@ public class BoardServiceImpl implements BoardService{
     public String boardTagGet(String boardid) {
         return boardDAO.boardTagGet(boardid);
     }
+
+    @Override
+    public List<BoardDTO> boardListGet1(String type, String field) {
+        Map<String,Object> map = new HashMap<>();
+        if(type.length()==0){
+            type="%p%";
+        }
+        if(field.length()==0){
+            field="%e%";
+        }
+
+        map.put("projectType",type);
+        map.put("projectField",field);
+
+
+        return boardDAO.boardListGet1(map);
+    }
 }

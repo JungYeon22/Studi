@@ -10,4 +10,6 @@ public interface BoardService {
     public List<BoardDTO> boardListGet();
 
     public String boardTagGet(String boardid);
+
+    List<BoardDTO> boardListGet1( String type, String field);
 }
