@@ -48,12 +48,12 @@
         <button type="button" class="btn btn-outline-danger rounded-3 btn-sm mt-2" style="height: 40px ; margin-left: 50%; width: 80px ;font-size: small" onclick="location.href='${pageContext.request.contextPath}/board/boardInput'">글쓰기</button>
 
     </div>
-    <div class="hstack gap-3">
-    <div id="selectDiv" style="margin-bottom: 10px ; margin-top: 0px; padding-top: 0">
+    <div class="hstack gap-1">
+    <div id="selectDiv" style="margin-bottom: 10px ; margin-top: 0px; padding-top: 0 ">
     </div>
-    <div id="selectDiv1" style="margin-bottom: 10px ; margin-top: 0px; padding-top: 0">
+    <div id="selectDiv1" style="margin-bottom: 10px ; margin-top: 0px; padding-top: 0 ; padding-left: 0;margin-left: 0px">
     </div>
-    <div id="selectDiv2" style="margin-bottom: 10px ; margin-top: 0px; padding-top: 0">
+    <div id="selectDiv2" style="margin-bottom: 10px ; margin-top: 0px; padding-top: 0 ;margin-left: 0px">
     </div>
     </div>
 
