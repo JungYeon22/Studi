@@ -17,4 +17,6 @@ public interface BoardDAO {
     public List<BoardDTO> boardListGet();
 
     public String boardTagGet(String boardid);
+
+    List<BoardDTO> boardListGet1(Map<String, Object> map);
 }

@@ -21,7 +21,6 @@ public class BoardImageController {
     @ResponseBody
     public String boardImageUpload(@RequestParam("file") MultipartFile file){
 
-        System.out.println("her");
         String fileName=objectStorage.uploadFile(bucketName,"miniproject/",file);
         return fileName;
     }
