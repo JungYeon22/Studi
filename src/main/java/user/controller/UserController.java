@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import user.bean.UserDTO;
 import user.service.UserServiceImpl;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.Map;
@@ -39,20 +40,6 @@ public class UserController {
         return "user/loginForm";
     }
 
-    /*@PostMapping("/loginForm")
-    public String login(@ModelAttribute UserDTO userDTO,
-                        HttpSession session,
-                        Model model) {
-        UserDTO loginResult = userService.login(userDTO);
-        if (loginResult != null) {
-            session.setAttribute("userDTO", loginResult);
-            return "redirect:/"; // 메인 페이지로 리디렉션
-        } else {
-            model.addAttribute("loginError", "계정 이름 또는 암호가 잘못되었습니다.");
-            return "user/loginForm"; // 로그인 폼 페이지로 다시 리턴
-        }
-    }*/
-
     @PostMapping("/loginForm")
     public String login(@ModelAttribute UserDTO userDTO,
                         HttpSession session,
@@ -64,6 +51,15 @@ public class UserController {
             model.addAttribute("loginError", "계정 이름 또는 암호가 잘못되었습니다.");
             return "user/loginForm";
         }
+    }
+
+    @GetMapping(value = "/logout")
+    public String logoutMainGET(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+
+        session.invalidate();
+
+        return "redirect:/";
     }
 
     @PostMapping("/checkUserId")
@@ -93,5 +89,6 @@ public class UserController {
     public String managerPage(){
         return "user/managerPage";
     }
+
 
 }
