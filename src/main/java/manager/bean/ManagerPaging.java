@@ -23,19 +23,19 @@ public class ManagerPaging {
 
         int endPage = startPage + pageBlock - 1;
 
-        if(endPage > totalP) endPage = totalP;
+        if (endPage > totalP) endPage = totalP;
 
-        if(startPage != 1)
-            pagingHTML.append("<span id='paging' onclick='managerPaging(" + (startPage-1) + ")'>이전</span>");
+        if (startPage != 1)
+            pagingHTML.append("<button type='button' class='btn btn-outline-danger border border-0 rounded-pill btn-sm  mt-2' id='pagingPrev' onclick='managerPaging(" + (startPage - 1) + ")'>이전</button>");
 
-        for(int i=startPage; i<=endPage; i++) {
-            if(i == currentPage)
-                pagingHTML.append("<span id='currentPaging' onclick='managerPaging(" + i + ")'>" + i + "</span>");
+        for (int i = startPage; i <= endPage; i++) {
+            if (i == currentPage)
+                pagingHTML.append("<button type='button' class='currentPaging btn btn-outline-danger border border-0 rounded-pill btn-sm  mt-2' id='paging" + i + "' onclick='managerPaging(" + i + ")'>" + i + "</button>");
             else
-                pagingHTML.append("<span id='paging' onclick='managerPaging(" + i + ")'>" + i + "</span>");
+                pagingHTML.append("<button type='button' class='paging btn btn-outline-danger border border-0 rounded-pill btn-sm  mt-2'id='paging" + i + "' onclick='managerPaging(" + i + ")' >" + i + "</button>");
         }
 
-        if(endPage < totalP)
-            pagingHTML.append("<span id='paging' onclick='managerPaging(" + (endPage+1) +")'>다음</span>");
+        if (endPage < totalP)
+            pagingHTML.append("<button type='button' class='btn btn-outline-danger border border-0 rounded-pill btn-sm  mt-2' id='pagingNext' onclick='managerPaging(" + (endPage + 1) + ")'>다음</button>");
     }
 }
