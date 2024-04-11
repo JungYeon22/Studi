@@ -20,8 +20,11 @@ public class FBoardServiceImpl implements FBoardService{
     }
 
     @Override
-    public List<FBoardDTO> getFBoardList() {
-        return fBoardDAO.getFBoardList();
+    public List<FBoardDTO> getFBoardList(int page) {
+        int startNum = (page-1)*5;
+        int size = 5;
+        // 1page 0 ~ 4  / 2page 5 ~ 9
+        return fBoardDAO.getFBoardList(startNum, size);
     }
 
     @Override

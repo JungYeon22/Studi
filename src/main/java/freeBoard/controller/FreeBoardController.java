@@ -22,7 +22,7 @@ public class FreeBoardController {
 
     @GetMapping(value = "/freeBoardList")
     public String freeBoardList(Model model){
-        List<FBoardDTO> fBoardList = fBoardService.getFBoardList();
+        List<FBoardDTO> fBoardList = fBoardService.getFBoardList(1);
         model.addAttribute("fBoardList", fBoardList);
         return "/freeBoard/freeBoardList";
     }
@@ -45,5 +45,12 @@ public class FreeBoardController {
                      @RequestParam("userId") String userId){
         fBoardService.updateLike(num, userId);
     }
+
+    @PostMapping(value = "getBoardList")
+    @ResponseBody
+    public List<FBoardDTO> getBoardList(@RequestParam String page){
+        return fBoardService.getFBoardList(Integer.parseInt(page));
+    }
+
 
 }

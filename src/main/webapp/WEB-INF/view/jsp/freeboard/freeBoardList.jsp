@@ -21,33 +21,35 @@
       로그인한 회원만 글쓰기가 가능합니다.
     </div>
   </div>
-<c:forEach var="fboardDTO" items="${fBoardList}">
-  <div class="row mt-4">
-    <div class="col-md-8">
-      <!-- 게시물 목록 -->
-      <div class="card mb-3">
-        <div class="card-header">
-          <strong>${fboardDTO.title}</strong>
-          <div class="text-end">
-            <small>작성자: ${fboardDTO.writer} | 작성시간:</small>
-            <small class="text-muted">${fboardDTO.date}</small>
+  <div id="fBoardContainer">
+    <c:forEach var="fboardDTO" items="${fBoardList}">
+      <div class="row mt-4">
+        <div class="col-md-8">
+          <!-- 게시물 목록 -->
+          <div class="card mb-3">
+            <div class="card-header">
+              <strong>${fboardDTO.title}</strong>
+              <div class="text-end">
+                <small>작성자: ${fboardDTO.writer} | 작성시간:</small>
+                <small class="text-muted">${fboardDTO.date}</small>
+              </div>
+            </div>
+            <div class="card-body m-3">
+              <p class="card-text" id="contentValue">
+                  ${fboardDTO.content}
+              </p>
+            </div>
+            <div class="card-footer text-end">
+              <i class="fa-regular fa-thumbs-up"> </i>
+              <span class="likeValue">${fboardDTO.likes}</span>
+              <button type="button" class="btn btn-primary likeBtn" data-number="${fboardDTO.FBoard}" data-bs-toggle="button" aria-pressed="false">좋아요</button>
+              <input type="hidden"  value="${fboardDTO.FBoard}">
+            </div>
           </div>
         </div>
-        <div class="card-body m-3">
-          <p class="card-text" id="contentValue">
-            ${fboardDTO.content}
-          </p>
-        </div>
-        <div class="card-footer text-end">
-          <i class="fa-regular fa-thumbs-up"> </i>
-          <span class="likeValue">${fboardDTO.likes}</span>
-          <button type="button" class="btn btn-primary likeBtn" data-number="${fboardDTO.FBoard}" data-bs-toggle="button" aria-pressed="false">좋아요</button>
-          <input type="hidden"  value="${fboardDTO.FBoard}">
-        </div>
       </div>
-    </div>
+    </c:forEach>
   </div>
-</c:forEach>
 </div>
 </body>
 </html>

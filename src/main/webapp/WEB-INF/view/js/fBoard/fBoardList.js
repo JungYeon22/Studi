@@ -14,7 +14,6 @@ $(function (){
             , success: function (data){
                 console.log(JSON.stringify(data));  // 콘솔로 확인하려고
                 $.each(data, function(index, number){
-                    console.log(number)
                     $('.likeBtn[data-number="'+number+'"]').addClass('active');
                 })
             }
@@ -80,18 +79,13 @@ $(function (){
         var time = mysqlDateTime[3];
 
         var mysqlFormatDateTime = year + '-' + month + '-' + day + ' ' + time;
-        console.log(mysqlFormatDateTime);
-
         var elapsedTime = getTimeAgo(mysqlFormatDateTime);
-        console.log(elapsedTime);
-
         dateElement.text(elapsedTime);
     })
 })
 function getTimeAgo(mysqlDateTime){
     var now = new Date();
     var pastTime = new Date(mysqlDateTime);
-    console.log("자바스크립트 date type으로 바꿈 : " + pastTime)
     var diffMillis = now - pastTime;
     var minutes = Math.floor(diffMillis / (1000 * 60));
 
@@ -118,3 +112,70 @@ function getTimeAgo(mysqlDateTime){
         return hours + "시간 전";
     }
 }
+
+$(document).ready(function(){
+    // 무한 스크롤
+    var options = {threshold: 0.8}
+    var observer = new IntersectionObserver((entries)=>{
+        entries.forEach((entry)=>{
+            // 화면에 보이면 새로운 내용을 추가
+            if(entry.isIntersecting){
+                page += 1;
+                addNewContent(page);
+            }
+        })
+    }, options);
+
+// 자유게시판 게시글을 observer 객체에 넣기
+    const fBoardContainer = $('#fBoardContainer')
+    observer.observe(fBoardContainer[0])
+
+    function addNewContent(){
+        $.post({
+            url: '/freeBoard/getBoardList',
+            data: 'page='+page,
+            dataType: 'json',
+            success: function (data){
+                console.log(JSON.stringify(data))
+                $.each(data, function(index, items){
+                    var result = `
+                <div class="row mt-4">
+                    <div class="col-md-8">
+                      <div class="card mb-3">
+                        <div class="card-header">
+                          <strong>`+items.title+`</strong>
+                          <div class="text-end">
+                            <small>작성자:`+ items.writer +` | 작성시간:</small>
+                            <small class="text-muted">`+ items.date + `</small>
+                          </div>
+                        </div>
+                        <div class="card-body m-3">
+                          <p class="card-text" id="contentValue">
+                              `+items.content+`
+                          </p>
+                        </div>
+                        <div class="card-footer text-end">
+                          <i class="fa-regular fa-thumbs-up"></i>
+                          <span class="likeValue">`+items.likes+`</span>
+                          <button type="button" class="btn btn-primary likeBtn" data-number="`+items.fboard+`" data-bs-toggle="button" aria-pressed="false">좋아요</button>
+                          <input type="hidden"  value="">
+                        </div>
+                      </div>
+                    </div>
+                </div>`
+                    $('#fBoardContainer').append(result);
+                    // IntersectionObserver를 다시 연결하여 계속 실행되도록 함
+                    const fBoardContainer = $('#fBoardContainer');
+                    observer.observe(fBoardContainer[0]);
+                })
+            },
+            error: function (e){
+                console.log(e);
+            }
+        })
+    }
+})
+
+var page = 1;
+var loading = false;
+
