@@ -29,7 +29,7 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">로그아웃&emsp;&emsp;
+                                <a class="dropdown-item" href="/user/logout">로그아웃&emsp;&emsp;
                                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                                 </a>
                             </li>

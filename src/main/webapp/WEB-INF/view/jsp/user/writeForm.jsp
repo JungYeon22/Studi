@@ -38,14 +38,12 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-8 mb-3">
                         <label for="id">아이디</label>
-                        <input type="text" class="form-control" id="id" name="userId" placeholder="아이디입력" value="" required>
-
-                    </div>
-                    <div class="col-md-6 mb-3">
-
-                        <button type="button" id="check-id" class="btn btn-outline-secondary" style="margin-top: 10px;">중복확인</button>
+                        <div class="input-group-append">
+                            <input type="text" class="form-control" id="id" name="userId" placeholder="아이디입력" value="" style="width: 340px"  required>
+                            <button type="button" id="check-id" class="btn btn-outline-secondary" style="margin-left: 20px; width: 110px" >중복확인</button>
+                        </div>
                         <div class="invalid-feedback">
                             아이디를 입력해주세요.
                         </div>

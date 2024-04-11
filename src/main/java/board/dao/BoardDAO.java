@@ -15,4 +15,6 @@ public interface BoardDAO {
     public void tagInput(Map<String, Object> map);
 
     public List<BoardDTO> boardListGet();
+
+    public String boardTagGet(String boardid);
 }
