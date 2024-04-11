@@ -4,7 +4,7 @@ $(function(){
 
         $.ajax({
             type:'post',
-            url:'/board/boardInputData',
+            url:'boardInputData',
             data:$('#boardInputForm').serialize(),
             dataType: 'json',
             success:function(data){

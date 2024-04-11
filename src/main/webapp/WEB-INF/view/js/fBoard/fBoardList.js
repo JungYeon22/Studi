@@ -1,3 +1,5 @@
+var likeList;
+
 $(function (){
     if($('#userId').val()!=''){
         // 글쓰기 기능
@@ -7,12 +9,14 @@ $(function (){
         });
 
         // 사용자의 좋아요를 누를 게시글 번호리스트를 가져온다.
+
         $.post({
             url: '/freeBoard/getUserLikeList'
             , data: 'userId='+$('#userId').val()
             , dataType: 'json'
             , success: function (data){
                 console.log(JSON.stringify(data));  // 콘솔로 확인하려고
+                likeList = data;
                 $.each(data, function(index, number){
                     $('.likeBtn[data-number="'+number+'"]').addClass('active');
                 })
@@ -22,16 +26,13 @@ $(function (){
             }
         })
 
-        // 로그인을 한 회원만 글쓰기 가능
-        $('')
-
         // 좋아요 버튼을 눌렀을 떄
-        $('.likeBtn').click(function (){
+        $(document).on('click', '.likeBtn', function(){
             var num = $(this).siblings('input[type="hidden"]'); // 해당 게시글 번호 가져오기
             var pressValue = $(this).hasClass('active');
             console.log(pressValue);
             var like = num.siblings('.likeValue').text();
-            var likeCount
+            var likeCount;
             if(pressValue){
                 likeCount = parseInt(like) + 1;
                 num.siblings('.likeValue').text(likeCount);
@@ -51,6 +52,9 @@ $(function (){
                 }
             })
         })
+       /* $('.likeBtn').click(function (){
+
+        })*/
     }else {
         $('#fBoardWriteModalBtn').attr({
             'data-bs-toggle': "collapse",
@@ -60,6 +64,11 @@ $(function (){
         });
 
     }
+function checkLikeList(data) {
+    $.each(data, function(index, number){
+        $('.likeBtn[data-number="'+number+'"]').addClass('active');
+    })
+ }
 
 
 
@@ -168,12 +177,16 @@ function addNewContent(page,observer){
                           <i class="fa-regular fa-thumbs-up"></i>
                           <span class="likeValue">`+items.likes+`</span>
                           <button type="button" class="btn btn-primary likeBtn" data-number="`+items.fboard+`" data-bs-toggle="button" aria-pressed="false">좋아요</button>
-                          <input type="hidden"  value="">
+                          <input type="hidden"  value="`+items.fboard+`">
                         </div>
                       </div>
                     </div>
                 </div>`
                 $('#fBoardContainer').append(result)
+            })
+
+            $.each(likeList, function(index, number){
+                $('.likeBtn[data-number="'+number+'"]').addClass('active');
             })
             // 자유게시판 게시글을 observer 객체에 넣기
             const fBoard = $('#fBoardContainer .content')
