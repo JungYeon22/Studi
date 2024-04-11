@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping(value = "board")
 public class BoardController {
@@ -39,5 +41,17 @@ public class BoardController {
         return "";
     }
 
+    @PostMapping(value = "/boardListGet")
+    @ResponseBody
+    public List<BoardDTO> boardListGet(){
 
+        return boardService.boardListGet();
+    }
+
+    @PostMapping(value = "/boardTagGet")
+    @ResponseBody
+    public String boardTagGet(@RequestParam() String boardid){
+
+        return boardService.boardTagGet(boardid);
+    }
 }

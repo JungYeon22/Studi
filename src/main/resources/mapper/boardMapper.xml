@@ -5,10 +5,17 @@
 <mapper namespace="board.dao.BoardDAO">
 
     <insert id="boardInputData" parameterType="board.bean.BoardDTO">
-        insert into board values(#{BOARDID},#{SUBJECT},#{CONTENT},#{userCnt},#{projectType},#{projectField},#{UserId},sysdate(),0,0)
+        insert into board values(#{BOARDID},#{SUBJECT},#{CONTENT},#{userTotCnt},1,#{projectType},#{projectField},#{UserId},sysdate(),0,0)
     </insert>
 
     <insert id="tagInput" parameterType="map">
         insert into boardtag values(#{lang},#{boardId})
     </insert>
+
+    <select id="boardListGet" resultType="board.bean.BoardDTO">
+        select * from board order by DATE desc
+    </select>
+    <select id="boardTagGet" parameterType="String" resultType="String">
+        select CONTENT from boardtag where BOARDID=#{boardid}
+    </select>
 </mapper>

@@ -37,7 +37,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-md-8 mb-3">
                         <label for="id">아이디</label>
@@ -255,10 +254,6 @@
                     alert('오류가 발생했습니다. 나중에 다시 시도해주세요.');
                 });
         });
-
-        // 프로미스 문법을 지원함. 자바스크립트에서 지원하는건데 비동기를 처리하면서 무조건 반응을 넣으면 수행한것을 기억함. 실패하더라도....
-        // 요즘 서비스 fetch를 사용하는게 좋음... fetch >= ajax 비슷하거나 더 좋다.
-        // fetch는 자바스크립트 자체 공식문법 , ajax는 jquery 외부 라이브러리인데 옛날꺼..
 
         document.getElementsByClassName('validation-form')[0].addEventListener('submit', function(event) {
             // 폼 제출 시 중복 ID 체크가 완료되었는지 확인

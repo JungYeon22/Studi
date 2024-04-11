@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -31,9 +32,16 @@ public class BoardServiceImpl implements BoardService{
          map.put("lang",lang_tmp);
          boardDAO.tagInput(map);
 
-
-
-
         return "";
+    }
+
+    @Override
+    public List<BoardDTO> boardListGet() {
+        return boardDAO.boardListGet();
+    }
+
+    @Override
+    public String boardTagGet(String boardid) {
+        return boardDAO.boardTagGet(boardid);
     }
 }
