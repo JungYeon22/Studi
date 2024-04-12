@@ -32,7 +32,6 @@ public class FBoardServiceImpl implements FBoardService{
         Map<String, Object> map = new HashMap<>();
         map.put("fBoard", Integer.parseInt(num));
         map.put("userId", userId);
-        System.out.println("updateLike(service)..");
         fBoardDAO.updateLike(map);
     }
 
