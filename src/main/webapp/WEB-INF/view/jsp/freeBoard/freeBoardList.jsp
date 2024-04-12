@@ -42,7 +42,7 @@
             <div class="card-footer text-end">
               <i class="fa-regular fa-thumbs-up"> </i>
               <span class="likeValue">${fboardDTO.likes}</span>
-              <button type="button" class="btn btn-primary likeBtn" data-number="${fboardDTO.FBoard}" data-bs-toggle="button" aria-pressed="false">좋아요</button>
+              <button type="button" class="btn btn-outline-primary likeBtn" data-number="${fboardDTO.FBoard}">좋아요</button>
               <input type="hidden"  value="${fboardDTO.FBoard}">
             </div>
           </div>
