@@ -3,7 +3,7 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary opacity-20" id="navbarall">
         <div class="container-fluid">
-            <a class="navbar-brand ms-5" href="${pageContext.request.contextPath}/"><img src="/image/sutdi.png" width="80" height="50"></a>
+            <a class="navbar-brand ms-5" id="imageA" href="${pageContext.request.contextPath}/"><img src="/image/sutdi.png" width="80" height="50"></a>
 
             <a class="navbar-brand ms-5 menuItem" href="${pageContext.request.contextPath}/board/boardListMain"><strong>게시판</strong></a>
             <a class="navbar-brand ms-5 menuItem" href="${pageContext.request.contextPath}/freeBoard/freeBoardList"><strong>라운지</strong></a>
