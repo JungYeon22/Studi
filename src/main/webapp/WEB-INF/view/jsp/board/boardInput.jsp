@@ -27,7 +27,7 @@
                         <input type="text" class="form-control" id="subject" name="SUBJECT" placeholder="제목" >
                         <div id="subjectDiv" style="color: red"></div>
                         <br>
-                        <input type="text" class="form-control" id="UserId" name="UserId" value="dongwoo" readonly>
+                        <input type="text" class="form-control" id="UserId" name="UserId" value="${userDTO.userId}" readonly>
                         <br>
 
 
