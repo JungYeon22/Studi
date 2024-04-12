@@ -29,7 +29,7 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item" href="/user/logout">로그아웃&emsp;&emsp;
+                                <a class="dropdown-item" href="/user/logout" onclick="confirmLogout();">로그아웃&emsp;&emsp;
                                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                                 </a>
                             </li>
@@ -47,3 +47,11 @@
         </div>
     </nav>
 </header>
+
+<script>
+    function confirmLogout() {
+        if (confirm("정말 로그아웃 하시겠습니까?")) {
+            location.href = "<c:url value='/'/>";
+        }
+    }
+</script>
