@@ -45,6 +45,7 @@
                 <h4 class="mb-3">나의 정보
                     <button class="btn btn-primary btn-sm" type="submit" id="updateFormBtn" onclick="location.href='updateForm'">수정</button>
                     <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">탈퇴</button>
+                    <button class="btn btn-primary btn-sm" type="submit" id="projectBtn" onclick="location.href='../projectPage/myProjectPage'">나의 프로젝트</button>
                 </h4>
                 <div class="border border-primary-subtle rounded p-3">
                     <div class="mb-3">

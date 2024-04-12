@@ -18,6 +18,7 @@
     <context:component-scan base-package="board.service"/>
     <context:component-scan base-package="manager.*"/>
     <context:component-scan base-package="freeBoard.*"/>
+    <context:component-scan base-package="projectTeam.*"/>
 
     <!-- DAO와 Mapper.xml 연결-->
     <mybatis-spring:scan base-package="user.dao"/>
