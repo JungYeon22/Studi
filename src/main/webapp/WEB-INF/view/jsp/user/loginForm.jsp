@@ -37,6 +37,13 @@
                 </div>
             </c:if>
 
+            <%-- 가입 성공 메시지 --%>
+            <c:if test="${not empty writeOk}">
+                <div class="alert alert-success">
+                        ${writeOk}
+                </div>
+            </c:if>
+
 <%--            변경 해봄--%>
             <%--  로그인 성공시 해당 url로 이동 --%>
             <form class="login-form" action="${pageContext.request.contextPath}/user/loginForm" method="post" novalidate>

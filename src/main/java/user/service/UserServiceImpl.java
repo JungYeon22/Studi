@@ -15,6 +15,15 @@ public class UserServiceImpl implements UserService {
     private final UserDAOImpl userDAO;
 
     public int save(UserDTO userDTO) {
+
+        // 제공된 이메일로 기존 사용자 조회
+        UserDTO existingUser = userDAO.findByEmail(userDTO.getEmail());
+
+        // 메일이 존재하면 회원가입 x
+        if (existingUser != null) {
+            return 0;
+        }
+
         return userDAO.save(userDTO);
 
     }

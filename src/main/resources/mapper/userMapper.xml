@@ -15,7 +15,11 @@
     </select>
 
     <select id="findByUserId" parameterType="string" resultType="user">
-        SELECT * FROM User WHERE userId = #{userId}
+        SELECT * FROM USER WHERE userId = #{userId}
+    </select>
+
+    <select id="findByEmail" parameterType="string" resultType="user">
+        SELECT * FROM USER WHERE email = #{email}
     </select>
 
     <select id="getIntro" parameterType="string" resultType="user.bean.UserIntro">
