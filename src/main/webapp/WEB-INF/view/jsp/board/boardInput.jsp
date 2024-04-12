@@ -15,8 +15,20 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/boardInput.css">
 
 </head>
+<style>
+    #navbarall{
+        border: 0px;
+
+    }
+    #imageA{
+        height: 50px;
+        line-height: 50px;
+        padding: 0px;
+    }
+</style>
 <body>
 <%@ include file="../include/header.jsp"%>
+
 <form id="boardInputForm" style="margin-top: 70px" >
 
     <div class="container">
@@ -27,7 +39,7 @@
                         <input type="text" class="form-control" id="subject" name="SUBJECT" placeholder="제목" >
                         <div id="subjectDiv" style="color: red"></div>
                         <br>
-                        <input type="text" class="form-control" id="UserId" name="UserId" value="dongwoo" readonly>
+                        <input type="text" class="form-control" id="UserId" name="UserId" value="${userDTO.userId}" readonly>
                         <br>
 
 
