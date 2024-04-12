@@ -18,7 +18,7 @@ $(function (){
                 console.log(JSON.stringify(data));  // 콘솔로 확인하려고
                 likeList = data;
                 $.each(data, function(index, number){
-                    $('.likeBtn[data-number="'+number+'"]').addClass('active');
+                    $('.likeBtn[data-number="'+number+'"]').removeClass('btn-outline-primary').addClass('btn-primary');
                 })
             }
             , error: function(e){
@@ -29,16 +29,18 @@ $(function (){
         // 좋아요 버튼을 눌렀을 떄
         $(document).on('click', '.likeBtn', function(){
             var num = $(this).siblings('input[type="hidden"]'); // 해당 게시글 번호 가져오기
-            var pressValue = $(this).hasClass('active');
+            var pressValue = $(this).hasClass('btn-outline-primary');
             console.log(pressValue);
             var like = num.siblings('.likeValue').text();
             var likeCount;
             if(pressValue){
                 likeCount = parseInt(like) + 1;
                 num.siblings('.likeValue').text(likeCount);
+                $(this).removeClass('btn-outline-primary').addClass('btn-primary');
             }else{
                 likeCount = parseInt(like) - 1;
                 num.siblings('.likeValue').text(likeCount);
+                $(this).removeClass('btn-primary').addClass('btn-outline-primary');
             }
 
             $.post({
@@ -176,7 +178,7 @@ function addNewContent(page,observer){
                         <div class="card-footer text-end">
                           <i class="fa-regular fa-thumbs-up"></i>
                           <span class="likeValue">`+items.likes+`</span>
-                          <button type="button" class="btn btn-primary likeBtn" data-number="`+items.fboard+`" data-bs-toggle="button" aria-pressed="false">좋아요</button>
+                          <button type="button" class="btn btn-outline-primary likeBtn" data-number="`+items.fboard+`" >좋아요</button>
                           <input type="hidden"  value="`+items.fboard+`">
                         </div>
                       </div>
@@ -186,7 +188,7 @@ function addNewContent(page,observer){
             })
 
             $.each(likeList, function(index, number){
-                $('.likeBtn[data-number="'+number+'"]').addClass('active');
+                $('.likeBtn[data-number="'+number+'"]').removeClass('btn-outline-primary').addClass('btn-primary');
             })
             // 자유게시판 게시글을 observer 객체에 넣기
             const fBoard = $('#fBoardContainer .content')
