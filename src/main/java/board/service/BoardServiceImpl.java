@@ -1,6 +1,7 @@
 package board.service;
 
 import board.bean.BoardDTO;
+import board.bean.BoardPaging;
 import board.dao.BoardDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,9 @@ public class BoardServiceImpl implements BoardService{
 
     @Autowired
     private BoardDAO boardDAO;
+
+    @Autowired
+    private BoardPaging boardPaging;
     @Override
     public String boardInputData(BoardDTO boardDTO, String[] lang) {
 
@@ -36,8 +40,31 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public List<BoardDTO> boardListGet() {
-        return boardDAO.boardListGet();
+    public Map<String,Object> boardListGet(String pg) {
+
+        //1페이지당 3개씩
+        int startNum= (Integer.parseInt(pg)*3)-2;
+
+
+        List<BoardDTO> list = boardDAO.boardListGet(startNum);
+        //List -> JSON 변환
+
+
+        //총글수 가져오기
+        int total = boardDAO.getTotal();
+
+
+        boardPaging.setCurrentPage(Integer.parseInt(pg));
+        boardPaging.setPageBlock(3);
+        boardPaging.setPageSize(3);
+        boardPaging.setTotal(total);
+        boardPaging.makePagingHTML();
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("list", list);
+        map.put("boardPaging", boardPaging.getPagingHTML().toString());
+
+        return map;
     }
 
     @Override

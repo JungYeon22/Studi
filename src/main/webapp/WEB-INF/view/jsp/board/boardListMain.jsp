@@ -13,6 +13,7 @@
 <%@ include file="../include/header.jsp"%>
 
 <form class="position-relative top-0 start-50 translate-middle-x mt-5" style="width: 50%">
+    <input type="hidden" id="pg" value="${pg}">
     <br>
     <div class="grid d-flex p-4  py-md-3 ms-2  " >
         <div class="p-2 g-col-6"   >
@@ -66,12 +67,10 @@
 
         </div>
     </div>
-    <div style="margin-left: 42%;">
-        <button type="button" class="btn btn-outline-danger border border-0 rounded-pill btn-sm  mt-2" >1</button>
-        <button type="button" class="btn btn-outline-danger border border-0 rounded-pill btn-sm  mt-2" >2</button>
-        <button type="button" class="btn btn-outline-danger border border-0 rounded-pill btn-sm mt-2" >3</button>
-        <button type="button" class="btn btn-outline-danger border border-0 rounded-pill btn-sm  mt-2" >4</button>
-        <button type="button" class="btn btn-outline-danger border border-0 rounded-pill btn-sm  mt-2" >5</button>
+    <div id="pagingDiv" style="margin-left: 42%;">
+        <!-- 동적 처리 -->
+
+
     </div>
 
 </form>
@@ -83,5 +82,10 @@
     const contextPath = ${pageContext.request.contextPath};
 </script>--%>
 <script src="${pageContext.request.contextPath}/js/board/boardListMain.js"></script>
+<script>
+function boardPaging(pg){
+    location.href="${pageContext.request.contextPath}/board/boardListMain?pg="+pg;
+}
+</script>
 </body>
 </html>

@@ -3,13 +3,14 @@ package board.service;
 import board.bean.BoardDTO;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BoardService {
     public String boardInputData(BoardDTO boardDTO, String[] lang);
 
-    public List<BoardDTO> boardListGet();
+    public Map<String,Object> boardListGet(String pg);
 
     public String boardTagGet(String boardid);
 
-    List<BoardDTO> boardListGet1( String type, String field);
+    public List<BoardDTO> boardListGet1( String type, String field);
 }

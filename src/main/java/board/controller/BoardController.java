@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "board")
@@ -17,7 +18,8 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
     @GetMapping(value = "/boardListMain")
-    public String boardListMain(){
+    public String boardListMain(@RequestParam String pg,Model model){
+        model.addAttribute("pg",pg);
 
         return "board/boardListMain";
     }
@@ -43,9 +45,9 @@ public class BoardController {
 
     @PostMapping(value = "/boardListGet")
     @ResponseBody
-    public List<BoardDTO> boardListGet(){
+    public Map<String, Object> boardListGet(@RequestParam String pg){
 
-        return boardService.boardListGet();
+        return boardService.boardListGet(pg);
     }
 
     @PostMapping(value = "/boardListGet1")
