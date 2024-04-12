@@ -15,6 +15,9 @@
     <select id="boardListGet" resultType="board.bean.BoardDTO">
         select * from board order by DATE desc
     </select>
+    <select id="boardListGet1" parameterType="Map" resultType="board.bean.BoardDTO">
+        select * from board where projectType Like #{projectType} and projectField Like #{projectField} order by DATE desc
+    </select>
     <select id="boardTagGet" parameterType="String" resultType="String">
         select CONTENT from boardtag where BOARDID=#{boardid}
     </select>

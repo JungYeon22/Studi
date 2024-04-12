@@ -16,17 +16,20 @@
     <br>
     <div class="grid d-flex p-4  py-md-3 ms-2  " >
         <div class="p-2 g-col-6"   >
-            <select class="form-select" aria-label="Default select example" style="background-color: rgb(255, 255, 255);">
-                <option selected>언어</option>
+            <select class="form-select" id="selectLang" aria-label="Default select example" style="background-color: rgb(255, 255, 255);">
+                <option selected value="default">언어</option>
                 <option value="java">JAVA</option>
                 <option value="C">C</option>
                 <option value="python">Python</option>
+                <option value="c++">C++</option>
+                <option value="c#">C#</option>
+                <option value="JavaScript">JavaScript</option>
             </select>
 
         </div>
         <div class="p-2 g-col-6" >
-            <select class="form-select" aria-label="Default select example" style="background-color: rgb(255, 255, 255); ">
-                <option selected>모집유형</option>
+            <select class="form-select" id="selectType" aria-label="Default select example" style="background-color: rgb(255, 255, 255); ">
+                <option selected value="default">모집유형</option>
                 <option value="project">프로젝트</option>
                 <option value="comp">대회</option>
                 <option value="skillup">스킬업</option>
@@ -34,8 +37,8 @@
 
         </div>
         <div class="p-2 g-col-6" >
-            <select class="form-select" aria-label="Default select example" style="background-color: rgb(255, 255, 255);">
-                <option selected>모집분야</option>
+            <select class="form-select" id="selectField" aria-label="Default select example" style="background-color: rgb(255, 255, 255);">
+                <option selected value="default">모집분야</option>
                 <option value="backend">BackEnd</option>
                 <option value="frontend">FrontEnd</option>
                 <option value="publisher">Publisher</option>
@@ -45,6 +48,15 @@
         <button type="button" class="btn btn-outline-danger rounded-3 btn-sm mt-2" style="height: 40px ; margin-left: 50%; width: 80px ;font-size: small" onclick="location.href='${pageContext.request.contextPath}/board/boardInput'">글쓰기</button>
 
     </div>
+    <div class="hstack gap-1">
+    <div id="selectDiv" style="margin-bottom: 10px ; margin-top: 0px; padding-top: 0 ">
+    </div>
+    <div id="selectDiv1" style="margin-bottom: 10px ; margin-top: 0px; padding-top: 0 ; padding-left: 0;margin-left: 0px">
+    </div>
+    <div id="selectDiv2" style="margin-bottom: 10px ; margin-top: 0px; padding-top: 0 ;margin-left: 0px">
+    </div>
+    </div>
+
 
 
     <div class=" flex-column p-3 flex-md-row gap-4 py-md-0 ">

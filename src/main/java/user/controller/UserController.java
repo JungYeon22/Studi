@@ -138,9 +138,9 @@ public class UserController {
         return "user/myPage";
     }
 
-    @GetMapping(value = "/managerPage")
+    @GetMapping(value = "/updateForm")
     public String managerPage(){
-        return "user/managerPage";
+        return "user/updateForm";
     }
 
 

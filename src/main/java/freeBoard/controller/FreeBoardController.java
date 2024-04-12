@@ -21,16 +21,9 @@ public class FreeBoardController {
     private FBoardService fBoardService;
 
     @GetMapping(value = "/freeBoardList")
-    public String freeBoardList(HttpSession session, Model model){
-        UserDTO userDTO = (UserDTO)session.getAttribute("userDTO");
-        List<Integer> userLikeList = new ArrayList<>();
-        if(userDTO != null){
-            userLikeList = fBoardService.getUserLikeList(userDTO.getUserId());
-        }
-        List<FBoardDTO> fBoardList = fBoardService.getFBoardList();
-
+    public String freeBoardList(Model model){
+        List<FBoardDTO> fBoardList = fBoardService.getFBoardList(1);
         model.addAttribute("fBoardList", fBoardList);
-        model.addAttribute("userLikeList", userLikeList);
         return "/freeBoard/freeBoardList";
     }
 
@@ -52,5 +45,12 @@ public class FreeBoardController {
                      @RequestParam("userId") String userId){
         fBoardService.updateLike(num, userId);
     }
+
+    @PostMapping(value = "getBoardList")
+    @ResponseBody
+    public List<FBoardDTO> getBoardList(@RequestParam String page){
+        return fBoardService.getFBoardList(Integer.parseInt(page));
+    }
+
 
 }

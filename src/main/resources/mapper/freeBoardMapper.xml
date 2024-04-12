@@ -6,19 +6,29 @@
 <mapper namespace="freeBoard.dao.FBoardDAO">
 
     <insert id="write" parameterType="FBoardDTO">
-        insert into free_board(writer, title, content) values(#{writer}, #{title}, #{content})
+        insert into free_board(writer, title, content)
+        values(#{writer}, #{title}, #{content})
     </insert>
 
-    <select id="getFBoardList" resultType="FBoardDTO">
+<!--    <select id="getFBoardList" resultType="FBoardDTO">
         select * from free_board order by fboard desc
-    </select>
+    </select>-->
 
     <select id="getUserLikeList" parameterType="String" resultType="int">
-        select fboard from fboard_like where userId=#{userId}
+        select fboard
+        from fboard_like
+        where userId=#{userId}
     </select>
 
     <select id="updateLike" parameterType="map" statementType="CALLABLE">
         call LIKE_PROCEDURE(#{fBoard},#{userId})
+    </select>
+
+    <select id="getFBoardList" resultType="FBoardDTO">
+        select *
+        from free_board
+        order by fboard desc
+        limit #{startNum}, #{size}
     </select>
 
 </mapper>
