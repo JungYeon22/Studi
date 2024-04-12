@@ -6,4 +6,6 @@ public interface UserDao {
     int save(UserDTO userDTO);
     UserDTO login(UserDTO userDTO);
     UserDTO findByUserId(String userId);
+
+    UserDTO findByEmail(String email);
 }

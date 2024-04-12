@@ -1,24 +1,33 @@
 package user.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import user.bean.UserDTO;
 import user.service.UserServiceImpl;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Random;
 
 @Controller
 @RequestMapping(value = "/user")
 @RequiredArgsConstructor
 public class UserController {
 
+//    @Autowired
     private final UserServiceImpl userService;
+    @Autowired
+    private final JavaMailSenderImpl mailSender;
 
     @GetMapping("/writeForm")
     public String writeForm() {
@@ -32,6 +41,7 @@ public class UserController {
             model.addAttribute("writeOk", "가입에 성공하였습니다!");
             return "user/loginForm";
         } else {
+            model.addAttribute("emailExistsError", "이미 존재하는 회원메일입니다.");
             return "user/writeForm";
         }
     }
@@ -75,6 +85,48 @@ public class UserController {
         }
         return ResponseEntity.ok(Collections.singletonMap("isDuplicate", isDuplicate));
     }
+
+    //이메일 인증
+    @ResponseBody
+    @PostMapping("/EmailAuth")
+    public String emailAuth(String email) {
+
+//        log.info("전달 받은 이메일 주소 : " + email);
+        System.out.println("전달 받은 이메일 주소 : " + email);
+
+        //난수의 범위 111111 ~ 999999 (6자리 난수)
+        Random random = new Random();
+        int checkNum = random.nextInt(888888)+111111;
+
+        //이메일 보낼 양식
+        String setFrom = "chlrytns94@naver.com"; //2단계 인증 x, 메일 설정에서 POP/IMAP 사용 설정에서 POP/SMTP 사용함으로 설정o
+        String toMail = email;
+        String title = "회원가입 인증 이메일 입니다.";
+        String content = "인증 코드는 " + checkNum + " 입니다." +
+                "<br>" +
+                "해당 인증 코드를 인증 코드 확인란에 기입하여 주세요.";
+
+        try {
+            MimeMessage message = mailSender.createMimeMessage(); //Spring에서 제공하는 mail API
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+
+            // 메일 내용을 채워줌
+            helper.setFrom(setFrom); // 보내는 사람 세팅
+            helper.setTo(toMail);  // 받는 사람 세팅
+            helper.setSubject(title); // 제목 세팅
+            helper.setText(content, true); // 내용 세팅
+            // 메일 전송
+            mailSender.send(message);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+//        log.info("랜덤숫자 : " + checkNum);
+        System.out.println("랜덤숫자 : " + checkNum);
+        return Integer.toString(checkNum);
+    }
+
 
     @GetMapping(value = "/introduceForm")
     public String introduceForm() {

@@ -23,4 +23,8 @@ public class UserDAOImpl implements UserDao {
         return sql.selectOne("USER.findByUserId", userId);
     }
 
+    public UserDTO findByEmail(String email) {
+        return sql.selectOne("USER.findByEmail", email);
+    }
+
 }
