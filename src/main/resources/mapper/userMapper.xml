@@ -18,4 +18,11 @@
         SELECT * FROM User WHERE userId = #{userId}
     </select>
 
+    <select id="getIntro" parameterType="string" resultType="user.bean.UserIntro">
+        SELECT * FROM USER_Description WHERE userId = #{userId}
+    </select>
+
+    <delete id="delete" parameterType="String">
+        delete from User where id=#{userId}
+    </delete>
 </mapper>

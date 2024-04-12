@@ -3,6 +3,7 @@ package user.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import user.bean.UserDTO;
+import user.bean.UserIntro;
 import user.dao.UserDAOImpl;
 
 import javax.servlet.http.HttpSession;
@@ -18,7 +19,8 @@ public class UserServiceImpl implements UserService {
 
     }
     public UserDTO login(UserDTO userDTO) {
-            return userDAO.login(userDTO);
+
+        return userDAO.login(userDTO);
     }
 
     public boolean checkUserId(String userId) {
@@ -35,6 +37,21 @@ public class UserServiceImpl implements UserService {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public UserIntro getIntro(String userId) {
+        return userDAO.getIntro(userId);
+    }
+
+    @Override
+    public void writeIntroduce(UserIntro userIntro) {
+        userDAO.writeIntroduce(userIntro);
+    }
+
+    @Override
+    public void delete(String userId) {
+        userDAO.delete(userId);
     }
 
 

@@ -22,7 +22,7 @@
 <%@ include file="../include/header.jsp"%>
 
 
-<form id="introduceForm1">
+<form id="introduceForm 1">
     <div class="input-form-background row">
 
         <div class="input-form col-md-12 mx-auto">
@@ -33,7 +33,7 @@
     </div>
 </form>
 
-<form id="introduceForm2">
+<form id="introduceForm 2">
     <div class="input-form-backgroud row">
         <div class="input-form col-md-12 mx-auto">
             <label for="career"><span>경력/신입</span></label>
@@ -42,7 +42,7 @@
     </div>
 </form>
 
-<form id="introduceForm3">
+<form id="introduceForm 3">
     <div class="input-form col-md-12 mx-auto">
         <label for="skill"><span>사용가능 언어(다중선택)</span></label>
         <div class="skill" role="group" aria-label="Basic checkbox toggle button group" >
@@ -70,18 +70,24 @@
     </div>
 </form>
 
-<form id="introduceForm4">
+<form id="introduceForm 4">
 
     <div class="input-form-backgroud row">
         <div class="mb-3">
             <div class="input-form col-md-12 mx-auto">
                 <label for="simpleIntroduce"><span>간단한 소개</span></label>
                 <input type="text" class="form-control" id="simpleIntroduce" required >
+                <div class="button-container mt-3 col-md-6 ms-auto">
+                    <button type="submit" id="insertBtn" class="btn btn-outline-dark btn-lg" >입력</button>
+                    <button type="button" id="cancelBtn" class="btn btn-outline-dark btn-lg" >취소</button>
+                </div>
             </div>
         </div>
     </div>
 </form>
 <%@include file="../include/footer.jsp"%>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script type="text/javascript" src="http://code.jQuery.com/jquery-3.7.1.min.js"></script>
+<script type="text/javascript" src="../../js/introduce.js"></script>
 </body>
 </html>

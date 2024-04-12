@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import user.bean.UserDTO;
+import user.bean.UserIntro;
 import user.service.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
@@ -81,14 +82,32 @@ public class UserController {
     }
 
     @GetMapping(value = "/myPage")
-    public String myPage(){
+    public String myPage(@SessionAttribute("userDTO") UserDTO userDTO, Model model)
+    {
+        model.addAttribute("userDTO", userDTO);
+        UserIntro userIntro = userService.getIntro(userDTO.getUserId());
+        model.addAttribute("userIntro",userIntro);
         return "user/myPage";
     }
 
     @GetMapping(value = "/updateForm")
-    public String managerPage(){
+    public String updateForm(@SessionAttribute("userDTO") UserDTO userDTO, Model model)
+    {
+        model.addAttribute("userDTO", userDTO);
+        UserIntro userIntro = userService.getIntro(userDTO.getUserId());
+        model.addAttribute("userIntro",userIntro);
         return "user/updateForm";
     }
 
+    @PostMapping(value="/introduceForm")
+    @ResponseBody
+    public void writeIntroduce(@ModelAttribute UserIntro userIntro) {
+        userService.writeIntroduce(userIntro);
+    }
 
+    @PostMapping(value="/delete")
+    @ResponseBody
+    public void delete(@SessionAttribute String userId) {
+        userService.delete(userId);
+    }
 }
