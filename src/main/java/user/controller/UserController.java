@@ -134,6 +134,15 @@ public class UserController {
         return "user/introduceForm";
     }
 
+    @PostMapping(value="/introduce")
+    public String writeIntroduce(@SessionAttribute("userDTO") UserDTO userDTO,
+                                 @ModelAttribute UserIntro userIntro) {
+        userIntro.setUserId(userDTO.getUserId());
+        userIntro.setName(userDTO.getName());
+        userService.writeIntroduce(userIntro);
+        return "user/myPage";
+    }
+
     @GetMapping(value = "/myPage")
     public String myPage(@SessionAttribute("userDTO") UserDTO userDTO, Model model)
     {
@@ -150,12 +159,6 @@ public class UserController {
         UserIntro userIntro = userService.getIntro(userDTO.getUserId());
         model.addAttribute("userIntro",userIntro);
         return "user/updateForm";
-    }
-
-    @PostMapping(value="/introduceForm")
-    @ResponseBody
-    public void writeIntroduce(@ModelAttribute UserIntro userIntro) {
-        userService.writeIntroduce(userIntro);
     }
 
     @PostMapping(value="/delete")

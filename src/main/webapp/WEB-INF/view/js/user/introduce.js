@@ -2,10 +2,10 @@ $(function(){
     $('#insertBtn').click(function(){
             $.ajax({
                 type: 'post',
-                url: '/user/introduceForm',
+                url: 'introduce',
                 data: $('#introduceForm').serialize(), //변수=값&변수=값
                 success: function(){
-                    location.href='/user/myPage';
+                    location.href='myPage';
                 },
                 error: function(e){
                     console.log(e);

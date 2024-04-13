@@ -6,8 +6,8 @@
 <mapper namespace="USER">
 
     <insert id="save" parameterType="user">
-        insert into USER(userId, pwd, name, skill, email, phone, hiredate)
-        values (#{userId}, #{pwd},#{name},#{skill},#{email},#{phone},#{hiredate})
+        insert into USER(userId, pwd, name, email, phone, hiredate)
+        values (#{userId}, #{pwd},#{name},#{email},#{phone},sysdate())
     </insert>
 
     <select id="login" parameterType="user" resultType="user">
@@ -25,6 +25,11 @@
     <select id="getIntro" parameterType="string" resultType="user.bean.UserIntro">
         SELECT * FROM USER_Description WHERE userId = #{userId}
     </select>
+
+    <insert id="writeIntroduce" parameterType="user.bean.UserIntro">
+        insert into USER_Description (name, userId, career, introduce)
+        values (#{name}, #{userId}, #{career}, #{introduce})
+    </insert>
 
     <delete id="delete" parameterType="String">
         delete from User where id=#{userId}
