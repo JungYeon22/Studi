@@ -126,15 +126,11 @@
                     </h4>
                     <div class="border border-primary-subtle rounded p-3">
                         <div>
-
-
                                     <h2 class="accordion-header">
-                                        <button
-                                                onclick="location.href='../chat/chatRoomList'">
+                                        <button type="button" class="chatlistBtn">
                                             목록보기
                                         </button>
                                     </h2>
-
 
                         </div>
                     </div>
@@ -147,5 +143,16 @@
 
 <!-- ######################################################### -->
 
+<script>
+
+    const button = document.querySelector('.chatlistBtn');
+    button.addEventListener('click', function() {
+        // 이동할 URL 지정
+        const url = '../chat/chatRoomList';
+
+        // 지정된 URL로 이동
+        location.href = url;
+    });
+</script>
 </body>
 </html>

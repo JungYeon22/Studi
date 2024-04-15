@@ -20,12 +20,13 @@ import java.util.List;
 
 @Controller
 @SessionAttributes({"loginMember", "chatRoomNo"})
+@RequestMapping(value = "chat")
 public class ChatController {
     @Autowired
     private ChatService service;
 
     // 채팅방 목록 조회
-    @GetMapping("/chat/chatRoomList")
+    @GetMapping("/chatRoomList")
     public String chattingList(Model model) {
 
         List<ChatRoomDTO> chatRoomList = service.selectChatRoomList();
@@ -36,7 +37,7 @@ public class ChatController {
     }
 
     // 채팅방 만들기
-    @PostMapping("/chat/openChatRoom")
+    @GetMapping("/openChatRoom")
     public String openChatRoom(HttpSession session, Model model,
                                ChatRoomDTO room, RedirectAttributes ra) {
 
@@ -63,7 +64,7 @@ public class ChatController {
     }
 
     // 채팅방 입장
-    @GetMapping("/chat/room/{chatRoomNo}")
+    @GetMapping("/room/{chatRoomNo}")
     public String joinChatRoom(HttpSession session, Model model,
                                @PathVariable("chatRoomNo") int chatRoomNo,
                                ChatRoomJoinDTO join,

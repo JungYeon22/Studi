@@ -29,6 +29,24 @@
     <p>현재 생성된 채팅방이 없습니다.</p>
     <!-- 채팅방이 없는 경우 해당 메시지를 표시 -->
 </c:if>
+<div class="border border-primary-subtle rounded p-3">
+    <div>
+        <h2 class="accordion-header">
+            <button type="button" id="createChatBtn">
+                채팅방 생성
+            </button>
+        </h2>
 
+    </div>
+<script>
+    const button = document.querySelector('#createChatBtn');
+    button.addEventListener('click', function() {
+        // 이동할 URL 지정
+        const url = '/openChatRoom';
+
+        // 지정된 URL로 이동
+        location.href = url;
+    });
+</script>
 </body>
 </html>

@@ -30,8 +30,10 @@
 
             int result = sqlSession.insert("chattingMapper.openChatRoom", room);
 
-            if(result > 0) return room.getChatRoomNo();
-            return 0;
+            if(result > 0) {return room.getChatRoomNo();}
+            else {
+                return 0;
+            }
         }
 
 
