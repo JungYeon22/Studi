@@ -1,18 +1,14 @@
 package freeBoard.controller;
 
 import freeBoard.bean.FBoardDTO;
+import freeBoard.bean.FBoardCommentDTO;
 import freeBoard.service.FBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import user.bean.UserDTO;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/freeBoard")
@@ -22,7 +18,7 @@ public class FreeBoardController {
 
     @GetMapping(value = "/freeBoardList")
     public String freeBoardList(Model model){
-        List<FBoardDTO> fBoardList = fBoardService.getFBoardList(1);
+        List<FBoardDTO> fBoardList = fBoardService.fBoardList(1);
         model.addAttribute("fBoardList", fBoardList);
         return "/freeBoard/freeBoardList";
     }
@@ -51,6 +47,19 @@ public class FreeBoardController {
     public List<FBoardDTO> getBoardList(@RequestParam String page){
         return fBoardService.getFBoardList(Integer.parseInt(page));
     }
+
+    @PostMapping(value = "getBoardComment")
+    @ResponseBody
+    public List<FBoardCommentDTO> getBoardComment(@RequestParam String fBoard){
+        return fBoardService.getBoardComment(Integer.parseInt(fBoard));
+    }
+
+    @PostMapping(value = "addComment")
+    @ResponseBody
+    public List<FBoardCommentDTO> addComment(@ModelAttribute FBoardCommentDTO fBoardCommentDTO){
+        return fBoardService.addComment(fBoardCommentDTO);
+    }
+
 
 
 }

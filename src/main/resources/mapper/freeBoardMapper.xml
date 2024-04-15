@@ -10,9 +10,13 @@
         values(#{writer}, #{title}, #{content})
     </insert>
 
-<!--    <select id="getFBoardList" resultType="FBoardDTO">
-        select * from free_board order by fboard desc
-    </select>-->
+    <select id="getBoardComment" parameterType="int" resultType="FBoardCommentDTO">
+        select * from fboard_comment where fboard=#{fBoard} order by date desc
+    </select>
+
+    <insert id="addComment" parameterType="FBoardCommentDTO">
+        insert into fboard_comment(fboard, writer, comment) values(#{fBoard}, #{writer}, #{comment})
+    </insert>
 
     <select id="getUserLikeList" parameterType="String" resultType="int">
         select fboard
@@ -22,6 +26,10 @@
 
     <select id="updateLike" parameterType="map" statementType="CALLABLE">
         call LIKE_PROCEDURE(#{fBoard},#{userId})
+    </select>
+
+    <select id="fBoardList" statementType="CALLABLE">
+        call LOUNGE_PROCEDURE(#{startNum}, #{size})
     </select>
 
     <select id="getFBoardList" resultType="FBoardDTO">

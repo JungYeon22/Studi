@@ -1,6 +1,7 @@
 package freeBoard.service;
 
 import freeBoard.bean.FBoardDTO;
+import freeBoard.bean.FBoardCommentDTO;
 import freeBoard.dao.FBoardDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,24 @@ public class FBoardServiceImpl implements FBoardService{
     @Override
     public List<Integer> getUserLikeList(String userId) {
         return fBoardDAO.getUserLikeList(userId);
+    }
+
+    @Override
+    public List<FBoardCommentDTO> getBoardComment(int fBoard) {
+        return fBoardDAO.getBoardComment(fBoard);
+    }
+
+    @Override
+    public List<FBoardCommentDTO> addComment(FBoardCommentDTO fBoardCommentDTO) {
+        fBoardDAO.addComment(fBoardCommentDTO);
+        return fBoardDAO.getBoardComment(fBoardCommentDTO.getFBoard());
+    }
+
+    @Override
+    public List<FBoardDTO> fBoardList(int page) {
+        int startNum = (page-1)*5;
+        int size = 5;
+        // 1page 0 ~ 4  / 2page 5 ~ 9
+        return fBoardDAO.fBoardList(startNum, size);
     }
 }
