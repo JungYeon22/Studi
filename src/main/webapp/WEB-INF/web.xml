@@ -19,7 +19,10 @@
                 /WEB-INF/spring/servlet-context.xml
             </param-value>
         </init-param>
+        <load-on-startup>1</load-on-startup>
+        <async-supported>true</async-supported>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
@@ -32,6 +35,7 @@
         <url-pattern>*.swf</url-pattern>
         <url-pattern>*.ejs</url-pattern>
     </servlet-mapping>
+
 
     <!-- 인코딩 -->
     <filter>

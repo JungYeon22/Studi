@@ -31,6 +31,7 @@
 
 <body>
 <%@ include file="include/header.jsp"%>
+
 <h2>test</h2>
 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
