@@ -76,7 +76,7 @@
                     <a type="button" onclick="" >
                         <img src="/image/free-icon-kakao-talk-3669973.png"  alt="..." width="50" height="50">
                     </a>
-                    <a type="button" onclick="" >
+                    <a type="button" onclick="naverLogin();" >
                         <img src="/image/btnG_아이콘사각.png" alt="..."  width="50" height="50">
                     </a>
                     <a type="button" onclick="" >
@@ -93,6 +93,17 @@
 <br>
 <%@include file="../include/footer.jsp"%>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+<script src="https://code.jQuery.com/jquery-3.7.1.min.js"></script>
+<script>
+    function naverLogin(){
+        $.get({
+            url: '/user/naverLogin',
+            success: function (data){
+                console.log(data);
+                location.href=data;
+            }
+        })
+    }
+</script>
 </body>
 </html>
