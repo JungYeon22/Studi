@@ -4,7 +4,8 @@ CREATE TABLE `FREE_BOARD` (
 `TITLE`     VARCHAR(100),
 `DATE`	DATETIME  default  CURRENT_TIMESTAMP,
 `CONTENT`	VARCHAR(100),
-`LIKES`	INT	NULL default 0
+`LIKES`	INT	NULL default 0,
+`COMMENT` INT DEFAULT 0
 );
 
 
@@ -13,6 +14,12 @@ CREATE TABLE `FBOARD_LIKE` (
 `UserId`	VARCHAR(100)
 );
 
+CREATE TABLE `FBOARD_COMMENT`(
+`FBOARD`    INT,
+`WRITER`    VARCHAR(100),
+`COMMENT`   VARCHAR(100),
+`DATE`  DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 
 /* 좋아요 기능을 수행하는 프로시저 */
 DELIMITER //
@@ -41,3 +48,26 @@ BEGIN
 END //
 DELIMITER ;
 
+
+/* 게시글을 가져오기 전에 댓글 수를 update하는 프로시저*/
+DELIMITER //
+CREATE PROCEDURE LOUNGE_PROCEDURE(
+    IN startNum INT,
+    IN size INT
+)
+BEGIN
+    -- 게시글 댓글 업데이트
+    UPDATE FREE_BOARD AS B
+    SET B.COMMENT = (
+        SELECT COUNT(*)
+        FROM FBOARD_COMMENT AS C
+        WHERE C.FBOARD = B.FBOARD
+        );
+
+    -- 게시글 목록 가져오기
+    SELECT *
+    FROM FREE_BOARD
+    order by fboard desc
+    limit startNum, size;
+end //
+DELIMITER ;
