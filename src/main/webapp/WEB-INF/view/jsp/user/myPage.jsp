@@ -56,8 +56,8 @@
                                 </svg>
                             </div>
                             <div class="col">
-                                <p class="mb-0">김용환</p>
-                                <p class="mb-0">k55183@naver.com</p>
+                                <p class="mb-0">${userDTO.name}</p>
+                                <p class="mb-0">${userDTO.email}</p>
                             </div>
                         </div>
                     </div>
@@ -69,19 +69,17 @@
                             <p class="col mb-2">닉네임</p>
                             <p class="col mb-2">소셜 로그인</p>
                             <p class="col mb-2">이메일</p>
-                            <p class="col mb-2">직업</p>
                             <p class="col mb-2">경력</p>
                             <p class="col mb-2">관심 스택</p>
                             <p class="col mb-2">자기소개</p>
                         </div>
                         <div class="col"> <!-- 오른쪽 열 -->
-                            <p class="col mb-2">김용환</p>
+                            <p class="col mb-2">${userDTO.userId}</p>
                             <p class="col mb-2">Kakao</p>
-                            <p class="col mb-2">k55183@naver.com</p>
-                            <p class="col mb-2">PM</p>
+                            <p class="col mb-2">${userDTO.email}</p>
                             <p class="col mb-2">2년차</p>
-                            <p class="col mb-2">JAVA</p>
-                            <p class="col mb-2">Hi !</p>
+                            <p class="col mb-2">${userIntro.skill1}</p>
+                            <p class="col mb-2">${userIntro.introduce}</p>
                         </div>
                     </div>
                 </div>

@@ -13,4 +13,12 @@ public interface ManagerDAO {
 
     public List<ManagerDTO> getUserList(int startNum);
     public int getTotalA();
+
+    public int getTotalA2(Map<String, Object> map);
+
+    public List<ManagerDTO> getUserList2(Map<String, Object> map);
+
+    List<Map<String, Object>> pichart1();
+
+    List<Map<String, Object>> pichart2();
 }

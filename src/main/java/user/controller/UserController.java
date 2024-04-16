@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import user.bean.UserDTO;
+import user.bean.UserIntro;
 import user.service.UserServiceImpl;
 
 import javax.mail.internet.MimeMessage;
@@ -35,11 +36,13 @@ public class UserController {
     }
 
     @PostMapping("/writeForm")
-    public String save(@ModelAttribute UserDTO userDTO, Model model) {
+    public String save(@ModelAttribute UserDTO userDTO, Model model,
+                       @ModelAttribute UserIntro userIntro) {
         int saveResult = userService.save(userDTO);
+//        userService.writeIntroduce(userIntro);
         if (saveResult > 0) {
             model.addAttribute("writeOk", "가입에 성공하였습니다!");
-            return "user/loginForm";
+            return "redirect:/";
         } else {
             model.addAttribute("emailExistsError", "이미 존재하는 회원메일입니다.");
             return "user/writeForm";
@@ -133,15 +136,35 @@ public class UserController {
         return "user/introduceForm";
     }
 
+    @PostMapping(value="/writeForm/introduce")
+    public String writeIntroduce(@ModelAttribute UserIntro userIntro) {
+        System.out.println(userIntro.getUserId()+" "+userIntro.getIntroduce() + " " + userIntro.getCareer());
+        userService.writeIntroduce(userIntro);
+        return "user/introduceForm";
+    }
+
     @GetMapping(value = "/myPage")
-    public String myPage(){
+    public String myPage(@SessionAttribute("userDTO") UserDTO userDTO, Model model)
+    {
+//        model.addAttribute("userDTO", userDTO);
+//        UserIntro userIntro = userService.getIntro(userDTO.getUserId());
+//        model.addAttribute("userIntro",userIntro);
         return "user/myPage";
     }
 
-    @GetMapping(value = "/updateForm")
-    public String managerPage(){
-        return "user/updateForm";
+//    @GetMapping(value = "/updateForm")
+//    public String updateForm(@SessionAttribute("userDTO") UserDTO userDTO,
+//                             @ModelAttribute UserIntro userIntro,
+//                             Model model)
+//    {   model.addAttribute("userIntro",userIntro);
+//        model.addAttribute("userDTO", userDTO);
+//        userService.update(model);
+//        return "user/updateForm";
+//    }
+
+    @PostMapping(value="/delete")
+    @ResponseBody
+    public void delete(@SessionAttribute String userId) {
+        userService.delete(userId);
     }
-
-
 }

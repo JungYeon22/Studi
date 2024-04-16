@@ -20,7 +20,7 @@
 
 --
 ### Git hub로 팀 프로젝트 진행하기(필독)
-![img.png](README_img/img.png)
+![img.png](README_IMAGE/img.png)
 
 ```text
 1. 팀장 Repository에서 자신의 Repository에 `Fork` 해온다
@@ -32,7 +32,7 @@
 7. 팀장 레포지토리에 `pull request`
 ```
 ## 🖤 커밋 메시지 컨벤션
-![img_1.png](README_img/img_1.png)
+![img_1.png](README_IMAGE/img_1.png)
 <aside>
 
 ### 1. 커밋 유형 지정

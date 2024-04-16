@@ -1,5 +1,6 @@
 package freeBoard.dao;
 
+import freeBoard.bean.FBoardCommentDTO;
 import freeBoard.bean.FBoardDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -17,4 +18,10 @@ public interface FBoardDAO {
     void updateLike(Map<String, Object> map);
 
     List<Integer> getUserLikeList(String userId);
+
+    List<FBoardCommentDTO> getBoardComment(int fBoard);
+
+    void addComment(FBoardCommentDTO fBoardCommentDTO);
+
+    List<FBoardDTO> fBoardList(@Param("startNum") int startNum,@Param("size") int size);
 }

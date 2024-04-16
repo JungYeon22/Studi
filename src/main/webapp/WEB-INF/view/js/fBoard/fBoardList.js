@@ -66,12 +66,6 @@ $(function (){
         });
 
     }
-function checkLikeList(data) {
-    $.each(data, function(index, number){
-        $('.likeBtn[data-number="'+number+'"]').addClass('active');
-    })
- }
-
 
 
     // 날짜 포멧 original : Tue Apr 09 16:49:50 KST 2024 -> 1분전..
@@ -158,28 +152,34 @@ function addNewContent(page,observer){
             $.each(data, function(index, items){
                 //시간 형식 설정
                 var date = new Date(items.date);
+                console.log('like : ' + items.likes);
                 var dateResult = getTimeAgo(date);
                 var result = `
                 <div class="content row mt-4">
                     <div class="col-md-8">
                       <div class="card mb-3">
-                        <div class="card-header">
+                        <div class="card-header d-flex justify-content-between">
                           <strong>`+items.title+`</strong>
                           <div class="text-end">
-                            <small>작성자:`+ items.writer +` | 작성시간:</small>
+                            <small>작성자: `+ items.writer +` </small>
                             <small class="text-muted">`+ dateResult + `</small>
                           </div>
                         </div>
-                        <div class="card-body m-3">
-                          <p class="card-text" id="contentValue">
+                        <div class="card-body m-1">
+                          <p class="contentValue">
                               `+items.content+`
                           </p>
                         </div>
-                        <div class="card-footer text-end">
-                          <i class="fa-regular fa-thumbs-up"></i>
-                          <span class="likeValue">`+items.likes+`</span>
-                          <button type="button" class="btn btn-outline-primary likeBtn" data-number="`+items.fboard+`" >좋아요</button>
-                          <input type="hidden"  value="`+items.fboard+`">
+                        <div class="card-footer bg-transparent d-flex justify-content-between">
+                          <div>
+                            <i class="fa-regular fa-comment mt-1" data-bs-toggle="modal" data-bs-target="#fBoardCommentModal" data-post-id="`+items.fboard+`"></i><small> `+items.comment+`</small>
+                          </div>
+                          <div>
+                            <i class="fa-regular fa-thumbs-up" > </i>
+                            <span class="likeValue">`+items.likes+`</span>
+                            <button type="button" class="btn btn-outline-primary likeBtn" data-number="`+items.fboard+`">좋아요</button>
+                            <input type="hidden"  value="`+items.fboard+`">
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -196,6 +196,16 @@ function addNewContent(page,observer){
                 observer.observe(fBoard[page * 5 - 1])
             }
             loading = false;
+            $('.content').each(function (index, items){
+                var contentValue = $(items).find('.contentValue');
+                var contentBody = $(items).find('.card-body');
+
+                if(contentValue.innerHeight() > 100){
+                    console.log('height : '+ contentValue.height());
+                    contentValue.addClass("webKitBox ellipsis-text overflow-hidden");
+                    contentBody.append('<button class="btn btn-outline-secondary toggleButton" >더보기</button>')
+                }
+            })
         },
         error: function (e){
             console.log(e);

@@ -53,40 +53,28 @@
         #search .background-image:hover{
             cursor: pointer;
         }
-
-        .navlogin{
-            margin-left: 620px;
+        .fixTable_wrap {
+            height: 300px;
+            overflow: auto;
         }
 
-
-        #navmenu {
-            color: #000000;
-            font-size: 1.6em;
-        }
-
-        #navbarall{
-            position: fixed;
+        .fixTable_wrap thead th {
+            position: sticky;
             top: 0;
-            width: 100%;
-            z-index: 1000;
-            display: flex; /* Flexbox 사용 */
-            justify-content: space-between; /* 요소를 동일한 간격으로 분산 배치 */
-            align-items: center; /* 요소를 수직 가운데 정렬 */
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(3px);
-            box-shadow: 2px 7px 15px 8px rgba(192, 185, 185, 0.3);
-        }
-        .uplogin {
-            color: rgb(119, 119, 127);
-            margin: 0;
-            margin-top: 15px;
+            z-index: 1;
         }
 
-        .upwrite {
-            color: rgb(119, 119, 127);
-            margin: 0;
-            margin-top: 15px;
+        .fixTable_wrap tbody {
+            overflow-y: auto;
+            max-height: calc(100% - 40px);
+        }
+        .fixTable_wrap tbody::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .fixTable_wrap tbody::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 4px;
         }
 
     </style>
@@ -94,169 +82,242 @@
 <body data-bs-spy="scroll" data-bs-target="#navbar-example">
 <%@ include file="../include/header.jsp"%>
 <!-- ########################################################################################################################### -->
-<div class="container mt-5">
-    <main>
-        <div class="py-5 text-center">
-            <h2>관리자 페이지</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+            <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="sidebarMenuLabel">Company name</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
+                        <span>Admin menu</span>
+                        <a class="link-secondary" href="#" aria-label="Add a new report">
+                            <svg class="bi"><use xlink:href="#plus-circle"></use></svg>
+                        </a>
+                    </h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2 active dashboard-link" aria-current="page" href="#">
+                                <svg class="bi"><use xlink:href="#house-fill"></use></svg>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2 userlist-link" href="#">
+                                <svg class="bi"><use xlink:href="#people"></use></svg>
+                                User List
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2 notice-link" href="#">
+                                <svg class="bi"><use xlink:href="#people"></use></svg>
+                                Notice
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
+        <%--사이드바--%>
 
-        <br>
-<%--        <table border="1" frame="hsides" role="rows" id="userListTable">
-            <tr>
-                <th>이름</th>
-                <th>아이디</th>
-                <th>비밀번호</th>
-            </tr>
-
-            <!-- 동적 처리 -->
-        </table>
-
-        <!-- 페이징 처리 -->
-        <div id="userPagingDiv" >~~~</div>--%>
-
-        <h4 class="mb-3">
-            <span class="text-primary">유저 리스트</span>
-        </h4>
-        <div class="border border-primary-subtle rounded p-3 table-responsive small">
-            <input type="hidden" name="userPagingPg" id="userPagingPg" value="1">
-            <table class="table table-striped table-sm" role="rows" id="userListTable">
-                <thead>
-                    <tr>
-                        <th scope="col">이름</th>
-                        <th scope="col">아이디</th>
-                        <th scope="col">비밀번호</th>
-                        <th scope="col">email</th>
-                        <th scope="col">휴대전화</th>
-                        <th scope="col">가입날짜</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
-            <div id="userPagingDiv" ></div>
-        </div>
-
-
-        <div class="row">
-            <div class="col-md-6"> <!-- 왼쪽 영역 -->
-                <h3 class="mb-3">대시 보드
-                </h3>
-                <div class="border border-primary-subtle rounded p-3">
-                    <div class="mb-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-auto">
-                                <canvas id="myChart" width="550" height="500"></canvas>
-                            </div>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="py-5 text-center">
+                <h2>관리자 페이지</h2>
+            </div>
+            <br>
+            <div class="userlist-section" style="display: none;"> <%--유저 리스트--%>
+                <div class="border border-primary-subtle rounded p-3 table-responsive small">
+                    <input type="hidden" name="userPagingPg" id="userPagingPg" value="1">
+                    <div class="d-flex">
+                        <div class="me-2 " style="width:150px">
+                            <select class="form-select" id="search-input">
+                                <option id="title" value="name">이름</option>
+                                <option id="content" value="userId">아이디</option>
+                                <option id="writer" value="email">email</option>
+                            </select>
                         </div>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" id="search-value" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" id="search-btn" type="submit">Search</button>
+                        </form>
                     </div>
-                    <hr>
+                    <div class="fixTable_wrap" >
+                        <table class="table table-striped table-sm" role="rows" id="userListTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">이름</th>
+                                    <th scope="col">아이디</th>
+                                    <th scope="col">비밀번호</th>
+                                    <th scope="col">email</th>
+                                    <th scope="col">휴대전화</th>
+                                    <th scope="col">가입날짜</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+<%--                    <div id="userPagingDiv" ></div>--%>
+                </div>
+            </div>
 
-                    <div class="mb-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-auto">
-                                <canvas id="myChart2" width="550" height="500"></canvas>
+            <div class="row">
+                <div class="dashboard-section" style="display: none;">
+                    <div class="border border-primary-subtle rounded p-3">
+                        <div class="mb-3">
+                            <div class="row align-items-center">
+                                <div class="col-md-auto">
+                                    <div class="py-5 text-center">
+                                        <h4>게시물 카테고리 차트</h4>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <canvas id="myChart3" width="350" height="300"></canvas>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <canvas id="myChart4" width="350" height="300"></canvas>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <canvas id="myChart5" width="350" height="300"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <br>
 
-            <div class="col-md-6"> <!-- 오른쪽 영역 -->
+                <div class="col-md-6 dashboard-section" style="display: none;"> <!-- 대시보드 영역 -->
 
-                <h4 class="mb-3">
-                    <span class="text-primary">신고 리스트</span>
-                </h4>
-                <div class="border border-primary-subtle rounded p-3">
-                    <div class="accordion accordion-flush" id="accordion2">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                    모두보기
-                                </button>
-                            </h2>
-                            <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordion2">
-                                <div class="accordion-body">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <span><svg class="rounded-circle border center" width="32" height="32" viewBox="0 0 64 64" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="64" height="64" fill="hsl(29, 100%, 90%)"></rect><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="32" font-weight="600" fill="black">박</text></svg></span>
-                                            <a href="#">박정연</a>
-                                        </div>
-                                        <div>
-                                            <a href="#">금지</a> /
-                                            <a href="#" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
-                                        </div>
+                    <div class="border border-primary-subtle rounded p-3">
+                        <div class="mb-3">
+                            <div class="row align-items-center">
+                                <div class="col-md-auto">
+                                    <div class="py-5 text-center">
+                                        <h4>게시물 생성 차트</h4>
                                     </div>
-                                    <p>욕설 / 비방</p>
-                                    <hr>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <span><svg class="rounded-circle border center" width="32" height="32" viewBox="0 0 64 64" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="64" height="64" fill="hsl(29, 100%, 90%)"></rect><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="32" font-weight="600" fill="black">김</text></svg></span>
-                                            <a href="#">김태진</a>
-                                        </div>
-                                        <div>
-                                            <a href="#">금지</a> /
-                                            <a href="#" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
-                                        </div>
-                                    </div>
-                                    <p>광고 홍보</p>
-                                    <hr>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <span><svg class="rounded-circle border center" width="32" height="32" viewBox="0 0 64 64" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="64" height="64" fill="hsl(29, 100%, 90%)"></rect><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="32" font-weight="600" fill="black">이</text></svg></span>
-                                            <a href="#">이동우</a>
-                                        </div>
-                                        <div>
-                                            <a href="#">금지</a> /
-                                            <a href="#" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
-                                        </div>
-                                    </div>
-                                    <p>음란성 게시물 배포</p>
+                                    <canvas id="myChart" width="550" height="500"></canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <div class="col-md-6 dashboard-section" style="display: none;">
+                    <div class="border border-primary-subtle rounded p-3">
+                        <div class="mb-3">
+                            <div class="row align-items-center">
+                                <div class="col-md-auto">
+                                    <div class="py-5 text-center">
+                                        <h4>신규 가입자 차트</h4>
+                                    </div>
+                                    <canvas id="myChart2" width="550" height="500"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                <h4 class="mb-3 mt-3">
-                    <span class="text-primary">공지사항</span>
-                    <button class="btn btn-primary btn-sm" type="submit">새글쓰기</button>
-                </h4>
-                <div class="border border-primary-subtle rounded p-3">
-                    <div class="d-grid gap-2">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="#" class="font-large">공지사항1</a>
-                            <div>
-                                <a href="#">수정</a> /
-                                <a href="#" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
+                <div class="col-md-6 notice-section" style="display: none;"> <!-- 오른쪽 영역 -->
+                    <h4 class="mb-3">
+                        <span class="text-primary">신고 리스트</span>
+                    </h4>
+                    <div class="border border-primary-subtle rounded p-3">
+                        <div class="accordion accordion-flush" id="accordion2">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                        모두보기
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordion2">
+                                    <div class="accordion-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <span><svg class="rounded-circle border center" width="32" height="32" viewBox="0 0 64 64" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="64" height="64" fill="hsl(29, 100%, 90%)"></rect><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="32" font-weight="600" fill="black">박</text></svg></span>
+                                                <a href="#">박정연</a>
+                                            </div>
+                                            <div>
+                                                <a href="#">금지</a> /
+                                                <a href="#" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
+                                            </div>
+                                        </div>
+                                        <p>욕설 / 비방</p>
+                                        <hr>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <span><svg class="rounded-circle border center" width="32" height="32" viewBox="0 0 64 64" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="64" height="64" fill="hsl(29, 100%, 90%)"></rect><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="32" font-weight="600" fill="black">김</text></svg></span>
+                                                <a href="#">김태진</a>
+                                            </div>
+                                            <div>
+                                                <a href="#">금지</a> /
+                                                <a href="#" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
+                                            </div>
+                                        </div>
+                                        <p>광고 홍보</p>
+                                        <hr>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <span><svg class="rounded-circle border center" width="32" height="32" viewBox="0 0 64 64" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="64" height="64" fill="hsl(29, 100%, 90%)"></rect><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="32" font-weight="600" fill="black">이</text></svg></span>
+                                                <a href="#">이동우</a>
+                                            </div>
+                                            <div>
+                                                <a href="#">금지</a> /
+                                                <a href="#" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
+                                            </div>
+                                        </div>
+                                        <p>음란성 게시물 배포</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <p class="font-large mb-0">공지사항 내용</p>
-                        <hr>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="#" class="font-large">공지사항2</a>
-                            <div>
-                                <a href="#">수정</a> /
-                                <a href="#" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 notice-section" style="display: none;"> <!-- 오른쪽 영역 -->
+                    <h4 class="mb-3">
+                        <span class="text-primary">공지사항</span>
+                        <button class="btn btn-primary btn-sm" type="submit">새글쓰기</button>
+                    </h4>
+                    <div class="border border-primary-subtle rounded p-3">
+                        <div class="d-grid gap-2">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="#" class="font-large">공지사항1</a>
+                                <div>
+                                    <a href="#">수정</a> /
+                                    <a href="#" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
+                                </div>
                             </div>
-                        </div>
-                        <p class="font-large mb-0">공지사항 내용</p>
-                        <hr>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="#" class="font-large">공지사항3</a>
-                            <div>
-                                <a href="#">수정</a> /
-                                <a href="#" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
+                            <p class="font-large mb-0">공지사항 내용</p>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="#" class="font-large">공지사항2</a>
+                                <div>
+                                    <a href="#">수정</a> /
+                                    <a href="#" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
+                                </div>
                             </div>
+                            <p class="font-large mb-0">공지사항 내용</p>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="#" class="font-large">공지사항3</a>
+                                <div>
+                                    <a href="#">수정</a> /
+                                    <a href="#" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
+                                </div>
+                            </div>
+                            <p class="font-large mb-0">공지사항 내용</p>
+                            <button class="btn btn-outline-*">모두보기</button>
                         </div>
-                        <p class="font-large mb-0">공지사항 내용</p>
-                        <button class="btn btn-outline-*">모두보기</button>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -267,185 +328,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jQuery.com/jquery-3.7.1.min.js"></script>
-<script>
-    function loadUserList(pg) {
-        $.ajax({
-            type: 'POST',
-            url: '/admin/managerPage/getUserList',
-            data: {pg: pg}, // 클릭한 페이징 번호를 사용하여 데이터 요청
-            dataType: 'json',
-            success: function (data) {
-                console.log(JSON.stringify(data));
-                // 사용자 리스트 표시
-                var userListTable = $('#userListTable tbody');
-                userListTable.empty();
-                $.each(data.list, function (index, items) {
-                    var result = `<tr>`
-                        + `<td >` + items.name + `</td>`
-                        + `<td ><a href="#" class="idA">` + items.userid + `</a></td>`
-                        + `<td >` + items.pwd + `</td>` + `</a></td>`
-                        + `<td >` + items.email + `</td>` + `</a></td>`
-                        + `<td >` + items.phone + `</td>` + `</a></td>`
-                        + `<td >` + items.hiredate + `</td>`
-                        + `</tr>`;
-                    userListTable.append(result);
-                });
+<script src="${pageContext.request.contextPath}/js/manager/manager.js"></script>
 
-                // 페이징 처리
-                $('#userPagingDiv').html(data.managerPaging.pagingHTML);
-            },
-            error: function (e) {
-                console.log(e);
-            }
-        });
-    }
-
-    $(document).ready(function() {
-        $('#userPagingDiv').on('click', '.paging', function() {
-            var pg = $(this).text();
-            loadUserList(pg);
-        });
-
-        // 페이지 로드 시 초기 데이터 로딩
-        loadUserList($('#userPagingPg').val());
-
-        $(function() {
-            $.ajax({
-                type: 'POST',
-                url: '/admin/managerPage/boardUpload',
-                dataType: 'json',
-                <%--data:${signupData},--%>
-                success: function(data) {
-                    console.log(JSON.stringify(data));
-
-                    var labelList = [];
-                    var valueList = [];
-
-                    for (var i = 0; i < data.length; i++) {
-                        var d = data[i];
-                        console.log(d.date);
-                        console.log(d.upload);
-                        labelList.push(d.date);
-                        valueList.push(d.upload);
-                    }
-
-                    const ctx = document.getElementById('myChart').getContext('2d');
-                    var data = {
-                        labels: labelList,
-                        datasets: [{
-                            label: '게시물 업로드 개수',
-                            data: valueList,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    };
-
-                    var myChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: data,
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            }
-                        }
-                    });
-                },
-                error: function(e) {
-                    console.log(e);
-                }
-            });
-        });
-
-
-    // ************************************************************************************************
-
-        $(function() {
-            $.ajax({
-                type: 'POST',
-                url: '/admin/managerPage/signupCounts',
-                dataType: 'json',
-                <%--data:${signupData},--%>
-                success: function(data) {
-                    console.log(JSON.stringify(data));
-
-                    var labelList = [];
-                    var valueList = [];
-
-                    for (var i = 0; i < data.length; i++) {
-                        var d = data[i];
-                        labelList.push(d.date);
-                        valueList.push(d.signups);
-                    }
-
-                    const ctx2 = document.getElementById('myChart2').getContext('2d');
-                    var data = {
-                        labels: labelList,
-                        datasets: [{
-                            label: '가입자',
-                            data: valueList,
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            backgroundColor: 'rgba(255, 0, 0, 0.5)',
-                            yAxisID: 'y',
-                        }]
-                    };
-
-                    const myChart2 = new Chart(ctx2, {
-                        type: 'line',
-                        data: data,
-                        options: {
-                            responsive: true,
-                            interaction: {
-                                mode: 'index',
-                                intersect: false,
-                            },
-                            stacked: false,
-                            plugins: {
-                                title: {
-                                    display: true,
-                                }
-                            },
-                            scales: {
-                                y: {
-                                    type: 'linear',
-                                    display: true,
-                                    position: 'left',
-                                },
-                                y1: {
-                                    type: 'linear',
-                                    display: true,
-                                    position: 'right',
-                                    grid: {
-                                        drawOnChartArea: false,
-                                    },
-                                },
-                            }
-                        },
-                    });
-                },
-                error: function(e) {
-                    console.log(e);
-                }
-            });
-        });
-    });
-
-</script>
 </body>
 </html>
