@@ -53,40 +53,28 @@
         #search .background-image:hover{
             cursor: pointer;
         }
-
-        .navlogin{
-            margin-left: 620px;
+        .fixTable_wrap {
+            height: 300px;
+            overflow: auto;
         }
 
-
-        #navmenu {
-            color: #000000;
-            font-size: 1.6em;
-        }
-
-        #navbarall{
-            position: fixed;
+        .fixTable_wrap thead th {
+            position: sticky;
             top: 0;
-            width: 100%;
-            z-index: 1000;
-            display: flex; /* Flexbox 사용 */
-            justify-content: space-between; /* 요소를 동일한 간격으로 분산 배치 */
-            align-items: center; /* 요소를 수직 가운데 정렬 */
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(3px);
-            box-shadow: 2px 7px 15px 8px rgba(192, 185, 185, 0.3);
-        }
-        .uplogin {
-            color: rgb(119, 119, 127);
-            margin: 0;
-            margin-top: 15px;
+            z-index: 1;
         }
 
-        .upwrite {
-            color: rgb(119, 119, 127);
-            margin: 0;
-            margin-top: 15px;
+        .fixTable_wrap tbody {
+            overflow-y: auto;
+            max-height: calc(100% - 40px);
+        }
+        .fixTable_wrap tbody::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .fixTable_wrap tbody::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 4px;
         }
 
     </style>
@@ -94,7 +82,7 @@
 <body data-bs-spy="scroll" data-bs-target="#navbar-example">
 <%@ include file="../include/header.jsp"%>
 <!-- ########################################################################################################################### -->
-<div class="container-fluid mt-5">
+<div class="container-fluid">
     <div class="row">
         <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
             <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
@@ -155,34 +143,45 @@
                             <button class="btn btn-outline-success" id="search-btn" type="submit">Search</button>
                         </form>
                     </div>
-                    <table class="table table-striped table-sm" role="rows" id="userListTable">
-                        <thead>
-                            <tr>
-                                <th scope="col">이름</th>
-                                <th scope="col">아이디</th>
-                                <th scope="col">비밀번호</th>
-                                <th scope="col">email</th>
-                                <th scope="col">휴대전화</th>
-                                <th scope="col">가입날짜</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                    <div id="userPagingDiv" ></div>
+                    <div class="fixTable_wrap" >
+                        <table class="table table-striped table-sm" role="rows" id="userListTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">이름</th>
+                                    <th scope="col">아이디</th>
+                                    <th scope="col">비밀번호</th>
+                                    <th scope="col">email</th>
+                                    <th scope="col">휴대전화</th>
+                                    <th scope="col">가입날짜</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+<%--                    <div id="userPagingDiv" ></div>--%>
                 </div>
             </div>
 
             <div class="row">
                 <div class="dashboard-section" style="display: none;">
-                    <div class="border border-primary-subtle rounded p-3 table-responsive small">
-                        <div class="border border-primary-subtle rounded p-3">
-                            <div class="mb-3">
-                                <div class="row align-items-center">
-                                    <div class="col-md-auto">
-                                        <canvas id="myChart3" width="350" height="300"></canvas>
-                                        <canvas id="myChart4" width="350" height="300"></canvas>
-                                        <canvas id="myChart5" width="350" height="300"></canvas>
+                    <div class="border border-primary-subtle rounded p-3">
+                        <div class="mb-3">
+                            <div class="row align-items-center">
+                                <div class="col-md-auto">
+                                    <div class="py-5 text-center">
+                                        <h4>게시물 카테고리 차트</h4>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <canvas id="myChart3" width="350" height="300"></canvas>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <canvas id="myChart4" width="350" height="300"></canvas>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <canvas id="myChart5" width="350" height="300"></canvas>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -197,6 +196,9 @@
                         <div class="mb-3">
                             <div class="row align-items-center">
                                 <div class="col-md-auto">
+                                    <div class="py-5 text-center">
+                                        <h4>게시물 생성 차트</h4>
+                                    </div>
                                     <canvas id="myChart" width="550" height="500"></canvas>
                                 </div>
                             </div>
@@ -209,6 +211,9 @@
                         <div class="mb-3">
                             <div class="row align-items-center">
                                 <div class="col-md-auto">
+                                    <div class="py-5 text-center">
+                                        <h4>신규 가입자 차트</h4>
+                                    </div>
                                     <canvas id="myChart2" width="550" height="500"></canvas>
                                 </div>
                             </div>

@@ -190,6 +190,106 @@ $(function() {
         });
     }
 
+    function loadDashboard3(url){
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'json',
+            success: function(data) {
+                var labelList = [];
+                var valueList = [];
+                const colors = [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ];
+
+                for (var i = 0; i < data.length; i++) {
+                    var d = data[i];
+                    labelList.push(d.projectType);
+                    valueList.push(d.projectType_count);
+                }
+
+                const ctx = document.getElementById('myChart3').getContext('2d');
+                var data = {
+                    labels: labelList,
+                    datasets: [{
+                        label: '카테고리1',
+                        data: valueList,
+                        backgroundColor: colors,
+                    }]
+                };
+
+                const myChart3 = new Chart(ctx, {
+                    type: 'pie',
+                    data: data,
+                    options: {
+                        title: {
+                            display: true,
+                            text: ''
+                        }
+                    }
+                });
+            },
+            error: function(e) {
+                console.log(e);
+            }
+        });
+    }
+
+    function loadDashboard4(url){
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'json',
+            success: function(data) {
+                var labelList = [];
+                var valueList = [];
+                const colors = [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ];
+
+                for (var i = 0; i < data.length; i++) {
+                    var d = data[i];
+                    labelList.push(d.projectField);
+                    valueList.push(d.projectField_count);
+                }
+
+                const ctx = document.getElementById('myChart4').getContext('2d');
+                var data = {
+                    labels: labelList,
+                    datasets: [{
+                        label: '카테고리2',
+                        data: valueList,
+                        backgroundColor: colors,
+                    }]
+                };
+
+                const myChart4 = new Chart(ctx, {
+                    type: 'pie',
+                    data: data,
+                    options: {
+                        title: {
+                            display: true,
+                            text: ''
+                        }
+                    }
+                });
+            },
+            error: function(e) {
+                console.log(e);
+            }
+        });
+    }
+
 
     $(document).ready(function() {
         // 대시보드 섹션을 보여줍니다.
@@ -202,6 +302,8 @@ $(function() {
         $(function() {
             loadDashboard1('/admin/managerPage/boardUpload');
             loadDashboard2('/admin/managerPage/signupCounts');
+            loadDashboard3('/admin/managerPage/pichart1');
+            loadDashboard4('/admin/managerPage/pichart2');
         });
 
         $(".userlist-link").click(function(e) {
@@ -238,6 +340,8 @@ $(function() {
             $(function() {
                 loadDashboard1('/admin/managerPage/boardUpload');
                 loadDashboard2('/admin/managerPage/signupCounts');
+                loadDashboard3('/admin/managerPage/pichart1');
+                loadDashboard4('/admin/managerPage/pichart2');
             });
         });
 

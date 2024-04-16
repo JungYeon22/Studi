@@ -13,4 +13,6 @@ import java.util.Map;
 public class ManagerData {
     private List<Map<String, Object>> signupCounts;
     private List<Map<String, Object>> boardCounts;
+    private List<Map<String, Object>> typeCounts;
+    private List<Map<String, Object>> fielddCounts;
 }
