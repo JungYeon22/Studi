@@ -3,11 +3,13 @@ $(function(){
     $('#boardInputFormBtn').click(function(){
 
 
+
         $('#subjectDiv').empty();
         $('#userTotCntDiv').empty();
 
-
-        if($('#subject').val()==''){
+        if($('#UserId').val()==''){
+            alert("로그인 후 이용가능합니다.");
+        }else if($('#subject').val()==''){
             $('#subjectDiv').text('제목을 입력하세요');
 
         }else if($('#userTotCnt').val()==''){

@@ -3,12 +3,13 @@
 $(function (){
     $.ajax({
         type:'post',
+        data:{'pg':$('#pg').val()},
         url:'boardListGet',
         dataType:'json',
         success:function(data){
             /*alert('글 불러오기 완료');*/
             console.log(JSON.stringify(data));
-            $.each(data,function(index,items){
+            $.each(data.list,function(index,items){
 
 
                 var date = new Date(items.date);
@@ -55,7 +56,7 @@ $(function (){
                     +`<h6 class="mb-0 ms-3" >`+items.subject+`</h6><h6 class="mb-0 position-absolute top-50 end-0 translate-middle-y me-5">`+userCnt+`</h6>`
                 ;
 
-                tagInsert(result,items);
+                tagInsert(result,items,data.boardPaging);
 
             });
 
@@ -69,7 +70,7 @@ $(function (){
     });
 });
 
-function tagInsert(result, items){
+function tagInsert(result, items,boardPaging){
     $.ajax({
         type:'post',
         data:'boardid='+items.boardid,
@@ -104,6 +105,7 @@ function tagInsert(result, items){
                     +`<br>`;
             }
             $('#list-group').append(result);
+            $('#pagingDiv').html(boardPaging);
         },
         error:function(e){
             console.log(e);
@@ -204,7 +206,8 @@ function filterSelect(){
     $('#list-group').empty();
     $.ajax({
         data:{'type':type,
-            'field':field},
+            'field':field
+            },
         type:'post',
         url:'boardListGet1',
         dataType:'json',
@@ -319,6 +322,7 @@ function tagInsert1(result, items){
                     +`<br>`;
             }
             $('#list-group').append(result);
+
         },
         error:function(e){
             console.log(e);
