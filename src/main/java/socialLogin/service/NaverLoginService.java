@@ -6,18 +6,21 @@ import com.github.scribejava.core.model.OAuthRequest;
 import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth20Service;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import socialLogin.dao.SocialLoginDAO;
+import socialLogin.bean.NaverLoginDTO;
+import socialLogin.dao.SocialLoginRepo;
+import user.bean.UserDTO;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 public class NaverLoginService {
+    @Autowired
+    private SocialLoginRepo socialLoginDAO;
     public final static String CLIENT_ID = "VBE7cII0y9YD9bpkACFu";
     public final static String CLIENT_SECRET = "i_i_9KVyxJ";
     public final static String SESSION_STATE = "state";
@@ -74,5 +77,12 @@ public class NaverLoginService {
         Response response = request.send();
 
         return response.getBody();  //응답 : 사용자의 정보들
+    }
+
+    public void checkUserAndSave(NaverLoginDTO user) {
+        UserDTO userDTO = socialLoginDAO.isExistSocialLogin(user);
+        if(userDTO == null){
+            socialLoginDAO.saveSocialLogin(user);
+        }
     }
 }

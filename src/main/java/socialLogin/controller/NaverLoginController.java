@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,10 +24,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 @Controller
-@RequiredArgsConstructor
 @RequestMapping(value = "/user")
 public class NaverLoginController {
-    private final NaverLoginService naverLoginService;
+    @Autowired
+    private NaverLoginService naverLoginService;
 
     @GetMapping("naverLogin")
     @ResponseBody
@@ -39,12 +40,15 @@ public class NaverLoginController {
     public String Oauth2Login(@RequestParam String code, @RequestParam String state, HttpSession session, Model model) throws IOException, JsonParseException {
         OAuth2AccessToken oauthToken;
         oauthToken = naverLoginService.getAccessToken(session, code, state);
-        String[] imsi = oauthToken.toString().substring(31).split(",");
-        String accessToken = imsi[0];
+        System.out.println(oauthToken);
+//        String[] imsi = oauthToken.toString().substring(31).split(",");
+//        String accessToken = imsi[0];
 
         /*네이버 프로필 정보 가져오기*/
         /* 응답 받은 response body의 json정보 추출*/
+        /* 해당 유저의 고유 id, 이름이 암호화 되서 나옴*/
         String result = naverLoginService.getUserProfile(oauthToken);
+        System.out.println(result);
         Object obj = null;
         JsonParser parser = new JsonParser();
 
@@ -56,15 +60,19 @@ public class NaverLoginController {
 
         JsonObject jobj = (JsonObject) obj;
         JsonObject res_obj = (JsonObject) jobj.get("response");
+        System.out.println(res_obj);
 
         NaverLoginDTO user = new NaverLoginDTO();
-
         String userId = res_obj.get("email").toString().split("@")[0];
-        user.setUserId(userId);
-        user.setUserId( res_obj.get("email").toString());
-        user.setName(res_obj.get("name").toString());
-        user.setAge(res_obj.get("age").toString());
+
+        user.setUserId(userId.replaceAll("\"", ""));
+        user.setEmail( res_obj.get("email").toString().replaceAll("\"", ""));
+        user.setName(res_obj.get("name").toString().replaceAll("\"", ""));
+        user.setAge(res_obj.get("age").toString().replaceAll("\"", ""));
+        user.setMobile(res_obj.get("mobile").toString().replaceAll("\"", ""));
         user.setLoginType("naver");
+
+        naverLoginService.checkUserAndSave(user);
 
         String access_token = oauthToken.getAccessToken();
         String str_result = access_token.replaceAll("\\\"","");
