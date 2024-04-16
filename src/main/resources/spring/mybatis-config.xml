@@ -9,5 +9,8 @@
 <!--        <typeAlias type="edu.kh.comm.chat.model.vo.ChatRoom" alias="chatRoom"/>-->
 <!--        <typeAlias type="edu.kh.comm.chat.model.vo.ChatRoomJoin" alias="chatRoomJoin"/>-->
 <!--        <typeAlias type="edu.kh.comm.chat.model.vo.ChatMessage" alias="chatMessage"/>-->
+        <typeAlias type="chatWebsocket.bean.ChatMessageDTO" alias="chatMessage"/>
+        <typeAlias type="chatWebsocket.bean.ChatRoomDTO" alias="chatRoom"/>
+        <typeAlias type="chatWebsocket.bean.ChatRoomJoinDTO" alias="chatRoomJoin"/>
     </typeAliases>
 </configuration>

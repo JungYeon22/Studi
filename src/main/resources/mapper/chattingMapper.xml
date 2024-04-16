@@ -2,27 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="chattingMapper">
 
-    <resultMap id="chatroom_rm" type="ChatRoomDTO">
-        <id property="chatRoomNo" column="CHAT_ROOM_NO"/>
-        <result property="title" column="TITLE"/>
-        <result property="memberNo" column="MEMBER_NO"/>
-    </resultMap>
+<resultMap id="chatroom_rm" type="chatWebsocket.bean.ChatRoomDTO">
+    <id property="chatRoomNo" column="CHATROOMNO"/>
+    <result property="title" column="TITLE"/>
+    <result property="memberNo" column="MEMBERNO"/>
+</resultMap>
 
-    <select id="selectChatRoomList" resultMap="chatroom_rm">
-        SELECT chat_room_no, title, member_no
-        FROM chat_room
-        WHERE status = 'Y'
-        ORDER BY chat_room_no DESC;
-    </select>
+<select id="selectChatRoomList" resultMap="chatroom_rm">
+    SELECT CHATROOMNO, TITLE, MEMBERNO FROM CHATROOM WHERE STATUS = 'Y' ORDER BY CHATROOMNO DESC;
+</select>
 
-    <insert id="openChatRoom" useGeneratedKeys="true">
-
-        <selectKey keyProperty="chatRoomNo" resultType="_int" order="BEFORE">
-            SELECT SEQ_CR_NO.NEXTVAL FROM DUAL
-        </selectKey>
-
-
-        INSERT INTO CHAT_ROOM VALUES
-        (#{chatRoomNo}, #{title}, DEFAULT, #{memberNo})
+    <insert id="openChatRoom" useGeneratedKeys="true" keyProperty="chatRoomNo" parameterType="chatWebsocket.bean.ChatRoomDTO">
+        INSERT INTO CHATROOM (TITLE, STATUS, MEMBERNO)
+        VALUES (#{title}, 'Y', #{memberNo});
     </insert>
+
+    <insert id="insertMessage">
+        INSERT INTO CHATMESSAGE
+        VALUES(SEQCMNO.NEXTVAL, #{message}, DEFAULT, #{chatRoomNo}, #{memberNo})
+    </insert>
+
 </mapper>

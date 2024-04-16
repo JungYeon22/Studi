@@ -18,7 +18,7 @@
     <ul>
         <c:forEach var="chatRoom" items="${chatRoomList}">
             <li>
-                <a href="/chat/room/${chatRoom.chatRoomNo}">${chatRoom.title}</a>
+                <a href="<c:url value='/chat/chatRoom/${chatRoom.chatRoomNo}' />">${chatRoom.title}</a>
                 <!-- 각 채팅방의 제목과 해당 채팅방에 입장할 수 있는 링크를 제공 -->
             </li>
         </c:forEach>
@@ -32,20 +32,50 @@
 <div class="border border-primary-subtle rounded p-3">
     <div>
         <h2 class="accordion-header">
-            <button type="button" id="createChatBtn">
+            <input type="text" id="userId" value="${sessionScope.UserDTO.getUserId}">
+            <button type="button" class="createChatBtn">
                 채팅방 생성
             </button>
         </h2>
-
     </div>
+</div>
 <script>
-    const button = document.querySelector('#createChatBtn');
-    button.addEventListener('click', function() {
-        // 이동할 URL 지정
-        const url = '/openChatRoom';
+    var contextPath = "<%= request.getContextPath() %>";
+</script>
 
-        // 지정된 URL로 이동
-        location.href = url;
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.createChatBtn').on('click', function() {
+            var title = prompt("채팅방 제목을 입력하세요:");
+            if (title !== null && title.trim() !== "") {
+                console.log("전달된 제목:", title); // 콘솔에 제목 값 출력
+                var encodedTitle = encodeURIComponent(title);
+                // contextPath 변수를 사용하여 URL 구성
+                var url = contextPath + '/chat/openChatRoom?title=' + encodedTitle;
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+                    success: function(response) {
+                        if (response.success) {
+                            // 채팅방 번호를 받아옵니다.
+                            var chatRoomNo = response.chatRoomNo;
+                            // 생성된 채팅방으로 이동합니다.
+                            location.href = '/chat/chatRoom' + chatRoomNo;
+                        } else {
+                            alert('실패');
+
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        alert('서버 오류가 발생했습니다.');
+                    }
+                });
+            } else {
+                alert("채팅방 제목을 입력해주세요.");
+            }
+        });
     });
 </script>
 </body>

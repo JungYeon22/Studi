@@ -11,6 +11,7 @@ public interface ChatService {
     // 채팅방 만들기
     int openChatRoom(ChatRoomDTO room);
 
+
     // 채팅방 입장 + 내용 얻어오기
     List<ChatMessageDTO> joinChatRoom(ChatRoomJoinDTO join);
 

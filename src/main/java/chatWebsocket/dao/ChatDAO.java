@@ -3,13 +3,17 @@
     import chatWebsocket.bean.ChatMessageDTO;
     import chatWebsocket.bean.ChatRoomDTO;
     import chatWebsocket.bean.ChatRoomJoinDTO;
+    import org.apache.ibatis.annotations.Mapper;
     import org.mybatis.spring.SqlSessionTemplate;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Repository;
+    import org.springframework.transaction.annotation.Transactional;
 
     import java.util.List;
 
     @Repository
+    @Transactional
+    @Mapper
     public class ChatDAO {
 
         @Autowired
@@ -27,11 +31,16 @@
          * @return chatRoomNo
          */
         public int openChatRoom(ChatRoomDTO room) {
-
-            int result = sqlSession.insert("chattingMapper.openChatRoom", room);
-
-            if(result > 0) {return room.getChatRoomNo();}
-            else {
+            try {
+                int result = sqlSession.insert("chattingMapper.openChatRoom", room);
+                if (result > 0) {
+                    return room.getChatRoomNo();
+                } else {
+                    return 0;
+                }
+            } catch (Exception e) {
+                // 예외 처리
+                e.printStackTrace();
                 return 0;
             }
         }
@@ -93,4 +102,11 @@
         public int closeChatRoom(int chatRoomNo) {
             return sqlSession.update("chattingMapper.closeChatRoom", chatRoomNo);
         }
+
+//        public ChatRoomDTO getChatRoomInfo(int chatRoomNo) {
+//            // 여기에는 실제 DB 쿼리를 실행하여 채팅방 정보를 가져오는 코드가 들어갑니다.
+//            // 예시로 채팅방 정보를 임시로 생성하여 반환하겠습니다.
+//            return sqlSession.selectOne("chattingMapper.getChatRoomInfo", chatRoomNo);
+//        }
     }
+

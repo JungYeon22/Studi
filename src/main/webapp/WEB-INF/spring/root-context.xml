@@ -20,13 +20,15 @@
     <context:component-scan base-package="freeBoard.*"/>
     <context:component-scan base-package="projectTeam.*"/>
     <context:component-scan base-package="chatWebsocket.*"/>
-
     <!-- DAO와 Mapper.xml 연결-->
     <mybatis-spring:scan base-package="user.dao"/>
     <mybatis-spring:scan base-package="board.dao"/>
     <mybatis-spring:scan base-package="manager.dao"/>
     <mybatis-spring:scan base-package="freeBoard.dao"/>
     <mybatis-spring:scan base-package="chatWebsocket.dao"/>
+<!--    <mybatis-spring:scan base-package="chatWebsocket.service"/>-->
+<!--    <mybatis-spring:scan base-package="chatWebsocket.bean"/>-->
+
 
     <!-- 파일 모두 생성했는지 확인 -->
 <!--    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

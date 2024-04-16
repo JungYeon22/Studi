@@ -3,11 +3,13 @@ package user.bean;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Setter @Getter
 @ToString
+
 public class UserDTO {
 
     private String name;
