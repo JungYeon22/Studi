@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <a class="navbar-brand ms-5" id="imageA" href="${pageContext.request.contextPath}/"><img src="/image/sutdi.png" width="80" height="50"></a>
 
-            <a class="navbar-brand ms-5 menuItem" href="${pageContext.request.contextPath}/board/boardListMain"><strong>게시판</strong></a>
+            <a class="navbar-brand ms-5 menuItem" href="${pageContext.request.contextPath}/board/boardListMain?pg=1"><strong>게시판</strong></a>
             <a class="navbar-brand ms-5 menuItem" href="${pageContext.request.contextPath}/freeBoard/freeBoardList"><strong>라운지</strong></a>
             <a class="navbar-brand ms-5 menuItem" href="${pageContext.request.contextPath}/user/myPage"><strong>마이 페이지</strong></a>
 
@@ -23,8 +23,13 @@
                             ${sessionScope.userDTO.name}님
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">회원정보수정</a></li>
+                            <c:if test="${sessionScope.userDTO.userId != 'admin'}">
+                            <li><a class="dropdown-item" href="/user/updateForm">회원정보수정</a></li>
                             <li><a class="dropdown-item" href="#">나의 프로젝트</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.userDTO.userId == 'admin'}">
+                            <li id="adminMenu"><a class="dropdown-item" href="/admin/managerPage">관리자 페이지</a></li>
+                            </c:if>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -47,11 +52,11 @@
         </div>
     </nav>
 </header>
-
 <script>
     function confirmLogout() {
         if (confirm("정말 로그아웃 하시겠습니까?")) {
             location.href = "<c:url value='/'/>";
         }
     }
+
 </script>

@@ -29,4 +29,12 @@
         select count(*) from user
     </select>
 
+    <select id="getTotalA2" parameterType="java.util.Map" resultType="int">
+        select count(*) from user where ${input} like concat('%', #{value}, '%')
+    </select>
+
+    <select id="getUserList2" parameterType="java.util.Map" resultType="manager.bean.ManagerDTO">
+        select * from user where ${input} like concat('%', #{value}, '%') limit #{startNum}, 3
+    </select>
+
 </mapper>
