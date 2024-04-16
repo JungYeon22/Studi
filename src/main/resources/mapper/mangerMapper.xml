@@ -22,7 +22,7 @@
     </select>
 
     <select id="getUserList" parameterType="int" resultType="manager.bean.ManagerDTO">
-        select * from user limit #{startNum}, 3
+        select * from user
     </select>
 
     <select id="getTotalA" resultType="int">
@@ -34,7 +34,24 @@
     </select>
 
     <select id="getUserList2" parameterType="java.util.Map" resultType="manager.bean.ManagerDTO">
-        select * from user where ${input} like concat('%', #{value}, '%') limit #{startNum}, 3
+        select * from user where ${input} like concat('%', #{value}, '%')
     </select>
 
+    <select id="pichart1" resultType="java.util.Map">
+        SELECT projectType, COUNT(*) AS projectType_count
+        FROM board
+        WHERE DATE >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+        GROUP BY projectType
+        ORDER BY projectType_count DESC
+
+    </select>
+
+    <select id="pichart2" resultType="java.util.Map">
+        SELECT projectField, COUNT(*) AS projectField_count
+        FROM board
+        WHERE DATE >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+        GROUP BY projectField
+        ORDER BY projectField_count DESC
+
+    </select>
 </mapper>

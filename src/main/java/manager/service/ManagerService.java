@@ -10,4 +10,8 @@ public interface ManagerService {
     public Map<String, Object> getUserList(String pg);
 
     public Map<String, Object> getUserList2(Map<String, Object> map);
+
+    List<Map<String, Object>> pichart1();
+
+    List<Map<String, Object>> pichart2();
 }

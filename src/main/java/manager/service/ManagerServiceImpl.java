@@ -38,6 +38,20 @@ public class ManagerServiceImpl implements ManagerService{
         return boardCounts;
     }
 
+    @Override
+    public List<Map<String, Object>> pichart1() {
+        List<Map<String, Object>> pichart1 = managerDAO.pichart1();
+        managerData.setTypeCounts(pichart1);
+        return pichart1;
+    }
+
+    @Override
+    public List<Map<String, Object>> pichart2() {
+        List<Map<String, Object>> pichart2 = managerDAO.pichart2();
+        managerData.setFielddCounts(pichart2);
+        return pichart2;
+    }
+
 
     @Override
     public Map<String, Object> getUserList(String pg) {

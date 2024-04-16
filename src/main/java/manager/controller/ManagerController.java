@@ -61,6 +61,42 @@ public class ManagerController {
         return jsonData;
     }
 
+    @PostMapping(value = "/managerPage/pichart1", produces = "application/json")
+    @ResponseBody
+    public String pichart1(){
+        List<Map<String, Object>> boardCounts = managerService.pichart1();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        String jsonData;
+        try {
+            jsonData = objectMapper.writeValueAsString(boardCounts);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            jsonData = "[]";
+        }
+
+        return jsonData;
+    }
+
+    @PostMapping(value = "/managerPage/pichart2", produces = "application/json")
+    @ResponseBody
+    public String pichart2(){
+        List<Map<String, Object>> boardCounts = managerService.pichart2();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        String jsonData;
+        try {
+            jsonData = objectMapper.writeValueAsString(boardCounts);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            jsonData = "[]";
+        }
+
+        return jsonData;
+    }
+
     @PostMapping(value="/managerPage/getUserList", produces = "application/json")
     @ResponseBody
     public Map<String, Object> getUserList(@RequestParam String pg){
@@ -78,4 +114,5 @@ public class ManagerController {
         map.put("pg", pg);
         return managerService.getUserList2(map);
     }
+
 }
