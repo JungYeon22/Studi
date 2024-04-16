@@ -43,7 +43,7 @@ public class BoardServiceImpl implements BoardService{
     public Map<String,Object> boardListGet(String pg) {
 
         //1페이지당 3개씩
-        int startNum= (Integer.parseInt(pg)*3)-2;
+        int startNum= (Integer.parseInt(pg)*5)-4;
 
 
         List<BoardDTO> list = boardDAO.boardListGet(startNum);
@@ -55,8 +55,8 @@ public class BoardServiceImpl implements BoardService{
 
 
         boardPaging.setCurrentPage(Integer.parseInt(pg));
-        boardPaging.setPageBlock(3);
-        boardPaging.setPageSize(3);
+        boardPaging.setPageBlock(5);
+        boardPaging.setPageSize(5);
         boardPaging.setTotal(total);
         boardPaging.makePagingHTML();
 
@@ -87,5 +87,51 @@ public class BoardServiceImpl implements BoardService{
 
 
         return boardDAO.boardListGet1(map);
+    }
+
+    @Override
+    public BoardDTO boardListGetbyId(String boardid) {
+        return boardDAO.boardListGetbyId(boardid);
+    }
+
+    @Override
+    public void addHit(String boardid) {
+        boardDAO.addHit(boardid);
+    }
+
+    @Override
+    public String boardScrap(String boardid, String userId) {
+        Map<String, String> map = new HashMap<>();
+        map.put("boardid",boardid);
+        map.put("userId",userId);
+        return boardDAO.boardScrap(map);
+    }
+
+    @Override
+    public void addBoardScrap(String boardid, String userId) {
+        Map<String, String> map = new HashMap<>();
+        map.put("boardid",boardid);
+        map.put("userId",userId);
+        boardDAO.addBoardScrap(map);
+    }
+
+    @Override
+    public String removeBoardScrap(String boardid, String userId) {
+        Map<String, String> map = new HashMap<>();
+        map.put("boardid",boardid);
+        map.put("userId",userId);
+        boardDAO.removeBoardScrap(map);
+        return "";
+    }
+
+    @Override
+    public String removeBoard(String boardid, String userId) {
+
+        Map<String, String> map = new HashMap<>();
+        map.put("boardid",boardid);
+        map.put("userId",userId);
+        boardDAO.removeBoardScrap(map);
+        boardDAO.removeBoard(map);
+        return "";
     }
 }

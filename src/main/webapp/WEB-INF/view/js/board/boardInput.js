@@ -27,7 +27,7 @@ $(function(){
                 data: $('#boardInputForm').serialize(),
                 success: function (data) {
                     alert('글쓰기 완료');
-                    location.href = 'boardListMain';
+                    location.href = 'boardListMain?pg=1';
 
                 },
                 error: function (e) {

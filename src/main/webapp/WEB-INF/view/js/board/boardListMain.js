@@ -42,19 +42,55 @@ $(function (){
 
                 if(userTotCnt==userCurCnt){
                     var userCnt="모집 마감("+userTotCnt+"/"+userTotCnt+")";
+
+                    var result=
+                        `<a href="boardListDetail?boardid=`+items.boardid+`" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true" style="background: dimgray">`
+                        +`<div class=" gap-2 w-100 justify-content-between">`
+                        +`<div>`
+                        +`<small class="opacity-50 text-nowrap ms-3">`+items.userId+`</small>&emsp;<small class="opacity-50 text-nowrap">`+hours+`</small>&emsp;<small class="opacity-50 text-nowrap">조회수</small><small class="opacity-50 text-nowrap">`+items.hit+`</small>`
+                    ;
                 }else{
                     var userCnt="모집 중("+userCurCnt+"/"+userTotCnt+")";
+
+                    var result=
+                        `<a href="boardListDetail?boardid=`+items.boardid+`" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true" >`
+                        +`<div class=" gap-2 w-100 justify-content-between">`
+                        +`<div>`
+                        +`<small class="opacity-50 text-nowrap ms-3">`+items.userId+`</small>&emsp;<small class="opacity-50 text-nowrap">`+hours+`</small>&emsp;<small class="opacity-50 text-nowrap">조회수</small><small class="opacity-50 text-nowrap">`+items.hit+`</small>`
+                    ;
                 }
 
 
+                $.ajax({
+                    type:'post',
+                    url:'checkBoardScrap',
+                    async:false,
+                    data:{'boardid':items.boardid,
+                        'userId':items.userId},
+                    dataType:'text',
+                    success:function (data){
+                        console.log(data);
+                        if(data=='non_exist'){
+                            result= result+`<img src="/image/bookmark2.png" id="bookmark"  class="rounded float-end"  alt="bookmark">`
+                        +`<h6 class="mb-0 ms-3" >`+items.subject+`</h6><h6 class="mb-0 position-absolute top-50 end-0 translate-middle-y me-5">`+userCnt+`</h6>`
+                        }else{
+                            result= result+`<img src="/image/bookmark1.png" id="bookmark"  class="rounded float-end"  alt="bookmark">`
+                                +`<h6 class="mb-0 ms-3" >`+items.subject+`</h6><h6 class="mb-0 position-absolute top-50 end-0 translate-middle-y me-5">`+userCnt+`</h6>`
+                        }
 
-                var result=
-                    `<a href="boardListDetail" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true">`
-                    +`<div class=" gap-2 w-100 justify-content-between">`
-                    +`<div>`
-                    +`<small class="opacity-50 text-nowrap ms-3">`+items.userId+`</small>&emsp;<small class="opacity-50 text-nowrap">`+hours+`</small>&emsp;<small class="opacity-50 text-nowrap">조회수</small><small class="opacity-50 text-nowrap">`+items.hit+`</small><img src="/image/icons8-북마크-리본-24.png" class="rounded float-end"  alt="bookmark">`
-                    +`<h6 class="mb-0 ms-3" >`+items.subject+`</h6><h6 class="mb-0 position-absolute top-50 end-0 translate-middle-y me-5">`+userCnt+`</h6>`
-                ;
+
+
+                    },
+                    error:function (e){
+                        console.log(e);
+                    }
+
+                });
+
+
+
+
+
 
                 tagInsert(result,items,data.boardPaging);
 
@@ -111,6 +147,9 @@ function tagInsert(result, items,boardPaging){
             console.log(e);
         }
     });
+
+
+
 }
 
 
@@ -247,19 +286,50 @@ function filterSelect(){
 
                 if(userTotCnt==userCurCnt){
                     var userCnt="모집 마감("+userTotCnt+"/"+userTotCnt+")";
+                    var result=
+                        `<a href="boardListDetail?boardid=`+items.boardid+`" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true" style="background: dimgray">`
+                        +`<div class=" gap-2 w-100 justify-content-between">`
+                        +`<div>`
+                        +`<small class="opacity-50 text-nowrap ms-3">`+items.userId+`</small>&emsp;<small class="opacity-50 text-nowrap">`+hours+`</small>&emsp;<small class="opacity-50 text-nowrap">조회수</small><small class="opacity-50 text-nowrap">`+items.hit+`</small>`
+                    ;
+
                 }else{
                     var userCnt="모집 중("+userCurCnt+"/"+userTotCnt+")";
+                    var result=
+                        `<a href="boardListDetail?boardid=`+items.boardid+`" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true">`
+                        +`<div class=" gap-2 w-100 justify-content-between">`
+                        +`<div>`
+                        +`<small class="opacity-50 text-nowrap ms-3">`+items.userId+`</small>&emsp;<small class="opacity-50 text-nowrap">`+hours+`</small>&emsp;<small class="opacity-50 text-nowrap">조회수</small><small class="opacity-50 text-nowrap">`+items.hit+`</small>`
+                    ;
                 }
 
 
+                $.ajax({
+                    type:'post',
+                    url:'checkBoardScrap',
+                    async:false,
+                    data:{'boardid':items.boardid,
+                        'userId':items.userId},
+                    dataType:'text',
+                    success:function (data){
+                        console.log(data);
+                        if(data=='non_exist'){
+                            result= result+`<img src="/image/bookmark2.png" id="bookmark"  class="rounded float-end"  alt="bookmark">`
+                                +`<h6 class="mb-0 ms-3" >`+items.subject+`</h6><h6 class="mb-0 position-absolute top-50 end-0 translate-middle-y me-5">`+userCnt+`</h6>`
+                        }else{
+                            result= result+`<img src="/image/bookmark1.png" id="bookmark"  class="rounded float-end"  alt="bookmark">`
+                                +`<h6 class="mb-0 ms-3" >`+items.subject+`</h6><h6 class="mb-0 position-absolute top-50 end-0 translate-middle-y me-5">`+userCnt+`</h6>`
+                        }
 
-                var result=
-                    `<a href="boardListDetail" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true">`
-                    +`<div class=" gap-2 w-100 justify-content-between">`
-                    +`<div>`
-                    +`<small class="opacity-50 text-nowrap ms-3">`+items.userId+`</small>&emsp;<small class="opacity-50 text-nowrap">`+hours+`</small>&emsp;<small class="opacity-50 text-nowrap">조회수</small><small class="opacity-50 text-nowrap">`+items.hit+`</small><img src="/image/icons8-북마크-리본-24.png" class="rounded float-end"  alt="bookmark">`
-                    +`<h6 class="mb-0 ms-3" >`+items.subject+`</h6><h6 class="mb-0 position-absolute top-50 end-0 translate-middle-y me-5">`+userCnt+`</h6>`
-                ;
+
+
+                    },
+                    error:function (e){
+                        console.log(e);
+                    }
+
+                });
+
 
                 tagInsert1(result,items);
 
@@ -322,6 +392,10 @@ function tagInsert1(result, items){
                     +`<br>`;
             }
             $('#list-group').append(result);
+            $('#pagingDiv').empty();
+            if(lang=="" && field=="" && type=="" ){
+                window.location.reload();
+            }
 
         },
         error:function(e){
