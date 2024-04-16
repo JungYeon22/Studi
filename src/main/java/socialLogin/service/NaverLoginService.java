@@ -24,8 +24,8 @@ public class NaverLoginService {
     public final static String CLIENT_ID = "VBE7cII0y9YD9bpkACFu";
     public final static String CLIENT_SECRET = "i_i_9KVyxJ";
     public final static String SESSION_STATE = "state";
-    public final static String REDIRECT_URI = "http://localhost:8080/user/oauth2/login";
-    public final static String REDIRECT_LOGOUT_URI = "http://localhost:8080/user/oauth2/logout";
+    public final static String REDIRECT_URI = "http://223.130.140.180:8090/user/oauth2/login";
+    public final static String REDIRECT_LOGOUT_URI = "http://223.130.140.180:8090/user/oauth2/logout";
     public final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
 
 
