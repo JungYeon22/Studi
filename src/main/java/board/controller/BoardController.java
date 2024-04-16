@@ -2,6 +2,7 @@ package board.controller;
 
 
 import board.bean.BoardDTO;
+import board.bean.BoardReply;
 import board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -163,6 +164,20 @@ public class BoardController {
     @ResponseBody
     public String removeBoard(@RequestParam String boardid, String userId){
         return boardService.removeBoard(boardid,userId);
+    }
+    @PostMapping(value = "/addReply")
+    @ResponseBody
+    public String addReply(@RequestParam String boardid, String userId,String text, int ref){
+
+        return boardService.addReply(boardid,userId,text,ref);
+    }
+
+
+    @PostMapping(value = "/loadReply")
+    @ResponseBody
+    public List<BoardReply> loadReply(@RequestParam String boardid){
+
+        return boardService.loadReply(boardid);
     }
 
 

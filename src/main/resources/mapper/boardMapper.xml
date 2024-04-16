@@ -54,4 +54,13 @@
     <delete id="removeBoard" parameterType="Map">
         delete from board where UserId=#{userId} and BOARDID=#{boardid}
     </delete>
+
+    <insert id="addReply" parameterType="Map">
+        insert into comment(ref,BOARDID,DATE,UserId,TEXT) values(<if test="ref==0">last_insert_id()+1</if><if test="ref!=0">#{ref}</if>,#{boardid},sysdate(),#{userId},#{text})
+
+    </insert>
+
+    <select id="loadReply" parameterType="String" resultType="board.bean.BoardReply">
+        select * from comment where BOARDID=#{boardid} order by ref, No
+    </select>
 </mapper>

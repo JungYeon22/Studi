@@ -66,7 +66,7 @@ $(function (){
                     url:'checkBoardScrap',
                     async:false,
                     data:{'boardid':items.boardid,
-                        'userId':items.userId},
+                        'userId':$('#sessionId').val()},
                     dataType:'text',
                     success:function (data){
                         console.log(data);
@@ -309,7 +309,7 @@ function filterSelect(){
                     url:'checkBoardScrap',
                     async:false,
                     data:{'boardid':items.boardid,
-                        'userId':items.userId},
+                        'userId':$('#sessionId').val()},
                     dataType:'text',
                     success:function (data){
                         console.log(data);

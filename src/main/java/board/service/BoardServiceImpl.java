@@ -2,6 +2,7 @@ package board.service;
 
 import board.bean.BoardDTO;
 import board.bean.BoardPaging;
+import board.bean.BoardReply;
 import board.dao.BoardDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,7 +56,7 @@ public class BoardServiceImpl implements BoardService{
 
 
         boardPaging.setCurrentPage(Integer.parseInt(pg));
-        boardPaging.setPageBlock(5);
+        boardPaging.setPageBlock(3);
         boardPaging.setPageSize(5);
         boardPaging.setTotal(total);
         boardPaging.makePagingHTML();
@@ -133,5 +134,21 @@ public class BoardServiceImpl implements BoardService{
         boardDAO.removeBoardScrap(map);
         boardDAO.removeBoard(map);
         return "";
+    }
+
+    @Override
+    public String addReply(String boardid, String userId, String text, int ref) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("boardid",boardid);
+        map.put("userId",userId);
+        map.put("text",text);
+        map.put("ref",ref);
+        boardDAO.addReply(map);
+        return "";
+    }
+
+    @Override
+    public List<BoardReply> loadReply(String boardid) {
+        return boardDAO.loadReply(boardid);
     }
 }

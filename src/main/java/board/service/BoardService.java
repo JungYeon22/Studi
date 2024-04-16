@@ -1,6 +1,7 @@
 package board.service;
 
 import board.bean.BoardDTO;
+import board.bean.BoardReply;
 
 import java.util.List;
 import java.util.Map;
@@ -25,4 +26,8 @@ public interface BoardService {
     public String removeBoardScrap(String boardid, String userId);
 
     public String removeBoard(String boardid, String userId);
+
+    public String addReply(String boardid, String userId, String text, int ref);
+
+    public List<BoardReply> loadReply(String boardid);
 }

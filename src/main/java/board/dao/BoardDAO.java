@@ -1,6 +1,7 @@
 package board.dao;
 
 import board.bean.BoardDTO;
+import board.bean.BoardReply;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,4 +36,8 @@ public interface BoardDAO {
     public void removeBoardScrap(Map<String, String> map);
 
     public void removeBoard(Map<String, String> map);
+
+    public void addReply(Map<String, Object> map);
+
+    public List<BoardReply> loadReply(String boardid);
 }
