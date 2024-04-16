@@ -1,6 +1,8 @@
 package manager.service;
 
 
+import manager.bean.NoticeDTO;
+
 import java.util.List;
 import java.util.Map;
 
@@ -10,4 +12,10 @@ public interface ManagerService {
     public Map<String, Object> getUserList(String pg);
 
     public Map<String, Object> getUserList2(Map<String, Object> map);
+
+    void registerNotice(Map<String, String> map);
+
+    List<NoticeDTO> getNotice();
+
+    void notiDelete(int parseInt);
 }

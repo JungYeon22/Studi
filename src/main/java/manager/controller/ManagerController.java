@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import manager.bean.ManagerDTO;
+import manager.bean.NoticeDTO;
 import manager.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,9 @@ public class ManagerController {
     @GetMapping(value = "/managerPage")
     public String managerPage(@RequestParam(required = false, defaultValue = "1") String pg,Model model){
         model.addAttribute("pg", pg);
+
+        List<NoticeDTO> notiList = managerService.getNotice();
+        model.addAttribute("notiList", notiList );
         return "manager/managerPage";
     }
     @PostMapping(value = "/managerPage/signupCounts", produces = "application/json")
@@ -78,4 +82,19 @@ public class ManagerController {
         map.put("pg", pg);
         return managerService.getUserList2(map);
     }
+
+    @PostMapping(value = "/managerPage/noti")
+    @ResponseBody
+    public void noti(@RequestParam Map<String,String> map){
+        System.out.println(map.get("title"));
+        managerService.registerNotice(map);
+    }
+
+    @PostMapping(value = "/noti/delete")
+    @ResponseBody
+    public void notiDelte(@RequestParam String id){
+        managerService.notiDelete(Integer.parseInt(id));
+    }
+
+
 }
