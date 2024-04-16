@@ -16,4 +16,5 @@ public class UserDTO {
     private String phone;
     private String email;
     private Date hiredate;
+    private String loginType;
 }

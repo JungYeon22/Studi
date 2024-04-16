@@ -5,7 +5,8 @@ CREATE TABLE USER (
     SKILL    VARCHAR(100),
     EMAIL    VARCHAR(100)    ,
     PHONE    VARCHAR(100)    ,
-    HIREDATE    DATE
+    HIREDATE    DATE     default (CURRENT_DATE)   ,
+    LOGIN_TYPE VARCHAR(100)
 );
 
 CREATE TABLE USER_Description (

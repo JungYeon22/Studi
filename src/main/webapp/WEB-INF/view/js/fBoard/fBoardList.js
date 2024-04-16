@@ -152,6 +152,7 @@ function addNewContent(page,observer){
             $.each(data, function(index, items){
                 //시간 형식 설정
                 var date = new Date(items.date);
+                console.log('like : ' + items.likes);
                 var dateResult = getTimeAgo(date);
                 var result = `
                 <div class="content row mt-4">
@@ -171,13 +172,13 @@ function addNewContent(page,observer){
                         </div>
                         <div class="card-footer bg-transparent d-flex justify-content-between">
                           <div>
-                            <i class="fa-regular fa-comment mt-1" data-bs-toggle="modal" data-bs-target="#fBoardCommentModal" data-post-id="`+items.fBoard+`"></i>
+                            <i class="fa-regular fa-comment mt-1" data-bs-toggle="modal" data-bs-target="#fBoardCommentModal" data-post-id="`+items.fboard+`"></i><small> `+items.comment+`</small>
                           </div>
                           <div>
                             <i class="fa-regular fa-thumbs-up" > </i>
                             <span class="likeValue">`+items.likes+`</span>
-                            <button type="button" class="btn btn-outline-primary likeBtn" data-number="`+items.fBoard+`">좋아요</button>
-                            <input type="hidden"  value="`+items.fBoard+`">
+                            <button type="button" class="btn btn-outline-primary likeBtn" data-number="`+items.fboard+`">좋아요</button>
+                            <input type="hidden"  value="`+items.fboard+`">
                           </div>
                         </div>
                       </div>

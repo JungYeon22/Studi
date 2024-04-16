@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import socialLogin.bean.NaverLoginDTO;
 import socialLogin.service.NaverLoginService;
+import user.bean.UserDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -78,7 +79,13 @@ public class NaverLoginController {
         String str_result = access_token.replaceAll("\\\"","");
         user.setAccessToken(str_result);
 
-        session.setAttribute("userDTO", user);
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUserId(user.getUserId());
+        userDTO.setName(user.getName());
+        userDTO.setPhone(user.getMobile());
+        userDTO.setEmail(user.getEmail());
+
+        session.setAttribute("userDTO", userDTO);
 
         return "redirect:/";
     }

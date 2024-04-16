@@ -10,7 +10,7 @@
 <%@include file="fBoardCommentModal.jsp"%>
 <div><br><br><br></div>
 <input type="hidden" id="userId" name="userId" value="${sessionScope.userDTO.userId}">
-<input type="hidden" id="userId" name="userName" value="${sessionScope.userDTO.name}">
+<input type="hidden" id="userName" name="userName" value="${sessionScope.userDTO.name}">
 <div class="container mt-5">
   <div class="text-start mt-5">
     <!-- Button trigger modal -->
