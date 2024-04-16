@@ -22,16 +22,19 @@
         SELECT * FROM USER WHERE email = #{email}
     </select>
 
-    <select id="getIntro" parameterType="string" resultType="user.bean.UserIntro">
-        SELECT * FROM USER_Description WHERE userId = #{userId}
-    </select>
-
     <insert id="writeIntroduce" parameterType="user.bean.UserIntro">
-        insert into USER_Description (name, userId, career, introduce)
-        values (#{name}, #{userId}, #{career}, #{introduce})
+        insert into USER_Description
+        values (#{name}, #{userId}, #{position} ,#{career},'java', 'python', '' ,#{introduce})
     </insert>
 
     <delete id="delete" parameterType="String">
         delete from User where id=#{userId}
     </delete>
+
+<!--    <update id="update" parameterType="model">-->
+<!--        UPDATE USER_Description-->
+<!--        SET position = #{position}, career = #{career}, introduce = #{introduce}-->
+<!--        WHERE id = #{userid}-->
+<!--    </update>-->
+
 </mapper>

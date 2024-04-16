@@ -21,30 +21,22 @@
 <body>
 <%@ include file="../include/header.jsp"%>
 
-<form id="introduceForm1">
-    <div class="input-form-background row">
-
+<form id="updateForm" action="user/updateForm" method="post">
+    <div class="input-form-background row mb-0 mt-0">
         <div class="input-form col-md-12 mx-auto">
             <label for="position"><span>주요 포지션</span></label>
             <input type="text" class="form-control" id="position" placeholder="back-end" required >
         </div>
-
     </div>
-</form>
-
-<form id="introduceForm2">
-    <div class="input-form-backgroud row">
+    <div class="input-form-backgroud row mb-0 mt-0 p-1">
         <div class="input-form col-md-12 mx-auto">
             <label for="career"><span>경력/신입</span></label>
-            <input type="text" class="form-control" id="career" placeholder="경력" required >
+            <input type="text" class="form-control" id="career" name="career" placeholder="경력" required >
         </div>
     </div>
-</form>
-
-<form id="introduceForm3">
-    <div class="input-form col-md-12 mx-auto">
+    <div class="input-form col-md-12 mx-auto mb-0 mt-0 p-1">
         <label for="skill"><span>사용가능 언어(다중선택)</span></label>
-        <div class="skill" role="group" aria-label="Basic checkbox toggle button group" >
+        <div class="skill" id="skill" role="group" aria-label="Basic checkbox toggle button group" >
             <input type="checkbox" class="btn-check" id="java" >
             <label class="btn btn-outline-dark" for="java">JAVA</label>
             <input type="checkbox" class="btn-check" id="c" >
@@ -67,16 +59,13 @@
             <label class="btn btn-outline-dark" for="oracle">Oracle</label>
         </div>
     </div>
-</form>
-
-<form id="introduceForm4">
-    <div class="input-form-backgroud row">
+    <div class="input-form-backgroud row mb-0 mt-0 p-1">
         <div class="mb-3">
             <div class="input-form col-md-12 mx-auto">
                 <label for="simpleIntroduce"><span>간단한 소개</span></label>
-                <input type="text" class="form-control" id="simpleIntroduce" required >
+                <input type="text" class="form-control" id="simpleIntroduce" name="introduce" required >
                 <div class="button-container mt-3 col-md-6 ms-auto">
-                    <button type="submit" id="updateBtn" class="btn btn-outline-dark btn-lg" >수정</button>
+                    <button type="submit" id="insertBtn" class="btn btn-outline-dark btn-lg" >입력</button>
                     <button type="button" id="cancelBtn" class="btn btn-outline-dark btn-lg" >취소</button>
                 </div>
             </div>

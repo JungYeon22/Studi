@@ -37,4 +37,16 @@ public class ManagerDAOMyBatis implements ManagerDAO{
         return totalA;
     }
 
+    @Override
+    public int getTotalA2(Map<String, Object> map) {
+        int totalA = sqlSession.selectOne("manager.getTotalA2");
+        return totalA;
+    }
+    @Override
+    public List<ManagerDTO> getUserList2(Map<String, Object> map) {
+        System.out.println("ㅅㅂ");
+
+        return sqlSession.selectList("manager.getUserList2", map);
+    }
+
 }

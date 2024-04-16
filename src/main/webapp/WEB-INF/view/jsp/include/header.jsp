@@ -23,8 +23,13 @@
                             ${sessionScope.userDTO.name}님
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">회원정보수정</a></li>
+                            <c:if test="${sessionScope.userDTO.userId != 'admin'}">
+                            <li><a class="dropdown-item" href="/user/updateForm">회원정보수정</a></li>
                             <li><a class="dropdown-item" href="#">나의 프로젝트</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.userDTO.userId == 'admin'}">
+                            <li id="adminMenu"><a class="dropdown-item" href="/admin/managerPage">관리자 페이지</a></li>
+                            </c:if>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -47,11 +52,11 @@
         </div>
     </nav>
 </header>
-
 <script>
     function confirmLogout() {
         if (confirm("정말 로그아웃 하시겠습니까?")) {
             location.href = "<c:url value='/'/>";
         }
     }
+
 </script>

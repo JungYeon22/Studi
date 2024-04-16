@@ -2,6 +2,7 @@ package user.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import user.bean.UserDTO;
 import user.bean.UserIntro;
 import user.dao.UserDAOImpl;
@@ -48,13 +49,14 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public UserIntro getIntro(String userId) {
-        return userDAO.getIntro(userId);
-    }
+//    @Override
+//    public UserIntro getIntro(String userId) {
+//        return userDAO.getIntro(userId);
+//    }
 
     @Override
     public void writeIntroduce(UserIntro userIntro) {
+        System.out.println("2 " + userIntro.getUserId()+" "+userIntro.getIntroduce() + " " + userIntro.getCareer());
         userDAO.writeIntroduce(userIntro);
     }
 
@@ -62,6 +64,11 @@ public class UserServiceImpl implements UserService {
     public void delete(String userId) {
         userDAO.delete(userId);
     }
+
+//    @Override
+//    public void update(Model model) {
+//        userDAO.update(model);
+//    }
 
 
 }

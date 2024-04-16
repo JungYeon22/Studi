@@ -1,5 +1,6 @@
 package user.dao;
 
+import org.springframework.ui.Model;
 import user.bean.UserDTO;
 import user.bean.UserIntro;
 
@@ -10,7 +11,9 @@ public interface UserDao {
 
     UserDTO findByEmail(String email);
 
-    UserIntro getIntro(String userId);
+//    UserIntro getIntro(String userId);
     void writeIntroduce(UserIntro userIntro);
     void delete(String userId);
+
+//    void update(Model model);
 }

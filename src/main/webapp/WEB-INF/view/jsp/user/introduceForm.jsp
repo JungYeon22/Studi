@@ -22,7 +22,7 @@
 <%@ include file="../include/header.jsp"%>
 
 
-<form action="user/introduce" method="post" >
+<form action="user/introduce" >
     <div class="input-form-background row mb-0 mt-0">
         <div class="input-form col-md-12 mx-auto">
             <label for="position"><span>주요 포지션</span></label>

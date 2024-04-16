@@ -13,6 +13,7 @@ public class UserIntro {
     private String name;
     private String userId;
     private String career;
+    private String position;
     private String skill1;
     private String skill2;
     private String skill3;
