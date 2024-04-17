@@ -84,6 +84,7 @@ public class NaverLoginController {
         userDTO.setName(user.getName());
         userDTO.setPhone(user.getMobile());
         userDTO.setEmail(user.getEmail());
+        userDTO.setLoginType(user.getLoginType());
 
         session.setAttribute("userDTO", userDTO);
 

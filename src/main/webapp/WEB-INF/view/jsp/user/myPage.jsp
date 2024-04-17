@@ -44,7 +44,7 @@
             <div class="col-md-6"> <!-- 왼쪽 영역 -->
                 <h4 class="mb-3">나의 정보
                     <button class="btn btn-primary btn-sm" type="submit" id="updateFormBtn" onclick="location.href='updateForm'">수정</button>
-                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">탈퇴</button>
+                    <button class="btn btn-primary btn-sm" type="button" id="deleteBtn" >탈퇴</button>
                 </h4>
                 <div class="border border-primary-subtle rounded p-3">
                     <div class="mb-3">
@@ -52,7 +52,7 @@
                             <div class="col-md-auto">
                                 <svg class="rounded-circle border" width="64" height="64" viewBox="0 0 64 64" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <rect width="64" height="64" fill="hsl(15, 100%, 90%)"></rect>
-                                    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="32" font-weight="600" fill="black">김</text>
+                                    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="32" font-weight="600" fill="black">${userDTO.userId}</text>
                                 </svg>
                             </div>
                             <div class="col">
@@ -67,18 +67,18 @@
                     <div class="row">
                         <div class="col-lg-3"> <!-- 왼쪽 열 -->
                             <p class="col mb-2">닉네임</p>
-                            <p class="col mb-2">소셜 로그인</p>
                             <p class="col mb-2">이메일</p>
+                            <p class="col mb-2">주요 포지션</p>
                             <p class="col mb-2">경력</p>
                             <p class="col mb-2">관심 스택</p>
                             <p class="col mb-2">자기소개</p>
                         </div>
                         <div class="col"> <!-- 오른쪽 열 -->
-                            <p class="col mb-2">${userDTO.userId}</p>
-                            <p class="col mb-2">Kakao</p>
+                            <p class="col mb-2" id="id">${userDTO.userId}</p>
                             <p class="col mb-2">${userDTO.email}</p>
-                            <p class="col mb-2">2년차</p>
-                            <p class="col mb-2">${userIntro.skill1}</p>
+                            <p class="col mb-2">${userIntro.position}</p>
+                            <p class="col mb-2">${userIntro.career}</p>
+                            <p class="col mb-2">${userIntro.skill1} <c:if test="${userIntro.skill2 != null}">,${userIntro.skill2}</c:if><c:if test="${userIntro.skill3 != null}">,${userIntro.skill3}</c:if></p>
                             <p class="col mb-2">${userIntro.introduce}</p>
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                                     <div class="accordion-body">
                                         <span><svg class="rounded-circle border center" width="32" height="32" viewBox="0 0 64 64" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="64" height="64" fill="hsl(29, 100%, 90%)"></rect><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="32" font-weight="600" fill="black">J</text></svg></span>
                                         <label for="email" class="form-label">강남역 오전 모각코 모집합니다</label>
-                                        <p class="text-truncate" style="max-width: 1000px;">[개발 스터디 모집 내용 예시] 스터디 주제 : 오전 시간 활용해서 부지런한 하루하루 보내기 스터디 목표 : 오전 시간 활용하기! 예상 스터디 일정(횟수) : 주 5회 8시반~9시반, 강남역 할리스 예상 커리큘럼 간략히 : 예상 모집인원 : 3명 스터디 소개와 개설 이유 : 오전 시간 활용하고 건강한 생활습관 형성하고 싶어서 스터디 관련 주의사항 : 1</p>
+                                        <p id="email" class="text-truncate" style="max-width: 1000px;">[개발 스터디 모집 내용 예시] 스터디 주제 : 오전 시간 활용해서 부지런한 하루하루 보내기 스터디 목표 : 오전 시간 활용하기! 예상 스터디 일정(횟수) : 주 5회 8시반~9시반, 강남역 할리스 예상 커리큘럼 간략히 : 예상 모집인원 : 3명 스터디 소개와 개설 이유 : 오전 시간 활용하고 건강한 생활습관 형성하고 싶어서 스터디 관련 주의사항 : 1</p>
                                         <button class="btn btn-secondary btn-sm">스터디</button>
                                         <hr>
                                         <span><svg class="rounded-circle border center" width="32" height="32" viewBox="0 0 64 64" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="64" height="64" fill="hsl(29, 100%, 90%)"></rect><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="32" font-weight="600" fill="black">J</text></svg></span>
@@ -137,28 +137,30 @@
     </main>
 </div>
 
-<%--모달창--%>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                정말로 탈퇴하시겠습니까?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button>
-                <button type="button" class="btn btn-primary">네, 탈퇴하겠습니다.</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- ######################################################### -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" ></script>
-
+<script src="https://code.jQuery.com/jquery-3.7.1.min.js"></script>
+<script>
+    $(function(){
+        $('#deleteBtn').click(function(){
+            if(confirm('탈퇴하시겠습니까?')) {
+                $.ajax({
+                    type: 'post',
+                    url: '/user/delete',
+                    data: { userId: "${userDTO.userId}" },
+                    success: function () {
+                        alert("탈퇴를 성공하였습니다.");
+                        location.href = '/user/logout';
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+                });
+            }
+        });
+    });
+</script>
 </body>
 </html>

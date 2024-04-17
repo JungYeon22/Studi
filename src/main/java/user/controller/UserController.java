@@ -9,6 +9,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import user.bean.UserDTO;
 import user.bean.UserIntro;
 import user.service.UserServiceImpl;
@@ -16,9 +17,7 @@ import user.service.UserServiceImpl;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -31,7 +30,10 @@ public class UserController {
     private final JavaMailSenderImpl mailSender;
 
     @GetMapping("/writeForm")
-    public String writeForm() {
+    public String writeForm(Model model) {
+        List<String> skillList = Arrays.asList("JAVA", "C", "C++", "C#", "Python", "JavaScript", "Kotlin", "Go", "MySQL", "Oracle");
+        model.addAttribute("skillList", skillList);
+
         return "user/writeForm";
     }
 
@@ -102,7 +104,7 @@ public class UserController {
         int checkNum = random.nextInt(888888)+111111;
 
         //이메일 보낼 양식
-        String setFrom = "chlrytns94@naver.com"; //2단계 인증 x, 메일 설정에서 POP/IMAP 사용 설정에서 POP/SMTP 사용함으로 설정o
+        String setFrom = "rytns24@naver.com"; //2단계 인증 x, 메일 설정에서 POP/IMAP 사용 설정에서 POP/SMTP 사용함으로 설정o
         String toMail = email;
         String title = "회원가입 인증 이메일 입니다.";
         String content = "인증 코드는 " + checkNum + " 입니다." +
@@ -130,41 +132,139 @@ public class UserController {
         return Integer.toString(checkNum);
     }
 
-
     @GetMapping(value = "/introduceForm")
     public String introduceForm() {
         return "user/introduceForm";
     }
 
     @PostMapping(value="/writeForm/introduce")
-    public String writeIntroduce(@ModelAttribute UserIntro userIntro) {
-        System.out.println(userIntro.getUserId()+" "+userIntro.getIntroduce() + " " + userIntro.getCareer());
+    public String writeIntroduce(@ModelAttribute UserIntro userIntro,
+                                 @RequestParam HashMap<String, Object> skillMap,
+                                 @RequestParam String skill) {
+        String[] code_array = null;
+//        String code = skillMap.get("skill").toString();
+        code_array = skill.split(",");
+        int[] results= new int[code_array.length];
+        int result=1;
+        for(int i=0; i < code_array.length; i++){
+            if(i == 0) {
+                userIntro.setSkill1(code_array[i]);
+            } else if(i == 1) {
+                userIntro.setSkill2(code_array[i]);
+            } else if(i == 2) {
+                userIntro.setSkill3(code_array[i]);
+                break;
+            }
+        }
         userService.writeIntroduce(userIntro);
         return "user/introduceForm";
     }
 
     @GetMapping(value = "/myPage")
-    public String myPage(@SessionAttribute("userDTO") UserDTO userDTO, Model model)
+    public String myPage(@SessionAttribute("userDTO") UserDTO userDTO,Model model)
     {
+        UserIntro userIntro = userService.getIntro(userDTO.getUserId());
+        model.addAttribute("userIntro",userIntro);
 //        model.addAttribute("userDTO", userDTO);
 //        UserIntro userIntro = userService.getIntro(userDTO.getUserId());
 //        model.addAttribute("userIntro",userIntro);
         return "user/myPage";
     }
 
-//    @GetMapping(value = "/updateForm")
-//    public String updateForm(@SessionAttribute("userDTO") UserDTO userDTO,
-//                             @ModelAttribute UserIntro userIntro,
-//                             Model model)
-//    {   model.addAttribute("userIntro",userIntro);
-//        model.addAttribute("userDTO", userDTO);
-//        userService.update(model);
-//        return "user/updateForm";
-//    }
+    @GetMapping("/updateForm")
+    public String updateForm(Model model) {
+        List<String> skillList = Arrays.asList("JAVA", "C", "C++", "C#", "Python", "JavaScript", "Kotlin", "Go", "MySQL", "Oracle");
+        model.addAttribute("skillList", skillList);
+        return "user/updateForm";
+    }
+    @PostMapping(value = "/updateForm")
+    public String update(@ModelAttribute UserIntro userIntro,
+                         @RequestParam HashMap<String, Object> skillMap,
+                         @SessionAttribute("userDTO") UserDTO userDTO)
+    {
+        String[] code_array = null;
+
+        String code = skillMap.get("arrayParam").toString();
+        code_array = code.split(",");
+        int[] results= new int[code_array.length];
+        int result=1;
+        for(int i=0; i < code_array.length; i++){
+            if(i == 0) {
+                userIntro.setSkill1(code_array[i]);
+            } else if(i == 1) {
+                userIntro.setSkill2(code_array[i]);
+            } else if(i == 2) {
+                userIntro.setSkill3(code_array[i]);
+                break;
+            }
+        }
+
+        userIntro.setUserId(userDTO.getUserId());
+        userService.update(userIntro);
+        return "user/myPage";
+    }
 
     @PostMapping(value="/delete")
     @ResponseBody
-    public void delete(@SessionAttribute String userId) {
+    public void delete(@RequestParam String userId) {
         userService.delete(userId);
     }
+
+
+    // 아이디 찾기
+    @GetMapping(value = "/findIdForm")
+    public String findIdForm() {
+        return "user/findIdForm";
+    }
+
+    @PostMapping(value = "/findIdForm")
+    public String findIdPost(@RequestParam("email") String email,
+                             RedirectAttributes redirectAttributes,
+                             HttpServletRequest request) {
+        UserDTO user = userService.findByEmail(email);
+        if(user != null) {
+            // 세션에 사용자 정보 저장했음 !
+            request.getSession().setAttribute("user", user);
+            return "redirect:/user/findId";
+        } else {
+            // 이건 단발성 요청에 존재하는 기능 !
+            redirectAttributes.addFlashAttribute("error", "입력하신 이메일로 등록된 아이디가 없습니다.");
+            return "redirect:/user/findIdForm";
+        }
+    }
+
+    // 찾은 아이디 조회
+    @GetMapping(value = "/findId")
+    public String findIdView() {
+        return "user/findId";
+    }
+
+    // 비밀번호 찾기
+    @GetMapping(value = "/findPwdForm")
+    public String findPwdForm() {
+        return "user/findPwdForm";
+    }
+
+    @PostMapping(value = "/findPwdForm")
+    public String findPwdPost(@RequestParam("email") String email,
+                              RedirectAttributes redirectAttributes,
+                              HttpServletRequest request) {
+        UserDTO user = userService.findByEmail(email);
+        if(user != null) {
+            // 세션에 사용자 정보 저장했음 !
+            request.getSession().setAttribute("user", user);
+            return "redirect:/user/findPwd";
+        } else {
+            // 이건 단발성 요청에 존재하는 기능 !
+            redirectAttributes.addFlashAttribute("error", "입력하신 이메일로 등록된 아이디가 없습니다.");
+            return "redirect:/user/findPwdForm";
+        }
+    }
+
+    // 찾은 비밀번호 조회
+    @GetMapping(value = "/findPwd")
+    public String findPwdView() {
+        return "user/findPwd";
+    }
+
 }

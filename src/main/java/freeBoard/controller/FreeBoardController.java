@@ -3,6 +3,8 @@ package freeBoard.controller;
 import freeBoard.bean.FBoardDTO;
 import freeBoard.bean.FBoardCommentDTO;
 import freeBoard.service.FBoardService;
+import manager.bean.NoticeDTO;
+import manager.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +17,18 @@ import java.util.List;
 public class FreeBoardController {
     @Autowired
     private FBoardService fBoardService;
+    @Autowired
+    private ManagerService managerService;
 
     @GetMapping(value = "/freeBoardList")
     public String freeBoardList(Model model){
         List<FBoardDTO> fBoardList = fBoardService.fBoardList(1);
+        List<NoticeDTO> notiList = managerService.getNotice();
+        for(NoticeDTO noticeDTO : notiList){
+            System.out.println(noticeDTO.toString());
+        }
         model.addAttribute("fBoardList", fBoardList);
+        model.addAttribute("notiList", notiList);
         return "/freeBoard/freeBoardList";
     }
 
