@@ -224,7 +224,7 @@ public class UserController {
         UserDTO user = userService.findByEmail(email);
         if(user != null) {
             // 세션에 사용자 정보 저장했음 !
-            request.getSession().setAttribute("user", user);
+            request.getSession().setAttribute("userDTO", user);
             return "redirect:/user/findId";
         } else {
             // 이건 단발성 요청에 존재하는 기능 !
@@ -252,7 +252,7 @@ public class UserController {
         UserDTO user = userService.findByEmail(email);
         if(user != null) {
             // 세션에 사용자 정보 저장했음 !
-            request.getSession().setAttribute("user", user);
+            request.getSession().setAttribute("userDTO", user);
             return "redirect:/user/findPwd";
         } else {
             // 이건 단발성 요청에 존재하는 기능 !

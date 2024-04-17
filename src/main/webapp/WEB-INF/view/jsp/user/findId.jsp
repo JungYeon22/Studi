@@ -46,21 +46,22 @@
             <form class="login-form" action="${pageContext.request.contextPath}/user/findId" method="post" novalidate>
                 <div class="mb-3">
                     <label for="name" style="margin-bottom: 6px">이름</label>
-                    <input type="text" class="form-control" id="name" value="${user.name}" style="margin-bottom: 30px" disabled required>
+                    <input type="text" class="form-control" id="name" value="${userDTO.name}" style="margin-bottom: 30px" disabled required>
                     <div class="invalid-feedback"></div>
 
                     <label for="id" style="margin-bottom: 6px">아이디</label>
-                    <input type="text" class="form-control" id="id" value="${user.userId}" style="margin-bottom: 30px" disabled required>
+                    <input type="text" class="form-control" id="id" value="${userDTO.userId}" style="margin-bottom: 30px" disabled required>
                     <div class="invalid-feedback"></div>
+
+                    <c:if test="${userDTO.loginType eq naver}">
+                        <p class="text-success">네이버 아이디입니다.</p>
+                    </c:if>
                 </div>
 
                 <div class="d-grid gap-2">
                     <button class="btn btn-outline-dark" type="button" id="writebtn" onclick="location.href='loginForm' ">로그인으로 이동하기</button>
                 </div>
             </form>
-
-
-
         </div>
     </div>
 </div>
