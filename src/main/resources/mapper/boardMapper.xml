@@ -63,4 +63,12 @@
     <select id="loadReply" parameterType="String" resultType="board.bean.BoardReply">
         select * from comment where BOARDID=#{boardid} order by ref, No
     </select>
+
+    <update id="boardEditData" parameterType="board.bean.BoardDTO">
+        update board set SUBJECT=#{SUBJECT},CONTENT=#{CONTENT},projectType=#{projectType},projectField=#{projectField},DATE=sysdate() where BOARDID=#{BOARDID}
+    </update>
+
+    <update id="tagEdit" parameterType="map">
+        update boardtag set CONTENT=#{lang} where BOARDID=#{boardId}
+    </update>
 </mapper>

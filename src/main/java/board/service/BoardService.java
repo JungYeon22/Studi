@@ -30,4 +30,6 @@ public interface BoardService {
     public String addReply(String boardid, String userId, String text, int ref);
 
     public List<BoardReply> loadReply(String boardid);
+
+    public void boardEditData(BoardDTO boardDTO, String[] lang);
 }

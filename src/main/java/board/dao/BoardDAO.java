@@ -40,4 +40,8 @@ public interface BoardDAO {
     public void addReply(Map<String, Object> map);
 
     public List<BoardReply> loadReply(String boardid);
+
+    public void boardEditData(BoardDTO boardDTO);
+
+    public void tagEdit(Map<String, Object> map);
 }

@@ -237,3 +237,10 @@ $('#oriUserDiv').click(function(){
     $(this).empty();
     ref=0;
 });
+
+
+
+function editBoard(){
+    console.log("content="+$('#content').val());
+    location.href="editBoard?boardid="+$('#boardid').val();
+}
