@@ -53,8 +53,8 @@
                     <input type="text" class="form-control" id="id" value="${userDTO.userId}" style="margin-bottom: 30px" disabled required>
                     <div class="invalid-feedback"></div>
 
-                    <c:if test="${userDTO.loginType eq naver}">
-                        <p class="text-success">네이버 아이디입니다.</p>
+                    <c:if test="${userDTO.login_type ne null}">
+                        <p class="text-muted">네이버 아이디입니다.</p>
                     </c:if>
                 </div>
 
