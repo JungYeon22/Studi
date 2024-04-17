@@ -30,12 +30,11 @@ public class UserDAOImpl implements UserDao {
         return sql.selectOne("USER.findByEmail", email);
     }
 
-//    public UserIntro getIntro(String userId) {
-//        return sql.selectOne("USER.getIntro", userId);
-//    }
+    public UserIntro getIntro(String userId) {
+        return sql.selectOne("USER.getIntro", userId);
+    }
 
     public void writeIntroduce(UserIntro userIntro) {
-        System.out.println("3 " + userIntro.getUserId()+" "+userIntro.getIntroduce() + " " + userIntro.getCareer());
         sql.insert("USER.writeIntroduce", userIntro);
     }
 
@@ -43,16 +42,13 @@ public class UserDAOImpl implements UserDao {
         sql.delete("USER.delete", userId);
     }
 
-
+    public void update(UserIntro userIntro) {
+        sql.update("USER.update", userIntro);
+    }
     @Override
     public boolean isEmailExist(String email) {
         Integer count = sql.selectOne("USER.countByEmail", email);
         return count != null && count > 0;
     }
-
-//    @Override
-//    public void update(Model model) {
-//        sql.update("USER.update", model);
-//    }
 
 }
