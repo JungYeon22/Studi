@@ -40,4 +40,16 @@ public interface BoardDAO {
     public void addReply(Map<String, Object> map);
 
     public List<BoardReply> loadReply(String boardid);
+
+    public void boardEditData(BoardDTO boardDTO);
+
+    public void tagEdit(Map<String, Object> map);
+
+    public List<BoardDTO> getHot5();
+
+    public List<BoardDTO> getRecent5();
+
+    public void removeComment(Map<String, String> map);
+
+    public void removeTag(Map<String, String> map);
 }

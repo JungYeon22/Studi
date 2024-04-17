@@ -54,6 +54,12 @@
     <delete id="removeBoard" parameterType="Map">
         delete from board where UserId=#{userId} and BOARDID=#{boardid}
     </delete>
+    <delete id="removeComment" parameterType="Map">
+        delete from comment where UserId=#{userId} and BOARDID=#{boardid}
+    </delete>
+    <delete id="removeTag" parameterType="Map">
+        delete from boardtag where BOARDID=#{boardid}
+    </delete>
 
     <insert id="addReply" parameterType="Map">
         insert into comment(ref,BOARDID,DATE,UserId,TEXT) values(<if test="ref==0">last_insert_id()+1</if><if test="ref!=0">#{ref}</if>,#{boardid},sysdate(),#{userId},#{text})
@@ -62,5 +68,21 @@
 
     <select id="loadReply" parameterType="String" resultType="board.bean.BoardReply">
         select * from comment where BOARDID=#{boardid} order by ref, No
+    </select>
+
+    <update id="boardEditData" parameterType="board.bean.BoardDTO">
+        update board set SUBJECT=#{SUBJECT},CONTENT=#{CONTENT},projectType=#{projectType},projectField=#{projectField},DATE=sysdate() where BOARDID=#{BOARDID}
+    </update>
+
+    <update id="tagEdit" parameterType="map">
+        update boardtag set CONTENT=#{lang} where BOARDID=#{boardId}
+    </update>
+
+    <select id="getHot5" resultType="board.bean.BoardDTO">
+        select * from board order by length(HIT) desc ,HIT desc limit 0,5
+    </select>
+
+    <select id="getRecent5" resultType="board.bean.BoardDTO">
+        select * from board order by DATE desc limit 0,5
     </select>
 </mapper>
