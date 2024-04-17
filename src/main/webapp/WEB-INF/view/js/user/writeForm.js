@@ -185,6 +185,13 @@ $(function(){
         });
         document.querySelector("#addrbutton").addEventListener("click", onClickSearch);
     });
+    function updateArrayParam() {
+        var array = []; // 배열 선언
+        $('input:checkbox[name=skill]:checked').each(function() {
+            array.push(this.value);
+        });
+        $("#arrayParam").val(array.join(','));
+    }
 
     $(document).ready(function() {
 
@@ -193,8 +200,18 @@ $(function(){
             // 모달 창 보이기
             $('#exampleModalToggle').modal('show');
         });
+
+        $("#moadl1").click(function(e) {
+            updateArrayParam();
+        });
+        $('input:checkbox[name=skill]').change(function () {
+            updateArrayParam();
+        });
+        console.log($('#arrayParam').val())
+
         $('#exampleModalToggle3').on('hidden.bs.modal', function () {
             $('#writeForm').submit();
+
             $.ajax({
                 type: "POST",
                 url: "/user/writeForm/introduce",
@@ -203,7 +220,8 @@ $(function(){
                     userId: $('#id').val(),
                     position: $('#position').val(),
                     career: $('#career').val(),
-                    introduce: $('#introduce').val()
+                    introduce: $('#introduce').val(),
+                    skill:$('#arrayParam').val()
                 },
                 success: function(data) {
                     console.log(data);
