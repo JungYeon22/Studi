@@ -39,4 +39,11 @@
         limit #{startNum}, #{size}
     </select>
 
+    <select id="getFBoardTopRank" parameterType="int" resultType="FBoardDTO">
+        select *
+        from free_board
+        order by date desc
+        limit 0, #{number}
+    </select>
+
 </mapper>
