@@ -21,4 +21,10 @@ public interface ManagerDAO {
     List<Map<String, Object>> pichart1();
 
     List<Map<String, Object>> pichart2();
+
+    void registerNotice(Map<String, String> map);
+
+    List<NoticeDTO> getNotice();
+
+    void notiDelete(int id);
 }

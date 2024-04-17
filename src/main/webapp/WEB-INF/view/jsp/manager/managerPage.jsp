@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -14,6 +15,7 @@
     <title>managerPage</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://code.jQuery.com/jquery-3.7.1.min.js"></script>
     <style>
         .btn:hover{
             background-color: rgb(222, 222, 222);
@@ -221,100 +223,8 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 notice-section" style="display: none;"> <!-- 오른쪽 영역 -->
-                    <h4 class="mb-3">
-                        <span class="text-primary">신고 리스트</span>
-                    </h4>
-                    <div class="border border-primary-subtle rounded p-3">
-                        <div class="accordion accordion-flush" id="accordion2">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                        모두보기
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordion2">
-                                    <div class="accordion-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <span><svg class="rounded-circle border center" width="32" height="32" viewBox="0 0 64 64" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="64" height="64" fill="hsl(29, 100%, 90%)"></rect><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="32" font-weight="600" fill="black">박</text></svg></span>
-                                                <a href="#">박정연</a>
-                                            </div>
-                                            <div>
-                                                <a href="#">금지</a> /
-                                                <a href="#" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
-                                            </div>
-                                        </div>
-                                        <p>욕설 / 비방</p>
-                                        <hr>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <span><svg class="rounded-circle border center" width="32" height="32" viewBox="0 0 64 64" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="64" height="64" fill="hsl(29, 100%, 90%)"></rect><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="32" font-weight="600" fill="black">김</text></svg></span>
-                                                <a href="#">김태진</a>
-                                            </div>
-                                            <div>
-                                                <a href="#">금지</a> /
-                                                <a href="#" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
-                                            </div>
-                                        </div>
-                                        <p>광고 홍보</p>
-                                        <hr>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <span><svg class="rounded-circle border center" width="32" height="32" viewBox="0 0 64 64" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="64" height="64" fill="hsl(29, 100%, 90%)"></rect><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="32" font-weight="600" fill="black">이</text></svg></span>
-                                                <a href="#">이동우</a>
-                                            </div>
-                                            <div>
-                                                <a href="#">금지</a> /
-                                                <a href="#" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
-                                            </div>
-                                        </div>
-                                        <p>음란성 게시물 배포</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <%@ include file="managerNoticeView.jsp"%>
 
-                </div>
-
-                <div class="col-md-6 notice-section" style="display: none;"> <!-- 오른쪽 영역 -->
-                    <h4 class="mb-3">
-                        <span class="text-primary">공지사항</span>
-                        <button class="btn btn-primary btn-sm" type="submit">새글쓰기</button>
-                    </h4>
-                    <div class="border border-primary-subtle rounded p-3">
-                        <div class="d-grid gap-2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <a href="#" class="font-large">공지사항1</a>
-                                <div>
-                                    <a href="#">수정</a> /
-                                    <a href="#" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
-                                </div>
-                            </div>
-                            <p class="font-large mb-0">공지사항 내용</p>
-                            <hr>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <a href="#" class="font-large">공지사항2</a>
-                                <div>
-                                    <a href="#">수정</a> /
-                                    <a href="#" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
-                                </div>
-                            </div>
-                            <p class="font-large mb-0">공지사항 내용</p>
-                            <hr>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <a href="#" class="font-large">공지사항3</a>
-                                <div>
-                                    <a href="#">수정</a> /
-                                    <a href="#" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
-                                </div>
-                            </div>
-                            <p class="font-large mb-0">공지사항 내용</p>
-                            <button class="btn btn-outline-*">모두보기</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </main>
     </div>
