@@ -4,12 +4,13 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary opacity-20" id="navbarall">
         <div class="container-fluid">
             <a class="navbar-brand ms-5" id="imageA" href="${pageContext.request.contextPath}/"><img src="/image/sutdi.png" width="80" height="50"></a>
-
-            <a class="navbar-brand ms-5 menuItem" href="${pageContext.request.contextPath}/board/boardListMain?pg=1"><strong>게시판</strong></a>
-            <a class="navbar-brand ms-5 menuItem" href="${pageContext.request.contextPath}/freeBoard/freeBoardList"><strong>라운지</strong></a>
-            <c:if test="${sessionScope.userDTO != null}" >
-            <a class="navbar-brand ms-5 menuItem" href="${pageContext.request.contextPath}/user/myPage"><strong>마이 페이지</strong></a>
-            </c:if>
+            <div>
+                <a class="navbar-brand ms-3 menuItem" href="${pageContext.request.contextPath}/board/boardListMain?pg=1"><strong>게시판</strong></a>
+                <a class="navbar-brand ms-3 menuItem" href="${pageContext.request.contextPath}/freeBoard/freeBoardList"><strong>라운지</strong></a>
+                <c:if test="${sessionScope.userDTO != null}" >
+                    <a class="navbar-brand ms-3 menuItem" href="${pageContext.request.contextPath}/user/myPage"><strong>마이 페이지</strong></a>
+                </c:if>
+            </div>
             <div class=" position-relative top-0 end-0" style="width: 300px; height: 60px;">
                 <ul class="navbar-nav me-auto mb-3 mb-lg-1">
                     <c:if test="${sessionScope.userDTO != null}" >

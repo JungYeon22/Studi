@@ -82,4 +82,17 @@ public class ManagerController {
         map.put("pg", pg);
         return managerService.getUserList2(map);
     }
+    @PostMapping(value = "/managerPage/noti")
+    @ResponseBody
+    public void noti(@RequestParam Map<String,String> map){
+        System.out.println(map.get("title"));
+        managerService.registerNotice(map);
+    }
+
+    @PostMapping(value = "/noti/delete")
+    @ResponseBody
+    public void notiDelte(@RequestParam String id){
+        managerService.notiDelete(Integer.parseInt(id));
+    }
+
 }
