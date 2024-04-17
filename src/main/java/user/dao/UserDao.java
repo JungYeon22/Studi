@@ -15,4 +15,5 @@ public interface UserDao {
     void writeIntroduce(UserIntro userIntro);
     void delete(String userId);
     void update(UserIntro userIntro);
+    boolean isEmailExist(String email);
 }

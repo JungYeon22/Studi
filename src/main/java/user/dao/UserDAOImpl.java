@@ -45,5 +45,10 @@ public class UserDAOImpl implements UserDao {
     public void update(UserIntro userIntro) {
         sql.update("USER.update", userIntro);
     }
+    @Override
+    public boolean isEmailExist(String email) {
+        Integer count = sql.selectOne("USER.countByEmail", email);
+        return count != null && count > 0;
+    }
 
 }

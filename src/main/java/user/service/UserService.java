@@ -14,5 +14,7 @@ public interface UserService {
     UserIntro getIntro(String userId);
     void writeIntroduce(UserIntro userIntro);
     void delete(String userId);
+    UserDTO findByEmail(String email);
+    boolean isEmailDuplicate(String email);
     void update(UserIntro userIntro);
 }

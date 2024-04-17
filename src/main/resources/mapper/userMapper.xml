@@ -41,4 +41,8 @@
         WHERE userId = #{userId}
     </update>
 
+    <select id="countByEmail" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM USER WHERE email = #{email}
+    </select>
+
 </mapper>
