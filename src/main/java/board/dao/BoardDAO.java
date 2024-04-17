@@ -44,4 +44,8 @@ public interface BoardDAO {
     public void boardEditData(BoardDTO boardDTO);
 
     public void tagEdit(Map<String, Object> map);
+
+    public List<BoardDTO> getHot5();
+
+    public List<BoardDTO> getRecent5();
 }

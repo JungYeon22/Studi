@@ -170,4 +170,14 @@ public class BoardServiceImpl implements BoardService{
         boardDAO.tagEdit(map);
 
     }
+
+    @Override
+    public List<BoardDTO> getHot5() {
+        return boardDAO.getHot5();
+    }
+
+    @Override
+    public List<BoardDTO> getRecent5() {
+        return boardDAO.getRecent5();
+    }
 }

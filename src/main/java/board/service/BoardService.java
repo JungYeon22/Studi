@@ -32,4 +32,8 @@ public interface BoardService {
     public List<BoardReply> loadReply(String boardid);
 
     public void boardEditData(BoardDTO boardDTO, String[] lang);
+
+    public List<BoardDTO> getHot5();
+
+    public List<BoardDTO> getRecent5();
 }

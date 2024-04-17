@@ -55,114 +55,74 @@
 </div>
 
 
-<div class="container-fluid p-5 row justify-content-center">
+<div id="hot5Div" class="container-fluid p-5 row justify-content-center" >
   <h2>🔥 인기 프로젝트/스터디 </h2>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">자바스크립트 스터디원 구합니다!</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">박정연</h6>
-      <p class="card-text">안녕하세요! 저는 자바스크립트를 공부하고 싶은 초보자입니다. 함께 스터디를 진행할 동료를 찾습니다. 관심 있으신 분은 댓글 남겨주세요!</p>
-      <div class="opacity-25 mt-2">
-        <i class="fa-solid fa-heart"> 100</i>
-        <i class="fa-regular fa-comment"> 100</i>
-      </div>
-    </div>
-  </div>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">자바스크립트 스터디원 구합니다!</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">박정연</h6>
-      <p class="card-text">안녕하세요! 저는 자바스크립트를 공부하고 싶은 초보자입니다. 함께 스터디를 진행할 동료를 찾습니다. 관심 있으신 분은 댓글 남겨주세요!</p>
-      <div class="opacity-25 mt-2">
-        <i class="fa-solid fa-heart"> 100</i>
-        <i class="fa-regular fa-comment"> 100</i>
-      </div>
-    </div>
-  </div>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">자바스크립트 스터디원 구합니다!</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">박정연</h6>
-      <p class="card-text">안녕하세요! 저는 자바스크립트를 공부하고 싶은 초보자입니다. 함께 스터디를 진행할 동료를 찾습니다. 관심 있으신 분은 댓글 남겨주세요!</p>
-      <div class="opacity-25 mt-2">
-        <i class="fa-solid fa-heart"> 100</i>
-        <i class="fa-regular fa-comment"> 100</i>
-      </div>
-    </div>
-  </div>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">자바스크립트 스터디원 구합니다!</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">박정연</h6>
-      <p class="card-text">안녕하세요! 저는 자바스크립트를 공부하고 싶은 초보자입니다. 함께 스터디를 진행할 동료를 찾습니다. 관심 있으신 분은 댓글 남겨주세요!</p>
-      <div class="opacity-25 mt-2">
-        <i class="fa-solid fa-heart"> 100</i>
-        <i class="fa-regular fa-comment"> 100</i>
-      </div>
-    </div>
-  </div>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">자바스크립트 스터디원 구합니다!</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">박정연</h6>
-      <p class="card-text">안녕하세요! 저는 자바스크립트를 공부하고 싶은 초보자입니다. 함께 스터디를 진행할 동료를 찾습니다. 관심 있으신 분은 댓글 남겨주세요!</p>
-      <div class="opacity-25 mt-2">
-        <i class="fa-solid fa-heart"> 100</i>
-        <i class="fa-regular fa-comment"> 100</i>
-      </div>
-    </div>
-  </div>
+
+
 </div>
 
-<div class="container-fluid p-5 row justify-content-center">
+<div id="recent5Div" class="container-fluid p-5 row justify-content-center">
   <h2>⭐️ 신규 공모전/프로젝트 </h2>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
+
   </div>
 
 </div>
 <%@include file="include/footer.jsp"%>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+$(function(){
+  $.ajax({
+    type:'post',
+    url:'${pageContext.request.contextPath}/getHot5',
+    dataType:'json',
+    success:function (data){
+      console.log(JSON.stringify(data));
+      $.each(data.list,function (index,items) {
+
+        var result = `<div class="card col-3 m-2" style="width: 18rem;" onclick="location.href='${pageContext.request.contextPath}/board/boardListDetail?boardid=`+items.boardid+`'">
+          <div class="card-body" >
+            <h5 class="card-title">`+items.subject+`</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">`+items.userId+`</h6>
+            <p class="card-text " style="color: #4169E1 ;" >프로젝트 타입: `+items.projectType+`</p>
+            <p class="card-text " style="color: #4169E1 ;">프로젝트 유형: `+items.projectField+`</p>
+            <div class="opacity-25 mt-2">
+               <i class="fa-regular fa-eye"> `+items.hit+`</i>
+            </div>
+          </div>
+        </div>`;
+
+
+
+        $('#hot5Div').append(result);
+      });
+      $.each(data.list1,function (index,items) {
+
+        var result = `<div class="card col-3 m-2" style="width: 18rem;" onclick="location.href='${pageContext.request.contextPath}/board/boardListDetail?boardid=`+items.boardid+`'">
+          <div class="card-body" >
+            <h5 class="card-title">`+items.subject+`</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">`+items.userId+`</h6>
+            <p class="card-text" style="color: #2E8B57 ;">프로젝트 타입: `+items.projectType+`</p>
+            <p class="card-text" style="color: #2E8B57 ;">프로젝트 유형: `+items.projectField+`</p>
+            <div class="opacity-25 mt-2">
+              <i class="fa-regular fa-eye"> `+items.hit+`</i>
+            </div>
+          </div>
+        </div>`;
+
+
+
+        $('#recent5Div').append(result);
+      });
+
+    },
+    error: function (e) {
+      console.log(e);
+    }
+
+  });
+
+});
+
+</script>
 </body>
 </html>

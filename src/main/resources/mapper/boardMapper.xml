@@ -71,4 +71,12 @@
     <update id="tagEdit" parameterType="map">
         update boardtag set CONTENT=#{lang} where BOARDID=#{boardId}
     </update>
+
+    <select id="getHot5" resultType="board.bean.BoardDTO">
+        select * from board order by length(HIT) desc ,HIT desc limit 0,5
+    </select>
+
+    <select id="getRecent5" resultType="board.bean.BoardDTO">
+        select * from board order by DATE desc limit 0,5
+    </select>
 </mapper>
