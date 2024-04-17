@@ -68,17 +68,16 @@
             <div class="d-flex justify-content-between align-items-center">
                 <a href="#" class="font-large">${noti.title}</a>
                 <div>
-                    <a href="">수정</a> /
-                    <a href="" class="notiDeleteBtn">삭제</a>
+                    <a href="" class="notiDeleteBtn">delete</a>
                     <input type="hidden" value="${noti.noti_id}">
                 </div>
             </div>
             <p class="font-large mb-0">${noti.content}</p>
             <hr>
             </c:forEach>
-            <p class="font-large mb-0">공지사항 내용</p>
-            <button class="btn btn-outline-*">모두보기</button>
         </div>
+        <p class="font-large mb-0">공지사항 내용</p>
+        <button class="btn btn-outline-*">모두보기</button>
     </div>
 </div>
 

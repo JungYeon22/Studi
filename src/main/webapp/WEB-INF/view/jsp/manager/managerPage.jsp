@@ -78,6 +78,22 @@
             background-color: #888;
             border-radius: 4px;
         }
+        .notiDeleteBtn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #ffffff; /* 버튼 배경색 */
+            color: #3f3f3f; /* 버튼 텍스트 색상 */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .notiDeleteBtn:hover {
+            background-color: #ff473a; /* 버튼에 호버 시 배경색 변경 */
+            color: #f8f9fa;
+        }
 
     </style>
 </head>

@@ -55,8 +55,6 @@
 </div>
 
 
-
-
 <div class="container-fluid p-5 row justify-content-center">
   <h2>🔥 인기 프로젝트/스터디 </h2>
   <div class="card col-3 m-2" style="width: 18rem;">
