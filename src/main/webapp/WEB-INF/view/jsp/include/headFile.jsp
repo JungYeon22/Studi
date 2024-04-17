@@ -23,6 +23,9 @@
     #titleDiv, #contentDiv{
         color: red;
     }
+    body {
+        font-family: 'Arial', sans-serif; /* 여기에 사용할 글꼴을 지정합니다. */
+    }
 </style>
 
 <%--  javascript  --%>

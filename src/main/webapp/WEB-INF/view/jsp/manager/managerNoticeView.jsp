@@ -65,12 +65,11 @@
     <div class="border border-primary-subtle rounded p-3">
         <div class="d-grid gap-2 noti-container">
             <c:forEach items="${notiList}" var="noti">
-
             <div class="d-flex justify-content-between align-items-center">
                 <a href="#" class="font-large">${noti.title}</a>
                 <div>
                     <a href="">수정</a> /
-                    <a href="" data>삭제</a>
+                    <a href="" class="notiDeleteBtn">삭제</a>
                     <input type="hidden" value="${noti.noti_id}">
                 </div>
             </div>
@@ -138,10 +137,10 @@
     }
 
     $(document).ready(function (){
-        $('').on('click', function (){
+        $('.notiDeleteBtn').on('click', function (){
             $.post({
                 url: "${pageContext.request.contextPath}/admin/noti/delete",
-                data: $(this).siblings('input[type="hidden"]').val(),
+                data: "id=" + $(this).siblings('input[type="hidden"]').val(),
                 success: function (){
                     alert('삭제되었습니다.')
                     location.reload();

@@ -9,11 +9,6 @@
             <a class="navbar-brand ms-5 menuItem" href="${pageContext.request.contextPath}/freeBoard/freeBoardList"><strong>라운지</strong></a>
             <a class="navbar-brand ms-5 menuItem" href="${pageContext.request.contextPath}/user/myPage"><strong>마이 페이지</strong></a>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <div class="position-absolute top-50 start-50 translate-middle">
-                    <input id="search" type="search" placeholder="search...">
-                </div>
-            </div>
             <div class=" position-relative top-0 end-0" style="width: 300px; height: 60px;">
                 <ul class="navbar-nav me-auto mb-3 mb-lg-1">
                     <c:if test="${sessionScope.userDTO != null}" >
