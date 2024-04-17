@@ -1,6 +1,8 @@
 package manager.service;
 
 
+import manager.bean.NoticeDTO;
+
 import java.util.List;
 import java.util.Map;
 
