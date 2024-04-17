@@ -20,4 +20,6 @@ public interface FBoardService {
     List<FBoardCommentDTO> addComment(FBoardCommentDTO fBoardCommentDTO);
 
     List<FBoardDTO> fBoardList(int page);
+
+    List<FBoardDTO> getFBoardTopRank(int n);
 }
