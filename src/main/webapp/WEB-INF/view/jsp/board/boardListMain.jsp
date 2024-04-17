@@ -14,6 +14,7 @@
 
 <form class="position-relative top-0 start-50 translate-middle-x mt-5" style="width: 50%">
     <input type="hidden" id="pg" value="${pg}">
+    <input type="hidden" id="sessionId" value="${userDTO.userId}">
     <br>
     <div class="grid d-flex p-4  py-md-3 ms-2  " >
         <div class="p-2 g-col-6"   >
@@ -67,7 +68,7 @@
 
         </div>
     </div>
-    <div id="pagingDiv" style="margin-left: 42%;">
+    <div id="pagingDiv" style="margin-left: 50%;">
         <!-- 동적 처리 -->
 
 

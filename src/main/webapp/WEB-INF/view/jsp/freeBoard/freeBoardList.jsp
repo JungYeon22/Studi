@@ -3,6 +3,17 @@
 <html>
 <head>
 <%@include file="../include/headFile.jsp"%>
+  <style>
+    .accordion-fixed {
+      position: fixed;
+      top: 200px; /* 오른쪽에 고정될 위치를 조정할 수 있습니다. */
+      right: 50px;
+      width: 400px; /* 공지사항 아코디언의 너비를 조정할 수 있습니다. */
+      z-index: 1000; /* 다른 요소 위에 표시되도록 z-index를 설정할 수 있습니다. */
+      overflow-y: auto; /* 스크롤이 필요한 경우 수직 스크롤바를 표시합니다. */
+      max-height: calc(100vh - 50px); /* 화면의 높이에서 헤더의 높이를 뺀 만큼 최대 높이로 설정합니다. */
+    }
+  </style>
 </head>
 <body>
 <%@include file="../include/header.jsp"%>
@@ -58,6 +69,24 @@
     </c:forEach>
   </div>
 </div>
+
+<div class="accordion accordion-fixed" id="accordionFlushExample">
+
+  <h2 class="text-center mt-4 mb-4"><i class="fa-solid fa-tower-cell"></i>  공지사항</h2>
+  <c:forEach var="noti" items="${notiList}">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#noti${noti.noti_id}" aria-expanded="false" aria-controls="flush-collapseOne">
+        <strong>${noti.title}</strong>
+      </button>
+    </h2>
+    <div id="noti${noti.noti_id}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">${noti.content}</div>
+    </div>
+  </div>
+  </c:forEach>
+</div>
+
 
 <script>
   $(document).ready(function (){

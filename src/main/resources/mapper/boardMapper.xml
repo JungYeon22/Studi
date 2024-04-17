@@ -13,18 +13,54 @@
     </insert>
 
     <select id="boardListGet" parameterType="int" resultType="board.bean.BoardDTO">
-        select * from board order by DATE desc limit ${startNum-1},3
+        select * from board order by DATE desc limit ${startNum-1},5
     </select>
+    <select id="boardListGetbyId" parameterType="String" resultType="board.bean.BoardDTO">
+        select * from board where BOARDID=#{boardid}
+    </select>
+
     <select id="boardListGet1" parameterType="Map" resultType="board.bean.BoardDTO">
         select * from board where projectType Like #{projectType} and projectField Like #{projectField} order by DATE desc
     </select>
     <select id="boardTagGet" parameterType="String" resultType="String">
         select CONTENT from boardtag where BOARDID=#{boardid}
     </select>
+
     <select id="getTotal" resultType="int">
         select count(*) from board;
     </select>
     <select id="getTotal1" parameterType="Map" resultType="int">
         select count(*) from board where projectType Like #{projectType} and projectField Like #{projectField};
+    </select>
+
+
+    <update id="addHit" parameterType="String">
+        update board set HIT=HIT+1 where BOARDID=#{boardid}
+    </update>
+
+
+    <select id="boardScrap" parameterType="Map" resultType="String">
+        select BOARDID from scrap where UserId=#{userId} and BOARDID=#{boardid}
+    </select>
+
+    <insert id="addBoardScrap" parameterType="Map">
+        insert into scrap values(#{userId},#{boardid})
+    </insert>
+
+    <delete id="removeBoardScrap" parameterType="Map">
+        delete from scrap where UserId=#{userId} and BOARDID=#{boardid}
+    </delete>
+
+    <delete id="removeBoard" parameterType="Map">
+        delete from board where UserId=#{userId} and BOARDID=#{boardid}
+    </delete>
+
+    <insert id="addReply" parameterType="Map">
+        insert into comment(ref,BOARDID,DATE,UserId,TEXT) values(<if test="ref==0">last_insert_id()+1</if><if test="ref!=0">#{ref}</if>,#{boardid},sysdate(),#{userId},#{text})
+
+    </insert>
+
+    <select id="loadReply" parameterType="String" resultType="board.bean.BoardReply">
+        select * from comment where BOARDID=#{boardid} order by ref, No
     </select>
 </mapper>

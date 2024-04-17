@@ -1,5 +1,6 @@
 package manager.dao;
 
+import manager.bean.NoticeDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -44,7 +45,7 @@ public class ManagerDAOMyBatis implements ManagerDAO{
     }
     @Override
     public List<ManagerDTO> getUserList2(Map<String, Object> map) {
-        System.out.println("");
+        System.out.println("ㅅㅂ");
 
         return sqlSession.selectList("manager.getUserList2", map);
     }
@@ -57,6 +58,21 @@ public class ManagerDAOMyBatis implements ManagerDAO{
     @Override
     public List<Map<String, Object>> pichart2() {
         return sqlSession.selectList("manager.pichart2");
+    }
+
+    @Override
+    public void registerNotice(Map<String, String> map) {
+
+    }
+
+    @Override
+    public List<NoticeDTO> getNotice() {
+        return null;
+    }
+
+    @Override
+    public void notiDelete(int id) {
+
     }
 
 }

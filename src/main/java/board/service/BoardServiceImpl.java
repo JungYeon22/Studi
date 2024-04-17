@@ -2,6 +2,7 @@ package board.service;
 
 import board.bean.BoardDTO;
 import board.bean.BoardPaging;
+import board.bean.BoardReply;
 import board.dao.BoardDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,7 @@ public class BoardServiceImpl implements BoardService{
     public Map<String,Object> boardListGet(String pg) {
 
         //1페이지당 3개씩
-        int startNum= (Integer.parseInt(pg)*3)-2;
+        int startNum= (Integer.parseInt(pg)*5)-4;
 
 
         List<BoardDTO> list = boardDAO.boardListGet(startNum);
@@ -56,7 +57,7 @@ public class BoardServiceImpl implements BoardService{
 
         boardPaging.setCurrentPage(Integer.parseInt(pg));
         boardPaging.setPageBlock(3);
-        boardPaging.setPageSize(3);
+        boardPaging.setPageSize(5);
         boardPaging.setTotal(total);
         boardPaging.makePagingHTML();
 
@@ -87,5 +88,67 @@ public class BoardServiceImpl implements BoardService{
 
 
         return boardDAO.boardListGet1(map);
+    }
+
+    @Override
+    public BoardDTO boardListGetbyId(String boardid) {
+        return boardDAO.boardListGetbyId(boardid);
+    }
+
+    @Override
+    public void addHit(String boardid) {
+        boardDAO.addHit(boardid);
+    }
+
+    @Override
+    public String boardScrap(String boardid, String userId) {
+        Map<String, String> map = new HashMap<>();
+        map.put("boardid",boardid);
+        map.put("userId",userId);
+        return boardDAO.boardScrap(map);
+    }
+
+    @Override
+    public void addBoardScrap(String boardid, String userId) {
+        Map<String, String> map = new HashMap<>();
+        map.put("boardid",boardid);
+        map.put("userId",userId);
+        boardDAO.addBoardScrap(map);
+    }
+
+    @Override
+    public String removeBoardScrap(String boardid, String userId) {
+        Map<String, String> map = new HashMap<>();
+        map.put("boardid",boardid);
+        map.put("userId",userId);
+        boardDAO.removeBoardScrap(map);
+        return "";
+    }
+
+    @Override
+    public String removeBoard(String boardid, String userId) {
+
+        Map<String, String> map = new HashMap<>();
+        map.put("boardid",boardid);
+        map.put("userId",userId);
+        boardDAO.removeBoardScrap(map);
+        boardDAO.removeBoard(map);
+        return "";
+    }
+
+    @Override
+    public String addReply(String boardid, String userId, String text, int ref) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("boardid",boardid);
+        map.put("userId",userId);
+        map.put("text",text);
+        map.put("ref",ref);
+        boardDAO.addReply(map);
+        return "";
+    }
+
+    @Override
+    public List<BoardReply> loadReply(String boardid) {
+        return boardDAO.loadReply(boardid);
     }
 }
