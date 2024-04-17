@@ -11,9 +11,8 @@ public interface UserDao {
 
     UserDTO findByEmail(String email);
 
-//    UserIntro getIntro(String userId);
+    UserIntro getIntro(String userId);
     void writeIntroduce(UserIntro userIntro);
     void delete(String userId);
-
-//    void update(Model model);
+    void update(UserIntro userIntro);
 }

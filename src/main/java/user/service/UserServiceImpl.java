@@ -49,14 +49,13 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-//    @Override
-//    public UserIntro getIntro(String userId) {
-//        return userDAO.getIntro(userId);
-//    }
+    @Override
+    public UserIntro getIntro(String userId) {
+        return userDAO.getIntro(userId);
+    }
 
     @Override
     public void writeIntroduce(UserIntro userIntro) {
-        System.out.println("2 " + userIntro.getUserId()+" "+userIntro.getIntroduce() + " " + userIntro.getCareer());
         userDAO.writeIntroduce(userIntro);
     }
 
@@ -65,10 +64,10 @@ public class UserServiceImpl implements UserService {
         userDAO.delete(userId);
     }
 
-//    @Override
-//    public void update(Model model) {
-//        userDAO.update(model);
-//    }
+    @Override
+    public void update(UserIntro userIntro) {
+        userDAO.update(userIntro);
+    }
 
 
 }

@@ -16,9 +16,7 @@ import user.service.UserServiceImpl;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -31,7 +29,10 @@ public class UserController {
     private final JavaMailSenderImpl mailSender;
 
     @GetMapping("/writeForm")
-    public String writeForm() {
+    public String writeForm(Model model) {
+        List<String> skillList = Arrays.asList("JAVA", "C", "C++", "C#", "Python", "JavaScript", "Kotlin", "Go", "MySQL", "Oracle");
+        model.addAttribute("skillList", skillList);
+
         return "user/writeForm";
     }
 
@@ -130,41 +131,81 @@ public class UserController {
         return Integer.toString(checkNum);
     }
 
-
     @GetMapping(value = "/introduceForm")
     public String introduceForm() {
         return "user/introduceForm";
     }
 
     @PostMapping(value="/writeForm/introduce")
-    public String writeIntroduce(@ModelAttribute UserIntro userIntro) {
-        System.out.println(userIntro.getUserId()+" "+userIntro.getIntroduce() + " " + userIntro.getCareer());
+    public String writeIntroduce(@ModelAttribute UserIntro userIntro,
+                                 @RequestParam HashMap<String, Object> skillMap,
+                                 @RequestParam String skill) {
+        String[] code_array = null;
+//        String code = skillMap.get("skill").toString();
+        code_array = skill.split(",");
+        int[] results= new int[code_array.length];
+        int result=1;
+        for(int i=0; i < code_array.length; i++){
+            if(i == 0) {
+                userIntro.setSkill1(code_array[i]);
+            } else if(i == 1) {
+                userIntro.setSkill2(code_array[i]);
+            } else if(i == 2) {
+                userIntro.setSkill3(code_array[i]);
+                break;
+            }
+        }
         userService.writeIntroduce(userIntro);
         return "user/introduceForm";
     }
 
     @GetMapping(value = "/myPage")
-    public String myPage(@SessionAttribute("userDTO") UserDTO userDTO, Model model)
+    public String myPage(@SessionAttribute("userDTO") UserDTO userDTO,Model model)
     {
+        UserIntro userIntro = userService.getIntro(userDTO.getUserId());
+        model.addAttribute("userIntro",userIntro);
 //        model.addAttribute("userDTO", userDTO);
 //        UserIntro userIntro = userService.getIntro(userDTO.getUserId());
 //        model.addAttribute("userIntro",userIntro);
         return "user/myPage";
     }
 
-//    @GetMapping(value = "/updateForm")
-//    public String updateForm(@SessionAttribute("userDTO") UserDTO userDTO,
-//                             @ModelAttribute UserIntro userIntro,
-//                             Model model)
-//    {   model.addAttribute("userIntro",userIntro);
-//        model.addAttribute("userDTO", userDTO);
-//        userService.update(model);
-//        return "user/updateForm";
-//    }
+    @GetMapping("/updateForm")
+    public String updateForm(Model model) {
+        List<String> skillList = Arrays.asList("JAVA", "C", "C++", "C#", "Python", "JavaScript", "Kotlin", "Go", "MySQL", "Oracle");
+        model.addAttribute("skillList", skillList);
+        return "user/updateForm";
+    }
+    @PostMapping(value = "/updateForm")
+    public String update(@ModelAttribute UserIntro userIntro,
+                         @RequestParam HashMap<String, Object> skillMap,
+                         @SessionAttribute("userDTO") UserDTO userDTO)
+    {
+        String[] code_array = null;
+
+        String code = skillMap.get("arrayParam").toString();
+        code_array = code.split(",");
+        int[] results= new int[code_array.length];
+        int result=1;
+        for(int i=0; i < code_array.length; i++){
+            if(i == 0) {
+                userIntro.setSkill1(code_array[i]);
+            } else if(i == 1) {
+                userIntro.setSkill2(code_array[i]);
+            } else if(i == 2) {
+                userIntro.setSkill3(code_array[i]);
+                break;
+            }
+        }
+
+        userIntro.setUserId(userDTO.getUserId());
+        userService.update(userIntro);
+        return "user/myPage";
+    }
 
     @PostMapping(value="/delete")
     @ResponseBody
-    public void delete(@SessionAttribute String userId) {
+    public void delete(@RequestParam String userId) {
         userService.delete(userId);
     }
 }
