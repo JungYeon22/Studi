@@ -13,11 +13,12 @@ CREATE TABLE `BOARD` (
 );
 
 CREATE TABLE `COMMENT` (
-`No`	INT,
-`BOARDID`	VARCHAR(100),
-`DATE`	DATE,
-`UserId`	VARCHAR(100),
-`TEXT`	VARCHAR(100)
+                           `No`	INT auto_increment primary key,
+                           `ref` INT,
+                           `BOARDID`	VARCHAR(100),
+                           `DATE`	DATE,
+                           `UserId`	VARCHAR(100),
+                           `TEXT`	VARCHAR(100)
 );
 
 CREATE TABLE `SCRAP` (
