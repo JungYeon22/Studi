@@ -9,6 +9,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import user.bean.UserDTO;
 import user.bean.UserIntro;
 import user.service.UserServiceImpl;
@@ -102,7 +103,7 @@ public class UserController {
         int checkNum = random.nextInt(888888)+111111;
 
         //이메일 보낼 양식
-        String setFrom = "chlrytns94@naver.com"; //2단계 인증 x, 메일 설정에서 POP/IMAP 사용 설정에서 POP/SMTP 사용함으로 설정o
+        String setFrom = "rytns24@naver.com"; //2단계 인증 x, 메일 설정에서 POP/IMAP 사용 설정에서 POP/SMTP 사용함으로 설정o
         String toMail = email;
         String title = "회원가입 인증 이메일 입니다.";
         String content = "인증 코드는 " + checkNum + " 입니다." +
@@ -167,4 +168,62 @@ public class UserController {
     public void delete(@SessionAttribute String userId) {
         userService.delete(userId);
     }
+
+
+    // 아이디 찾기
+    @GetMapping(value = "/findIdForm")
+    public String findIdForm() {
+        return "user/findIdForm";
+    }
+
+    @PostMapping(value = "/findIdForm")
+    public String findIdPost(@RequestParam("email") String email,
+                             RedirectAttributes redirectAttributes,
+                             HttpServletRequest request) {
+        UserDTO user = userService.findByEmail(email);
+        if(user != null) {
+            // 세션에 사용자 정보 저장했음 !
+            request.getSession().setAttribute("user", user);
+            return "redirect:/user/findId";
+        } else {
+            // 이건 단발성 요청에 존재하는 기능 !
+            redirectAttributes.addFlashAttribute("error", "입력하신 이메일로 등록된 아이디가 없습니다.");
+            return "redirect:/user/findIdForm";
+        }
+    }
+
+    // 찾은 아이디 조회
+    @GetMapping(value = "/findId")
+    public String findIdView() {
+        return "user/findId";
+    }
+
+    // 비밀번호 찾기
+    @GetMapping(value = "/findPwdForm")
+    public String findPwdForm() {
+        return "user/findPwdForm";
+    }
+
+    @PostMapping(value = "/findPwdForm")
+    public String findPwdPost(@RequestParam("email") String email,
+                              RedirectAttributes redirectAttributes,
+                              HttpServletRequest request) {
+        UserDTO user = userService.findByEmail(email);
+        if(user != null) {
+            // 세션에 사용자 정보 저장했음 !
+            request.getSession().setAttribute("user", user);
+            return "redirect:/user/findPwd";
+        } else {
+            // 이건 단발성 요청에 존재하는 기능 !
+            redirectAttributes.addFlashAttribute("error", "입력하신 이메일로 등록된 아이디가 없습니다.");
+            return "redirect:/user/findPwdForm";
+        }
+    }
+
+    // 찾은 비밀번호 조회
+    @GetMapping(value = "/findPwd")
+    public String findPwdView() {
+        return "user/findPwd";
+    }
+
 }

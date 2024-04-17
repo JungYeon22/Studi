@@ -31,6 +31,10 @@
         delete from User where id=#{userId}
     </delete>
 
+    <select id="countByEmail" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM USER WHERE email = #{email}
+    </select>
+
 <!--    <update id="update" parameterType="model">-->
 <!--        UPDATE USER_Description-->
 <!--        SET position = #{position}, career = #{career}, introduce = #{introduce}-->

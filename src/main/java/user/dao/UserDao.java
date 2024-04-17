@@ -16,4 +16,5 @@ public interface UserDao {
     void delete(String userId);
 
 //    void update(Model model);
+    boolean isEmailExist(String email);
 }

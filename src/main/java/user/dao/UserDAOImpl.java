@@ -43,6 +43,13 @@ public class UserDAOImpl implements UserDao {
         sql.delete("USER.delete", userId);
     }
 
+
+    @Override
+    public boolean isEmailExist(String email) {
+        Integer count = sql.selectOne("USER.countByEmail", email);
+        return count != null && count > 0;
+    }
+
 //    @Override
 //    public void update(Model model) {
 //        sql.update("USER.update", model);
