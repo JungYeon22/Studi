@@ -29,7 +29,7 @@
         <div class="col-md-8">
           <!-- 게시물 목록 -->
           <div class="card mb-3">
-            <div class="card-header d-flex justify-content-between">
+            <div class="card-header d-flex justify-content-between border-success">
               <strong>${fboardDTO.title}</strong>
               <div class="text-end">
                 <small>작성자: ${fboardDTO.writer} </small>
