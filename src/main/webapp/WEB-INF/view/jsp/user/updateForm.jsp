@@ -21,11 +21,11 @@
 <body>
 <%@ include file="../include/header.jsp"%>
 
-<form id="updateForm" action="user/updateForm" method="post">
+<form class="validation-form" id="updateForm" action="/user/updateForm" method="post" novalidate>
     <div class="input-form-background row mb-0 mt-0">
         <div class="input-form col-md-12 mx-auto">
             <label for="position"><span>주요 포지션</span></label>
-            <input type="text" class="form-control" id="position" placeholder="back-end" required >
+            <input type="text" class="form-control" id="position" name="position" placeholder="back-end" required >
         </div>
     </div>
     <div class="input-form-backgroud row mb-0 mt-0 p-1">
@@ -36,34 +36,19 @@
     </div>
     <div class="input-form col-md-12 mx-auto mb-0 mt-0 p-1">
         <label for="skill"><span>사용가능 언어(다중선택)</span></label>
-        <div class="skill" id="skill" role="group" aria-label="Basic checkbox toggle button group" >
-            <input type="checkbox" class="btn-check" id="java" >
-            <label class="btn btn-outline-dark" for="java">JAVA</label>
-            <input type="checkbox" class="btn-check" id="c" >
-            <label class="btn btn-outline-dark" for="c">C</label>
-            <input type="checkbox" class="btn-check" id="cpp" >
-            <label class="btn btn-outline-dark" for="cpp">C++</label>
-            <input type="checkbox" class="btn-check" id="cs" >
-            <label class="btn btn-outline-dark" for="cs">C#</label>
-            <input type="checkbox" class="btn-check" id="python" >
-            <label class="btn btn-outline-dark" for="python">Python</label>
-            <input type="checkbox" class="btn-check" id="javascript" >
-            <label class="btn btn-outline-dark" for="javascript">javascript</label>
-            <input type="checkbox" class="btn-check" id="kotlin" >
-            <label class="btn btn-outline-dark" for="kotlin">kotlin</label>
-            <input type="checkbox" class="btn-check" id="go" >
-            <label class="btn btn-outline-dark" for="go">Go</label>
-            <input type="checkbox" class="btn-check" id="mysql" >
-            <label class="btn btn-outline-dark" for="mysql">MySQL</label>
-            <input type="checkbox" class="btn-check" id="oracle" >
-            <label class="btn btn-outline-dark" for="oracle">Oracle</label>
+        <div class="skill" id="skill" role="group" aria-label="Basic checkbox toggle button group">
+            <input type="hidden" id="arrayParam" name="arrayParam"/>
+            <c:forEach var="item" items="${skillList}" varStatus="status">
+                <input type="checkbox" class="btn-check" name="skill" id="skill${status.index}" value="${item}">
+                <label class="btn btn-outline-dark" for="skill${status.index}">${item}</label>
+            </c:forEach>
         </div>
     </div>
     <div class="input-form-backgroud row mb-0 mt-0 p-1">
         <div class="mb-3">
             <div class="input-form col-md-12 mx-auto">
-                <label for="simpleIntroduce"><span>간단한 소개</span></label>
-                <input type="text" class="form-control" id="simpleIntroduce" name="introduce" required >
+                <label for="introduce"><span>간단한 소개</span></label>
+                <input type="text" class="form-control" id="introduce" name="introduce" required >
                 <div class="button-container mt-3 col-md-6 ms-auto">
                     <button type="submit" id="insertBtn" class="btn btn-outline-dark btn-lg" >입력</button>
                     <button type="button" id="cancelBtn" class="btn btn-outline-dark btn-lg" >취소</button>
@@ -79,10 +64,33 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/user/update.js"></script>
 <script>
     $(document).ready(function() {
+        // 페이지 로드 시 초기화
+        updateArrayParam();
+
+        // 체크박스가 변경될 때마다 호출되는 함수
+        $('input:checkbox[name=skill]').change(function() {
+            updateArrayParam();
+        });
+
+        // 취소 버튼 클릭 시 이벤트 처리
         $('#cancelBtn').click(function() {
             history.back();
         });
+
+        // 등록 버튼 클릭 시 이벤트 처리
+        $('#insertBtn').click(function () {
+            $('#updateForm').submit();
+        });
     });
+
+    // #arrayParam 값을 업데이트하는 함수
+    function updateArrayParam() {
+        var array = []; // 배열 선언
+        $('input:checkbox[name=skill]:checked').each(function() {
+            array.push(this.value);
+        });
+        $("#arrayParam").val(array.join(','));
+    }
 </script>
 </body>
 </html>

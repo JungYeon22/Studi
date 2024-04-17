@@ -59,6 +59,24 @@
   </div>
 </div>
 
+<div class="accordion accordion-fixed" id="accordionFlushExample">
+
+  <h2 class="text-center mt-4 mb-4"><i class="fa-solid fa-tower-cell"></i>  공지사항</h2>
+  <c:forEach var="noti" items="${notiList}">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#noti${noti.noti_id}" aria-expanded="false" aria-controls="flush-collapseOne">
+        <strong>📢${noti.title}</strong>
+      </button>
+    </h2>
+    <div id="noti${noti.noti_id}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body contentValue">${noti.content}</div>
+    </div>
+  </div>
+  </c:forEach>
+</div>
+
+
 <script>
   $(document).ready(function (){
 

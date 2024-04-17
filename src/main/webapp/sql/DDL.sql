@@ -1,10 +1,10 @@
 use minidb;
 
+/* 유저 */
 CREATE TABLE user (
     UserId    VARCHAR(100)    ,
     PWD    VARCHAR(100),
     NAME    VARCHAR(100)    ,
-    SKILL    VARCHAR(100),
     EMAIL    VARCHAR(100)    ,
     PHONE    VARCHAR(100)    ,
     HIREDATE    DATE     default (CURRENT_DATE),
@@ -12,16 +12,52 @@ CREATE TABLE user (
 );
 
 
-CREATE TABLE user_description (
-    name	VARCHAR(100),
-    UserId	VARCHAR(100),
-    Career	VARCHAR(100),
-    SKILL1	VARCHAR(100),
-    SKILL2	VARCHAR(100),
-    SKILL3	VARCHAR(100),
-    Introduce  VARCHAR(100)
+CREATE TABLE USER_Description (
+  name	VARCHAR(100),
+  UserId	VARCHAR(100),
+  Position VARCHAR(100),
+  Career	VARCHAR(100),
+  SKILL1	VARCHAR(100),
+  SKILL2	VARCHAR(100),
+  SKILL3	VARCHAR(100),
+  Introduce  VARCHAR(100)
 );
 
+/* 모집 게시판 */
+CREATE TABLE `BOARD` (
+    `BOARDID`	VARCHAR(100),
+    `SUBJECT`	VARCHAR(100),
+    `CONTENT`	VARCHAR(4000),
+    `userTotCnt` INT,
+    `userCurCnt` INT,
+    `projectType` VARCHAR(100),
+    `projectField` VARCHAR(100),
+    `UserId`	VARCHAR(100),
+    `DATE`	DATETIME,
+    `FILE`	VARCHAR(100),
+    `HIT`	VARCHAR(100)
+);
+
+CREATE TABLE `COMMENT` (
+    `No`	INT auto_increment primary key,
+    `ref` INT,
+    `BOARDID`	VARCHAR(100),
+    `DATE`	DATE,
+    `UserId`	VARCHAR(100),
+    `TEXT`	VARCHAR(100)
+);
+
+CREATE TABLE `SCRAP` (
+    `UserId`	VARCHAR(100),
+    `BOARDID`	VARCHAR(100)
+);
+
+CREATE TABLE `boardtag` (
+    `CONTENT`	VARCHAR(100),
+    `BOARDID`	VARCHAR(100)
+);
+
+/* 팀 프로젝트 */
 CREATE TABLE `project` (
     `PROJECTID`	VARCHAR(100),
     `PROJECTNAME`	VARCHAR(100),
@@ -37,6 +73,7 @@ CREATE TABLE `project_member` (
     `UserID`	VARCHAR(100)
 );
 
+/* 라우지(자유게시판)*/
 drop table free_board;
 CREATE TABLE `free_board` (
     `FBOARD`	INT primary key auto_increment,
@@ -113,6 +150,7 @@ BEGIN
 end //
 DELIMITER ;
 
+/* 채팅방 */
 CREATE TABLE `CHATINGROOM` (
     `CHATID`	VARCHAR(100),
     `CHATINGNAME`	VARCHAR(100),
@@ -131,6 +169,7 @@ CREATE TABLE `CHATING` (
     `PROJECTID`	VARCHAR(100)
 );
 
+/* 알림 */
 CREATE TABLE `MAIL_NOTIFICATION` (
     `UserId`	VARCHAR(100),
     `NOTIFICATION_TYPE`	VARCHAR(50),

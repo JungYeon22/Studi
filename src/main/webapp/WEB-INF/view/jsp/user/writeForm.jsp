@@ -147,27 +147,12 @@
                 <div class="modal-body">
                     <div class="input-form col-md-12 mx-auto mb-0 mt-0 p-1">
                         <label for="skill"><span>사용가능 언어(다중선택)</span></label>
-                        <div class="skill" id="skill" role="group" aria-label="Basic checkbox toggle button group" >
-                            <input type="checkbox" class="btn-check" id="java" >
-                            <label class="btn btn-outline-dark" for="java">JAVA</label>
-                            <input type="checkbox" class="btn-check" id="c" >
-                            <label class="btn btn-outline-dark" for="c">C</label>
-                            <input type="checkbox" class="btn-check" id="cpp" >
-                            <label class="btn btn-outline-dark" for="cpp">C++</label>
-                            <input type="checkbox" class="btn-check" id="cs" >
-                            <label class="btn btn-outline-dark" for="cs">C#</label>
-                            <input type="checkbox" class="btn-check" id="python" >
-                            <label class="btn btn-outline-dark" for="python">Python</label>
-                            <input type="checkbox" class="btn-check" id="javascript" >
-                            <label class="btn btn-outline-dark" for="javascript">javascript</label>
-                            <input type="checkbox" class="btn-check" id="kotlin" >
-                            <label class="btn btn-outline-dark" for="kotlin">kotlin</label>
-                            <input type="checkbox" class="btn-check" id="go" >
-                            <label class="btn btn-outline-dark" for="go">Go</label>
-                            <input type="checkbox" class="btn-check" id="mysql" >
-                            <label class="btn btn-outline-dark" for="mysql">MySQL</label>
-                            <input type="checkbox" class="btn-check" id="oracle" >
-                            <label class="btn btn-outline-dark" for="oracle">Oracle</label>
+                        <div class="skill" id="skill" role="group" aria-label="Basic checkbox toggle button group">
+                            <input type="hidden" id="arrayParam" name="arrayParam"/>
+                            <c:forEach var="item" items="${skillList}" varStatus="status">
+                                <input type="checkbox" class="btn-check" name="skill" id="skill${status.index}" value="${item}">
+                                <label class="btn btn-outline-dark" for="skill${status.index}">${item}</label>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>

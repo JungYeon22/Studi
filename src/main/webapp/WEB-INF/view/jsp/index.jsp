@@ -1,11 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: jungyeon
-  Date: 2024-03-24
-  Time: 오후 12:25
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
@@ -25,6 +19,7 @@
     .card:hover {
       background-color: rgb(208, 221, 255); /* 변경할 배경색 */
       transform: scale(1.05); /* 약간 크기를 늘립니다. */
+      cursor: pointer;
     }
   </style>
 </head>
@@ -35,13 +30,13 @@
 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="2000">
-      <img src="/image/study.jpg" class="d-block w-100" alt="...">
+      <img src="/image/study2.jpg" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="/image/study.jpg" class="d-block w-100" alt="...">
+      <img src="/image/study3.jpg" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="/image/study.jpg" class="d-block w-100" alt="...">
+      <img src="/image/study4.jpg" class="d-block w-100" alt="...">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -53,8 +48,6 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-
-
 
 
 <div class="container-fluid p-5 row justify-content-center">
@@ -116,55 +109,45 @@
   </div>
 </div>
 
-<div class="container-fluid p-5 row justify-content-center">
-  <h2>⭐️ 신규 공모전/프로젝트 </h2>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
-
+<div class="container-fluid p-5 row justify-content-center" id="fBoardTopRankContainer">
+  <h2>⭐ 최근 라운지 게시글</h2>
 </div>
 <%@include file="include/footer.jsp"%>
+<script src="https://code.jQuery.com/jquery-3.7.1.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $(document).on('click', '.fBoardTopRank', function(){
+      console.log("afs")
+      location.href="/freeBoard/freeBoardList"
+    })
+
+    $.get({
+      url: 'freeBoard/getFBoardTopRank',
+      dataType: 'json',
+      success: function (data){
+        console.log(JSON.stringify(data));
+
+        $.each(data, function(index, items) {
+          var fBoardItem = `<div class="card border-primary fBoardTopRank col-3 m-2" style="width: 18rem;">
+                              <div class="card-body">
+                                <h5 class="card-title"><strong>`+items.title+`</strong></h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">`+items.writer+`</h6>
+                                <p class="card-text d-inline-block text-truncate" style="max-width: 150px;">
+                                    `+items.content+`
+                                </p>
+                              </div>
+                              <div class="card-footer bg-transparent">
+                                <div class="opacity-25 mb-1">
+                                  <i class="fa-solid fa-heart"> `+items.likes+`</i>
+                                  <i class="fa-regular fa-comment"> `+items.comment+`</i>
+                                </div>
+                              </div>
+                            </div>`
+          $('#fBoardTopRankContainer').append(fBoardItem);
+        })
+      }
+    })
+  })
+</script>
 </body>
 </html>

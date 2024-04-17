@@ -3,6 +3,7 @@ package manager.service;
 import manager.bean.ManagerDTO;
 import manager.bean.ManagerData;
 import manager.bean.ManagerPaging;
+import manager.bean.NoticeDTO;
 import manager.dao.ManagerDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -103,5 +104,20 @@ public class ManagerServiceImpl implements ManagerService{
         map2.put("managerPaging", managerPaging);
 
         return map2;
+    }
+
+    @Override
+    public void registerNotice(Map<String, String> map) {
+        managerDAO.registerNotice(map);
+    }
+
+    @Override
+    public List<NoticeDTO> getNotice() {
+        return managerDAO.getNotice();
+    }
+
+    @Override
+    public void notiDelete(int id) {
+        managerDAO.notiDelete(id);
     }
 }
