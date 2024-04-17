@@ -48,4 +48,8 @@ public interface BoardDAO {
     public List<BoardDTO> getHot5();
 
     public List<BoardDTO> getRecent5();
+
+    public void removeComment(Map<String, String> map);
+
+    public void removeTag(Map<String, String> map);
 }

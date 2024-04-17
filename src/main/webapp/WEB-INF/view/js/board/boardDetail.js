@@ -42,9 +42,9 @@ $(function (){
                         <div class="col-sm-1 dropdown "  style="width: 50px;">
                             <img src="/image/icons8-동물-30.png"
                                  class="rounded  dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                                 aria-expanded="false" style=" vertical-align: middle;" alt="profile"/>
-                            <div >
-                                <small id="userId" style="margin-left: 5px;">` +  items.userId+`</small>
+                                 aria-expanded="false"  alt="profile"/>
+                            <div style="height: 20px ;width: 60px;margin-left: -20px ">
+                                <small id="userId" >` +  items.userId+`</small>
                             </div>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">프로필 보기</a></li>
@@ -80,9 +80,9 @@ $(function (){
                         <div class="col-sm-1 dropdown" style="width: 50px; margin-left: 10px">
                             <img src="/image/icons8-테디-베어-30.png"
                                  class="rounded dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                                 aria-expanded="false" style="vertical-align: middle;" alt="profile"/>
-                            <div>
-                                <small style="margin-left: 5px;">`+items.userId+`</small>
+                                 aria-expanded="false"  alt="profile"/>
+                            <div style="height: 20px ;width: 60px;margin-left: -20px ">
+                                <small >`+items.userId+`</small>
                             </div>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">프로필 보기</a></li>

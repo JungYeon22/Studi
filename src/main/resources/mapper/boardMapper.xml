@@ -54,6 +54,12 @@
     <delete id="removeBoard" parameterType="Map">
         delete from board where UserId=#{userId} and BOARDID=#{boardid}
     </delete>
+    <delete id="removeComment" parameterType="Map">
+        delete from comment where UserId=#{userId} and BOARDID=#{boardid}
+    </delete>
+    <delete id="removeTag" parameterType="Map">
+        delete from boardtag where BOARDID=#{boardid}
+    </delete>
 
     <insert id="addReply" parameterType="Map">
         insert into comment(ref,BOARDID,DATE,UserId,TEXT) values(<if test="ref==0">last_insert_id()+1</if><if test="ref!=0">#{ref}</if>,#{boardid},sysdate(),#{userId},#{text})

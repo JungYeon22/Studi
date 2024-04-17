@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Controller
 @RequestMapping(value = "board")
@@ -92,7 +93,7 @@ public class BoardController {
     @PostMapping(value = "/boardInputData")
     @ResponseBody
     public String boardInputData(@ModelAttribute BoardDTO boardDTO, @RequestParam String[] lang){
-        boardDTO.setBOARDID(boardDTO.getUserId()+boardDTO.getSUBJECT());
+        boardDTO.setBOARDID(boardDTO.getUserId()+ UUID.randomUUID().toString());
         boardService.boardInputData(boardDTO,lang);
         return "";
     }

@@ -124,24 +124,19 @@ $(function(){
 
   });
 
-});
+  $(document).on('click', '.fBoardTopRank', function(){
+    console.log("afs")
+    location.href="/freeBoard/freeBoardList"
+  })
 
-</script>
-<script>
-    $(document).ready(function(){
-        $(document).on('click', '.fBoardTopRank', function(){
-            console.log("afs")
-            location.href="/freeBoard/freeBoardList"
-        })
+  $.get({
+    url: 'freeBoard/getFBoardTopRank',
+    dataType: 'json',
+    success: function (data){
+      console.log(JSON.stringify(data));
 
-        $.get({
-            url: 'freeBoard/getFBoardTopRank',
-            dataType: 'json',
-            success: function (data){
-                console.log(JSON.stringify(data));
-
-                $.each(data, function(index, items) {
-                    var fBoardItem = `<div class="card border-primary fBoardTopRank col-3 m-2" style="width: 18rem;">
+      $.each(data, function(index, items) {
+        var fBoardItem = `<div class="card border-primary fBoardTopRank col-3 m-2" style="width: 18rem;">
                               <div class="card-body">
                                 <h5 class="card-title"><strong>`+items.title+`</strong></h5>
                                 <h6 class="card-subtitle mb-2 text-body-secondary">`+items.writer+`</h6>
@@ -156,64 +151,15 @@ $(function(){
                                 </div>
                               </div>
                             </div>`
-                    $('#fBoardTopRankContainer').append(fBoardItem);
-                })
-            }
-        })
-    })
+        $('#fBoardTopRankContainer').append(fBoardItem);
+      })
+    }
+  })
+
+});
+
 </script>
+
 </body>
 </html>
 
-<div class="container-fluid p-5 row justify-content-center">
-  <h2>⭐️ 신규 공모전/프로젝트 </h2>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
-  <div class="card col-3 m-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
-
-</div>
-<%@include file="include/footer.jsp"%>
-</body>
-</html>

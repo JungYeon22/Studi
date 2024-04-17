@@ -133,6 +133,8 @@ public class BoardServiceImpl implements BoardService{
         map.put("userId",userId);
         boardDAO.removeBoardScrap(map);
         boardDAO.removeBoard(map);
+        boardDAO.removeComment(map);
+        boardDAO.removeTag(map);
         return "";
     }
 
