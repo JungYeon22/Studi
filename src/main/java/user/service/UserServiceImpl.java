@@ -70,5 +70,16 @@ public class UserServiceImpl implements UserService {
 //        userDAO.update(model);
 //    }
 
+    @Override
+    public UserDTO findByEmail(String email) {
+        return userDAO.findByEmail(email);
+    }
+
+    // 이메일 중복검사
+    @Override
+    public boolean isEmailDuplicate(String email) {
+        return userDAO.isEmailExist(email);
+    }
+
 
 }

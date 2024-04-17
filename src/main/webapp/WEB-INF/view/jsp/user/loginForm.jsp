@@ -57,8 +57,9 @@
                     <label for="password">비밀번호</label>
                     <input type="text" class="form-control" id="password" placeholder="비밀번호" name="pwd" required>
                     <div class="invalid-feedback"></div>
-                    <a type="button" class="find"><span>아이디·비밀번호 찾기</span></a><br>
-                </div><br>
+                    <a type="button" class="find" onclick="location.href='findPwdForm' "><span>비밀번호 찾기</span></a>
+                    <a type="button" class="find" onclick="location.href='findIdForm' "><span>아이디 찾기</span></a>
+                </div><br><br>
 
                 <div class="d-grid gap-2">
                     <button class="btn btn-outline-dark" type="submit" id="lobtn">로그인</button>
