@@ -46,11 +46,11 @@
             <form class="login-form" action="${pageContext.request.contextPath}/user/findPwd" method="post" novalidate>
                 <div class="mb-3">
                     <label for="name" style="margin-bottom: 6px">이름</label>
-                    <input type="text" class="form-control" id="name" value="${user.name}" style="margin-bottom: 30px" disabled required>
+                    <input type="text" class="form-control" id="name" value="${userDTO.name}" style="margin-bottom: 30px" disabled required>
                     <div class="invalid-feedback"></div>
 
                     <label for="pwd" style="margin-bottom: 6px">비밀번호</label>
-                    <input type="text" class="form-control" id="pwd" value="${user.pwd}" style="margin-bottom: 30px" disabled required>
+                    <input type="text" class="form-control" id="pwd" value="${userDTO.pwd}" style="margin-bottom: 30px" disabled required>
                     <div class="invalid-feedback"></div>
                 </div>
 
@@ -58,8 +58,6 @@
                     <button class="btn btn-outline-dark" type="button" id="writebtn" onclick="location.href='loginForm' ">로그인으로 이동하기</button>
                 </div>
             </form>
-
-
 
         </div>
     </div>

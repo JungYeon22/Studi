@@ -44,8 +44,17 @@
                     <div class="invalid-feedback"></div>
                 </div>
 
+                <div class="form-group">
+                    <label for="email">인증번호 받기</label>
+                    <input class="form-control" placeholder="인증 코드 6자리를 입력해주세요." maxlength="6" style="margin-top: 10px" disabled="disabled" name="authCode" id="authCode" type="text" autofocus>
+                    <div style="display: block; text-align: right; margin: 10px">
+                        <input type="button" value="인증번호 발급" class="btn btn-primary" id="emailAuthPwd">
+                    </div>
+                    <span id="emailAuthWarn"></span>
+                </div>
+
                 <div class="d-grid gap-2">
-                    <button class="btn btn-outline-dark" type="submit" id="findPwdBtn">비밀번호 찾기</button>
+                    <button class="btn btn-outline-dark" type="submit" id="findPwdBtn" disabled>비밀번호 찾기</button>
                 </div>
             </form>
         </div>
@@ -54,6 +63,56 @@
 <br>
 <%@include file="../include/footer.jsp"%>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </body>
 </html>
+
+<script>
+    $(function () {
+        window.addEventListener('load', () => {
+            //인증하기 버튼을 눌렀을 때 동작
+            $("#emailAuthPwd").click(function () {
+                const email = $("#email").val(); //사용자가 입력한 이메일 값 얻어오기
+
+                //Ajax로 전송
+                $.ajax({
+                    url: '/user/EmailAuthPwd',
+                    data: {
+                        email: email
+                    },
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (result) {
+                        console.log("result : " + result);
+                        $("#authCode").attr("disabled", false);
+                        code = result;
+                        alert("인증 코드가 입력하신 이메일로 전송 되었습니다.");
+                    },
+                    error: function (result) {
+                        alert("이메일 전송이 실패하였습니다.");
+                    }
+                }); //End Ajax
+            });
+
+            //인증 코드 비교
+            $("#authCode").on("focusout", function () {
+                const inputCode = $("#authCode").val(); //인증번호 입력 칸에 작성한 내용 가져오기
+
+                console.log("입력코드 : " + inputCode);
+                console.log("인증코드 : " + code);
+
+                if (Number(inputCode) === code) {
+                    $("#emailAuthWarn").html('인증번호가 일치합니다.');
+                    $("#emailAuthWarn").css('color', 'green');
+                    $('#emailAuth').attr('disabled', true);
+                    $('#email').attr('readonly', true);
+                    $("#findPwdBtn").attr("disabled", false);
+                } else {
+                    $("#emailAuthWarn").html('인증번호가 불일치 합니다. 다시 확인해주세요!');
+                    $("#emailAuthWarn").css('color', 'red');
+                    $("#findPwdBtn").attr("disabled", true);
+                }
+            });
+        });
+    });
+</script>
