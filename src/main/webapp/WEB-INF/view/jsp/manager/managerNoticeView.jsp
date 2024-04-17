@@ -72,12 +72,12 @@
                     <input type="hidden" value="${noti.noti_id}">
                 </div>
             </div>
-            <p class="font-large mb-0">${noti.content}</p>
+            <p class="font-large mb-0 d-inline-block text-truncate">${noti.content}</p>
             <hr>
             </c:forEach>
         </div>
-        <p class="font-large mb-0">공지사항 내용</p>
-        <button class="btn btn-outline-*">모두보기</button>
+<%--        <p class="font-large mb-0">공지사항 내용</p>
+        <button class="btn btn-outline-*">모두보기</button>--%>
     </div>
 </div>
 
