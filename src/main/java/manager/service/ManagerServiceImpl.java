@@ -1,12 +1,10 @@
 package manager.service;
 
-import manager.bean.ManagerDTO;
-import manager.bean.ManagerData;
-import manager.bean.ManagerPaging;
-import manager.bean.NoticeDTO;
+import manager.bean.*;
 import manager.dao.ManagerDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.HashMap;
 import java.util.List;
@@ -119,5 +117,31 @@ public class ManagerServiceImpl implements ManagerService{
     @Override
     public void notiDelete(int id) {
         managerDAO.notiDelete(id);
+    }
+
+    @Override
+    public Map<String, Object> report() {
+        List<ManagerReport> list = managerDAO.getReport();
+        Map<String, Object> map = new HashMap<>();
+        map.put("list", list);
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> reportSelect(String reportNum) {
+        List<ManagerReport> list = managerDAO.reportSelect(Integer.parseInt(reportNum));
+        Map<String, Object> map = new HashMap<>();
+        map.put("list", list);
+        return map;
+    }
+
+    @Override
+    public void reportStatus(Map<String,String> map) {
+        managerDAO.reportStatus(map);
+    }
+
+    @Override
+    public void reportUser(Map<String, String> map) {
+        managerDAO.reportUser(map);
     }
 }
