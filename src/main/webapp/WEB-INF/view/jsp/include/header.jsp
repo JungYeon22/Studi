@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary opacity-20" id="navbarall">
-        <div class="container-fluid">
+        <div class="container-fluid" id="header-container">
             <a class="navbar-brand ms-5" id="imageA" href="${pageContext.request.contextPath}/"><img src="/image/sutdi.png" width="80" height="50"></a>
             <div>
                 <a class="navbar-brand ms-3 menuItem" href="${pageContext.request.contextPath}/board/boardListMain?pg=1"><strong>게시판</strong></a>
