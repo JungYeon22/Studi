@@ -39,13 +39,13 @@
     <input type="hidden" id="subject" value="${boardDTO.SUBJECT}" >
 
 
-    <div class="card mb-4 rounded-3 shadow-sm " style="height: 100%; " >
+    <div class="card mb-4 rounded-3 shadow-sm " style="height: 100%; margin-top: 10px " >
         <div class="card-header py-3 " style="border-bottom: none; ">
             <h4 class="my-0 fw-normal " style="text-align: center;">${boardDTO.SUBJECT}</h4>
             <div><small class="opacity-70 text-nowrap ms-1" style="float: right;">조회수 : ${boardDTO.HIT}</small><small class="opacity-70 text-nowrap ms-1" style="float: right;">작성일: ${date}</small><small class="opacity-70 text-nowrap" style="float: right;">작성자: ${userId} </small></div>
         </div>
 
-        <div class="rounded-1 border" style="width: 100%; height: 400px; background-color: white; overflow: auto; word-wrap: break-word;">
+        <div class="rounded-1 border" style="width: 100%; height: 800px; background-color: white; overflow: auto; word-wrap: break-word; padding: 10px">
             ${boardDTO.CONTENT}
         </div>
 
