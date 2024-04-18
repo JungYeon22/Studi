@@ -117,7 +117,7 @@ function getTimeAgo(mysqlDateTime){
         return hours + "시간 전";
     }
 }
-
+var page = 1;
 $(document).ready(function(){
     // 무한 스크롤
     const options = {threshold: 0.5};
@@ -139,7 +139,7 @@ $(document).ready(function(){
 
 })
 
-var page = 1;
+
 var loading = false;
 
 function addNewContent(page,observer){

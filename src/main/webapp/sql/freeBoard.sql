@@ -68,7 +68,7 @@ BEGIN
     -- 게시글 목록 가져오기
     SELECT *
     FROM FREE_BOARD
-    order by fboard desc
+    order by DATE desc
     limit startNum, size;
 end //
 DELIMITER ;
