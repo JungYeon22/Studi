@@ -152,7 +152,6 @@ function addNewContent(page,observer){
             $.each(data, function(index, items){
                 //시간 형식 설정
                 var date = new Date(items.date);
-                console.log('like : ' + items.likes);
                 var dateResult = getTimeAgo(date);
                 var result = `
                 <div class="content row mt-4">
@@ -161,7 +160,7 @@ function addNewContent(page,observer){
                         <div class="card-header d-flex justify-content-between">
                           <strong>`+items.title+`</strong>
                           <div class="text-end">
-                            <small>작성자: `+ items.writer +` </small>
+                             <small>작성자: `+items.writer_name+` </small>(<small class="writerId">`+items.writer+`</small>)
                             <small class="text-muted">`+ dateResult + `</small>
                           </div>
                         </div>
@@ -197,13 +196,24 @@ function addNewContent(page,observer){
             }
             loading = false;
             $('.content').each(function (index, items){
-                var contentValue = $(items).find('.contentValue');
-                var contentBody = $(items).find('.card-body');
+                if(index >= (page-1)*5 && index < (page-1)*5 + 5){
+                    var contentValue = $(items).find('.contentValue');
+                    var contentBody = $(items).find('.card-body');
+                    let writeId = $(items).find('.writerId').text();
+                    let fBoardNum = $(items).find('input[type="hidden"]').val();
 
-                if(contentValue.innerHeight() > 100){
-                    console.log('height : '+ contentValue.height());
-                    contentValue.addClass("webKitBox ellipsis-text overflow-hidden");
-                    contentBody.append('<button class="btn btn-outline-secondary toggleButton" >더보기</button>')
+                    if( $('#userId').val()==writeId){
+                        var btnCloseValue =
+                            `<div class="icon-close">
+                          <button class="btn-close fBoardDeleteBtn" data="`+fBoardNum+`"></button>
+                        </div>`
+                        contentBody.append(btnCloseValue)
+                    }
+
+                    if(contentValue.innerHeight() > 100){
+                        contentValue.addClass("webKitBox ellipsis-text overflow-hidden");
+                        contentBody.append('<button class="btn btn-outline-secondary toggleButton" >더보기</button>')
+                    }
                 }
             })
         },

@@ -13,7 +13,8 @@
                         <div class="mb-3 row">
                             <label for="writer" class="col-sm-2 col-form-label">작성자</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="writer" name="writer" value="${sessionScope.userDTO.name}"><%--${sessionScope.userDTO.name}--%>
+                                <input type="hidden" name="writer_name" value="${sessionScope.userDTO.name}">
+                                <input type="text" readonly class="form-control-plaintext" id="writer" name="writer" value="${sessionScope.userDTO.userId}">
                             </div>
                         </div>
                         <div class="mb-3 row">
@@ -25,7 +26,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="content" class="form-label">내용</label>
-                            <textarea class="form-control" name="content" id="content" rows="5"></textarea>
+                            <textarea class="form-control" name="content" id="content" rows="15"></textarea>
                             <div id="contentDiv"></div>
                         </div>
                     </div>
