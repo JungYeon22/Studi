@@ -8,6 +8,8 @@ import user.bean.UserIntro;
 import user.dao.UserDAOImpl;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -72,6 +74,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserIntro showProfile(String userid) {
         return userDAO.showProfile(userid);
+    }
+
+    @Override
+    public String userIconChange(String userid, String fileName) {
+        Map<String,String> map = new HashMap<>();
+        map.put("userid",userid);
+        map.put("fileName",fileName);
+        return userDAO.userIconChange(map);
+    }
+
+    @Override
+    public String userIconCheck(String userid) {
+        return userDAO.userIconCheck(userid);
     }
 
     @Override

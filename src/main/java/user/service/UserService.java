@@ -19,4 +19,8 @@ public interface UserService {
     void update(UserIntro userIntro);
 
     public UserIntro showProfile(String userid);
+
+    public String userIconChange(String userid, String fileName);
+
+    public String userIconCheck(String userid);
 }

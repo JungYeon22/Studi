@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import user.bean.UserDTO;
 import user.bean.UserIntro;
 
+import java.util.Map;
+
 @Repository
 @RequiredArgsConstructor
 public class UserDAOImpl implements UserDao {
@@ -54,6 +56,21 @@ public class UserDAOImpl implements UserDao {
     @Override
     public UserIntro showProfile(String userid) {
         return sql.selectOne("USER.showProfile",userid);
+    }
+
+    @Override
+    public String userIconChange(Map<String, String> map) {
+        int su =sql.update("USER.userIconChange",map);
+        if(su==0){
+            sql.insert("USER.userIconInsert",map);
+        }
+
+        return "";
+    }
+
+    @Override
+    public String userIconCheck(String userid) {
+        return sql.selectOne("USER.userIconCheck",userid);
     }
 
 }
