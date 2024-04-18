@@ -55,7 +55,7 @@
 
                 <div class="mb-3">
                     <label for="password">비밀번호</label>
-                    <input type="text" class="form-control" id="password" placeholder="비밀번호" name="pwd" required>
+                    <input type="password" class="form-control" id="password" placeholder="비밀번호" name="pwd" required>
                     <div class="invalid-feedback"></div>
                     <a type="button" class="find" onclick="location.href='findPwdForm' "><span>비밀번호 찾기</span></a>
                     <a type="button" class="find" onclick="location.href='findIdForm' "><span>아이디 찾기</span></a>

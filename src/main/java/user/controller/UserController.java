@@ -132,6 +132,48 @@ public class UserController {
         return Integer.toString(checkNum);
     }
 
+    //이메일 인증
+    @ResponseBody
+    @PostMapping("/EmailAuthPwd")
+    public String emailAuthPwd(String email) {
+
+//        log.info("전달 받은 이메일 주소 : " + email);
+        System.out.println("전달 받은 이메일 주소 : " + email);
+
+        //난수의 범위 111111 ~ 999999 (6자리 난수)
+        Random random = new Random();
+        int checkNum = random.nextInt(888888)+111111;
+
+        //이메일 보낼 양식
+        String setFrom = "rytns24@naver.com"; //2단계 인증 x, 메일 설정에서 POP/IMAP 사용 설정에서 POP/SMTP 사용함으로 설정o
+        String toMail = email;
+        String title = "비밀번호 재설정 인증 이메일 입니다.";
+        String content = "인증 코드는 " + checkNum + " 입니다." +
+                "<br>" +
+                "해당 인증 코드를 인증 코드 확인란에 기입하여 주세요.";
+
+        try {
+            MimeMessage message = mailSender.createMimeMessage(); //Spring에서 제공하는 mail API
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+
+            // 메일 내용을 채워줌
+            helper.setFrom(setFrom); // 보내는 사람 세팅
+            helper.setTo(toMail);  // 받는 사람 세팅
+            helper.setSubject(title); // 제목 세팅
+            helper.setText(content, true); // 내용 세팅
+            // 메일 전송
+            mailSender.send(message);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+//        log.info("랜덤숫자 : " + checkNum);
+        System.out.println("랜덤숫자 : " + checkNum);
+        return Integer.toString(checkNum);
+    }
+
+
     @GetMapping(value = "/introduceForm")
     public String introduceForm() {
         return "user/introduceForm";
@@ -206,7 +248,7 @@ public class UserController {
 
     @PostMapping(value="/delete")
     @ResponseBody
-    public void delete(@RequestParam String userId) {
+    public void delete(@SessionAttribute String userId) {
         userService.delete(userId);
     }
 
@@ -223,8 +265,8 @@ public class UserController {
                              HttpServletRequest request) {
         UserDTO user = userService.findByEmail(email);
         if(user != null) {
-            // 세션에 사용자 정보 저장했음 !
-            request.getSession().setAttribute("user", user);
+            redirectAttributes.addFlashAttribute("userDTO", user);
+            System.out.println(user.getLogin_type());
             return "redirect:/user/findId";
         } else {
             // 이건 단발성 요청에 존재하는 기능 !
@@ -252,7 +294,7 @@ public class UserController {
         UserDTO user = userService.findByEmail(email);
         if(user != null) {
             // 세션에 사용자 정보 저장했음 !
-            request.getSession().setAttribute("user", user);
+            redirectAttributes.addFlashAttribute("userDTO", user);
             return "redirect:/user/findPwd";
         } else {
             // 이건 단발성 요청에 존재하는 기능 !

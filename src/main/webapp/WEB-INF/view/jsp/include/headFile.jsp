@@ -19,14 +19,6 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/lounge.css">
-<style>
-    #titleDiv, #contentDiv{
-        color: red;
-    }
-    body {
-        font-family: 'Arial', sans-serif; /* 여기에 사용할 글꼴을 지정합니다. */
-    }
-</style>
 
 <%--  javascript  --%>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

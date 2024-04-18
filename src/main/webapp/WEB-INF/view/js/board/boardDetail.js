@@ -34,14 +34,17 @@ $(function (){
 
                 if(items.ref == items.no) {
                     console.log("same");
+                    var no=items.no;
+                    var userid=items.userId;
+
                     var result =`
                     <div class="row" style="width: 95%; margin-top: 3px; margin-left: 10px">
                         <div class="col-sm-1 dropdown "  style="width: 50px;">
                             <img src="/image/icons8-동물-30.png"
                                  class="rounded  dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                                 aria-expanded="false" style=" vertical-align: middle;" alt="profile"/>
-                            <div >
-                                <small style="margin-left: 5px;">` +  items.userId+`</small>
+                                 aria-expanded="false"  alt="profile"/>
+                            <div style="height: 20px ;width: 60px;margin-left: -20px ">
+                                <small id="userId" >` +  items.userId+`</small>
                             </div>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">프로필 보기</a></li>
@@ -50,16 +53,25 @@ $(function (){
                             </ul>
                         </div>
                         <div class=" col card  rounded-3 bg-body-white " style="width: 90%;"> `+ items.text+`
-                        </div>
-                        <div class="col-sm-1" style="padding: 0px; margin:0 0 ;">
-                            <div>
-                                <img src="/image/edit.png" class="rounded "
-                                     alt="edit"/>
-                            </div>
+                        </div>`;
+
+                    if(items.userId==$('#sessionId').val()){
+                        result= result+`<div class="col-sm-1" style="padding: 0px; margin:0 0 ;">
+                            <div><img src="/image/edit.png" class="rounded "
+                                      alt="edit"/></div>
                             <img src="/image/remove.png" class="rounded "
                                  alt="remove"/>
+                                 <img src="/image/reply.png" data-no="`+no+`" data-userid="`+userid+`" onclick="reReplyBtn(this)"  class="rounded "
+                                 alt="reply" style="width: 24px; height: 24px ;cursor: pointer"/>
                         </div>
                     </div>`;
+                    }else{
+                        result= result+`<div class="col-sm-1" style="padding: 0px; margin:0 0 ;">
+                                <img src="/image/reply.png" data-no="`+no+`" data-userid="`+userid+`" onclick="reReplyBtn(this)"  class="rounded "
+                                                                 alt="reply" style="width: 24px; height: 24px ;cursor: pointer"/>
+                                </div>`;
+                    }
+
                 } else {
                     console.log("diff");
                     var result=`
@@ -68,9 +80,9 @@ $(function (){
                         <div class="col-sm-1 dropdown" style="width: 50px; margin-left: 10px">
                             <img src="/image/icons8-테디-베어-30.png"
                                  class="rounded dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                                 aria-expanded="false" style="vertical-align: middle;" alt="profile"/>
-                            <div>
-                                <small style="margin-left: 5px;">`+items.userId+`</small>
+                                 aria-expanded="false"  alt="profile"/>
+                            <div style="height: 20px ;width: 60px;margin-left: -20px ">
+                                <small >`+items.userId+`</small>
                             </div>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">프로필 보기</a></li>
@@ -79,14 +91,20 @@ $(function (){
                             </ul>
                         </div>
                         <div class=" col card  rounded-3 bg-body-white " style="width: 100%;margin-top: 5px;">`+ items.text+`
-                        </div>
-                        <div class="col-sm-1" style="padding: 0px; margin:0 0 ;">
+                        </div>`;
+
+
+                    if(items.userId==$('#sessionId').val()){
+                        result= result+`<div class="col-sm-1" style="padding: 0px; margin:0 0 ;">
                             <div><img src="/image/edit.png" class="rounded "
                                       alt="edit"/></div>
                             <img src="/image/remove.png" class="rounded "
                                  alt="remove"/>
                         </div>
                     </div>`;
+                    }else{
+                        result= result+`<div class="col-sm-1" style="padding: 0px; margin:0 0 ;"></div>`;
+                    }
                 }
 
                 $('#replyDiv').append(result);
@@ -203,3 +221,26 @@ $('#replyBtn').click(function(){
      });
     }
 });
+
+
+function reReplyBtn(ele){
+    ref=ele.getAttribute("data-no");
+    var oriuser=ele.getAttribute("data-userid");
+
+    oriuser= "@"+oriuser;
+
+    $('#oriUserDiv').html(oriuser);
+
+}
+
+$('#oriUserDiv').click(function(){
+    $(this).empty();
+    ref=0;
+});
+
+
+
+function editBoard(){
+    console.log("content="+$('#content').val());
+    location.href="editBoard?boardid="+$('#boardid').val();
+}

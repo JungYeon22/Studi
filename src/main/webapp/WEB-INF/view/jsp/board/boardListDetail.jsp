@@ -24,9 +24,12 @@
 
 <form class="position-absolute top-0 start-50 translate-middle-x mt-5" style="width: 50%">
     <br>
-    <input type="hidden" id="userId" value="${userId}">
-    <input type="hidden" id="sessionId" value="${userDTO.userId}">
-    <input type="hidden" id="boardid" value="${boardDTO.BOARDID}">
+    <input type="hidden" id="userId" value="${userId}" >
+    <input type="hidden" id="sessionId" value="${userDTO.userId}" >
+    <input type="hidden" id="boardid" value="${boardDTO.BOARDID}" >
+    <input type="hidden" id="subject" value="${boardDTO.SUBJECT}" >
+
+
     <div class="card mb-4 rounded-3 shadow-sm " style="height: 100%; " >
         <div class="card-header py-3 " style="border-bottom: none; ">
             <h4 class="my-0 fw-normal " style="text-align: center;">${boardDTO.SUBJECT}</h4>
@@ -43,6 +46,7 @@
         </div>
         <div >
             <div class="input-group" style="width: 85%; margin: 10px auto; "  >
+                <div id="oriUserDiv" style="margin-right: 5px ; margin-left: 0; color: #174cf6 ;cursor: pointer"></div>
                 <input type="text" id="reply" class="form-control" placeholder="댓글을 작성해 주세요.">
                 <button type="button" id="replyBtn" class="btn btn-outline-secondary" >댓글 작성</button>
             </div>
@@ -53,10 +57,10 @@
 </form>
 <div style="margin-left: 2% ; margin-top: 5%">
     <c:if test="${userId == sessionScope.userDTO.userId}">
-        <img src="${pageContext.request.contextPath}/image/edit.png" style="height: 35px ; margin-left: 75%; " >
-        <img src="${pageContext.request.contextPath}/image/remove.png" style="height: 35px ; margin-left: 75%;" onclick="removeBoard()">
+        <img src="${pageContext.request.contextPath}/image/edit.png" style="height: 35px ; margin-left: 75%; cursor: pointer " onclick="editBoard()">
+        <img src="${pageContext.request.contextPath}/image/remove.png" style="height: 35px ; margin-left: 75%; cursor: pointer" onclick="removeBoard()">
     </c:if>
-    <img src="${pageContext.request.contextPath}/image/bookmark1.png" id="bookmark" style="height: 35px ; margin-left: 75%;" onclick="boardScrap()"/>
+    <img src="${pageContext.request.contextPath}/image/bookmark1.png" id="bookmark" style="height: 35px ; margin-left: 75%; cursor: pointer" onclick="boardScrap()"/>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

@@ -69,6 +69,16 @@ public class FreeBoardController {
         return fBoardService.addComment(fBoardCommentDTO);
     }
 
+    @GetMapping(value = "getFBoardTopRank")
+    @ResponseBody
+    public List<FBoardDTO> getFBoardTopRank(){
+        List<FBoardDTO> fBoardList = fBoardService.getFBoardTopRank(5);
+        for(FBoardDTO fBoardDTO : fBoardList){
+            System.out.println(fBoardDTO.getTitle());
+        }
+        return fBoardList;
+    }
+
 
 
 }

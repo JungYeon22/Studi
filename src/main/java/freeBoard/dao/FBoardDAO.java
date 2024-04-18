@@ -24,4 +24,6 @@ public interface FBoardDAO {
     void addComment(FBoardCommentDTO fBoardCommentDTO);
 
     List<FBoardDTO> fBoardList(@Param("startNum") int startNum,@Param("size") int size);
+
+    List<FBoardDTO> getFBoardTopRank(int number);
 }

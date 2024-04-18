@@ -4,6 +4,7 @@ package board.controller;
 import board.bean.BoardDTO;
 import board.bean.BoardReply;
 import board.service.BoardService;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Controller
 @RequestMapping(value = "board")
@@ -91,8 +93,15 @@ public class BoardController {
     @PostMapping(value = "/boardInputData")
     @ResponseBody
     public String boardInputData(@ModelAttribute BoardDTO boardDTO, @RequestParam String[] lang){
-        boardDTO.setBOARDID(boardDTO.getUserId()+boardDTO.getSUBJECT());
+        boardDTO.setBOARDID(boardDTO.getUserId()+ UUID.randomUUID().toString());
         boardService.boardInputData(boardDTO,lang);
+        return "";
+    }
+    @PostMapping(value = "/boardEditData")
+    @ResponseBody
+    public String boardEditData(@ModelAttribute BoardDTO boardDTO, @RequestParam String[] lang){
+
+        boardService.boardEditData(boardDTO,lang);
         return "";
     }
 
@@ -180,5 +189,13 @@ public class BoardController {
         return boardService.loadReply(boardid);
     }
 
+
+    @GetMapping(value = "/editBoard")
+    public String editBoard(@RequestParam String boardid,Model model){
+        BoardDTO boardDTO = boardService.boardListGetbyId(boardid);
+
+        model.addAttribute("boardDTO",boardDTO);
+        return "/board/boardedit";
+    }
 
 }

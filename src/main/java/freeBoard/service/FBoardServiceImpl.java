@@ -59,4 +59,10 @@ public class FBoardServiceImpl implements FBoardService{
         // 1page 0 ~ 4  / 2page 5 ~ 9
         return fBoardDAO.fBoardList(startNum, size);
     }
+
+    @Override
+    public List<FBoardDTO> getFBoardTopRank(int number) {
+        return fBoardDAO.getFBoardTopRank(number);
+
+    }
 }

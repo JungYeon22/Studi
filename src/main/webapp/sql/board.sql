@@ -1,7 +1,7 @@
 CREATE TABLE `BOARD` (
                          `BOARDID`	VARCHAR(100),
                          `SUBJECT`	VARCHAR(100),
-                         `CONTENT`	VARCHAR(4000),
+                         `CONTENT`	VARCHAR(4000), -- mediumblob로 변경
                          `userTotCnt` INT,
                          `userCurCnt` INT,
                          `projectType` VARCHAR(100),
