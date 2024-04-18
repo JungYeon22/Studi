@@ -171,6 +171,7 @@
                                     <th scope="col">email</th>
                                     <th scope="col">휴대전화</th>
                                     <th scope="col">가입날짜</th>
+                                    <th scope="col">신고횟수</th>
                                 </tr>
                             </thead>
                             <tbody>

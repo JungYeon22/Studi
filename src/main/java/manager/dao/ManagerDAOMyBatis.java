@@ -1,5 +1,6 @@
 package manager.dao;
 
+import manager.bean.ManagerReport;
 import manager.bean.NoticeDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import manager.bean.ManagerDTO;
+import org.springframework.ui.Model;
 
 @Repository
 @Transactional
@@ -45,7 +47,6 @@ public class ManagerDAOMyBatis implements ManagerDAO{
     }
     @Override
     public List<ManagerDTO> getUserList2(Map<String, Object> map) {
-        System.out.println("ㅅㅂ");
 
         return sqlSession.selectList("manager.getUserList2", map);
     }
@@ -75,4 +76,26 @@ public class ManagerDAOMyBatis implements ManagerDAO{
 
     }
 
+    @Override
+    public List<ManagerReport> getReport() {
+        return sqlSession.selectList("manager.getReport");
+    }
+
+    @Override
+    public List<ManagerReport> reportSelect(int reportNum) {
+        return sqlSession.selectOne("manager.reportSelect",reportNum);
+    }
+
+    @Override
+    public void reportStatus(Map<String,String> map) {
+
+    }
+    public void reportUser(Map<String,String> map) {
+        if (Integer.parseInt(map.get("status")) >= 3 && Integer.parseInt(map.get("status")) < 7){
+            sqlSession.update("manager.reportUser",map);
+        }
+        else if(Integer.parseInt(map.get("status")) == 7){
+            sqlSession.delete("manager.reportUserDel",map);
+        }
+    }
 }
