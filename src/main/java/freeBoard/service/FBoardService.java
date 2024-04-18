@@ -22,4 +22,6 @@ public interface FBoardService {
     List<FBoardDTO> fBoardList(int page);
 
     List<FBoardDTO> getFBoardTopRank(int n);
+
+    void deleteFBoard(int parseInt);
 }

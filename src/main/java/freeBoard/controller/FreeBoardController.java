@@ -79,6 +79,13 @@ public class FreeBoardController {
         return fBoardList;
     }
 
+    @PostMapping(value = "deleteFBoard")
+    @ResponseBody
+    public void deleteFBoard(@RequestParam String fBoard){
+        System.out.println("fBoard = " + fBoard);
+        fBoardService.deleteFBoard(Integer.parseInt(fBoard));
+    }
+
 
 
 }

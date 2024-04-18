@@ -6,8 +6,8 @@
 <mapper namespace="freeBoard.dao.FBoardDAO">
 
     <insert id="write" parameterType="FBoardDTO">
-        insert into free_board(writer, title, content)
-        values(#{writer}, #{title}, #{content})
+        insert into free_board(writer, title, content, writer_name)
+        values(#{writer}, #{title}, #{content}, #{writer_name})
     </insert>
 
     <select id="getBoardComment" parameterType="int" resultType="FBoardCommentDTO">
@@ -45,5 +45,9 @@
         order by date desc
         limit 0, #{number}
     </select>
+
+    <delete id="deleteFBoard" parameterType="int" >
+        delete from free_board where fboard=#{fBoard}
+    </delete>
 
 </mapper>

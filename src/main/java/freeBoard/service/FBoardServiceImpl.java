@@ -65,4 +65,9 @@ public class FBoardServiceImpl implements FBoardService{
         return fBoardDAO.getFBoardTopRank(number);
 
     }
+
+    @Override
+    public void deleteFBoard(int fBoard) {
+        fBoardDAO.deleteFBoard(fBoard);
+    }
 }
