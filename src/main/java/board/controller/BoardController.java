@@ -211,5 +211,12 @@ public class BoardController {
         boardService.editReply(no,content);
         return "";
     }
+    @PostMapping(value = "/reportUser")
+    @ResponseBody
+    public String reportUser(@RequestParam String reportId,String reportText,String userid){
+        boardService.reportUser(reportId,reportText,userid);
+        return "";
+    }
+
 
 }

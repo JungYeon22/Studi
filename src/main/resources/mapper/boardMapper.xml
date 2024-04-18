@@ -93,4 +93,8 @@
     <update id="editReply" parameterType="Map">
         update comment set TEXT=#{content} where No=#{no}
     </update>
+
+    <insert id="reportUser" parameterType="Map">
+        insert into report(userId,TARGETId,CONTENT) values(#{userid},#{reportId},#{reportText})
+    </insert>
 </mapper>

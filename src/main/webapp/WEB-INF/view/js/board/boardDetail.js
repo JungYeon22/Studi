@@ -1,3 +1,5 @@
+var reportId="";
+var reportText="";
 $(function (){
     $.ajax({
         type:'post',
@@ -53,7 +55,8 @@ $(function (){
                 });
 
 
-
+                reportId=items.userId;
+                reportText=items.text;
                 if(items.ref == items.no) {
                     console.log("same");
                     var no=items.no;
@@ -71,7 +74,7 @@ $(function (){
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" onclick="showProfile('`+items.userId+`')">프로필 보기</a></li>
                                 <li><a class="dropdown-item" href="#">채팅하기</a></li>
-                                <li><a class="dropdown-item" href="#">신고하기</a></li>
+                                <li><a class="dropdown-item" data-reportId="`+reportId+`" data-reportText="`+reportText+`" onclick="reportUser(this)">신고하기</a></li>
                             </ul>
                         </div>
                         <div class=" col card  rounded-3 bg-body-white " style="width: 90%;"> `+ items.text+`
@@ -95,6 +98,7 @@ $(function (){
                     }
 
                 } else {
+
                     console.log("diff");
                     var result=`
                     <div class="row" style="width: 100%;">
@@ -109,7 +113,7 @@ $(function (){
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" onclick="showProfile('`+items.userId+`')">프로필 보기</a></li>
                                 <li><a class="dropdown-item" href="#">채팅하기</a></li>
-                                <li><a class="dropdown-item" href="#">신고하기</a></li>
+                                <li><a class="dropdown-item" data-reportId="`+reportId+`" data-reportText="`+reportText+`" onclick="reportUser(this)">신고하기</a></li>
                             </ul>
                         </div>
                         <div class=" col card  rounded-3 bg-body-white " style="width: 100%;margin-top: 5px;">`+ items.text+`
@@ -356,4 +360,33 @@ function showProfile(userid){
     });
 
     $('#trigger1').trigger("click");
+}
+function reportUser(ele){
+    reportId=ele.getAttribute("data-reportId");
+    reportText=ele.getAttribute("data-reportText");
+    if(confirm('정말 신고 하시겠습니까?')){
+        if($('#sessionId').val()==''){
+            alert("로그인 후 이용가능합니다.");
+        }else if(reportId==$('#sessionId').val()){
+            alert("본인은 신고할 수 없습니다.");
+        }else{
+            $.ajax({
+                type:'post',
+                url:'reportUser',
+                data:{'reportId':reportId,
+                'reportText':reportText,
+                'userid':$('#sessionId').val()},
+                success:function (data){
+                    console.log(data);
+                    alert('신고 완료!!');
+                    window.location.reload();
+
+                },
+                error:function (e){
+                    console.log(e);
+                }
+
+            });
+        }
+    }
 }
