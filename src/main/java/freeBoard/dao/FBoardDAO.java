@@ -26,4 +26,6 @@ public interface FBoardDAO {
     List<FBoardDTO> fBoardList(@Param("startNum") int startNum,@Param("size") int size);
 
     List<FBoardDTO> getFBoardTopRank(int number);
+
+    void deleteFBoard(int fBoard);
 }

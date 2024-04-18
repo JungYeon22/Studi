@@ -110,7 +110,7 @@
 </div>
 
 <div class="container-fluid p-5 row justify-content-center" id="fBoardTopRankContainer">
-  <h2>⭐ 최근 라운지 게시글</h2>
+  <h2>😎 최근 라운지 게시글</h2>
 </div>
 <%@include file="include/footer.jsp"%>
 <script src="https://code.jQuery.com/jquery-3.7.1.min.js"></script>

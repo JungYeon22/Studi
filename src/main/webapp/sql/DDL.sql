@@ -74,15 +74,15 @@ CREATE TABLE `project_member` (
 );
 
 /* 라우지(자유게시판)*/
-drop table free_board;
-CREATE TABLE `free_board` (
-    `FBOARD`	INT primary key auto_increment,
-    `WRITER`	VARCHAR(100),
-    `TITLE`     VARCHAR(100),
-    `DATE`	DATETIME  default  CURRENT_TIMESTAMP,
-    `CONTENT`	TEXT,
-    `LIKES`	INT	NULL default 0,
-    `COMMENT` INT DEFAULT 0
+CREATE TABLE `FREE_BOARD` (
+`FBOARD`	INT primary key auto_increment,
+`WRITER`	VARCHAR(100),
+`WRITER_NAME` VARCHAR(20),
+`TITLE`     VARCHAR(100),
+`DATE`	DATETIME  default  CURRENT_TIMESTAMP,
+`CONTENT`	text,
+`LIKES`	INT	NULL default 0,
+`COMMENT` INT DEFAULT 0
 );
 
 

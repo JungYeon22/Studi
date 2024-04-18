@@ -10,6 +10,7 @@ import java.util.Date;
 public class FBoardDTO {
     private int fBoard;
     private String writer;
+    private String writer_name;
     private String title;
     private String content;
     private Date date;
