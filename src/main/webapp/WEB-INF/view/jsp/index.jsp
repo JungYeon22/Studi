@@ -59,10 +59,6 @@
 </div>
 
 <div class="container-fluid p-5 row justify-content-center" id="fBoardTopRankContainer">
-    <h2>⭐ 최근 라운지 게시글</h2>
-</div>
-
-<div class="container-fluid p-5 row justify-content-center" id="fBoardTopRankContainer">
   <h2>😎 최근 라운지 게시글</h2>
 </div>
 
