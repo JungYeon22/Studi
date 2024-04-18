@@ -80,9 +80,9 @@ $(function (){
                     if(items.userId==$('#sessionId').val()){
                         result= result+`<div class="col-sm-1" style="padding: 0px; margin:0 0 ;">
                             <div><img src="/image/edit.png" class="rounded "
-                                      alt="edit" style="cursor: pointer" onclick="replyEdit(`+no+`)"/></div>
+                                      alt="edit" style="cursor: pointer;width: 24px;height: 24px" onclick="replyEdit(`+no+`)"/></div>
                             <img src="/image/remove.png" class="rounded "
-                                 alt="remove" style="cursor: pointer" onclick="replyRemove(`+no+`)"/>
+                                 alt="remove" style="cursor: pointer;width: 24px;height: 24px" onclick="replyRemove(`+no+`)"/>
                                  <img src="/image/reply.png" data-no="`+no+`" data-userid="`+userid+`" onclick="reReplyBtn(this)"  class="rounded "
                                  alt="reply" style="width: 24px; height: 24px ;cursor: pointer"/>
                         </div>
@@ -119,9 +119,9 @@ $(function (){
                     if(items.userId==$('#sessionId').val()){
                         result= result+`<div class="col-sm-1" style="padding: 0px; margin:0 0 ;">
                             <div><img src="/image/edit.png" class="rounded "
-                                      alt="edit" style="cursor: pointer" onclick="replyEdit(`+items.no+`)"/></div>
+                                      alt="edit" style="cursor: pointer;width: 24px;height: 24px" onclick="replyEdit(`+items.no+`)"/></div>
                             <img src="/image/remove.png" class="rounded "
-                                 alt="remove" style="cursor: pointer" onclick="replyRemove(`+items.no+`)"/>
+                                 alt="remove" style="cursor: pointer;width: 24px;height: 24px" onclick="replyRemove(`+items.no+`)"/>
                         </div>
                     </div>`;
                     }else{
