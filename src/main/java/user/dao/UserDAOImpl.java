@@ -51,4 +51,9 @@ public class UserDAOImpl implements UserDao {
         return count != null && count > 0;
     }
 
+    @Override
+    public UserIntro showProfile(String userid) {
+        return sql.selectOne("USER.showProfile",userid);
+    }
+
 }

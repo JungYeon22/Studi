@@ -47,7 +47,7 @@ $(function (){
                                 <small id="userId" >` +  items.userId+`</small>
                             </div>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">프로필 보기</a></li>
+                                <li><a class="dropdown-item" onclick="showProfile('`+items.userId+`')">프로필 보기</a></li>
                                 <li><a class="dropdown-item" href="#">채팅하기</a></li>
                                 <li><a class="dropdown-item" href="#">신고하기</a></li>
                             </ul>
@@ -85,7 +85,7 @@ $(function (){
                                 <small >`+items.userId+`</small>
                             </div>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">프로필 보기</a></li>
+                                <li><a class="dropdown-item" onclick="showProfile('`+items.userId+`')">프로필 보기</a></li>
                                 <li><a class="dropdown-item" href="#">채팅하기</a></li>
                                 <li><a class="dropdown-item" href="#">신고하기</a></li>
                             </ul>
@@ -294,3 +294,41 @@ function replyEdit(no){
     });
 }
 
+function showProfile(userid){
+    $.ajax({
+        type:'post',
+        url:'/user/showProfile',
+        data:{'userid':userid},
+        success:function (data){
+            console.log(data);
+
+            $('#name').html(data.name);
+            $('#position').html(data.position);
+            $('#career').html(data.career);
+            if(data.skill1 !=null){
+                $('#skill1').html(data.skill1);
+            }else{
+                $('#skill1').remove();
+            }
+            if(data.skill2 !=null){
+                $('#skill2').html(data.skill2);
+            }else{
+                $('#skill2').remove();
+            }
+            if(data.skill3 !=null){
+                $('#skill3').html(data.skill3);
+            }else{
+                $('#skill3').remove();
+            }
+
+
+
+        },
+        error:function (e){
+            console.log(e);
+        }
+
+    });
+
+    $('#trigger1').trigger("click");
+}

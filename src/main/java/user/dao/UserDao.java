@@ -16,4 +16,6 @@ public interface UserDao {
     void delete(String userId);
     void update(UserIntro userIntro);
     boolean isEmailExist(String email);
+
+    public UserIntro showProfile(String userid);
 }

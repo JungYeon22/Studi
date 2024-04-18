@@ -45,4 +45,8 @@
         SELECT COUNT(*) FROM USER WHERE email = #{email}
     </select>
 
+    <select id="showProfile" parameterType="String" resultType="user.bean.UserIntro">
+        select * from user_description where userId = #{userid}
+    </select>
+
 </mapper>

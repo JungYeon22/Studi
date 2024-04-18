@@ -309,4 +309,13 @@ public class UserController {
         return "user/findPwd";
     }
 
+
+
+    @PostMapping(value = "/showProfile")
+    @ResponseBody
+    public UserIntro showProfile(@RequestParam String userid){
+
+        return userService.showProfile(userid);
+    }
+
 }

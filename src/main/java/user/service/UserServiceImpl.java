@@ -70,6 +70,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserIntro showProfile(String userid) {
+        return userDAO.showProfile(userid);
+    }
+
+    @Override
     public UserDTO findByEmail(String email) {
         return userDAO.findByEmail(email);
     }
