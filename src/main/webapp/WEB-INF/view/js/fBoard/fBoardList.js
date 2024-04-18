@@ -196,22 +196,24 @@ function addNewContent(page,observer){
             }
             loading = false;
             $('.content').each(function (index, items){
-                var contentValue = $(items).find('.contentValue');
-                var contentBody = $(items).find('.card-body');
-                let writeId = $(items).find('.writerId').text();
-                let fBoardNum = $(items).find('input[type="hidden"]').val();
+                if(index >= (page-1)*5 && index < (page-1)*5 + 5){
+                    var contentValue = $(items).find('.contentValue');
+                    var contentBody = $(items).find('.card-body');
+                    let writeId = $(items).find('.writerId').text();
+                    let fBoardNum = $(items).find('input[type="hidden"]').val();
 
-                if( $('#userId').val()==writeId){
-                    var btnCloseValue =
-                        `<div class="icon-close">
+                    if( $('#userId').val()==writeId){
+                        var btnCloseValue =
+                            `<div class="icon-close">
                           <button class="btn-close fBoardDeleteBtn" data="`+fBoardNum+`"></button>
                         </div>`
-                    contentBody.append(btnCloseValue)
-                }
+                        contentBody.append(btnCloseValue)
+                    }
 
-                if(contentValue.innerHeight() > 100){
-                    contentValue.addClass("webKitBox ellipsis-text overflow-hidden");
-                    contentBody.append('<button class="btn btn-outline-secondary toggleButton" >더보기</button>')
+                    if(contentValue.innerHeight() > 100){
+                        contentValue.addClass("webKitBox ellipsis-text overflow-hidden");
+                        contentBody.append('<button class="btn btn-outline-secondary toggleButton" >더보기</button>')
+                    }
                 }
             })
         },
