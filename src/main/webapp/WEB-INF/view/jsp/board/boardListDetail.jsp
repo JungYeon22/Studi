@@ -26,6 +26,23 @@
         width: 100%;
         box-sizing: border-box; /* 패딩과 테두리를 포함하여 요소의 크기를 계산합니다. */
     }
+    #projectBtn {
+        background-color: #4CAF50; /* 배경색 */
+        color: white; /* 텍스트 색상 */
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.7s; /* 호버 효과 시간 */
+        cursor: pointer;
+    }
+
+    #projectBtn:hover {
+        background-color: olivedrab; /* 호버 시 배경색 변경 */
+        color: gold; /* 호버 시 텍스트 색상 변경 */
+    }
+
 </style>
 <body>
 
@@ -70,6 +87,11 @@
         <img src="${pageContext.request.contextPath}/image/remove.png" style="height: 35px ; margin-left: 75%; cursor: pointer" onclick="removeBoard()">
     </c:if>
     <img src="${pageContext.request.contextPath}/image/bookmark1.png" id="bookmark" style="height: 35px ; margin-left: 75%; cursor: pointer" onclick="boardScrap()"/>
+    <c:if test="${(userId != sessionScope.userDTO.userId )&& (boardDTO.userTotCnt != boardDTO.userCurCnt)}">
+        <button type="button" id="projectBtn" style="height: 35px ; margin-left: 75% ;font-size: 0.8em"  class="btn " >
+            프로젝트 참가 신청
+        </button>
+    </c:if>
 </div>
 
 
