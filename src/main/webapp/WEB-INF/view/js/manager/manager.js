@@ -18,6 +18,8 @@ $(function() {
                         + `<td >` + items.email + `</td>` + `</a></td>`
                         + `<td >` + items.phone + `</td>` + `</a></td>`
                         + `<td >` + items.hiredate + `</td>`
+                        + `<td ><c:choose><c:when test="${items.reportCnt != null}">`+ items.reportCnt + `</c:when>`
+                        + `<c:otherwise>0</c:otherwise></c:choose></td>`
                         + `</tr>`;
                     userListTable.append(result);
                 });
@@ -53,6 +55,8 @@ $(function() {
                             + `<td >` + items.email + `</td>` + `</a></td>`
                             + `<td >` + items.phone + `</td>` + `</a></td>`
                             + `<td >` + items.hiredate + `</td>`
+                            + `<td ><c:choose><c:when test="${items.reportCnt != null}">`+ items.reportCnt + `</c:when>`
+                            + `<c:otherwise>0</c:otherwise></c:choose></td>`
                             + `</tr>`;
                         userListTable.append(result);
                     });
@@ -290,27 +294,50 @@ $(function() {
         });
     }
 
-
-    function repoterList(url) {
+    function reportList(url) {
         $.ajax({
             type: 'POST',
             url: url,//'/admin/managerPage/reportList',
             dataType: 'json',
-            data:managerReport,
             success: function(data) {
                 // 사용자 리스트 표시
                 var reportListTable = $('#reportList');
                 reportListTable.empty();
                 $.each(data.list, function (index, items) {
-                    var result = `<div class="mb-3">`
-                        + `<label for="userId" class="form-label">신고자</label>`
-                        + `<input type="text" readonly class="form-control-plaintext" id="userId" value="` + items.userId + `"></div>`
-                        + `<div class="mb-3">`
-                        + `<label for="targetId" class="form-label">대상자</label>`
-                        + `<input type="text" readonly class="form-control-plaintext" id="userId" value="` + items.targetId + `"></div>`
-                        + `<div class="mb-3">`
+                    var result = (items.status == 1 || items.status == 2) ? `<div class="d-flex justify-content-between align-items-center"><div>`
+                        + `<a href="#"><h5>` + items.userId + `</h5></a></div>`
+                        + `<div><input type="hidden" value=`+ items.reportNum+`><button type="button" class="btn btn-primary reportBtn" data-bs-toggle="modal" data-bs-target="#reportModal">확인 </button></div></div>`
+                        + `<p><h4>` + items.content+ `</h4></p>`
+                        + `<hr>` : ``;
+                    reportListTable.append(result);
+                });
+            },
+            error: function(e) {
+                console.log(e);
+            }
+        });
+    }
+
+
+    function reportSelect(reportNum) {
+        $.ajax({
+            type: 'POST',
+            url: '/admin/managerPage/reportSelect',
+            data: {reportNum : reportNum},
+            dataType: 'json',
+            success: function(data) {
+                // 사용자 리스트 표시
+                var reportContent = $('#reportContent');
+                reportContent.empty();
+                $.each(data.list, function (index, items) {
+                    var result = `<label for="userId" class="col-sm-2 col-form-label">신고자</label>`
+                        + `<div class="col-sm-10"><input type="text" readonly class="form-control-plaintext" id="userId" value="` + items.userId + `"></div></div>`
+                        + `<div class="mb-3 row">`
+                        + `<label for="targetId" class="col-sm-2 col-form-label">대상자</label>`
+                        + `<div class="col-sm-10"><input type="text" readonly class="form-control-plaintext" id="targetId" value="` + items.targetId + `"></div></div>`
+                        + `<div class="mb-3 row">`
                         + `<label for="content" class="form-label">신고내용</label>`
-                        + `<input type="text" readonly class="form-control-plaintext" id="userId" value="` + items.content + `"></div>`
+                        + `<div class="col-sm-10"><input type="text" readonly class="form-control-plaintext" id="content" value="` + items.content + `"></div></div>`
                         + `<select class="form-select form-select-sm" aria-label="Small select example">`
                         + `<option selected>신고 처리</option>`
                         + `<option value="2">처리 중</option>`
@@ -319,10 +346,26 @@ $(function() {
                         + `<option value="5">게시물 삭제</option>`
                         + `<option value="6">회원 경고</option>`
                         + `<option value="7">회원 추방</option>`
-                        + `</select>`;
+                        + `<input type="hidden" value="`+ items.reportNum+`"></select>`;
 
-                    reportListTable.append(result);
+                    reportContent.append(result);
                 });
+            },
+            error: function(e) {
+                console.log(e);
+            }
+        });
+
+    }
+    function reportStatus(reportNum, select){
+        $.ajax({
+            type: 'POST',
+            url: '/admin/managerPage/reportStatus',
+            data: {reportNum : reportNum,
+                    status : select},
+            success: function(data){
+                alert("신고처리를 완료하였습니다.");
+                location.reload();
             },
             error: function(e) {
                 console.log(e);
@@ -392,14 +435,14 @@ $(function() {
 
             $("[class$='-section']").hide();
 
-            // 대시보드 섹션을 보여줍니다.
             $(".notice-section").show();
 
             // 기존에 활성화된 항목들을 비활성화합니다.
             $(".nav-link").removeClass("active");
             $(this).addClass("active");
+
             $(function (){
-                repoterList('/admin/managerPage/reportList');
+                reportList('/admin/managerPage/reportList');
             });
         });
 
@@ -418,5 +461,21 @@ $(function() {
             });
         });
 
+
+        $(document).on('click', '.reportBtn',function(e){
+            e.preventDefault();
+
+            var reportNum = $(this).siblings('input[type="hidden"]').val();
+            $(function (){
+                reportSelect(reportNum);
+            });
+        });
+
+        $("#reportSaveBtn").click(function(e) {
+            e.preventDefault();
+            var select= $('#reportContent select.form-select').val();
+            var reportNum = $('#reportContent input[type="hidden"]').val();
+            reportStatus(reportNum,select);
+        });
     });
 });

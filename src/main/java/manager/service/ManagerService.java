@@ -2,6 +2,7 @@ package manager.service;
 
 
 import manager.bean.NoticeDTO;
+import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.Map;
@@ -22,4 +23,12 @@ public interface ManagerService {
     List<NoticeDTO> getNotice();
 
     void notiDelete(int parseInt);
+
+    Map<String, Object> report();
+
+    Map<String, Object> reportSelect(String reportNum);
+
+    void reportStatus(Map<String,String> map);
+
+    void reportUser(Map<String, String> map);
 }

@@ -22,7 +22,11 @@
     </select>
 
     <select id="getUserList" parameterType="int" resultType="manager.bean.ManagerDTO">
-        select * from user limit #{startNum}, 3
+        select * from user
+        LEFT JOIN reportUser
+        ON user.userId = reportUser.userId
+        ORDER BY reportCnt DESC
+        LIMIT #{startNum}, 3;
     </select>
 
     <select id="getTotalA" resultType="int">
@@ -30,11 +34,17 @@
     </select>
 
     <select id="getTotalA2" parameterType="java.util.Map" resultType="int">
-        select count(*) from user where ${input} like concat('%', #{value}, '%')
+        select count(*) from user
+        where ${input} like concat('%', #{value}, '%');
     </select>
 
     <select id="getUserList2" parameterType="java.util.Map" resultType="manager.bean.ManagerDTO">
-        select * from user where ${input} like concat('%', #{value}, '%')
+        select * from user
+        LEFT JOIN reportUser
+        ON user.userId = reportUser.userId
+        where ${input} like concat('%', #{value}, '%')
+        ORDER BY reportCnt DESC
+        LIMIT #{startNum}, 3;
     </select>
 
     <select id="pichart1" resultType="java.util.Map">
@@ -63,7 +73,48 @@
     </select>
 
     <delete id="notiDelete" parameterType="int">
-        delete from notice where noti_id=#{id};
+        delete from notice where noti_id=#{id}
     </delete>
+
+    <select id="getReport" resultType="manager.bean.ManagerReport">
+        select * from report
+    </select>
+
+    <select id="reportSelect" parameterType="int" resultType="manager.bean.ManagerReport">
+        select * from report where reportNum = #{reportNum}
+    </select>
+    <!--  + `<option value="2">처리 중</option>`
+                        + `<option value="3">이상 없음</option>`
+                        + `<option value="4">댓글 삭제</option>`
+                        + `<option value="5">게시물 삭제</option>`
+                        + `<option value="6">회원 경고</option>`
+                        + `<option value="7">회원 추방</option>`-->
+    <update id="reportStatus" parameterType="map">
+        update report
+        set status = #{status}
+        where reportNum = #{reportNum};
+    </update>
+    <update id="reportUser" parameterType="map">
+        <choose>
+            <when test="userId != null">
+                update reportUser
+                set reportCnt = (
+                select reportCnt + 1
+                from reportUser
+                where userId = (
+                select targetId
+                from report
+                where reportNum = #{reportNum}
+                )
+                );
+            </when>
+            <otherwise>
+                insert into reportUser (userId, reportCnt)
+                select targetId, 1
+                from report
+                where reportNum = #{reportNum};
+            </otherwise>
+        </choose>
+    </update>
 
 </mapper>

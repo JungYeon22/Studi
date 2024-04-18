@@ -1,8 +1,10 @@
 package manager.dao;
 
 import manager.bean.ManagerDTO;
+import manager.bean.ManagerReport;
 import manager.bean.NoticeDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.Map;
@@ -28,4 +30,12 @@ public interface ManagerDAO {
     List<NoticeDTO> getNotice();
 
     void notiDelete(int id);
+
+    List<ManagerReport> getReport();
+
+    List<ManagerReport> reportSelect(int reportNum);
+
+    void reportStatus(Map<String,String> map);
+
+    void reportUser(Map<String, String> map);
 }
