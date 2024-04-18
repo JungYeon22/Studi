@@ -31,6 +31,28 @@ $(function (){
         success:function (data){
             console.log(JSON.stringify(data));
             $.each(data,function(index,items){
+                var src=""
+
+                $.ajax({
+                    type: 'post',
+                    url: '/user/userIconCheck',
+                    data: {'userid':items.userId},
+                    async:false,
+                    dataType:'text',
+                    success: function (data) {
+                        if(data!='') {
+                             src ="https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/miniproject/"+data;
+                        }else{
+                             src ="/image/icons8-테디-베어-30.png";
+                        }
+
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+                });
+
+
 
                 if(items.ref == items.no) {
                     console.log("same");
@@ -40,9 +62,9 @@ $(function (){
                     var result =`
                     <div class="row" style="width: 95%; margin-top: 3px; margin-left: 10px">
                         <div class="col-sm-1 dropdown "  style="width: 50px;">
-                            <img src="/image/icons8-동물-30.png"
+                            <img src=`+src+`
                                  class="rounded  dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                                 aria-expanded="false"  alt="profile"/>
+                                 aria-expanded="false"  alt="profile" style="width:30px;height:30px"/>
                             <div style="height: 20px ;width: 60px;margin-left: -20px ">
                                 <small id="userId" >` +  items.userId+`</small>
                             </div>
@@ -78,9 +100,9 @@ $(function (){
                     <div class="row" style="width: 100%;">
                         &emsp;&emsp;
                         <div class="col-sm-1 dropdown" style="width: 50px; margin-left: 10px">
-                            <img src="/image/icons8-테디-베어-30.png"
+                            <img src=`+src+`
                                  class="rounded dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                                 aria-expanded="false"  alt="profile"/>
+                                 aria-expanded="false"  alt="profile" style="width:30px;height:30px"/>
                             <div style="height: 20px ;width: 60px;margin-left: -20px ">
                                 <small >`+items.userId+`</small>
                             </div>
@@ -108,6 +130,9 @@ $(function (){
                 }
 
                 $('#replyDiv').append(result);
+
+
+
             });
 
         },
