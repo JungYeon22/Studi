@@ -1,5 +1,6 @@
 package user.controller;
 
+import board.service.ObjectStorage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import user.bean.UserDTO;
 import user.bean.UserIntro;
@@ -28,6 +30,9 @@ public class UserController {
     private final UserServiceImpl userService;
     @Autowired
     private final JavaMailSenderImpl mailSender;
+    @Autowired
+    private ObjectStorage objectStorage;
+    private String bucketName="bitcamp-6th-bucket-102";
 
     @GetMapping("/writeForm")
     public String writeForm(Model model) {
@@ -309,4 +314,29 @@ public class UserController {
         return "user/findPwd";
     }
 
+
+
+    @PostMapping(value = "/showProfile")
+    @ResponseBody
+    public UserIntro showProfile(@RequestParam String userid){
+
+        return userService.showProfile(userid);
+    }
+
+
+    @PostMapping(value = "/userIconChange")
+    @ResponseBody
+    public String userIconChange(@RequestParam String userid, MultipartFile img){
+        String fileName=objectStorage.uploadFile(bucketName,"miniproject/",img);
+
+        return userService.userIconChange(userid,fileName);
+    }
+
+
+    @PostMapping(value = "/userIconCheck")
+    @ResponseBody
+    public String userIconCheck(@RequestParam String userid){
+
+        return userService.userIconCheck(userid);
+    }
 }

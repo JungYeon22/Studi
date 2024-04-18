@@ -30,16 +30,19 @@
 
     </style>
 </head>
+
 <body data-bs-spy="scroll" data-bs-target="#navbar-example">
 
 <%@ include file="../include/header.jsp"%>
 <!-- ########################################################################################################################### -->
+<form id="iconForm">
 <div class="container">
     <main>
         <div class="py-5 text-center">
             <h2>마이 페이지</h2>
         </div>
 
+        <input type="hidden" name="userid" id="userid" value="${userDTO.userId}">
         <div class="row">
             <div class="col-md-6"> <!-- 왼쪽 영역 -->
                 <h4 class="mb-3">나의 정보
@@ -49,11 +52,13 @@
                 <div class="border border-primary-subtle rounded p-3">
                     <div class="mb-3">
                         <div class="row align-items-center">
-                            <div class="col-md-auto">
-                                <svg class="rounded-circle border" width="64" height="64" viewBox="0 0 64 64" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <div id="iconDiv" class="col-md-auto">
+                                <svg id="imgSvg" class="rounded-circle border" width="64" height="64" viewBox="0 0 64 64" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="cursor: pointer">
                                     <rect width="64" height="64" fill="hsl(15, 100%, 90%)"></rect>
                                     <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="32" font-weight="600" fill="black">${userDTO.userId}</text>
                                 </svg>
+<%--                                 <img style="width: 62px;height: 62px" src="${pageContext.request.contextPath}/image/git.png"/>--%>
+                                <input type="file" name="img" id="img" hidden>
                             </div>
                             <div class="col">
                                 <p class="mb-0">${userDTO.name}</p>
@@ -136,7 +141,7 @@
         </div>
     </main>
 </div>
-
+</form>
 <!-- ######################################################### -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -144,6 +149,27 @@
 <script src="https://code.jQuery.com/jquery-3.7.1.min.js"></script>
 <script>
     $(function(){
+
+        $.ajax({
+            type: 'post',
+            url: '/user/userIconCheck',
+            data: {'userid':$('#userid').val()},
+            dataType:'text',
+            success: function (data) {
+                if(data!='') {
+                    $('#imgSvg').remove();
+                    var result = `<img style="width: 62px;height: 62px;cursor:pointer;"
+                                      src="https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/miniproject/`+data+`" onclick="iconChange()"/>`;
+                    $('#iconDiv').append(result);
+                }
+
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+
+
         $('#deleteBtn').click(function(){
             if(confirm('탈퇴하시겠습니까?')) {
                 $.ajax({
@@ -160,7 +186,43 @@
                 });
             }
         });
+
+
+        $('#imgSvg').click(function (){
+            $('#img').trigger("click");
+
+        });
+
+
+
+
+
+        $('#img').change(function(){
+            var formData = new FormData($('#iconForm')[0]);
+
+            $.ajax({
+                type: 'post',
+                enctype: 'multipart/form-data',
+                processData: false,
+                contentType: false,
+                url: '/user/userIconChange',
+                data:formData,
+                success:function(data){
+                    alert("이미지 수정완료!");
+                    window.location.reload();
+                },
+                error:function(e){
+                    console.log(e);
+                }
+            });
+        });
+
+
     });
+
+    function iconChange(){
+        $('#img').trigger("click");
+    }
 </script>
 </body>
 </html>
