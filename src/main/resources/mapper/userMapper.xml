@@ -45,4 +45,17 @@
         SELECT COUNT(*) FROM USER WHERE email = #{email}
     </select>
 
+    <select id="showProfile" parameterType="String" resultType="user.bean.UserIntro">
+        select * from user_description where userId = #{userid}
+    </select>
+    <update id="userIconChange" parameterType="Map">
+        update USERICON set iconId=#{fileName} where UserId=#{userid}
+    </update>
+    <insert id="userIconInsert" parameterType="Map">
+        insert into USERICON values(#{userid},#{fileName})
+    </insert>
+    <select id="userIconCheck" parameterType="String" resultType="String">
+        select iconId from USERICON where UserId=#{userid}
+    </select>
+
 </mapper>

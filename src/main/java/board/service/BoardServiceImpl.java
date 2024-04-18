@@ -182,4 +182,17 @@ public class BoardServiceImpl implements BoardService{
     public List<BoardDTO> getRecent5() {
         return boardDAO.getRecent5();
     }
+
+    @Override
+    public void removeReply(String no) {
+        boardDAO.removeReply(no);
+    }
+
+    @Override
+    public void editReply(String no, String content) {
+        Map<String,String> map = new HashMap<>();
+        map.put("no",no);
+        map.put("content",content);
+        boardDAO.editReply(map);
+    }
 }

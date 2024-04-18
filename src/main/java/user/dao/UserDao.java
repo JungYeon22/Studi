@@ -4,6 +4,8 @@ import org.springframework.ui.Model;
 import user.bean.UserDTO;
 import user.bean.UserIntro;
 
+import java.util.Map;
+
 public interface UserDao {
     int save(UserDTO userDTO);
     UserDTO login(UserDTO userDTO);
@@ -16,4 +18,10 @@ public interface UserDao {
     void delete(String userId);
     void update(UserIntro userIntro);
     boolean isEmailExist(String email);
+
+    public UserIntro showProfile(String userid);
+
+    public String userIconChange(Map<String, String> map);
+
+    public String userIconCheck(String userid);
 }
