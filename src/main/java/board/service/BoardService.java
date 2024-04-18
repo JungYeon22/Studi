@@ -36,4 +36,8 @@ public interface BoardService {
     public List<BoardDTO> getHot5();
 
     public List<BoardDTO> getRecent5();
+
+    public void removeReply(String no);
+
+    public void editReply(String no, String content);
 }

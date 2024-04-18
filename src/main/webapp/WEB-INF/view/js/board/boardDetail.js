@@ -31,6 +31,28 @@ $(function (){
         success:function (data){
             console.log(JSON.stringify(data));
             $.each(data,function(index,items){
+                var src=""
+
+                $.ajax({
+                    type: 'post',
+                    url: '/user/userIconCheck',
+                    data: {'userid':items.userId},
+                    async:false,
+                    dataType:'text',
+                    success: function (data) {
+                        if(data!='') {
+                             src ="https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/miniproject/"+data;
+                        }else{
+                             src ="/image/icons8-테디-베어-30.png";
+                        }
+
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+                });
+
+
 
                 if(items.ref == items.no) {
                     console.log("same");
@@ -40,14 +62,14 @@ $(function (){
                     var result =`
                     <div class="row" style="width: 95%; margin-top: 3px; margin-left: 10px">
                         <div class="col-sm-1 dropdown "  style="width: 50px;">
-                            <img src="/image/icons8-동물-30.png"
+                            <img src=`+src+`
                                  class="rounded  dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                                 aria-expanded="false"  alt="profile"/>
+                                 aria-expanded="false"  alt="profile" style="width:30px;height:30px"/>
                             <div style="height: 20px ;width: 60px;margin-left: -20px ">
                                 <small id="userId" >` +  items.userId+`</small>
                             </div>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">프로필 보기</a></li>
+                                <li><a class="dropdown-item" onclick="showProfile('`+items.userId+`')">프로필 보기</a></li>
                                 <li><a class="dropdown-item" href="#">채팅하기</a></li>
                                 <li><a class="dropdown-item" href="#">신고하기</a></li>
                             </ul>
@@ -58,9 +80,9 @@ $(function (){
                     if(items.userId==$('#sessionId').val()){
                         result= result+`<div class="col-sm-1" style="padding: 0px; margin:0 0 ;">
                             <div><img src="/image/edit.png" class="rounded "
-                                      alt="edit"/></div>
+                                      alt="edit" style="cursor: pointer" onclick="replyEdit(`+no+`)"/></div>
                             <img src="/image/remove.png" class="rounded "
-                                 alt="remove"/>
+                                 alt="remove" style="cursor: pointer" onclick="replyRemove(`+no+`)"/>
                                  <img src="/image/reply.png" data-no="`+no+`" data-userid="`+userid+`" onclick="reReplyBtn(this)"  class="rounded "
                                  alt="reply" style="width: 24px; height: 24px ;cursor: pointer"/>
                         </div>
@@ -78,14 +100,14 @@ $(function (){
                     <div class="row" style="width: 100%;">
                         &emsp;&emsp;
                         <div class="col-sm-1 dropdown" style="width: 50px; margin-left: 10px">
-                            <img src="/image/icons8-테디-베어-30.png"
+                            <img src=`+src+`
                                  class="rounded dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                                 aria-expanded="false"  alt="profile"/>
+                                 aria-expanded="false"  alt="profile" style="width:30px;height:30px"/>
                             <div style="height: 20px ;width: 60px;margin-left: -20px ">
                                 <small >`+items.userId+`</small>
                             </div>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">프로필 보기</a></li>
+                                <li><a class="dropdown-item" onclick="showProfile('`+items.userId+`')">프로필 보기</a></li>
                                 <li><a class="dropdown-item" href="#">채팅하기</a></li>
                                 <li><a class="dropdown-item" href="#">신고하기</a></li>
                             </ul>
@@ -97,9 +119,9 @@ $(function (){
                     if(items.userId==$('#sessionId').val()){
                         result= result+`<div class="col-sm-1" style="padding: 0px; margin:0 0 ;">
                             <div><img src="/image/edit.png" class="rounded "
-                                      alt="edit"/></div>
+                                      alt="edit" style="cursor: pointer" onclick="replyEdit(`+items.no+`)"/></div>
                             <img src="/image/remove.png" class="rounded "
-                                 alt="remove"/>
+                                 alt="remove" style="cursor: pointer" onclick="replyRemove(`+items.no+`)"/>
                         </div>
                     </div>`;
                     }else{
@@ -108,6 +130,9 @@ $(function (){
                 }
 
                 $('#replyDiv').append(result);
+
+
+
             });
 
         },
@@ -243,4 +268,92 @@ $('#oriUserDiv').click(function(){
 function editBoard(){
     console.log("content="+$('#content').val());
     location.href="editBoard?boardid="+$('#boardid').val();
+}
+
+function replyRemove(no){
+    if(confirm('정말 댓글을 삭제하시겠습니까?')){
+        $.ajax({
+            type:'post',
+            url:'removeReply',
+            data:{'no':no},
+            success:function (data){
+                console.log(data);
+                alert('댓글 삭제 완료!!');
+                window.location.reload();
+
+            },
+            error:function (e){
+                console.log(e);
+            }
+
+        });
+    }
+}
+function replyEdit(no){
+ $('#trigger').trigger("click");
+
+    $('#editreplyBtn').click(function (){
+        var content=$('#editreply').val();
+
+        if(content==''){
+            $('#modalDiv').html("수정할 댓글을 입력하세요.");
+        }else{
+            $.ajax({
+                type:'post',
+                url:'editReply',
+                data:{'no':no,
+                    'content':content},
+                success:function (data){
+                    console.log(data);
+                    alert('댓글 수정 완료!!');
+                    window.location.reload();
+
+                },
+                error:function (e){
+                    console.log(e);
+                }
+
+            });
+        }
+
+    });
+}
+
+function showProfile(userid){
+    $.ajax({
+        type:'post',
+        url:'/user/showProfile',
+        data:{'userid':userid},
+        success:function (data){
+            console.log(data);
+
+            $('#name').html(data.name);
+            $('#position').html(data.position);
+            $('#career').html(data.career);
+            if(data.skill1 !=null){
+                $('#skill1').html(data.skill1);
+            }else{
+                $('#skill1').remove();
+            }
+            if(data.skill2 !=null){
+                $('#skill2').html(data.skill2);
+            }else{
+                $('#skill2').remove();
+            }
+            if(data.skill3 !=null){
+                $('#skill3').html(data.skill3);
+            }else{
+                $('#skill3').remove();
+            }
+
+
+
+        },
+        error:function (e){
+            console.log(e);
+        }
+
+    });
+
+    $('#trigger1').trigger("click");
 }

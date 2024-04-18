@@ -198,4 +198,18 @@ public class BoardController {
         return "/board/boardedit";
     }
 
+    @PostMapping(value = "/removeReply")
+    @ResponseBody
+    public String removeReply(@RequestParam String no){
+        boardService.removeReply(no);
+        return "";
+    }
+
+    @PostMapping(value = "/editReply")
+    @ResponseBody
+    public String editReply(@RequestParam String no,String content){
+        boardService.editReply(no,content);
+        return "";
+    }
+
 }

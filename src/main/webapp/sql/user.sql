@@ -18,3 +18,9 @@ CREATE TABLE USER_Description (
 	SKILL3	VARCHAR(100),
     Introduce  VARCHAR(100)
 );
+
+
+CREATE TABLE `USERICON` (
+                            `UserId`	VARCHAR(100),
+                            `iconId`	VARCHAR(100)
+);

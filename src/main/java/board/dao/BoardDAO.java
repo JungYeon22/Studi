@@ -52,4 +52,8 @@ public interface BoardDAO {
     public void removeComment(Map<String, String> map);
 
     public void removeTag(Map<String, String> map);
+
+    public void removeReply(String no);
+
+    public void editReply(Map<String, String> map);
 }
