@@ -58,9 +58,9 @@ $(function (){
                     if(items.userId==$('#sessionId').val()){
                         result= result+`<div class="col-sm-1" style="padding: 0px; margin:0 0 ;">
                             <div><img src="/image/edit.png" class="rounded "
-                                      alt="edit"/></div>
+                                      alt="edit" style="cursor: pointer" onclick="replyEdit(`+no+`)"/></div>
                             <img src="/image/remove.png" class="rounded "
-                                 alt="remove"/>
+                                 alt="remove" style="cursor: pointer" onclick="replyRemove(`+no+`)"/>
                                  <img src="/image/reply.png" data-no="`+no+`" data-userid="`+userid+`" onclick="reReplyBtn(this)"  class="rounded "
                                  alt="reply" style="width: 24px; height: 24px ;cursor: pointer"/>
                         </div>
@@ -97,9 +97,9 @@ $(function (){
                     if(items.userId==$('#sessionId').val()){
                         result= result+`<div class="col-sm-1" style="padding: 0px; margin:0 0 ;">
                             <div><img src="/image/edit.png" class="rounded "
-                                      alt="edit"/></div>
+                                      alt="edit" style="cursor: pointer" onclick="replyEdit(`+items.no+`)"/></div>
                             <img src="/image/remove.png" class="rounded "
-                                 alt="remove"/>
+                                 alt="remove" style="cursor: pointer" onclick="replyRemove(`+items.no+`)"/>
                         </div>
                     </div>`;
                     }else{
@@ -244,3 +244,53 @@ function editBoard(){
     console.log("content="+$('#content').val());
     location.href="editBoard?boardid="+$('#boardid').val();
 }
+
+function replyRemove(no){
+    if(confirm('정말 댓글을 삭제하시겠습니까?')){
+        $.ajax({
+            type:'post',
+            url:'removeReply',
+            data:{'no':no},
+            success:function (data){
+                console.log(data);
+                alert('댓글 삭제 완료!!');
+                window.location.reload();
+
+            },
+            error:function (e){
+                console.log(e);
+            }
+
+        });
+    }
+}
+function replyEdit(no){
+ $('#trigger').trigger("click");
+
+    $('#editreplyBtn').click(function (){
+        var content=$('#editreply').val();
+
+        if(content==''){
+            $('#modalDiv').html("수정할 댓글을 입력하세요.");
+        }else{
+            $.ajax({
+                type:'post',
+                url:'editReply',
+                data:{'no':no,
+                    'content':content},
+                success:function (data){
+                    console.log(data);
+                    alert('댓글 수정 완료!!');
+                    window.location.reload();
+
+                },
+                error:function (e){
+                    console.log(e);
+                }
+
+            });
+        }
+
+    });
+}
+

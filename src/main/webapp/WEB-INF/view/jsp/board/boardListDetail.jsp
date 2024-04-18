@@ -17,7 +17,16 @@
 
 
 </head>
-
+<style>
+    #editreply {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        width: 100%;
+        box-sizing: border-box; /* 패딩과 테두리를 포함하여 요소의 크기를 계산합니다. */
+    }
+</style>
 <body>
 
 <%@ include file="../include/header.jsp"%>
@@ -63,6 +72,31 @@
     <img src="${pageContext.request.contextPath}/image/bookmark1.png" id="bookmark" style="height: 35px ; margin-left: 75%; cursor: pointer" onclick="boardScrap()"/>
 </div>
 
+
+<!-- Button trigger modal -->
+<button type="button" id="trigger" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" hidden>
+    Launch demo modal
+</button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">댓글 수정</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="editreply" style="width: 100%" placeholder="수정할 댓글을 입력하세요."/>
+            </div>
+            <div class="modal-body" id="modalDiv" style="color: red">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" id="editreplyBtn" class="btn btn-primary">수정</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/board/boardDetail.js"></script>
