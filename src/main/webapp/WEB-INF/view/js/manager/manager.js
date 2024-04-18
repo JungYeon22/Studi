@@ -291,6 +291,46 @@ $(function() {
     }
 
 
+    function repoterList(url) {
+        $.ajax({
+            type: 'POST',
+            url: url,//'/admin/managerPage/reportList',
+            dataType: 'json',
+            data:managerReport,
+            success: function(data) {
+                // 사용자 리스트 표시
+                var reportListTable = $('#reportList');
+                reportListTable.empty();
+                $.each(data.list, function (index, items) {
+                    var result = `<div class="mb-3">`
+                        + `<label for="userId" class="form-label">신고자</label>`
+                        + `<input type="text" readonly class="form-control-plaintext" id="userId" value="` + items.userId + `"></div>`
+                        + `<div class="mb-3">`
+                        + `<label for="targetId" class="form-label">대상자</label>`
+                        + `<input type="text" readonly class="form-control-plaintext" id="userId" value="` + items.targetId + `"></div>`
+                        + `<div class="mb-3">`
+                        + `<label for="content" class="form-label">신고내용</label>`
+                        + `<input type="text" readonly class="form-control-plaintext" id="userId" value="` + items.content + `"></div>`
+                        + `<select class="form-select form-select-sm" aria-label="Small select example">`
+                        + `<option selected>신고 처리</option>`
+                        + `<option value="2">처리 중</option>`
+                        + `<option value="3">이상 없음</option>`
+                        + `<option value="4">댓글 삭제</option>`
+                        + `<option value="5">게시물 삭제</option>`
+                        + `<option value="6">회원 경고</option>`
+                        + `<option value="7">회원 추방</option>`
+                        + `</select>`;
+
+                    reportListTable.append(result);
+                });
+            },
+            error: function(e) {
+                console.log(e);
+            }
+        });
+    }
+
+
     $(document).ready(function() {
         // 대시보드 섹션을 보여줍니다.
         $(".dashboard-section").show();
@@ -358,6 +398,9 @@ $(function() {
             // 기존에 활성화된 항목들을 비활성화합니다.
             $(".nav-link").removeClass("active");
             $(this).addClass("active");
+            $(function (){
+                repoterList('/admin/managerPage/reportList');
+            });
         });
 
         //유저리스트 유저 검색

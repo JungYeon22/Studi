@@ -177,7 +177,15 @@ CREATE TABLE `MAIL_NOTIFICATION` (
     `SENT_TIME`	TIMESTAMP	NULL	DEFAULT CURRENT_TIMESTAMP	COMMENT '전송 시간'
 );
 
-
+CREATE TABLE report (
+                        reportNum INT auto_increment  PRIMARY KEY,
+                        userId	VARCHAR(100)	NOT NULL,
+                        REPORTDATE	DATE	NOT NULL,
+                        TARGETId	VARCHAR(100) NOT NULL,
+                        CONTENT	VARCHAR(600)	NOT NULL,
+                        STATUS	VARCHAR(6)	NOT NULL default 1
+--                     1 ~ 5 단계별로 신고 요청(관리자 확인x), 처리중(관리자가 확인), 이상없음,댓글 삭제,게시물 삭제, 회원 경고, 회원 추방
+);
 
 
 

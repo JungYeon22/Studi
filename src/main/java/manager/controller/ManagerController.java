@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import manager.bean.ManagerDTO;
+import manager.bean.ManagerReport;
 import manager.bean.NoticeDTO;
 import manager.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,13 @@ public class ManagerController {
     private ManagerService managerService;
 
     @GetMapping(value = "/managerPage")
-    public String managerPage(@RequestParam(required = false, defaultValue = "1") String pg,Model model){
+    public String managerPage(@RequestParam(required = false, defaultValue = "1") String pg, Model model,
+                              @ModelAttribute ManagerReport managerReport){
         model.addAttribute("pg", pg);
 
         List<NoticeDTO> notiList = managerService.getNotice();
         model.addAttribute("notiList", notiList );
+        model.addAttribute("managerReport", managerReport);
         return "manager/managerPage";
     }
     @PostMapping(value = "/managerPage/signupCounts", produces = "application/json")
