@@ -133,6 +133,8 @@ public class BoardServiceImpl implements BoardService{
         map.put("userId",userId);
         boardDAO.removeBoardScrap(map);
         boardDAO.removeBoard(map);
+        boardDAO.removeComment(map);
+        boardDAO.removeTag(map);
         return "";
     }
 
@@ -150,5 +152,34 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public List<BoardReply> loadReply(String boardid) {
         return boardDAO.loadReply(boardid);
+    }
+
+    @Override
+    public void boardEditData(BoardDTO boardDTO, String[] lang) {
+        String lang_tmp="";
+
+        for(int i=0;i<lang.length;i++){
+            if(i==lang.length-1){
+                lang_tmp+=lang[i];
+            }else{
+                lang_tmp+=lang[i]+",";
+            }
+        }
+        boardDAO.boardEditData(boardDTO);
+        Map<String,Object> map = new HashMap<>();
+        map.put("boardId",boardDTO.getBOARDID());
+        map.put("lang",lang_tmp);
+        boardDAO.tagEdit(map);
+
+    }
+
+    @Override
+    public List<BoardDTO> getHot5() {
+        return boardDAO.getHot5();
+    }
+
+    @Override
+    public List<BoardDTO> getRecent5() {
+        return boardDAO.getRecent5();
     }
 }

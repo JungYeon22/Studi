@@ -41,10 +41,11 @@ $(function (){
                 var userCurCnt = items.userCurCnt;
 
                 if(userTotCnt==userCurCnt){
-                    var userCnt="모집 마감("+userTotCnt+"/"+userTotCnt+")";
+                    // var userCnt="모집 마감("+userTotCnt+"/"+userTotCnt+")";
+                    var userCnt="모집 마감이 된 프로젝트 입니다.";
 
                     var result=
-                        `<a href="boardListDetail?boardid=`+items.boardid+`" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true" style="background: dimgray">`
+                        `<a href="boardListDetail?boardid=`+items.boardid+`" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true" >`
                         +`<div class=" gap-2 w-100 justify-content-between">`
                         +`<div>`
                         +`<small class="opacity-50 text-nowrap ms-3">`+items.userId+`</small>&emsp;<small class="opacity-50 text-nowrap">`+hours+`</small>&emsp;<small class="opacity-50 text-nowrap">조회수</small><small class="opacity-50 text-nowrap">`+items.hit+`</small>`
@@ -285,9 +286,10 @@ function filterSelect(){
                 var userCurCnt = items.userCurCnt;
 
                 if(userTotCnt==userCurCnt){
-                    var userCnt="모집 마감("+userTotCnt+"/"+userTotCnt+")";
+                    // var userCnt="모집 마감("+userTotCnt+"/"+userTotCnt+")";
+                    var userCnt="모집 마감이 된 프로젝트 입니다.";
                     var result=
-                        `<a href="boardListDetail?boardid=`+items.boardid+`" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true" style="background: dimgray">`
+                        `<a href="boardListDetail?boardid=`+items.boardid+`" class="list-group-item list-group-item-action d-flex gap-3 py-3 rounded-3" aria-current="true" >`
                         +`<div class=" gap-2 w-100 justify-content-between">`
                         +`<div>`
                         +`<small class="opacity-50 text-nowrap ms-3">`+items.userId+`</small>&emsp;<small class="opacity-50 text-nowrap">`+hours+`</small>&emsp;<small class="opacity-50 text-nowrap">조회수</small><small class="opacity-50 text-nowrap">`+items.hit+`</small>`
