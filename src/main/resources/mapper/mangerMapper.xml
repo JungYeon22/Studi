@@ -26,7 +26,6 @@
         LEFT JOIN reportUser
         ON user.userId = reportUser.userId
         ORDER BY reportCnt DESC
-        LIMIT #{startNum}, 3;
     </select>
 
     <select id="getTotalA" resultType="int">
@@ -44,7 +43,6 @@
         ON user.userId = reportUser.userId
         where ${input} like concat('%', #{value}, '%')
         ORDER BY reportCnt DESC
-        LIMIT #{startNum}, 3;
     </select>
 
     <select id="pichart1" resultType="java.util.Map">

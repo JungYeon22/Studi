@@ -11,15 +11,15 @@ $(function() {
                 var userListTable = $('#userListTable tbody');
                 userListTable.empty();
                 $.each(data.list, function (index, items) {
-                    var result = `<tr>`
+                    var result = `<tr xmlns:c="http://www.w3.org/1999/html">`
                         + `<td >` + items.name + `</td>`
                         + `<td ><a href="#" class="idA">` + items.userid + `</a></td>`
                         + `<td >` + items.pwd + `</td>` + `</a></td>`
                         + `<td >` + items.email + `</td>` + `</a></td>`
                         + `<td >` + items.phone + `</td>` + `</a></td>`
                         + `<td >` + items.hiredate + `</td>`
-                        + `<td ><c:choose><c:when test="${items.reportCnt != null}">`+ items.reportCnt + `</c:when>`
-                        + `<c:otherwise>0</c:otherwise></c:choose></td>`
+                        + `<td ><c:if test="${items.reportCnt != 'undefined'}">${items.reportCnt}</c:if>`
+                        + `<c:if test="${items.reportCnt == 'undefined'}">0</c:if></td>`
                         + `</tr>`;
                     userListTable.append(result);
                 });
@@ -55,8 +55,8 @@ $(function() {
                             + `<td >` + items.email + `</td>` + `</a></td>`
                             + `<td >` + items.phone + `</td>` + `</a></td>`
                             + `<td >` + items.hiredate + `</td>`
-                            + `<td ><c:choose><c:when test="${items.reportCnt != null}">`+ items.reportCnt + `</c:when>`
-                            + `<c:otherwise>0</c:otherwise></c:choose></td>`
+                            + `<td ><c:if test="${items.reportCnt != 'undefined'}">${items.reportCnt}</c:if>`
+                            + `<c:if test="${items.reportCnt == 'undefined'}">0</c:if></td>`
                             + `</tr>`;
                         userListTable.append(result);
                     });
