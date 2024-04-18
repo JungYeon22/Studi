@@ -36,20 +36,20 @@ nav {
     font-size: 1.6em;
 }
 
-#navbarall{
+/*#navbarall{
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
-    display: flex; /* Flexbox 사용 */
-    justify-content: space-between; /* 요소를 동일한 간격으로 분산 배치 */
-    align-items: center; /* 요소를 수직 가운데 정렬 */
+    display: flex; !* Flexbox 사용 *!
+    justify-content: space-between; !* 요소를 동일한 간격으로 분산 배치 *!
+    align-items: center; !* 요소를 수직 가운데 정렬 *!
     padding: 10px;
-    background-color: rgba(4, 4, 4, 0.1);
-    /*    background-color: rgba(12,12,12,1);*/
+    !*background-color: rgba(4, 4, 4, 0.1);*!
+    !*    background-color: rgba(12,12,12,1);*!
     backdrop-filter: blur(2px);
     box-shadow: 2px 7px 15px 8px rgba(192, 185, 185, 0.3);
-}
+}*/
 .uplogin {
     color: rgb(119, 119, 127);
     margin: 0;
@@ -71,4 +71,18 @@ nav {
 
 .menuItem:hover {
     text-decoration: underline; /* 호버 시 밑줄 표시 */
+}
+#header-container{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex; /* Flexbox 사용 */
+    justify-content: space-between; /* 요소를 동일한 간격으로 분산 배치 */
+    align-items: center; /* 요소를 수직 가운데 정렬 */
+    padding: 10px;
+    background-color: rgba(192, 212, 255, 0.8);
+    /*    background-color: rgba(12,12,12,1);*/
+    backdrop-filter: blur(2px);
+    box-shadow: 2px 7px 15px 8px rgba(177, 195, 255, 0.3);
 }

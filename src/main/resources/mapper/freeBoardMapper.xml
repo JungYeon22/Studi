@@ -35,7 +35,7 @@
     <select id="getFBoardList" resultType="FBoardDTO">
         select *
         from free_board
-        order by fboard desc
+        order by date desc
         limit #{startNum}, #{size}
     </select>
 
