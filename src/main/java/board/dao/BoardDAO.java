@@ -56,4 +56,6 @@ public interface BoardDAO {
     public void removeReply(String no);
 
     public void editReply(Map<String, String> map);
+
+    public void reportUser(Map<String, String> map);
 }

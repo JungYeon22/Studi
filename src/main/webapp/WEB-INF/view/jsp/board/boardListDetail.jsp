@@ -26,6 +26,23 @@
         width: 100%;
         box-sizing: border-box; /* 패딩과 테두리를 포함하여 요소의 크기를 계산합니다. */
     }
+    #projectBtn {
+        background-color: #4CAF50; /* 배경색 */
+        color: white; /* 텍스트 색상 */
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.7s; /* 호버 효과 시간 */
+        cursor: pointer;
+    }
+
+    #projectBtn:hover {
+        background-color: olivedrab; /* 호버 시 배경색 변경 */
+        color: gold; /* 호버 시 텍스트 색상 변경 */
+    }
+
 </style>
 <body>
 
@@ -39,13 +56,13 @@
     <input type="hidden" id="subject" value="${boardDTO.SUBJECT}" >
 
 
-    <div class="card mb-4 rounded-3 shadow-sm " style="height: 100%; " >
+    <div class="card mb-4 rounded-3 shadow-sm " style="height: 100%; margin-top: 10px " >
         <div class="card-header py-3 " style="border-bottom: none; ">
             <h4 class="my-0 fw-normal " style="text-align: center;">${boardDTO.SUBJECT}</h4>
             <div><small class="opacity-70 text-nowrap ms-1" style="float: right;">조회수 : ${boardDTO.HIT}</small><small class="opacity-70 text-nowrap ms-1" style="float: right;">작성일: ${date}</small><small class="opacity-70 text-nowrap" style="float: right;">작성자: ${userId} </small></div>
         </div>
 
-        <div class="rounded-1 border" style="width: 100%; height: 400px; background-color: white; overflow: auto; word-wrap: break-word;">
+        <div class="rounded-1 border" style="width: 100%; height: 800px; background-color: white; overflow: auto; word-wrap: break-word; padding: 10px">
             ${boardDTO.CONTENT}
         </div>
 
@@ -70,6 +87,11 @@
         <img src="${pageContext.request.contextPath}/image/remove.png" style="height: 35px ; margin-left: 75%; cursor: pointer" onclick="removeBoard()">
     </c:if>
     <img src="${pageContext.request.contextPath}/image/bookmark1.png" id="bookmark" style="height: 35px ; margin-left: 75%; cursor: pointer" onclick="boardScrap()"/>
+    <c:if test="${(userId != sessionScope.userDTO.userId )&& (boardDTO.userTotCnt != boardDTO.userCurCnt)}">
+        <button type="button" id="projectBtn" style="height: 35px ; margin-left: 75% ;font-size: 0.8em"  class="btn " >
+            프로젝트 참가 신청
+        </button>
+    </c:if>
 </div>
 
 

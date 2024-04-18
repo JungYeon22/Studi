@@ -40,4 +40,6 @@ public interface BoardService {
     public void removeReply(String no);
 
     public void editReply(String no, String content);
+
+    public void reportUser(String reportId, String reportText, String userid);
 }

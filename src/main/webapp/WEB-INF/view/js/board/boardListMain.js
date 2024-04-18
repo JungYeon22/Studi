@@ -72,10 +72,10 @@ $(function (){
                     success:function (data){
                         console.log(data);
                         if(data=='non_exist'){
-                            result= result+`<img src="/image/bookmark2.png" id="bookmark"  class="rounded float-end"  alt="bookmark">`
+                            result= result+`<img src="/image/bookmark2.png" id="bookmark"  class="rounded float-end"  alt="bookmark" style="width: 24px;height: 24px">`
                         +`<h6 class="mb-0 ms-3" >`+items.subject+`</h6><h6 class="mb-0 position-absolute top-50 end-0 translate-middle-y me-5">`+userCnt+`</h6>`
                         }else{
-                            result= result+`<img src="/image/bookmark1.png" id="bookmark"  class="rounded float-end"  alt="bookmark">`
+                            result= result+`<img src="/image/bookmark1.png" id="bookmark"  class="rounded float-end"  alt="bookmark" style="width: 24px;height: 24px">`
                                 +`<h6 class="mb-0 ms-3" >`+items.subject+`</h6><h6 class="mb-0 position-absolute top-50 end-0 translate-middle-y me-5">`+userCnt+`</h6>`
                         }
 
@@ -316,10 +316,10 @@ function filterSelect(){
                     success:function (data){
                         console.log(data);
                         if(data=='non_exist'){
-                            result= result+`<img src="/image/bookmark2.png" id="bookmark"  class="rounded float-end"  alt="bookmark">`
+                            result= result+`<img src="/image/bookmark2.png" id="bookmark"  class="rounded float-end"  alt="bookmark" style="width: 24px;height: 24px">`
                                 +`<h6 class="mb-0 ms-3" >`+items.subject+`</h6><h6 class="mb-0 position-absolute top-50 end-0 translate-middle-y me-5">`+userCnt+`</h6>`
                         }else{
-                            result= result+`<img src="/image/bookmark1.png" id="bookmark"  class="rounded float-end"  alt="bookmark">`
+                            result= result+`<img src="/image/bookmark1.png" id="bookmark"  class="rounded float-end"  alt="bookmark" style="width: 24px;height: 24px">`
                                 +`<h6 class="mb-0 ms-3" >`+items.subject+`</h6><h6 class="mb-0 position-absolute top-50 end-0 translate-middle-y me-5">`+userCnt+`</h6>`
                         }
 

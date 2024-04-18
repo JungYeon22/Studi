@@ -195,4 +195,13 @@ public class BoardServiceImpl implements BoardService{
         map.put("content",content);
         boardDAO.editReply(map);
     }
+
+    @Override
+    public void reportUser(String reportId, String reportText, String userid) {
+        Map<String,String> map = new HashMap<>();
+        map.put("reportId",reportId);
+        map.put("reportText",reportText);
+        map.put("userid",userid);
+        boardDAO.reportUser(map);
+    }
 }
