@@ -12,6 +12,7 @@
     <context:component-scan base-package="manager.controller"/>
     <context:component-scan base-package="freeBoard.controller"/>
     <context:component-scan base-package="socialLogin.controller"/>
+    <context:component-scan base-package="project.controller"/>
 
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
