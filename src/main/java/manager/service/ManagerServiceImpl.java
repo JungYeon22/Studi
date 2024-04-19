@@ -50,6 +50,12 @@ public class ManagerServiceImpl implements ManagerService{
         managerData.setFielddCounts(pichart2);
         return pichart2;
     }
+    @Override
+    public List<String> pichart3() {
+        List<String> pichart3 = managerDAO.pichart3();
+
+        return pichart3;
+    }
 
 
     @Override

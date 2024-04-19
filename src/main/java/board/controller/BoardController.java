@@ -80,7 +80,7 @@ public class BoardController {
 
 
         cookie.setPath("/"); // 모든 경로에서 접근 가능
-        cookie.setMaxAge(10);
+        cookie.setMaxAge(60*60);
         response.addCookie(cookie);
 
     }
@@ -211,5 +211,12 @@ public class BoardController {
         boardService.editReply(no,content);
         return "";
     }
+    @PostMapping(value = "/reportUser")
+    @ResponseBody
+    public String reportUser(@RequestParam String reportId,String reportText,String userid){
+        boardService.reportUser(reportId,reportText,userid);
+        return "";
+    }
+
 
 }

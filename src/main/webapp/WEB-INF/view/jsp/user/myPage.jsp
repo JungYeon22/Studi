@@ -19,14 +19,14 @@
         .btn:hover{
             background-color: rgb(222, 222, 222);
         }
-        nav {
+/*        nav {
             display: inline-block;
             height: 70px;
             text-align: right;
         }
         #search .background-image:hover{
             cursor: pointer;
-        }
+        }*/
 
     </style>
 </head>

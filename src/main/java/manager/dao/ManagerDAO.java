@@ -39,6 +39,8 @@ public interface ManagerDAO {
 
     void reportUser(Map<String, String> map);
 
+    List<String> pichart3();
+
     void userBan(Map<String, String> map);
 
     void userBanInsert(Map<String, String> map);

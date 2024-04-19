@@ -103,6 +103,41 @@ public class ManagerController {
 
         return jsonData;
     }
+    @PostMapping(value = "/managerPage/pichart3", produces = "application/json")
+    @ResponseBody
+    public Map<String,Object> pichart3(Model model){
+        List<String> fielddCounts = managerService.pichart3();
+        int java_count=0;
+        int python_count=0;
+        int JavaScript_count=0;
+        int C_count=0;
+
+        for(int i=0;i<fielddCounts.size();i++){
+            if(fielddCounts.get(i).contains("java")){
+                java_count++;
+            }
+            if(fielddCounts.get(i).contains("python")){
+                python_count++;
+            }
+            if(fielddCounts.get(i).contains("JavaScript")){
+                JavaScript_count++;
+            }
+            if(fielddCounts.get(i).contains("C")){
+                C_count++;
+            }
+        }
+        Map<String,Object> map = new HashMap<>();
+        map.put("java","java");
+        map.put("java_count",java_count);
+        map.put("python","python");
+        map.put("python_count",python_count);
+        map.put("JavaScript","JavaScript");
+        map.put("JavaScript_count",JavaScript_count);
+        map.put("C","C");
+        map.put("C_count",C_count);
+
+        return map;
+    }
 
     @PostMapping(value="/managerPage/getUserList", produces = "application/json")
     @ResponseBody

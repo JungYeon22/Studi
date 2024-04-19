@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import manager.bean.ManagerDTO;
+import org.springframework.ui.Model;
 
 @Repository
 @Transactional
@@ -58,6 +59,10 @@ public class ManagerDAOMyBatis implements ManagerDAO{
     @Override
     public List<Map<String, Object>> pichart2() {
         return sqlSession.selectList("manager.pichart2");
+    }
+    @Override
+    public List<String> pichart3() {
+        return sqlSession.selectList("manager.pichart3");
     }
 
     @Override

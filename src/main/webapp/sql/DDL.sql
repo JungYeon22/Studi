@@ -1,110 +1,178 @@
-use minidb;
-
-/* 유저 */
-CREATE TABLE user (
-    UserId    VARCHAR(100)    ,
-    PWD    VARCHAR(100),
-    NAME    VARCHAR(100)    ,
-    EMAIL    VARCHAR(100)    ,
-    PHONE    VARCHAR(100)    ,
-    HIREDATE    DATE     default (CURRENT_DATE),
-    LOGIN_TYPE VARCHAR(100)
+create table if not exists board
+(
+    BOARDID      varchar(100) null,
+    SUBJECT      varchar(100) null,
+    CONTENT      mediumblob   null,
+    userTotCnt   int          null,
+    userCurCnt   int          null,
+    projectType  varchar(100) null,
+    projectField varchar(100) null,
+    UserId       varchar(100) null,
+    DATE         datetime     null,
+    FILE         varchar(100) null,
+    HIT          varchar(100) null
 );
 
-
-CREATE TABLE USER_Description (
-  name	VARCHAR(100),
-  UserId	VARCHAR(100),
-  Position VARCHAR(100),
-  Career	VARCHAR(100),
-  SKILL1	VARCHAR(100),
-  SKILL2	VARCHAR(100),
-  SKILL3	VARCHAR(100),
-  Introduce  VARCHAR(100)
+create table if not exists boardtag
+(
+    CONTENT varchar(100) null,
+    BOARDID varchar(100) null
 );
 
-/* 모집 게시판 */
-CREATE TABLE `BOARD` (
-    `BOARDID`	VARCHAR(100),
-    `SUBJECT`	VARCHAR(100),
-    `CONTENT`	VARCHAR(4000),
-    `userTotCnt` INT,
-    `userCurCnt` INT,
-    `projectType` VARCHAR(100),
-    `projectField` VARCHAR(100),
-    `UserId`	VARCHAR(100),
-    `DATE`	DATETIME,
-    `FILE`	VARCHAR(100),
-    `HIT`	VARCHAR(100)
+create table if not exists chating
+(
+    TIME      timestamp    null,
+    USERNAME  varchar(100) null,
+    MESSAGE   varchar(100) null,
+    UserId    varchar(100) null,
+    PROJECTID varchar(100) null
 );
 
-CREATE TABLE `COMMENT` (
-    `No`	INT auto_increment primary key,
-    `ref` INT,
-    `BOARDID`	VARCHAR(100),
-    `DATE`	DATE,
-    `UserId`	VARCHAR(100),
-    `TEXT`	VARCHAR(100)
+create table if not exists chatingroom
+(
+    CHATID      varchar(100) null,
+    CHATINGNAME varchar(100) null,
+    CURRENTJOIN varchar(100) null,
+    MAXJOIN     varchar(100) null,
+    Field       varchar(255) null,
+    UserId      varchar(100) null,
+    PROJECTID   varchar(100) null
 );
 
-CREATE TABLE `SCRAP` (
-    `UserId`	VARCHAR(100),
-    `BOARDID`	VARCHAR(100)
+create table if not exists comment
+(
+    No      int auto_increment
+        primary key,
+    ref     int          null,
+    BOARDID varchar(100) null,
+    DATE    date         null,
+    UserId  varchar(100) null,
+    TEXT    varchar(100) null
 );
 
-CREATE TABLE `boardtag` (
-    `CONTENT`	VARCHAR(100),
-    `BOARDID`	VARCHAR(100)
+create table if not exists fboard_comment
+(
+    FBOARD  int                                null,
+    WRITER  varchar(100)                       null,
+    COMMENT text                               null,
+    DATE    datetime default CURRENT_TIMESTAMP null
 );
 
-/* 팀 프로젝트 */
-CREATE TABLE `project` (
-    `PROJECTID`	VARCHAR(100),
-    `PROJECTNAME`	VARCHAR(100),
-    `CREATEDATE`	DATE,
-    `MAXJOIN`	VARCHAR(100),
-    `ENDDATE`	DATE	NULL,
-    `LEADER`	VARCHAR(100)
+create table if not exists fboard_like
+(
+    FBOARD int          null,
+    UserId varchar(100) null
 );
 
-
-CREATE TABLE `project_member` (
-    `PROJECTID`	VARCHAR(100),
-    `UserID`	VARCHAR(100)
+create table if not exists free_board
+(
+    FBOARD      int auto_increment
+        primary key,
+    WRITER      varchar(100)                       null,
+    TITLE       varchar(100)                       null,
+    DATE        datetime default CURRENT_TIMESTAMP null,
+    CONTENT     text                               null,
+    LIKES       int      default 0                 null,
+    COMMENT     int      default 0                 null,
+    writer_name varchar(20)                        null
 );
 
-/* 라우지(자유게시판)*/
-CREATE TABLE `FREE_BOARD` (
-`FBOARD`	INT primary key auto_increment,
-`WRITER`	VARCHAR(100),
-`WRITER_NAME` VARCHAR(20),
-`TITLE`     VARCHAR(100),
-`DATE`	DATETIME  default  CURRENT_TIMESTAMP,
-`CONTENT`	text,
-`LIKES`	INT	NULL default 0,
-`COMMENT` INT DEFAULT 0
+create table if not exists mail_notification
+(
+    UserId               varchar(100)                        null,
+    NOTIFICATION_TYPE    varchar(50)                         null,
+    NOTIFICATION_MESSAGE varchar(50)                         null,
+    SENT_TIME            timestamp default CURRENT_TIMESTAMP null comment '전송 시간'
 );
 
-
-CREATE TABLE `fboard_like` (
-    `FBOARD`	INT,
-    `UserId`	VARCHAR(100)
+create table if not exists notice
+(
+    noti_id int auto_increment
+        primary key,
+    title   varchar(100)                       null,
+    content text                               null,
+    date    datetime default CURRENT_TIMESTAMP null,
+    period int null
 );
 
+drop table notice;
 
-CREATE TABLE `fboard_comment`(
-    `FBOARD`    INT,
-    `WRITER`    VARCHAR(100),
-    `COMMENT`   VARCHAR(100),
-    `DATE`  DATETIME DEFAULT CURRENT_TIMESTAMP
+create table if not exists project
+(
+    PROJECTID   varchar(100) null,
+    PROJECTNAME varchar(100) null,
+    CREATEDATE  date         null,
+    MAXJOIN     varchar(100) null,
+    ENDDATE     date         null,
+    LEADER      varchar(100) null
 );
 
-/* 좋아요 기능을 수행하는 프로시저 */
-DELIMITER //
-CREATE PROCEDURE LIKE_PROCEDURE (
-    IN fboard_id INT,
-    IN user_id varchar(20)
-)
+create table if not exists project_application
+(
+    PROJECTID varchar(100) null,
+    UserID    varchar(100) null
+);
+
+create table if not exists project_member
+(
+    PROJECTID varchar(100) null,
+    UserID    varchar(100) null
+);
+
+create table if not exists report
+(
+    reportNum  int auto_increment
+        primary key,
+    userId     varchar(100)                   null,
+    REPORTDATE date       default (curdate()) null,
+    TARGETId   varchar(100)                   null,
+    CONTENT    varchar(600)                   null,
+    STATUS     varchar(6) default '1'         not null
+);
+
+create table if not exists reportuser
+(
+    userId    varchar(100) not null,
+    reportCnt varchar(100) not null
+);
+
+create table if not exists scrap
+(
+    UserId  varchar(100) null,
+    BOARDID varchar(100) null
+);
+
+create table if not exists user
+(
+    UserId     varchar(100)             null,
+    PWD        varchar(100)             null,
+    NAME       varchar(100)             null,
+    EMAIL      varchar(100)             null,
+    PHONE      varchar(100)             null,
+    HIREDATE   date default (curdate()) null,
+    LOGIN_TYPE varchar(100)             null
+);
+
+create table if not exists user_description
+(
+    name      varchar(100) null,
+    UserId    varchar(100) null,
+    Position  varchar(100) null,
+    Career    varchar(100) null,
+    SKILL1    varchar(100) null,
+    SKILL2    varchar(100) null,
+    SKILL3    varchar(100) null,
+    Introduce varchar(100) null
+);
+
+create table if not exists usericon
+(
+    UserId varchar(100) null,
+    iconId varchar(100) null
+);
+
+create
+    definer = study@`%` procedure LIKE_PROCEDURE(IN fboard_id int, IN user_id varchar(20))
 BEGIN
     DECLARE existLike INT;
     -- 해당 사용자가 이미 해당 게시글에 좋아요를 눌렀는지 확인
@@ -123,16 +191,10 @@ BEGIN
         VALUES (fboard_id, user_id);
         update free_board set likes=likes+1 where fboard=fboard_id;
     END IF;
-END //
-DELIMITER ;
+END;
 
-
-/* 게시글을 가져오기 전에 댓글 수를 update하는 프로시저*/
-DELIMITER //
-CREATE PROCEDURE LOUNGE_PROCEDURE(
-    IN startNum INT,
-    IN size INT
-)
+create
+    definer = study@`%` procedure LOUNGE_PROCEDURE(IN startNum int, IN size int)
 BEGIN
     -- 게시글 댓글 업데이트
     UPDATE FREE_BOARD AS B
@@ -145,53 +207,9 @@ BEGIN
     -- 게시글 목록 가져오기
     SELECT *
     FROM FREE_BOARD
-    order by fboard desc
+    order by DATE desc
     limit startNum, size;
-end //
-DELIMITER ;
-
-/* 채팅방 */
-CREATE TABLE `CHATINGROOM` (
-    `CHATID`	VARCHAR(100),
-    `CHATINGNAME`	VARCHAR(100),
-    `CURRENTJOIN`	VARCHAR(100),
-    `MAXJOIN`	VARCHAR(100),
-    `Field`	VARCHAR(255),
-    `UserId`	VARCHAR(100),
-    `PROJECTID`	VARCHAR(100)
-);
-
-CREATE TABLE `CHATING` (
-    `TIME`	TIMESTAMP,
-    `USERNAME`	VARCHAR(100),
-    `MESSAGE`	VARCHAR(100),
-    `UserId`	VARCHAR(100),
-    `PROJECTID`	VARCHAR(100)
-);
-
-/* 알림 */
-CREATE TABLE `MAIL_NOTIFICATION` (
-    `UserId`	VARCHAR(100),
-    `NOTIFICATION_TYPE`	VARCHAR(50),
-    `NOTIFICATION_MESSAGE`	VARCHAR(50),
-    `SENT_TIME`	TIMESTAMP	NULL	DEFAULT CURRENT_TIMESTAMP	COMMENT '전송 시간'
-);
-
-CREATE TABLE report (
-                        reportNum INT auto_increment  PRIMARY KEY,
-                        userId	VARCHAR(100)	NOT NULL,
-                        REPORTDATE	DATE	NOT NULL,
-                        TARGETId	VARCHAR(100) NOT NULL,
-                        CONTENT	VARCHAR(600)	NOT NULL,
-                        STATUS	VARCHAR(6)	NOT NULL default 1
---                     1 ~ 5 단계별로 신고 요청(관리자 확인x), 처리중(관리자가 확인), 이상없음,댓글 삭제,게시물 삭제, 회원 경고, 회원 추방
-);
-
-CREATE TABLE reportUser (
-                            userId	VARCHAR(100)	NOT NULL,
-                            reportCnt	VARCHAR(100) NOT NULL
-);
-
+end;
 create table userBan(
                         userId	VARCHAR(100)	NOT NULL,
                         name	VARCHAR(100)	 ,
@@ -199,6 +217,5 @@ create table userBan(
                         PHONE    VARCHAR(100)    ,
                         bandate    DATE     default (CURRENT_DATE)
 );
-
 
 
