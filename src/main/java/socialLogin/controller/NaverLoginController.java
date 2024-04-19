@@ -88,6 +88,7 @@ public class NaverLoginController {
 
         session.setAttribute("userDTO", userDTO);
 
+        System.out.println("check: " + checkUser);
         if(checkUser.equals("save")){
             model.addAttribute("socialSave", true);
         }else {
