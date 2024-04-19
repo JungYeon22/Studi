@@ -14,4 +14,5 @@ public class ManagerDTO {
     private String email;
     private String phone;
     private String hiredate;
+    private int reportCnt;
 }

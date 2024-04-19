@@ -18,6 +18,10 @@
         SELECT * FROM USER WHERE userId = #{userId}
     </select>
 
+    <select id="findByUserId2" parameterType="Map" resultType="manager.bean.ManagerUserBan">
+        SELECT * FROM userBan WHERE name = #{name} and phone = #{phone} and email = #{email}
+    </select>
+
     <select id="findByEmail" parameterType="string" resultType="user">
         SELECT * FROM USER WHERE email = #{email}
     </select>

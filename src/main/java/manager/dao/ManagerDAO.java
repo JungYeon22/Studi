@@ -38,4 +38,8 @@ public interface ManagerDAO {
     void reportStatus(Map<String,String> map);
 
     void reportUser(Map<String, String> map);
+
+    void userBan(Map<String, String> map);
+
+    void userBanInsert(Map<String, String> map);
 }

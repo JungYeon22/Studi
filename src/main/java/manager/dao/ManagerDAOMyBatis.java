@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 import manager.bean.ManagerDTO;
-import org.springframework.ui.Model;
 
 @Repository
 @Transactional
@@ -97,5 +96,15 @@ public class ManagerDAOMyBatis implements ManagerDAO{
         else if(Integer.parseInt(map.get("status")) == 7){
             sqlSession.delete("manager.reportUserDel",map);
         }
+    }
+
+    @Override
+    public void userBan(Map<String, String> map) {
+
+    }
+
+    @Override
+    public void userBanInsert(Map<String, String> map) {
+
     }
 }

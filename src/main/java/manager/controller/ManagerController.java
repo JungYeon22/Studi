@@ -153,4 +153,11 @@ public class ManagerController {
         managerService.reportStatus(map);
         managerService.reportUser(map);
     }
+
+    @PostMapping(value = "/managerPage/userBan")
+    @ResponseBody
+    public void userBan(@RequestParam Map<String,String> map){
+        System.out.println(map.get("userId") +map.get("name") + map.get("email"));
+        managerService.userBan(map);
+    }
 }

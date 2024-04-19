@@ -144,4 +144,10 @@ public class ManagerServiceImpl implements ManagerService{
     public void reportUser(Map<String, String> map) {
         managerDAO.reportUser(map);
     }
+
+    @Override
+    public void userBan(Map<String, String> map) {
+        managerDAO.userBan(map);
+        managerDAO.userBanInsert(map);
+    }
 }

@@ -23,4 +23,6 @@ public interface UserService {
     public String userIconChange(String userid, String fileName);
 
     public String userIconCheck(String userid);
+
+    boolean checkUserId2(Model model);
 }

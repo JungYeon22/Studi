@@ -1,11 +1,13 @@
 package user.service;
 
 import lombok.RequiredArgsConstructor;
+import manager.bean.ManagerUserBan;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import user.bean.UserDTO;
 import user.bean.UserIntro;
 import user.dao.UserDAOImpl;
+import manager.bean.ManagerUserBan;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -87,6 +89,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public String userIconCheck(String userid) {
         return userDAO.userIconCheck(userid);
+    }
+
+    @Override
+    public boolean checkUserId2(Model model) {
+        ManagerUserBan userBan = userDAO.findByUserId2(model);
+        return userBan != null;
     }
 
     @Override

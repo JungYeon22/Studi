@@ -1,5 +1,6 @@
 package user.dao;
 
+import manager.bean.ManagerUserBan;
 import org.springframework.ui.Model;
 import user.bean.UserDTO;
 import user.bean.UserIntro;
@@ -24,4 +25,6 @@ public interface UserDao {
     public String userIconChange(Map<String, String> map);
 
     public String userIconCheck(String userid);
+
+    ManagerUserBan findByUserId2(Model model);
 }
