@@ -16,7 +16,7 @@
 
 <body>
 <%@ include file="../include/header.jsp"%>
-<form class="position-relative top-0 start-50 translate-middle-x mt-5" style="width: 50%; height: 1000px;">
+<form class="position-relative top-0 start-50 translate-middle-x mt-3" style="width: 50%; height: 1000px;">
     <input type="hidden" id="pg" value="${pg}">
     <input type="hidden" id="sessionId" value="${userDTO.userId}">
     <br>
