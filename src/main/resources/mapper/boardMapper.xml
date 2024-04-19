@@ -97,4 +97,8 @@
     <insert id="reportUser" parameterType="Map">
         insert into report(userId,TARGETId,CONTENT) values(#{userid},#{reportId},#{reportText})
     </insert>
+
+    <select id="boardCntGetByUserId" parameterType="String" resultType="board.bean.BoardDTO">
+        select * from board where UserId=#{userId}
+    </select>
 </mapper>

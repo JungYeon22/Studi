@@ -14,6 +14,7 @@
     <title>myPage</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" >
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e4cbd3c2a7.js" crossorigin="anonymous"></script>
     <style>
 
         .btn:hover{
@@ -46,7 +47,7 @@
         <div class="row">
             <div class="col-md-6"> <!-- 왼쪽 영역 -->
                 <h4 class="mb-3">나의 정보
-                    <button class="btn btn-primary btn-sm" type="submit" id="updateFormBtn" onclick="location.href='updateForm'">수정</button>
+                    <button class="btn btn-primary btn-sm" type="button" id="updateFormBtn" onclick="location.href='updateForm'">수정</button>
                     <button class="btn btn-primary btn-sm" type="button" id="deleteBtn" >탈퇴</button>
                 </h4>
                 <div class="border border-primary-subtle rounded p-3">
@@ -100,7 +101,7 @@
                         <div class="accordion accordion-flush" id="accordionExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                         모두보기
                                     </button>
                                 </h2>
@@ -129,15 +130,28 @@
 
                 <h4 class="mb-3 mt-3">
                     <span class="text-primary">작성한 글</span>
-                    <span class="badge bg-primary rounded-pill">0</span>
-                    <button class="btn btn-primary btn-sm" type="submit">새글쓰기</button>
+                    <span id="cntSpan" class="badge bg-primary rounded-pill"></span>
+<%--                    <button class="btn btn-primary btn-sm" type="submit">새글쓰기</button>--%>
                 </h4>
                 <div class="border border-primary-subtle rounded p-3">
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-outline-*" >모두보기</button>
+
+                        <div class="accordion accordion-flush" id="accordionExample1">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button id="myboardBtn" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne1" aria-expanded="false" aria-controls="flush-collapseOne">
+                                        모두보기
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne1" class="accordion-collapse collapse" data-bs-parent="#accordionExample1">
+                                    <div id="myboardDiv" class="accordion-body">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+
         </div>
     </main>
 </div>
@@ -145,6 +159,7 @@
 <!-- ######################################################### -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>--%>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" ></script>
 <script src="https://code.jQuery.com/jquery-3.7.1.min.js"></script>
 <script>
@@ -223,6 +238,36 @@
     function iconChange(){
         $('#img').trigger("click");
     }
+
+
+    $(document).ready(function(){
+        $.ajax({
+            type: 'post',
+            url: '/board/boardCntGetByUserId',
+            data: {'userId':$('#userid').val()},
+            dataType: 'json',
+            success: function (data) {
+                var cnt=0;
+                $.each(data,function (index,items) {
+                    cnt++;
+
+                    var result = `<label for="email" class="form-label" style="cursor: pointer" onclick="location.href='/board/boardListDetail?boardid=`+items.boardid+`'">`+items.subject+`</label>
+                    <br/>
+                    <i class="fa-regular fa-eye"style="opacity: 75%" >`+items.hit+`</i>
+                    <hr/>`;
+
+                    $('#myboardDiv').append(result);
+                });
+
+                $('#cntSpan').append(cnt);
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+
+
+    });
 </script>
 </body>
 </html>
