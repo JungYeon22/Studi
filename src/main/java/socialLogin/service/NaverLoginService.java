@@ -79,10 +79,14 @@ public class NaverLoginService {
         return response.getBody();  //응답 : 사용자의 정보들
     }
 
-    public void checkUserAndSave(NaverLoginDTO user) {
+    public String checkUserAndSave(NaverLoginDTO user) {
         UserDTO userDTO = socialLoginDAO.isExistSocialLogin(user);
         if(userDTO == null){
             socialLoginDAO.saveSocialLogin(user);
+            return "save";
+        }
+        else {
+            return "login";
         }
     }
 }

@@ -73,7 +73,7 @@ public class NaverLoginController {
         user.setMobile(res_obj.get("mobile").toString().replaceAll("\"", ""));
         user.setLoginType("naver");
 
-        naverLoginService.checkUserAndSave(user);
+        String checkUser = naverLoginService.checkUserAndSave(user);
 
         String access_token = oauthToken.getAccessToken();
         String str_result = access_token.replaceAll("\\\"","");
@@ -87,6 +87,12 @@ public class NaverLoginController {
         userDTO.setLogin_type(user.getLoginType());
 
         session.setAttribute("userDTO", userDTO);
+
+        if(checkUser.equals("save")){
+            model.addAttribute("socialSave", true);
+        }else {
+            model.addAttribute("socialSave", false);
+        }
 
         return "redirect:/";
     }
