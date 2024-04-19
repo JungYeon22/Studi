@@ -62,6 +62,10 @@
         ORDER BY projectField_count DESC
     </select>
 
+    <select id="pichart3" resultType="String">
+        select CONTENT from boardtag
+    </select>
+
     <insert id="registerNotice" parameterType="map">
         insert into notice(title, content) values(#{title}, #{content})
     </insert>

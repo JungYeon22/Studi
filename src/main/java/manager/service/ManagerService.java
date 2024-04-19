@@ -31,4 +31,6 @@ public interface ManagerService {
     void reportStatus(Map<String,String> map);
 
     void reportUser(Map<String, String> map);
+
+    List<String> pichart3();
 }

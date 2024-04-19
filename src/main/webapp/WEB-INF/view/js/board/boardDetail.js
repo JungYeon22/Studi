@@ -68,7 +68,7 @@ $(function (){
                             <img src=`+src+`
                                  class="rounded  dropdown-toggle" role="button" data-bs-toggle="dropdown"
                                  aria-expanded="false"  alt="profile" style="width:30px;height:30px"/>
-                            <div style="height: 20px ;width: 60px;margin-left: -20px ">
+                            <div style="height: 20px ;width: 60px;margin-left: -20px ;text-align: center">
                                 <small id="userId" >` +  items.userId+`</small>
                             </div>
                             <ul class="dropdown-menu">
@@ -106,7 +106,7 @@ $(function (){
                         <div class="col-sm-1 dropdown" style="width: 50px; margin-left: 10px">
                             <img src=`+src+`
                                  class="rounded dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                                 aria-expanded="false"  alt="profile" style="width:30px;height:30px"/>
+                                 aria-expanded="false"  alt="profile" style="width:30px;height:30px ;text-align: center"/>
                             <div style="height: 20px ;width: 60px;margin-left: -20px ">
                                 <small >`+items.userId+`</small>
                             </div>
