@@ -10,7 +10,7 @@
 - 개발 언어 : Java 17
 - 프론트 개발 : JSP, JQuery, bootstrap
 - 의존성 관리 : Maven
-- 퍼시스턴스 프레임워크 : Mybtis
+- 퍼시스턴스 프레임워크 : Mybatis
 - DB : MySQL
 - 인프라 : Naver Cloud Platform 
 ---
