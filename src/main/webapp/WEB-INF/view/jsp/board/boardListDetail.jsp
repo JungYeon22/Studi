@@ -177,7 +177,27 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/board/boardDetail.js"></script>
 
+<script>
+    $(document).ready(function (){
+        $('#projectBtn').click(function (){
+            if(confirm('신청하시겠습니까?'  + $('#sessionId').val() + $('#boardid').val())){
+                $.post({
+                    url: '/projectTeam/application',
+                    data: {
+                        'applicationUser' : $('#sessionId').val(),
+                        'applicationBoardId' : $('#boardid').val()
+                    },
+                    success: function (){
+                        console.log('신청');
+                    },
+                    error: function (e){
+                        console.log(e)
+                    }
+                })
+            }
 
+        })
+    })
+</script>
 </body>
-
 </html>

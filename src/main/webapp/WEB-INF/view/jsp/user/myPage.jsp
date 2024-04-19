@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -158,6 +159,22 @@
 </form>
 <!-- ######################################################### -->
 
+<div class="container">
+    <c:forEach var="project" items="${projectList}">
+    <div class="card mt-3">
+        <div class="card-header">
+            ${project.BOARDID}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title mt-2">${project.SUBJECT}</h5>
+            <p class="card-text text-end">
+                <strong>${project.userCurCnt}/${project.userTotCnt}</strong>
+            </p>
+            <a href="/projectPage/myProjectPage?boardId=${project.BOARDID}" class="btn btn-primary">프로젝트 이동</a>
+        </div>
+    </div>
+    </c:forEach>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>--%>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" ></script>
@@ -202,15 +219,10 @@
             }
         });
 
-
         $('#imgSvg').click(function (){
             $('#img').trigger("click");
 
         });
-
-
-
-
 
         $('#img').change(function(){
             var formData = new FormData($('#iconForm')[0]);

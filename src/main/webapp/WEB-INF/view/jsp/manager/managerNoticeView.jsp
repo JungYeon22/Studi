@@ -99,19 +99,19 @@
             data: $('#notiWriteForm').serialize(),
             success: function (){
                 alert('등록되었습니다.');
-                $('.btn-close').click();
+                location.reload();
+                /*$('.btn-close').click();
                 var value =
                     `<div class="d-flex justify-content-between align-items-center">
-                        <a href="#" class="font-large">`+modalTile+`</a>
-                        <div>
-                            <a href="">수정</a> /
-                            <a href="" data>삭제</a>
-                            <input type="hidden" value="`+modalContent+`">
-                        </div>
-                    </div>
-                    <p class="font-large mb-0"></p>
+                <a href="#" class="font-large">`+modalTile+`</a>
+                <div>
+                    <a href="" class="notiDeleteBtn">delete</a>
+                    <input type="hidden" value="`+modalTile+`">
+                </div>
+                </div>
+                <p class="font-large mb-0 d-inline-block text-truncate">`+modalContent+`</p>
                     <hr>`
-                $('.noti-container').append(value);
+                $('.noti-container').append(value);*/
             }
         })
     }

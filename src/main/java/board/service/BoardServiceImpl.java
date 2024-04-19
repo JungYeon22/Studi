@@ -6,6 +6,7 @@ import board.bean.BoardReply;
 import board.dao.BoardDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import project.service.ProjectService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,8 @@ public class BoardServiceImpl implements BoardService{
 
     @Autowired
     private BoardDAO boardDAO;
+    @Autowired
+    private ProjectService projectService;
 
     @Autowired
     private BoardPaging boardPaging;
@@ -36,6 +39,12 @@ public class BoardServiceImpl implements BoardService{
          map.put("boardId",boardDTO.getBOARDID());
          map.put("lang",lang_tmp);
          boardDAO.tagInput(map);
+
+         /* PROJECT_MEMBER DB에 작성자 등록*/
+        Map<String,String> projectMap = new HashMap<>();
+        map.put("boardId", boardDTO.getBOARDID());
+        map.put("userId", boardDTO.getUserId());
+        projectService.approve(map);
 
         return "";
     }
