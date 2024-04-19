@@ -46,7 +46,7 @@
         <div class="row">
             <div class="col-md-6"> <!-- 왼쪽 영역 -->
                 <h4 class="mb-3">나의 정보
-                    <button class="btn btn-primary btn-sm" type="submit" id="updateFormBtn" onclick="location.href='updateForm'">수정</button>
+                    <button class="btn btn-primary btn-sm" type="button" id="updateFormBtn" onclick="location.href='updateForm'">수정</button>
                     <button class="btn btn-primary btn-sm" type="button" id="deleteBtn" >탈퇴</button>
                 </h4>
                 <div class="border border-primary-subtle rounded p-3">
@@ -100,7 +100,7 @@
                         <div class="accordion accordion-flush" id="accordionExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                         모두보기
                                     </button>
                                 </h2>
