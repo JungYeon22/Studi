@@ -58,4 +58,6 @@ public interface BoardDAO {
     public void editReply(Map<String, String> map);
 
     public void reportUser(Map<String, String> map);
+
+    public List<BoardDTO> boardCntGetByUserId(String userId);
 }

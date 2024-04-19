@@ -218,5 +218,9 @@ public class BoardController {
         return "";
     }
 
-
+    @PostMapping(value = "/boardCntGetByUserId")
+    @ResponseBody
+    public List<BoardDTO> boardCntGetByUserId(@RequestParam String userId){
+        return boardService.boardCntGetByUserId(userId);
+    }
 }

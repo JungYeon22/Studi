@@ -42,4 +42,6 @@ public interface BoardService {
     public void editReply(String no, String content);
 
     public void reportUser(String reportId, String reportText, String userid);
+
+    public List<BoardDTO> boardCntGetByUserId(String userId);
 }
