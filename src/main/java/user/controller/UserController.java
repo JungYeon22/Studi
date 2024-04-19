@@ -1,5 +1,6 @@
 package user.controller;
 
+import board.bean.BoardDTO;
 import board.service.ObjectStorage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import project.service.ProjectService;
 import user.bean.UserDTO;
 import user.bean.UserIntro;
 import user.service.UserServiceImpl;
@@ -33,6 +35,8 @@ public class UserController {
     @Autowired
     private ObjectStorage objectStorage;
     private String bucketName="bitcamp-6th-bucket-102";
+    @Autowired
+    private ProjectService projectService;
 
     @GetMapping("/writeForm")
     public String writeForm(Model model) {
@@ -215,6 +219,8 @@ public class UserController {
 //        model.addAttribute("userDTO", userDTO);
 //        UserIntro userIntro = userService.getIntro(userDTO.getUserId());
 //        model.addAttribute("userIntro",userIntro);
+        List<BoardDTO> projectList = projectService.getMyProjectList(userDTO.getUserId());
+        model.addAttribute("projectList", projectList);
         return "user/myPage";
     }
 
