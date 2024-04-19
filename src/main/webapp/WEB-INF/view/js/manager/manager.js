@@ -49,13 +49,14 @@ $(function() {
                     console.log(JSON.stringify(data));
                     // 사용자 리스트 표시
                     var userListTable = $('#userListTable tbody');
-                    var reportCnt = items.reportCnt;
-                    var result2 = "";
+
                     if (reportCnt >= 3){
                         result2 = `<button type="button" class="btn btn-outline-secondary btn-sm banBtn">회원추방</button>`;
                     }
                     userListTable.empty();
                     $.each(data.list, function (index, items) {
+                        var reportCnt = items.reportCnt;
+                        var result2 = "";
                         var result = `<tr>`
                             + `<td class="name">` + items.name + `</td>`
                             + `<td class="userId">` + items.userid + `</a></td>`
