@@ -293,6 +293,60 @@ $(function() {
             }
         });
     }
+    function loadDashboard5(url){
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'json',
+            success: function(data) {
+                var labelList = [];
+                var valueList = [];
+                const colors = [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ];
+
+
+                    labelList.push(data.java);
+                    labelList.push(data.python);
+                    labelList.push(data.JavaScript);
+                    labelList.push(data.C);
+                    valueList.push(data.java_count);
+                    valueList.push(data.python_count);
+                    valueList.push(data.JavaScript_count);
+                    valueList.push(data.C_count);
+
+
+                const ctx = document.getElementById('myChart5').getContext('2d');
+                var data = {
+                    labels: labelList,
+                    datasets: [{
+                        label: '카테고리2',
+                        data: valueList,
+                        backgroundColor: colors,
+                    }]
+                };
+
+                const myChart5 = new Chart(ctx, {
+                    type: 'pie',
+                    data: data,
+                    options: {
+                        title: {
+                            display: true,
+                            text: ''
+                        }
+                    }
+                });
+            },
+            error: function(e) {
+                console.log(e);
+            }
+        });
+    }
 
     function reportList(url) {
         $.ajax({
@@ -387,6 +441,7 @@ $(function() {
             loadDashboard2('/admin/managerPage/signupCounts');
             loadDashboard3('/admin/managerPage/pichart1');
             loadDashboard4('/admin/managerPage/pichart2');
+            loadDashboard5('/admin/managerPage/pichart3');
         });
 
         $(".userlist-link").click(function(e) {
@@ -425,6 +480,7 @@ $(function() {
                 loadDashboard2('/admin/managerPage/signupCounts');
                 loadDashboard3('/admin/managerPage/pichart1');
                 loadDashboard4('/admin/managerPage/pichart2');
+                loadDashboard5('/admin/managerPage/pichart3');
             });
         });
 

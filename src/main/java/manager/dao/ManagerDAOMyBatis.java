@@ -60,6 +60,10 @@ public class ManagerDAOMyBatis implements ManagerDAO{
     public List<Map<String, Object>> pichart2() {
         return sqlSession.selectList("manager.pichart2");
     }
+    @Override
+    public List<String> pichart3() {
+        return sqlSession.selectList("manager.pichart3");
+    }
 
     @Override
     public void registerNotice(Map<String, String> map) {
@@ -98,4 +102,6 @@ public class ManagerDAOMyBatis implements ManagerDAO{
             sqlSession.delete("manager.reportUserDel",map);
         }
     }
+
+
 }
