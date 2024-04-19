@@ -204,4 +204,9 @@ public class BoardServiceImpl implements BoardService{
         map.put("userid",userid);
         boardDAO.reportUser(map);
     }
+
+    @Override
+    public List<BoardDTO> boardCntGetByUserId(String userId) {
+        return boardDAO.boardCntGetByUserId(userId);
+    }
 }
