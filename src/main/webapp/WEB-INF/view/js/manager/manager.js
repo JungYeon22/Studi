@@ -11,21 +11,24 @@ $(function() {
                 var userListTable = $('#userListTable tbody');
                 userListTable.empty();
                 $.each(data.list, function (index, items) {
+                    var reportCnt = items.reportCnt;
+                    var result2 = "";
+                    if (reportCnt >= 3){
+                        result2 = `<button type="button" class="btn btn-outline-secondary btn-sm banBtn">회원추방</button>`;
+                    }
+
                     var result = `<tr xmlns:c="http://www.w3.org/1999/html">`
-                        + `<td >` + items.name + `</td>`
-                        + `<td ><a href="#" class="idA">` + items.userid + `</a></td>`
-                        + `<td >` + items.pwd + `</td>` + `</a></td>`
-                        + `<td >` + items.email + `</td>` + `</a></td>`
-                        + `<td >` + items.phone + `</td>` + `</a></td>`
+                        + `<td class="name">` + items.name + `</td>`
+                        + `<td class="userId">` + items.userid + `</a></td>`
+                        + `<td class="pwd">` + items.pwd + `</td>` + `</a></td>`
+                        + `<td class="email">` + items.email + `</td>` + `</a></td>`
+                        + `<td class="phone">` + items.phone + `</td>` + `</a></td>`
                         + `<td >` + items.hiredate + `</td>`
-                        + `<td ><c:if test="${items.reportCnt != 'undefined'}">${items.reportCnt}</c:if>`
-                        + `<c:if test="${items.reportCnt == 'undefined'}">0</c:if></td>`
+                        + `<td >`+ items.reportCnt +`</td>` + `<td >`+ result2 + `</td>`
                         + `</tr>`;
                     userListTable.append(result);
                 });
 
-                // 페이징 처리
-                $('#userPagingDiv').html(data.managerPaging.pagingHTML);
             },
             error: function (e) {
                 console.log(e);
@@ -46,23 +49,26 @@ $(function() {
                     console.log(JSON.stringify(data));
                     // 사용자 리스트 표시
                     var userListTable = $('#userListTable tbody');
+                    var reportCnt = items.reportCnt;
+                    var result2 = "";
+                    if (reportCnt >= 3){
+                        result2 = `<button type="button" class="btn btn-outline-secondary btn-sm banBtn">회원추방</button>`;
+                    }
                     userListTable.empty();
                     $.each(data.list, function (index, items) {
                         var result = `<tr>`
-                            + `<td >` + items.name + `</td>`
-                            + `<td ><a href="#" class="idA">` + items.userid + `</a></td>`
-                            + `<td >` + items.pwd + `</td>` + `</a></td>`
-                            + `<td >` + items.email + `</td>` + `</a></td>`
-                            + `<td >` + items.phone + `</td>` + `</a></td>`
+                            + `<td class="name">` + items.name + `</td>`
+                            + `<td class="userId">` + items.userid + `</a></td>`
+                            + `<td class="pwd">` + items.pwd + `</td>` + `</a></td>`
+                            + `<td class="email">` + items.email + `</td>` + `</a></td>`
+                            + `<td class="phone">` + items.phone + `</td>` + `</a></td>`
                             + `<td >` + items.hiredate + `</td>`
-                            + `<td ><c:if test="${items.reportCnt != 'undefined'}">${items.reportCnt}</c:if>`
-                            + `<c:if test="${items.reportCnt == 'undefined'}">0</c:if></td>`
+                            + `<td >`+ items.reportCnt +`</td>`
+                            + `<td >`+ items.reportCnt +`</td>` + `<td >`+ result2 + `</td>`
                             + `</tr>`;
                         userListTable.append(result);
                     });
 
-                    // 페이징 처리
-                    $('#userPagingDiv').html(data.managerPaging.pagingHTML);
                 },
                 error: function(e) {
                     console.log(e);
@@ -384,7 +390,7 @@ $(function() {
                 var reportContent = $('#reportContent');
                 reportContent.empty();
                 $.each(data.list, function (index, items) {
-                    var result = `<label for="userId" class="col-sm-2 col-form-label">신고자</label>`
+                    var result = `<div class="mb-3 row"><label for="userId" class="col-sm-2 col-form-label">신고자</label>`
                         + `<div class="col-sm-10"><input type="text" readonly class="form-control-plaintext" id="userId" value="` + items.userId + `"></div></div>`
                         + `<div class="mb-3 row">`
                         + `<label for="targetId" class="col-sm-2 col-form-label">대상자</label>`
@@ -532,6 +538,30 @@ $(function() {
             var select= $('#reportContent select.form-select').val();
             var reportNum = $('#reportContent input[type="hidden"]').val();
             reportStatus(reportNum,select);
+        });
+
+        $(document).on('click', '.banBtn',function(e){
+            e.preventDefault();
+            if(confirm("회원을 추방시키겠습니까?")){
+                $.ajax({
+                    type: 'POST',
+                    url: '/admin/managerPage/userBan',
+                    dataType: 'text',
+                    data:{
+                        userId:$(this).closest("tr").find(".userId").text(),
+                        name:$(this).closest("tr").find(".name").text(),
+                        email:$(this).closest("tr").find(".email").text(),
+                        phone:$(this).closest("tr").find(".phone").text(),
+                        },
+                    success:function(data){
+                        alert("회원 추방을 완료하였습니다.");
+                        location.reload();
+                    },
+                    error: function(e) {
+                        console.log(e);
+                    }
+                });
+            }
         });
     });
 });

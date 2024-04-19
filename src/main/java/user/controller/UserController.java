@@ -85,15 +85,23 @@ public class UserController {
 
     @PostMapping("/checkUserId")
     @ResponseBody
-    public ResponseEntity<Map<String, Boolean>> checkUserId(@RequestBody Map<String, String> json) {
+    public ResponseEntity<Map<String, Boolean>> checkUserId(@RequestBody Map<String, String> json,Model model) {
         boolean isDuplicate;
+        boolean isDuplicate2;
         String userId = json.get("userId");
+        model.addAttribute("name",json.get("name"));
+        model.addAttribute("phone",json.get("phone"));
+        model.addAttribute("email",json.get("email"));
+        Map<String, Boolean> response = new HashMap<>();
         if (userId.isEmpty()) {
             isDuplicate = true;
         } else {
             isDuplicate = userService.checkUserId(userId);
+            isDuplicate2 = userService.checkUserId2(model);
+            response.put("isDuplicate", isDuplicate);
+            response.put("isBan", isDuplicate2);
         }
-        return ResponseEntity.ok(Collections.singletonMap("isDuplicate", isDuplicate));
+        return ResponseEntity.ok(response);
     }
 
     //이메일 인증

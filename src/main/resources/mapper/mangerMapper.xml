@@ -119,4 +119,12 @@
         </choose>
     </update>
 
+    <delete id="userBan" parameterType="map">
+        delete from user where userId=#{userId}
+    </delete>
+    <insert id="userBanInsert" parameterType="map">
+
+        insert into userBan (userId, name, EMAIL, PHONE) values(#{userId}, #{name}, #{email}, #{phone})
+
+    </insert>
 </mapper>

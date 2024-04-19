@@ -210,4 +210,12 @@ BEGIN
     order by DATE desc
     limit startNum, size;
 end;
+create table userBan(
+                        userId	VARCHAR(100)	NOT NULL,
+                        name	VARCHAR(100)	 ,
+                        EMAIL    VARCHAR(100)    ,
+                        PHONE    VARCHAR(100)    ,
+                        bandate    DATE     default (CURRENT_DATE)
+);
+
 

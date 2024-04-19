@@ -126,24 +126,31 @@ $(function(){
     window.addEventListener('load', () => {
         document.getElementById('check-id').addEventListener('click', function () {
             const userId = document.getElementById('id').value;
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
 
             fetch('/user/checkUserId', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({userId: userId})
+                body: JSON.stringify({userId: userId,
+                    name: name,
+                    phone: phone,
+                    email: email})
             })
                 .then(response => response.json())
                 .then((data) => {
                     if (data.isDuplicate) {
                         alert('아이디가 중복됩니다. 다른 아이디를 입력해주세요.');
                         isUserIdChecked = false; // 중복된 ID이므로 체크 플래그를 false로 설정
-                        document.getElementById('submit-button').disabled = true; // 가입 완료 버튼 비활성화
+                        document.getElementById('registerBtn').disabled = true; // 가입 완료 버튼 비활성화
+
                     } else {
                         alert('사용 가능한 아이디입니다.');
                         isUserIdChecked = true; // 유효한 ID이므로 체크 플래그를 true로 설정
-                        document.getElementById('submit-button').disabled = false; // 가입 완료 버튼 활성화
+                        document.getElementById('registerBtn').disabled = false; // 가입 완료 버튼 활성화
                     }
                 })
             /*.catch(error => {
@@ -194,11 +201,34 @@ $(function(){
     }
 
     $(document).ready(function() {
-
         $("#registerBtn").click(function(e) {
             e.preventDefault(); // 폼 서브미션을 막음
+            const userId = document.getElementById('id').value;
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+
+            fetch('/user/checkUserId', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({userId: userId,
+                    name: name,
+                    phone: phone,
+                    email: email})
+            })
+                .then(response => response.json())
+                .then((data) => {
+                    if (data.isBan) {
+                        alert('신고로 인한 추방으로 회원가입이 제한됩니다.');
+                        isUserIdChecked = false; // 중복된 ID이므로 체크 플래그를 false로 설정
+                        location.reload(); // 가입 완료 버튼 비활성화
+                    }
+                    else{$('#exampleModalToggle').modal('show');}
+                });
             // 모달 창 보이기
-            $('#exampleModalToggle').modal('show');
+
         });
 
         $("#moadl1").click(function(e) {

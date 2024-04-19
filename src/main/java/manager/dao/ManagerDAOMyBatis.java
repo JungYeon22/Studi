@@ -103,5 +103,13 @@ public class ManagerDAOMyBatis implements ManagerDAO{
         }
     }
 
+    @Override
+    public void userBan(Map<String, String> map) {
 
+    }
+
+    @Override
+    public void userBanInsert(Map<String, String> map) {
+
+    }
 }

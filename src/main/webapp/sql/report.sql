@@ -12,3 +12,11 @@ CREATE TABLE reportUser (
                         userId	VARCHAR(100)	NOT NULL,
                         reportCnt	VARCHAR(100) NOT NULL
 );
+
+create table userBan(
+                        userId	VARCHAR(100)	NOT NULL,
+                        name	VARCHAR(100)	 ,
+                        EMAIL    VARCHAR(100)    ,
+                        PHONE    VARCHAR(100)    ,
+                        bandate    DATE     default (CURRENT_DATE)
+);

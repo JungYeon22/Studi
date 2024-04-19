@@ -1,6 +1,7 @@
 package user.dao;
 
 import lombok.RequiredArgsConstructor;
+import manager.bean.ManagerUserBan;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -71,6 +72,11 @@ public class UserDAOImpl implements UserDao {
     @Override
     public String userIconCheck(String userid) {
         return sql.selectOne("USER.userIconCheck",userid);
+    }
+
+    @Override
+    public ManagerUserBan findByUserId2(Model model) {
+        return sql.selectOne("USER.findByUserId2", model);
     }
 
 }

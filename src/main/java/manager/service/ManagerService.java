@@ -32,5 +32,7 @@ public interface ManagerService {
 
     void reportUser(Map<String, String> map);
 
+    void userBan(Map<String, String> map);
+
     List<String> pichart3();
 }
