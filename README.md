@@ -63,10 +63,13 @@
 
 ---
 ### 메인 화면
-<img src="https://github.com/JungYeon22/Studi/assets/105910143/86507575-2184-4a78-bedd-8c6698ae298f" style="width: 50%">
+<img src="https://github.com/JungYeon22/Studi/assets/105910143/86507575-2184-4a78-bedd-8c6698ae298f" style="width: 80%">
 
 ### 프로젝트 및 스터디 모집 게시판
-<img src="https://github.com/JungYeon22/Studi/assets/105910143/7e9ed2d2-834f-451f-b5eb-c0eae1240327" style="width: 50%">
+<img src="https://github.com/JungYeon22/Studi/assets/105910143/7e9ed2d2-834f-451f-b5eb-c0eae1240327" style="width: 80%">
 
 ### 라운지 화면
-<img src="https://github.com/JungYeon22/Studi/assets/105910143/95301ac9-17a7-402e-bedf-7056e361e9c1" style="width: 50%">
+<img src="https://github.com/JungYeon22/Studi/assets/105910143/95301ac9-17a7-402e-bedf-7056e361e9c1" style="width: 80%">
+
+### 관리자 화면
+<img src="https://github.com/JungYeon22/Studi/assets/105910143/00e6d954-d40c-405a-894c-1e65e74f7e30" style="width: 80%">
