@@ -17,13 +17,27 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary" onclick="location.reload()">Save changes</button>
             </div>
         </div>
     </div>
 </div>
 <script>
     $(document).ready(function(){
+        $.post({
+            url: '/projectTeam/applicationListCnt',
+            data: 'boardId=' + $('#boardId').val(),
+            dataType: 'json',
+            success: function (data) {
+                console.log(JSON.stringify(data))
+                $('.badge').text(data);
+            },
+            error: function (e) {
+                console.log(e)
+            }
+        })
+
+
         $('#applicationNotiBtn').click(function (){
             console.log("모달 버튼 클릭")
             console.log($('#boardId').val())

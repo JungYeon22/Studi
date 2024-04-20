@@ -35,6 +35,12 @@ public class ProjectController {
          return projectService.applicationList(boardId);
     }
 
+    @PostMapping(value = "/applicationListCnt")
+    @ResponseBody
+    public int applicationListCnt(@RequestParam String boardId){
+        return projectService.applicationList(boardId).size();
+    }
+
     @PostMapping(value = "/approve")
     @ResponseBody
     public String participation(@RequestParam String boardId,

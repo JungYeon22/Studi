@@ -22,7 +22,6 @@ public class ProjectTeamController {
     @Autowired
     private ProjectService projectService;
 
-
     @GetMapping(value = "/myProjectPage")
     public String myProjectPage(@RequestParam(required = true) String boardId, Model model){
         BoardDTO boardDTO = boardService.boardListGetbyId(boardId);
@@ -30,6 +29,7 @@ public class ProjectTeamController {
         for(UserIntro userIntro: projectMemberList){
             System.out.println(userIntro.getUserId());
         }
+
         model.addAttribute("boardDTO", boardDTO);
         model.addAttribute("projectMemberList", projectMemberList);
         return "projectPage/myProjectPage";

@@ -94,10 +94,12 @@
     <%@ include file="../include/header.jsp"%>
 
     <input type="hidden" id="boardId" value="${boardDTO.BOARDID}">
-    <button type="button" id="applicationNotiBtn" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#applicationNoti">
-        알림 <span class="badge text-bg-secondary">5</span>
-    </button>
-    <%@include file="applicationListModal.jsp"%>
+    <c:if test="${boardDTO.userId == userDTO.userId}">
+        <button type="button" id="applicationNotiBtn" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#applicationNoti">
+            알림 <span class="badge text-bg-secondary"></span>
+        </button>
+        <%@include file="applicationListModal.jsp"%>
+    </c:if>
 
     <!-- ########################################################################################################################### -->
     <div class="container" style="height: 800px;">
@@ -154,13 +156,13 @@
                             <tr>
                                 <td>${user.name}</td>
                                 <td>
-                                    <c:if test="${user.skill1 ne ''}">
+                                    <c:if test="${user.skill1 ne null}">
                                         ${user.skill1}
                                     </c:if>
-                                    <c:if test="${user.skill2 ne ''}">
+                                    <c:if test="${user.skill2 ne null}">
                                         , ${user.skill2}
                                     </c:if>
-                                    <c:if test="${user.skill3 ne ''}">
+                                    <c:if test="${user.skill3 ne null}">
                                         , ${user.skill3}
                                     </c:if>
                                 </td>
