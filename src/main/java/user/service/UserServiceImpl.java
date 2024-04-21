@@ -11,6 +11,7 @@ import manager.bean.ManagerUserBan;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -95,6 +96,16 @@ public class UserServiceImpl implements UserService {
     public boolean checkUserId2(Model model) {
         ManagerUserBan userBan = userDAO.findByUserId2(model);
         return userBan != null;
+    }
+
+    @Override
+    public List<Map<String, Object>> scrap(String userId) {
+        return userDAO.scrap(userId);
+    }
+
+    @Override
+    public List<Map<String, Object>> whrite(String userId) {
+        return userDAO.whrite(userId);
     }
 
     @Override

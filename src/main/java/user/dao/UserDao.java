@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import user.bean.UserDTO;
 import user.bean.UserIntro;
 
+import java.util.List;
 import java.util.Map;
 
 public interface UserDao {
@@ -27,4 +28,8 @@ public interface UserDao {
     public String userIconCheck(String userid);
 
     ManagerUserBan findByUserId2(Model model);
+
+    List<Map<String, Object>> scrap(String userId);
+
+    List<Map<String, Object>> whrite(String userId);
 }

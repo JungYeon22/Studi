@@ -267,7 +267,7 @@ public class UserController {
 
     @PostMapping(value="/delete")
     @ResponseBody
-    public void delete(@SessionAttribute String userId) {
+    public void delete(@RequestParam String userId) {
         userService.delete(userId);
     }
 
@@ -352,5 +352,19 @@ public class UserController {
     public String userIconCheck(@RequestParam String userid){
 
         return userService.userIconCheck(userid);
+    }
+
+    @PostMapping(value = "/scrap")
+    @ResponseBody
+    public List<Map<String, Object>> scrap(@RequestParam String userId){
+
+        return userService.scrap(userId);
+    }
+
+    @PostMapping(value = "/whrite")
+    @ResponseBody
+    public List<Map<String, Object>> whrite(@RequestParam String userId){
+
+        return userService.whrite(userId);
     }
 }

@@ -5,6 +5,8 @@ import user.bean.UserDTO;
 import user.bean.UserIntro;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
 
 public interface UserService {
     int save(UserDTO userDTO);
@@ -25,4 +27,8 @@ public interface UserService {
     public String userIconCheck(String userid);
 
     boolean checkUserId2(Model model);
+
+    List<Map<String, Object>> scrap(String userId);
+
+    List<Map<String, Object>> whrite(String userId);
 }

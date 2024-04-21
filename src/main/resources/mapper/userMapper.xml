@@ -62,4 +62,19 @@
         select iconId from USERICON where UserId=#{userid}
     </select>
 
+    <select id="scrap" parameterType="String" resultType="Map">
+        select scrap.userid as scrapId, SUBJECT, CONTENT, board.userId, projectType, scrap.BOARDID
+        from scrap
+        left join board
+        on scrap.BOARDID = board.BOARDID
+        where scrap.userId = #{userId}
+        order by DATE desc
+    </select>
+
+    <select id="whrite" parameterType="String" resultType="Map">
+        select SUBJECT, CONTENT, projectType, BOARDID
+        from board
+        where userId = #{userId}
+    </select>
+
 </mapper>
