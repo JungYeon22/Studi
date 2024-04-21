@@ -267,7 +267,7 @@ public class UserController {
 
     @PostMapping(value="/delete")
     @ResponseBody
-    public void delete(@SessionAttribute String userId) {
+    public void delete(@RequestParam String userId) {
         userService.delete(userId);
     }
 

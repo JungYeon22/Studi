@@ -250,7 +250,7 @@
                 $.each(data,function (index,items) {
                     cnt++;
 
-                    var result = `<label for="email" class="form-label" style="cursor: pointer" onclick="location.href='/board/boardListDetail?boardid=`+items.boardid+`'">`+items.subject+`</label>
+                    var result = `<label for="email" class="form-label" style="cursor: pointer" onclick="location.href='/board/boardListDetail?boardid=`+items.BOARDID+`'">`+items.subject+`</label>
                     <br/>
                     <i class="fa-regular fa-eye"style="opacity: 75%" >`+items.hit+`</i>
                     <hr/>`;
@@ -280,7 +280,7 @@
                 scrapTable.empty();
                 if (data.length > 0){
                     $.each(data, function (index, items) {
-                        var result = `<label for="email" class="form-label" onclick="location.href='/board/boardListDetail?boardid=`+items.boardid+`'">`+items.SUBJECT+`</label>`
+                        var result = `<label for="email" class="form-label" style="cursor: pointer" onclick="location.href='/board/boardListDetail?boardid=`+items.BOARDID+`'">`+items.SUBJECT+`</label>`
                             + `<p id="email" class="text-truncate" style="max-width: 1000px;">` + items.CONTENT + `</p>`
                             + `<p id="writer" class="text-truncate" style="max-width: 1000px;"> 작성자 : ` + items.userId + `</p>`
                             + `<button class="btn btn-secondary btn-sm" onclick="location.href='#'>` + items.projectType + `</button><hr>`;
@@ -310,9 +310,8 @@
                 whriteTable.empty();
                 if(data.length > 0) {
                     $.each(data, function (index, items) {
-                        var result = `<label for="email" class="form-label" onclick="location.href='/board/boardListDetail?boardid=`+items.boardid+`'">`+items.SUBJECT+`</label>`
+                        var result = `<label for="email" class="form-label" style="cursor: pointer" onclick="location.href='/board/boardListDetail?boardid=`+items.BOARDID+`'">`+items.SUBJECT+`</label>`
                             + `<p id="email" class="text-truncate" style="max-width: 1000px;">` + items.CONTENT + `</p>`
-                            + `<p id="writer" class="text-truncate" style="max-width: 1000px;"> 작성자 : ` + items.userId + `</p>`
                             + `<button class="btn btn-secondary btn-sm" onclick="location.href='#'>` + items.projectType + `</button><hr>`;
 
                         whriteTable.append(result);

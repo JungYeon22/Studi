@@ -63,7 +63,8 @@
     </select>
 
     <select id="scrap" parameterType="String" resultType="Map">
-        select scrap.userid as scrapId, SUBJECT, CONTENT, board.userId, projectType,  count(*) as scrpCnt from scrap
+        select scrap.userid as scrapId, SUBJECT, CONTENT, board.userId, projectType, scrap.BOARDID
+        from scrap
         left join board
         on scrap.BOARDID = board.BOARDID
         where scrap.userId = #{userId}
@@ -71,7 +72,7 @@
     </select>
 
     <select id="whrite" parameterType="String" resultType="Map">
-        select SUBJECT, CONTENT, projectType
+        select SUBJECT, CONTENT, projectType, BOARDID
         from board
         where userId = #{userId}
     </select>
