@@ -35,7 +35,7 @@
                     <div class="col-md-8 mb-3">
                         <label for="id">아이디</label>
                         <div class="input-group-append">
-                            <input type="text" class="form-control" id="id" name="userId" placeholder="아이디입력" value="" style="width: 340px"  required>
+                            <input type="text" class="form-control" id="id" name="userId" placeholder="아이디입력"  style="width: 340px"  required>
                             <button type="button" id="check-id" class="btn btn-outline-secondary" style="margin-left: 20px; width: 110px" >중복확인</button>
                         </div>
                         <div class="invalid-feedback">

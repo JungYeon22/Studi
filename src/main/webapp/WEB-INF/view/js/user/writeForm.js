@@ -123,41 +123,44 @@ $(function(){
     // 중복 ID 체크 플래그 선언
     let isUserIdChecked = false;
 
-    window.addEventListener('load', () => {
-        document.getElementById('check-id').addEventListener('click', function () {
-            const userId = document.getElementById('id').value;
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const email = document.getElementById('email').value;
+    document.getElementById('check-id').addEventListener('click', function () {
+        const userId = document.getElementById('id').value;
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const email = document.getElementById('email').value;
+        console.log("중복체크 버튼 클릭")
 
-            fetch('/user/checkUserId', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({userId: userId,
-                    name: name,
-                    phone: phone,
-                    email: email})
+        fetch('/user/checkUserId', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({userId: userId,
+                name: name,
+                phone: phone,
+                email: email})
+        })
+            .then(response => response.json())
+            .then((data) => {
+                if (data.isDuplicate) {
+                    alert('아이디가 중복됩니다. 다른 아이디를 입력해주세요.');
+                    isUserIdChecked = false; // 중복된 ID이므로 체크 플래그를 false로 설정
+                    document.getElementById('registerBtn').disabled = true; // 가입 완료 버튼 비활성화
+
+                } else {
+                    alert('사용 가능한 아이디입니다.');
+                    isUserIdChecked = true; // 유효한 ID이므로 체크 플래그를 true로 설정
+                    document.getElementById('registerBtn').disabled = false; // 가입 완료 버튼 활성화
+                }
             })
-                .then(response => response.json())
-                .then((data) => {
-                    if (data.isDuplicate) {
-                        alert('아이디가 중복됩니다. 다른 아이디를 입력해주세요.');
-                        isUserIdChecked = false; // 중복된 ID이므로 체크 플래그를 false로 설정
-                        document.getElementById('registerBtn').disabled = true; // 가입 완료 버튼 비활성화
+        /*.catch(error => {
+            console.error('Error:', error);
+            alert('오류가 발생했습니다. 나중에 다시 시도해주세요.');
+        });*/
+    });
 
-                    } else {
-                        alert('사용 가능한 아이디입니다.');
-                        isUserIdChecked = true; // 유효한 ID이므로 체크 플래그를 true로 설정
-                        document.getElementById('registerBtn').disabled = false; // 가입 완료 버튼 활성화
-                    }
-                })
-            /*.catch(error => {
-                console.error('Error:', error);
-                alert('오류가 발생했습니다. 나중에 다시 시도해주세요.');
-            });*/
-        });
+    window.addEventListener('load', () => {
+
 
         document.getElementsByClassName('validation-form')[0].addEventListener('submit', function(event) {
             // 폼 제출 시 중복 ID 체크가 완료되었는지 확인
@@ -166,8 +169,16 @@ $(function(){
                 alert('아이디 중복 확인이 필요합니다.');
             }
         });
+    });
+    function updateArrayParam() {
+        var array = []; // 배열 선언
+        $('input:checkbox[name=skill]:checked').each(function() {
+            array.push(this.value);
+        });
+        $("#arrayParam").val(array.join(','));
+    }
 
-
+    $(document).ready(function() {
         // 우편번호 api
         const elZonecode = document.querySelector("#zonecode");
         const elRoadAddress = document.querySelector("#roadAddress");
@@ -191,16 +202,7 @@ $(function(){
             elRoadAddressDetail.value = e.target.value;
         });
         document.querySelector("#addrbutton").addEventListener("click", onClickSearch);
-    });
-    function updateArrayParam() {
-        var array = []; // 배열 선언
-        $('input:checkbox[name=skill]:checked').each(function() {
-            array.push(this.value);
-        });
-        $("#arrayParam").val(array.join(','));
-    }
 
-    $(document).ready(function() {
         $("#registerBtn").click(function(e) {
             e.preventDefault(); // 폼 서브미션을 막음
             const userId = document.getElementById('id').value;
@@ -237,7 +239,7 @@ $(function(){
         $('input:checkbox[name=skill]').change(function () {
             updateArrayParam();
         });
-        console.log($('#arrayParam').val())
+        //console.log($('#arrayParam').val())
 
         $('#exampleModalToggle3').on('hidden.bs.modal', function () {
             $('#writeForm').submit();
