@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import socialLogin.bean.NaverLoginDTO;
 import socialLogin.service.NaverLoginService;
 import user.bean.UserDTO;
+import user.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,6 +30,8 @@ import java.net.URL;
 public class NaverLoginController {
     @Autowired
     private NaverLoginService naverLoginService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("naverLogin")
     @ResponseBody

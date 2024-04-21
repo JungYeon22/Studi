@@ -12,6 +12,8 @@ import org.springframework.util.StringUtils;
 import socialLogin.bean.NaverLoginDTO;
 import socialLogin.dao.SocialLoginRepo;
 import user.bean.UserDTO;
+import user.bean.UserIntro;
+import user.dao.UserDao;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -21,6 +23,8 @@ import java.util.UUID;
 public class NaverLoginService {
     @Autowired
     private SocialLoginRepo socialLoginDAO;
+    @Autowired
+    private UserDao userDao;
     public final static String CLIENT_ID = "VBE7cII0y9YD9bpkACFu";
     public final static String CLIENT_SECRET = "i_i_9KVyxJ";
     public final static String SESSION_STATE = "state";
@@ -83,6 +87,9 @@ public class NaverLoginService {
         UserDTO userDTO = socialLoginDAO.isExistSocialLogin(user);
         if(userDTO == null){
             socialLoginDAO.saveSocialLogin(user);
+            UserIntro userIntro = new UserIntro();
+            userIntro.setUserId(user.getUserId());
+            userDao.writeIntroduce(userIntro);
             return "save";
         }
         else {

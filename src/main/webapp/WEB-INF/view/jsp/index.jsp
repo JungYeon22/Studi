@@ -64,9 +64,8 @@
   <%@include file="user/introWriteModal.jsp"%>
   <script>
     $(function (){
-      if($('#socialSave').val() == 'save'){
+
         $('#exampleModalToggle').modal('show');
-      }
 
     })
   </script>
