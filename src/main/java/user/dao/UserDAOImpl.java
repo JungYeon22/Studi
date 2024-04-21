@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import user.bean.UserDTO;
 import user.bean.UserIntro;
 
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -77,6 +78,16 @@ public class UserDAOImpl implements UserDao {
     @Override
     public ManagerUserBan findByUserId2(Model model) {
         return sql.selectOne("USER.findByUserId2", model);
+    }
+
+    @Override
+    public List<Map<String, Object>> scrap(String userId) {
+        return sql.selectList("USER.scrap", userId);
+    }
+
+    @Override
+    public List<Map<String, Object>> whrite(String userId) {
+        return sql.selectList("USER.whrite", userId);
     }
 
 }
