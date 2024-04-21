@@ -365,9 +365,9 @@ $(function() {
                 reportListTable.empty();
                 $.each(data.list, function (index, items) {
                     var result = (items.status == 1 || items.status == 2) ? `<div class="d-flex justify-content-between align-items-center"><div>`
-                        + `<a href="#"><h5>` + items.userId + `</h5></a></div>`
+                        + `<a href="#"><h5> 신고자 : ` + items.userId + `</h5></a></div>`
                         + `<div><input type="hidden" value=`+ items.reportNum+`><button type="button" class="btn btn-primary reportBtn" data-bs-toggle="modal" data-bs-target="#reportModal">확인 </button></div></div>`
-                        + `<p><h4>` + items.content+ `</h4></p>`
+                        + `<p><h4> 신고 내용 : ` + items.content+ `</h4></p>`
                         + `<hr>` : ``;
                     reportListTable.append(result);
                 });
