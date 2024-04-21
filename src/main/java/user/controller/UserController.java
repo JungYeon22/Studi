@@ -353,4 +353,18 @@ public class UserController {
 
         return userService.userIconCheck(userid);
     }
+
+    @PostMapping(value = "/scrap")
+    @ResponseBody
+    public List<Map<String, Object>> scrap(@RequestParam String userId){
+
+        return userService.scrap(userId);
+    }
+
+    @PostMapping(value = "/whrite")
+    @ResponseBody
+    public List<Map<String, Object>> whrite(@RequestParam String userId){
+
+        return userService.whrite(userId);
+    }
 }

@@ -95,33 +95,18 @@
             <div class="col-md-6"> <!-- 오른쪽 영역 -->
                 <h4 class="mb-3">
                     <span class="text-primary">스크랩</span>
-                    <span class="badge bg-primary rounded-pill">3</span>
                 </h4>
                 <div class="border border-primary-subtle rounded p-3">
                     <div>
                         <div class="accordion accordion-flush" id="accordionExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    <button class="accordion-button collapsed" type="button" id="scrapBtn" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                         모두보기
                                     </button>
                                 </h2>
                                 <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <span><svg class="rounded-circle border center" width="32" height="32" viewBox="0 0 64 64" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="64" height="64" fill="hsl(29, 100%, 90%)"></rect><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="32" font-weight="600" fill="black">J</text></svg></span>
-                                        <label for="email" class="form-label">강남역 오전 모각코 모집합니다</label>
-                                        <p id="email" class="text-truncate" style="max-width: 1000px;">[개발 스터디 모집 내용 예시] 스터디 주제 : 오전 시간 활용해서 부지런한 하루하루 보내기 스터디 목표 : 오전 시간 활용하기! 예상 스터디 일정(횟수) : 주 5회 8시반~9시반, 강남역 할리스 예상 커리큘럼 간략히 : 예상 모집인원 : 3명 스터디 소개와 개설 이유 : 오전 시간 활용하고 건강한 생활습관 형성하고 싶어서 스터디 관련 주의사항 : 1</p>
-                                        <button class="btn btn-secondary btn-sm">스터디</button>
-                                        <hr>
-                                        <span><svg class="rounded-circle border center" width="32" height="32" viewBox="0 0 64 64" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="64" height="64" fill="hsl(29, 100%, 90%)"></rect><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="32" font-weight="600" fill="black">J</text></svg></span>
-                                        <label for="email" class="form-label">강남역 오전 모각코 모집합니다</label>
-                                        <p class="text-truncate" style="max-width: 1000px;">[개발 스터디 모집 내용 예시] 스터디 주제 : 오전 시간 활용해서 부지런한 하루하루 보내기 스터디 목표 : 오전 시간 활용하기! 예상 스터디 일정(횟수) : 주 5회 8시반~9시반, 강남역 할리스 예상 커리큘럼 간략히 : 예상 모집인원 : 3명 스터디 소개와 개설 이유 : 오전 시간 활용하고 건강한 생활습관 형성하고 싶어서 스터디 관련 주의사항 : 1</p>
-                                        <button class="btn btn-secondary btn-sm">스터디</button>
-                                        <hr>
-                                        <span><svg class="rounded-circle border center" width="32" height="32" viewBox="0 0 64 64" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="64" height="64" fill="hsl(29, 100%, 90%)"></rect><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="32" font-weight="600" fill="black">J</text></svg></span>
-                                        <label for="email" class="form-label">강남역 오전 모각코 모집합니다</label>
-                                        <p class="text-truncate" style="max-width: 1000px;">[개발 스터디 모집 내용 예시] 스터디 주제 : 오전 시간 활용해서 부지런한 하루하루 보내기 스터디 목표 : 오전 시간 활용하기! 예상 스터디 일정(횟수) : 주 5회 8시반~9시반, 강남역 할리스 예상 커리큘럼 간략히 : 예상 모집인원 : 3명 스터디 소개와 개설 이유 : 오전 시간 활용하고 건강한 생활습관 형성하고 싶어서 스터디 관련 주의사항 : 1</p>
-                                        <button class="btn btn-secondary btn-sm">스터디</button>
+                                    <div id="myscrapDiv" class="accordion-body">
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +116,6 @@
 
                 <h4 class="mb-3 mt-3">
                     <span class="text-primary">작성한 글</span>
-                    <span id="cntSpan" class="badge bg-primary rounded-pill"></span>
 <%--                    <button class="btn btn-primary btn-sm" type="submit">새글쓰기</button>--%>
                 </h4>
                 <div class="border border-primary-subtle rounded p-3">
@@ -179,6 +163,9 @@
 <%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>--%>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" ></script>
 <script src="https://code.jQuery.com/jquery-3.7.1.min.js"></script>
+</body>
+</html>
+
 <script>
     $(function(){
 
@@ -279,7 +266,68 @@
         });
 
 
+
+        $.ajax({
+            type: 'post',
+            url: '/user/scrap',
+            data: { userId: "${userDTO.userId}" },
+            dataType: 'json',
+            success: function(data) {
+                console.log(JSON.stringify(data));
+                // 사용자 리스트 표시
+                var scrapTable = $('#myscrapDiv');
+
+                scrapTable.empty();
+                if (data.length > 0){
+                    $.each(data, function (index, items) {
+                        var result = `<label for="email" class="form-label" onclick="location.href='/board/boardListDetail?boardid=`+items.boardid+`'">`+items.SUBJECT+`</label>`
+                            + `<p id="email" class="text-truncate" style="max-width: 1000px;">` + items.CONTENT + `</p>`
+                            + `<p id="writer" class="text-truncate" style="max-width: 1000px;"> 작성자 : ` + items.userId + `</p>`
+                            + `<button class="btn btn-secondary btn-sm" onclick="location.href='#'>` + items.projectType + `</button><hr>`;
+                        scrapTable.append(result);
+                    });
+                }
+                else {
+                    var result = `<label for="email" class="form-label">스크랩한 게시물이 없습니다.</label>`;
+                    scrapTable.append(result);
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+
+        $.ajax({
+            type: 'post',
+            url: '/user/whrite',
+            data: { userId: "${userDTO.userId}" },
+            dataType: 'json',
+            success: function(data) {
+                console.log(JSON.stringify(data));
+                // 사용자 리스트 표시
+                var whriteTable = $('#myboardDiv');
+
+                whriteTable.empty();
+                if(data.length > 0) {
+                    $.each(data, function (index, items) {
+                        var result = `<label for="email" class="form-label" onclick="location.href='/board/boardListDetail?boardid=`+items.boardid+`'">`+items.SUBJECT+`</label>`
+                            + `<p id="email" class="text-truncate" style="max-width: 1000px;">` + items.CONTENT + `</p>`
+                            + `<p id="writer" class="text-truncate" style="max-width: 1000px;"> 작성자 : ` + items.userId + `</p>`
+                            + `<button class="btn btn-secondary btn-sm" onclick="location.href='#'>` + items.projectType + `</button><hr>`;
+
+                        whriteTable.append(result);
+
+                    });
+                }
+                else {
+                    var result = `<label for="email" class="form-label">작성한 게시물이 없습니다.</label>`;
+                    whriteTable.append(result);
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+
     });
 </script>
-</body>
-</html>

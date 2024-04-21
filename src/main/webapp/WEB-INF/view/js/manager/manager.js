@@ -50,13 +50,13 @@ $(function() {
                     // 사용자 리스트 표시
                     var userListTable = $('#userListTable tbody');
 
-                    if (reportCnt >= 3){
-                        result2 = `<button type="button" class="btn btn-outline-secondary btn-sm banBtn">회원추방</button>`;
-                    }
                     userListTable.empty();
                     $.each(data.list, function (index, items) {
                         var reportCnt = items.reportCnt;
                         var result2 = "";
+                        if (reportCnt >= 3){
+                            result2 = `<button type="button" class="btn btn-outline-secondary btn-sm banBtn">회원추방</button>`;
+                        }
                         var result = `<tr>`
                             + `<td class="name">` + items.name + `</td>`
                             + `<td class="userId">` + items.userid + `</a></td>`
@@ -69,7 +69,6 @@ $(function() {
                             + `</tr>`;
                         userListTable.append(result);
                     });
-
                 },
                 error: function(e) {
                     console.log(e);
@@ -403,10 +402,10 @@ $(function() {
                         + `<option selected>신고 처리</option>`
                         + `<option value="2">처리 중</option>`
                         + `<option value="3">이상 없음</option>`
-                        + `<option value="4">댓글 삭제</option>`
-                        + `<option value="5">게시물 삭제</option>`
+                        // + `<option value="4">댓글 삭제</option>`
+                        // + `<option value="5">게시물 삭제</option>`
                         + `<option value="6">회원 경고</option>`
-                        + `<option value="7">회원 추방</option>`
+                        // + `<option value="7">회원 추방</option>`
                         + `<input type="hidden" value="`+ items.reportNum+`"></select>`;
 
                     reportContent.append(result);
@@ -425,6 +424,13 @@ $(function() {
             data: {reportNum : reportNum,
                     status : select},
             success: function(data){
+                if (data.status == 4){
+
+                }
+
+                else if (data.status == 7){
+
+                }
                 alert("신고처리를 완료하였습니다.");
                 location.reload();
             },
