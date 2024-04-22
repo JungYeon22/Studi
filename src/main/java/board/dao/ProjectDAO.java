@@ -24,4 +24,6 @@ public interface ProjectDAO {
     List<BoardDTO> getMyProjectList(String userId);
 
     List<UserIntro> getProjectMember(String boardId);
+
+    void updateProjectCnt(Map<String, Object> map);
 }

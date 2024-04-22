@@ -38,4 +38,8 @@
         where projectId=#{boardId})
     </select>
 
+    <update id="updateProjectCnt" parameterType="map" >
+        update board set userCurCnt=userCurCnt+1 where BOARDID=#{boardId}
+    </update>
+
 </mapper>

@@ -180,7 +180,7 @@
 <script>
     $(document).ready(function (){
         $('#projectBtn').click(function (){
-            if(confirm('신청하시겠습니까?'  + $('#sessionId').val() + $('#boardid').val())){
+            if(confirm('신청하시겠습니까?')){
                 $.post({
                     url: '/projectTeam/application',
                     data: {

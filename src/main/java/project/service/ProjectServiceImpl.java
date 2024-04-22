@@ -23,6 +23,7 @@ public class ProjectServiceImpl implements ProjectService {
     public void approve(Map<String, Object> map) {
         projectDAO.applicationDelete(map);
         projectDAO.approve(map);
+        projectDAO.updateProjectCnt(map);
     }
 
     @Override
